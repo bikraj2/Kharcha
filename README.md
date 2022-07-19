@@ -1,4 +1,4 @@
-# demo2
+# Kharcha App
 
 A new Flutter project.
 
