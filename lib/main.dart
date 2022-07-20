@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home.dart';
  
 void main() => runApp(const MyApp());
  
@@ -10,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: _title,
       home: Scaffold(
         appBar: AppBar(title: const Text(_title), backgroundColor: Colors.green,),
@@ -91,8 +93,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   child: const Text('Login'),
                     
                   onPressed: () {
-                    print(nameController.text);
-                    print(passwordController.text);
+
+                    Navigator.push(context, MaterialPageRoute( builder: (BuildContext context){
+                      return HomeScreen(); 
+                    }, ), 
+                     ) ; 
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.green, 
