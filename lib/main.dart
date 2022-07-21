@@ -126,7 +126,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return SignUp();
+                          return SignUpApp();
                         },
                       ),
                     );
