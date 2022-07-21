@@ -1,37 +1,41 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
- 
+import 'signup.dart'; 
+
 void main() => runApp(const MyApp());
- 
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
- 
+
   static const String _title = 'Welcome';
- 
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: _title,
       home: Scaffold(
-        appBar: AppBar(title: const Text(_title), backgroundColor: Colors.green,),
+        appBar: AppBar(
+          title: const Text(_title),
+          backgroundColor: Colors.green,
+        ),
         body: const MyStatefulWidget(),
       ),
     );
   }
 }
- 
+
 class MyStatefulWidget extends StatefulWidget {
   const MyStatefulWidget({Key? key}) : super(key: key);
- 
+
   @override
   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
 }
- 
+
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
- 
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -80,45 +84,55 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               onPressed: () {
                 //forgot password screen
               },
-              child: const Text('Forgot Password',), style: TextButton.styleFrom(
-                primary: Colors.green, 
+              child: const Text(
+                'Forgot Password',
+              ),
+              style: TextButton.styleFrom(
+                primary: Colors.green,
               ),
             ),
             Container(
-               
-        
                 height: 50,
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: ElevatedButton(
                   child: const Text('Login'),
-                    
                   onPressed: () {
-
-                    Navigator.push(context, MaterialPageRoute( builder: (BuildContext context){
-                      return HomeScreen(); 
-                    }, ), 
-                     ) ; 
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return HomeScreen();
+                        },
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.green, 
+                    primary: Colors.green,
                   ),
-                )
-            ),
+                )),
             Row(
               children: <Widget>[
                 const Text('No Account?'),
                 TextButton(
                   child: const Text(
                     'Sign Up',
-                    style: TextStyle(fontSize: 18, color: Colors.green,), 
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.green,
+                    ),
                   ),
-                  
-                  
-                  
                   onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return SignUp();
+                        },
+                      ),
+                    );
+
                     //signup screen
                   },
-                  
                 ),
               ],
               mainAxisAlignment: MainAxisAlignment.center,
