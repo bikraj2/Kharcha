@@ -5,10 +5,9 @@ class AuthService {
   Dio diio = new Dio();
   login(name, password) async {
     try {
-      var value = await diio.post("http://localhost:3000/authenticate",
+      var value = await diio.post("https://myharcha.herokuapp.com/authenticate",
           data: {"name": name, "password": password},
           options: Options(contentType: Headers.formUrlEncodedContentType));
-      print(value);
       return value;
     } on DioError catch (e) {
       Fluttertoast.showToast(
@@ -19,10 +18,9 @@ class AuthService {
 
   addUser(name, password) async {
     try {
-      var value = await diio.post("http://localhost:3000/adduser",
+      var value = await diio.post("https://myharcha.herokuapp.com//adduser",
           data: {"name": name, "password": password},
           options: Options(contentType: Headers.formUrlEncodedContentType));
-      print(value);
       return value;
     } on DioError catch (e) {
       Fluttertoast.showToast(
