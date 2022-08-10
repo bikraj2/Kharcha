@@ -1,4 +1,4 @@
-import 'package:demo2/screens/login.dart';
+import 'package:demo2/screens/get_started_screen.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
           title: const Text(_title),
           backgroundColor: Colors.blueAccent,
         ),
-        body: const LoginPage(),
+        body: const GetStartedScreen(),
       ),
     );
   }
