@@ -11,14 +11,14 @@ class AuthService {
       return value;
     } on DioError catch (e) {
       Fluttertoast.showToast(
-        msg: e.response!.data['msg'],
+        msg: e.response?.data['msg'],
       );
     }
   }
 
   addUser(name, password) async {
     try {
-      var value = await diio.post("https://myharcha.herokuapp.com//adduser",
+      var value = await diio.post("https://myharcha.herokuapp.com/adduser",
           data: {"name": name, "password": password},
           options: Options(contentType: Headers.formUrlEncodedContentType));
       return value;

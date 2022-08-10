@@ -29,9 +29,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  dio:
-  fluttertoast:
+  dio: any
+  fluttertoast: any
   flutter_map: ^2.1.0
+
 
 
   # The following adds the Cupertino Icons font to your application.

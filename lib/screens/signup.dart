@@ -104,10 +104,13 @@ class SignUpState extends State<SignUp> {
               child: const Text('Create Account'),
               onPressed: () {
                 AuthService()
-                    .addUser(nameController.text, passwordController.text)
+                    .addUser(
+                        nameController.text, (passwordController.text))
                     .then((val) {
                   if (val.data['success']) {
                     Fluttertoast.showToast(msg: val.data['msg']);
+                  } else {
+                    Fluttertoast.showToast(msg: "not done");
                   }
                 });
               },
