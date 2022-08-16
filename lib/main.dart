@@ -1,5 +1,6 @@
 import 'package:demo2/screens/get_started_screen.dart';
 import 'package:demo2/services/authservices.dart';
+import 'package:demo2/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -18,11 +19,10 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: const Text(_title),
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: AppTheme.colors.basecolor,
         ),
         body: const GetStartedScreen(),
       ),
     );
   }
 }
-
