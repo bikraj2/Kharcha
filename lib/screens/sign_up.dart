@@ -1,7 +1,24 @@
+import 'package:demo2/services/authservices.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
+
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+void getHTTP() async {
+  try {
+    var response = await Dio().get("http://kharcha-1.herokuapp.com/");
+    print(response);
+  } catch (e) {
+    print(e);
+  }
+}
+
+class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +95,9 @@ class SignUp extends StatelessWidget {
               height: 20,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                getHTTP();
+              },
               style: ButtonStyle(
                 padding: MaterialStateProperty.all(
                   const EdgeInsets.all(10),

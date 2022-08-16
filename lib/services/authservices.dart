@@ -5,7 +5,8 @@ class AuthService {
   Dio diio = new Dio();
   login(name, password) async {
     try {
-      var value = await diio.post("https://myharcha.herokuapp.com/authenticate",
+      var value = await diio.post(
+          "https://kharcha-1.herokuapp.com/authenticate",
           data: {"name": name, "password": password},
           options: Options(contentType: Headers.formUrlEncodedContentType));
       return value;

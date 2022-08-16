@@ -32,6 +32,7 @@ dependencies:
   dio: any
   fluttertoast: any
   flutter_map: ^2.1.0
+  bubbled_navigation_bar: ^0.0.4
 
 
 
