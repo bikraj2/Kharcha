@@ -15,7 +15,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowMaterialGrid: false,
+      debugShowCheckedModeBanner: false,
       title: _title,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch()
+            .copyWith(primary: AppTheme.colors.basecolor),
+      ),
       home: Scaffold(
         appBar: AppBar(
           title: const Text(_title),

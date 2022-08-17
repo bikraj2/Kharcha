@@ -1,3 +1,4 @@
+import 'package:demo2/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 import 'get_started_screen.dart';
@@ -16,7 +17,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: AppTheme.colors.basecolor
+        ),
       ),
       home: const GetStartedScreen(),
     );
