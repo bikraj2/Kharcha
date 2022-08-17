@@ -1,64 +1,60 @@
-
 import 'package:flutter/material.dart';
-import '../main.dart' ; 
-import 'package:flutter/cupertino.dart';
-
 
 class HomeScreen extends StatefulWidget {
- HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
   @override
-  State <HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State <HomeScreen> {
-
-  int _currentIndex = 0 ; 
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
   final tabs = [
-    const Center(child: Text("Home")),
+    Center(
+        child: Column(
+      children: [
+        Container(
+          color: Colors.yellow,
+          padding: const EdgeInsets.all(10),
+          child: const Image(
+            image: AssetImage("assetss/images/profile.png"),
+          ),
+        )
+      ],
+    )),
     const Center(child: Text("Charts")),
-    const Center(child: Text("Profile")), 
+    const Center(child: Text("Profile")),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Page"), 
+        title: const Text("Home Page"),
       ),
-      body: tabs[_currentIndex] ,
+      body: tabs[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
-        showSelectedLabels: true, 
+        showSelectedLabels: true,
         showUnselectedLabels: true,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home), 
-            
+            icon: Icon(Icons.home),
             label: 'Home',
-            
-             
-          ), 
+          ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.map), 
-            label: 'Chart', 
-             
-          ), 
+            icon: Icon(Icons.map),
+            label: 'Chart',
+          ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person), 
-            label: 'Profile', 
-             
-          ), 
-          
-
-
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
         ],
-        onTap: (index){
+        onTap: (index) {
           setState(() {
-            _currentIndex = index; 
-            
+            _currentIndex = index;
           });
-
         },
       ),
-    ); 
+    );
   }
 }
