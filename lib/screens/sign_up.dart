@@ -1,7 +1,26 @@
+import 'package:demo2/screens/login_screen.dart';
+import 'package:demo2/services/authservices.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import '../models/user_info.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
+
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+TextEditingController firstNameController = TextEditingController();
+TextEditingController middleNameController = TextEditingController();
+TextEditingController lastNameController = TextEditingController();
+TextEditingController emailController = TextEditingController();
+TextEditingController usernameController = TextEditingController();
+TextEditingController passwordController = TextEditingController();
+
+class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,11 +52,12 @@ class SignUp extends StatelessWidget {
               height: 20,
             ),
             TextField(
+              controller: firstNameController,
               style: const TextStyle(fontSize: 18, color: Colors.black54),
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
-                hintText: 'Username',
+                hintText: 'Firstname',
                 contentPadding: const EdgeInsets.all(15),
                 focusedBorder: OutlineInputBorder(
                   borderSide:
@@ -55,6 +75,101 @@ class SignUp extends StatelessWidget {
               height: 20,
             ),
             TextField(
+              controller: middleNameController,
+              obscureText: true,
+              style: const TextStyle(fontSize: 18, color: Colors.black54),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                hintText: 'MiddleName',
+                contentPadding: const EdgeInsets.all(15),
+                focusedBorder: OutlineInputBorder(
+                  borderSide:
+                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide:
+                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextField(
+              controller: lastNameController,
+              style: const TextStyle(fontSize: 18, color: Colors.black54),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                hintText: 'Lastname',
+                contentPadding: const EdgeInsets.all(15),
+                focusedBorder: OutlineInputBorder(
+                  borderSide:
+                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide:
+                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextField(
+              controller: usernameController,
+              obscureText: true,
+              style: const TextStyle(fontSize: 18, color: Colors.black54),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                hintText: 'username',
+                contentPadding: const EdgeInsets.all(15),
+                focusedBorder: OutlineInputBorder(
+                  borderSide:
+                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide:
+                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextField(
+              controller: emailController,
+              style: const TextStyle(fontSize: 18, color: Colors.black54),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                hintText: 'Email',
+                contentPadding: const EdgeInsets.all(15),
+                focusedBorder: OutlineInputBorder(
+                  borderSide:
+                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide:
+                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextField(
+              controller: passwordController,
               obscureText: true,
               style: const TextStyle(fontSize: 18, color: Colors.black54),
               decoration: InputDecoration(
@@ -78,7 +193,24 @@ class SignUp extends StatelessWidget {
               height: 20,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Users newuser = Users(
+                    firstNameController.text,
+                    middleNameController.text,
+                    lastNameController.text,
+                    emailController.text,
+                    usernameController.text,
+                    passwordController.text);
+                AuthService().addUser(newuser).then((val) {
+                  if (val.data["success"]) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()),
+                    );
+                  }
+                });
+              },
               style: ButtonStyle(
                 padding: MaterialStateProperty.all(
                   const EdgeInsets.all(10),
