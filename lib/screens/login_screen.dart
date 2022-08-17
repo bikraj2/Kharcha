@@ -1,8 +1,19 @@
+import 'package:demo2/services/authservices.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'home.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +44,7 @@ class LoginScreen extends StatelessWidget {
               height: 20,
             ),
             TextField(
+              controller: usernameController,
               style: const TextStyle(fontSize: 18, color: Colors.black54),
               decoration: InputDecoration(
                 filled: true,
@@ -55,6 +67,7 @@ class LoginScreen extends StatelessWidget {
               height: 20,
             ),
             TextField(
+              controller: passwordController,
               obscureText: true,
               style: const TextStyle(fontSize: 18, color: Colors.black54),
               decoration: InputDecoration(
@@ -79,10 +92,23 @@ class LoginScreen extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (BuildContext context) {
-                  return HomeScreen();
-                }));
+                AuthService()
+                    .login(usernameController.text, passwordController.text)
+                    .then((val) {
+                  print(val);
+                  if (val.data["success"]) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return HomeScreen();
+                        },
+                      ),
+                    );
+                  } else {
+                    Fluttertoast.showToast(msg: val);
+                  }
+                });
               },
               style: ButtonStyle(
                 padding: MaterialStateProperty.all(

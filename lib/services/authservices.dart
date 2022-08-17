@@ -1,14 +1,18 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../models/user_info.dart';
 
 class AuthService {
   Dio diio = new Dio();
   login(name, password) async {
     try {
-      var value = await diio.post(
-          "https://kharcha-1.herokuapp.com/authenticate",
-          data: {"name": name, "password": password},
+      var value = await diio.post("http://192.168.1.75:3000/authenticate",
+          data: {"username": name, "password": password},
           options: Options(contentType: Headers.formUrlEncodedContentType));
+      print(value);
       return value;
     } on DioError catch (e) {
       Fluttertoast.showToast(
@@ -17,16 +21,15 @@ class AuthService {
     }
   }
 
-  addUser(name, password) async {
+  addUser(Users user) async {
     try {
-      var value = await diio.post("https://myharcha.herokuapp.com/adduser",
-          data: {"name": name, "password": password},
+      var value = await diio.post("http://192.168.1.75:3000/adduser",
+          data: user.value(),
           options: Options(contentType: Headers.formUrlEncodedContentType));
       return value;
-    } on DioError catch (e) {
-      Fluttertoast.showToast(
-        msg: e.response!.data['msg'],
-      );
+    } on DioError catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return error.response;
     }
   }
 }
