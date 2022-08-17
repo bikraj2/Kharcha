@@ -71,6 +71,7 @@ flutter:
     - assetss/images/pie.png
     - assetss/images/sack.png
     - assetss/images/tick.png
+    - assetss/images/profile.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
