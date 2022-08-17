@@ -1,5 +1,7 @@
+import 'package:demo2/main.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
+import 'plus.dart'; 
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -81,7 +83,7 @@ class LoginScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (BuildContext context) {
-                  return HomeScreen();
+                  return MyApp1();
                 }));
               },
               style: ButtonStyle(
