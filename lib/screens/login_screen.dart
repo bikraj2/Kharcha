@@ -1,4 +1,5 @@
 import 'package:demo2/main.dart';
+import 'package:demo2/screens/add_expenses.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'home.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../token/token.dart';
-import 'plus.dart'; 
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -101,17 +101,17 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             ElevatedButton(
               onPressed: () {
-
                 AuthService()
                     .login(usernameController.text, passwordController.text)
                     .then((val) {
                   if (val.data["success"]) {
                     token.storeToken(val.data["token"]);
+                    token.readToken();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return HomeScreen();
+                          return expenseAdder();
                         },
                       ),
                     );
@@ -119,11 +119,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     Fluttertoast.showToast(msg: val.data["msg"]);
                   }
                 });
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (BuildContext context) {
-                  return HomeScreen();
-                }));
-
               },
               style: ButtonStyle(
                 padding: MaterialStateProperty.all(

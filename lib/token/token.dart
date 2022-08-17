@@ -9,6 +9,7 @@ class token {
   static Future<String?> readToken() async {
     await storage.read(key: 'jwt').then((value) {
       print(value);
+      return (value);
     });
   }
 }

@@ -1,4 +1,9 @@
+import 'dart:ffi';
+
+import 'package:demo2/models/expenses.dart';
+import 'package:demo2/services/authservices.dart';
 import 'package:flutter/material.dart';
+import '../token/token.dart';
 
 class expenseTracker extends StatelessWidget {
   const expenseTracker({Key? key}) : super(key: key);
@@ -26,7 +31,7 @@ class _expenseAdderState extends State<expenseAdder> {
   final _moneyController = TextEditingController();
   String date = " ";
   String? value;
-  String money = "";
+  late double money;
   String? categories = "";
   final category = ['Health', 'Rent', 'Food', 'Luxury'];
   @override
@@ -99,8 +104,16 @@ class _expenseAdderState extends State<expenseAdder> {
                   onPressed: () {
                     setState(() {
                       date = _dateController.text;
-                      money = _moneyController.text;
+                      money = double.parse(_moneyController.text);
                       categories = value;
+                    });
+                    var expense = Expense(
+                        _dateController.text, categories.toString(), money);
+                    var token1;
+                    token.storage.read(key: "jwt").then((value) {
+                      AuthService().getExpense(value).then((val) => {
+                        print(val)
+                      });
                     });
                   })),
         ),
