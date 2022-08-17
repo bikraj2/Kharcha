@@ -9,7 +9,18 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   final tabs = [
-    const Center(child: Text("Home")),
+    Center(
+        child: Column(
+      children: [
+        Container(
+          color: Colors.yellow,
+          padding: const EdgeInsets.all(10),
+          child: const Image(
+            image: AssetImage("assetss/images/profile.png"),
+          ),
+        )
+      ],
+    )),
     const Center(child: Text("Charts")),
     const Center(child: Text("Profile")),
   ];
@@ -17,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Page"),
+        title: const Text("Home Page"),
       ),
       body: tabs[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
