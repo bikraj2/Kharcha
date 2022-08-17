@@ -19,6 +19,14 @@ TextEditingController lastNameController = TextEditingController();
 TextEditingController emailController = TextEditingController();
 TextEditingController usernameController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
+void dipose() {
+  usernameController.dispose();
+  passwordController.dispose();
+  firstNameController.dispose();
+  middleNameController.dispose();
+  lastNameController.dispose();
+  emailController.dispose();
+}
 
 class _SignUpState extends State<SignUp> {
   @override
@@ -203,6 +211,7 @@ class _SignUpState extends State<SignUp> {
                     passwordController.text);
                 AuthService().addUser(newuser).then((val) {
                   if (val.data["success"]) {
+                    dispose();
                     Navigator.push(
                       context,
                       MaterialPageRoute(

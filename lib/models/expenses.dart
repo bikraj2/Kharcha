@@ -1,17 +1,22 @@
 // ignore_for_file: unnecessary_this
 
+import 'dart:ffi';
+
 class Expense {
-  late String name,catefgory,date;
-  
-  Expense(String f, String m, String l, String e, String u, String p) {
-    this.firstName = f;
-    this.middleName = m;
-    this.lastName = l;
-    this.email = e;
-    this.username = u;
-    this.password = p;
+  late String name, category, date;
+  late Double amount ;
+  Expense(String name, String category, String date, Double amount) {
+    this.name = name;
+    this.category = category;
+    this.amount = amount;
+    this.date = date;
   }
   Object value() {
-    return {'firstName':firstName,'middleName':middleName,'lastName':lastName,'email':email,'username':username,'password':password};
+    return {
+      "name":name,
+      "category":category,
+      "amount":amount,
+      "date":date
+    };
   }
 }

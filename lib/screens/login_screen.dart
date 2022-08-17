@@ -3,6 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'home.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../token/token.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -14,6 +16,11 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  void dipose() {
+    usernameController.dispose();
+    passwordController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,8 +102,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 AuthService()
                     .login(usernameController.text, passwordController.text)
                     .then((val) {
-                  print(val);
                   if (val.data["success"]) {
+                    token.storeToken(val.data["token"]);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -106,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     );
                   } else {
-                    Fluttertoast.showToast(msg: val);
+                    Fluttertoast.showToast(msg: val.data["msg"]);
                   }
                 });
               },

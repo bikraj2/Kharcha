@@ -1,4 +1,6 @@
+import 'login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -7,6 +9,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  
   int _currentIndex = 0;
   final tabs = [
     Center(
@@ -21,9 +24,10 @@ class _HomeScreenState extends State<HomeScreen> {
         )
       ],
     )),
-    const Center(child: Text("Charts")),
+    const Center(child: Text("charts")),
     const Center(child: Text("Profile")),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

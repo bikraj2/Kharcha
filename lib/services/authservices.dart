@@ -9,10 +9,9 @@ class AuthService {
   Dio diio = new Dio();
   login(name, password) async {
     try {
-      var value = await diio.post("http://192.168.1.75:3000/authenticate",
+      var value = await diio.post("http://192.168.1.68:3000/authenticate",
           data: {"username": name, "password": password},
           options: Options(contentType: Headers.formUrlEncodedContentType));
-      print(value);
       return value;
     } on DioError catch (e) {
       Fluttertoast.showToast(
@@ -23,7 +22,8 @@ class AuthService {
 
   addUser(Users user) async {
     try {
-      var value = await diio.post("http://192.168.1.75:3000/adduser",
+      print("I am here");
+      var value = await diio.post("http://192.168.1.68:3000/adduser",
           data: user.value(),
           options: Options(contentType: Headers.formUrlEncodedContentType));
       return value;
