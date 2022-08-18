@@ -4,6 +4,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'home.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../token/token.dart';
+import '../services/authservices.dart';
+import 'add_expenses.dart'; 
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -108,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return expenseAdder();
+                          return expenseTracker();
                         },
                       ),
                     );
