@@ -1,7 +1,4 @@
-import 'package:demo2/main.dart';
-import 'package:demo2/screens/add_expenses.dart';
-import 'package:demo2/services/authservices.dart';
-import 'package:dio/dio.dart';
+import 'package:demo2/screens/rough.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'home.dart';

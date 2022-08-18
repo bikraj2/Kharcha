@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import '../models/user_info.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../theme/theme.dart';
+
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -33,7 +35,7 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 35, 45, 64),
+        backgroundColor: AppTheme.colors.tertiarycolor,
         // title: Text('Login'),
         elevation: 0,
         leading: IconButton(
@@ -158,8 +160,8 @@ class _SignUpState extends State<SignUp> {
               style: const TextStyle(fontSize: 18, color: Colors.black54),
               decoration: InputDecoration(
                 filled: true,
-                fillColor: Colors.white,
-                hintText: 'Email',
+                fillColor: AppTheme.colors.tertiarycolor,
+                hintText: 'Username',
                 contentPadding: const EdgeInsets.all(15),
                 focusedBorder: OutlineInputBorder(
                   borderSide:

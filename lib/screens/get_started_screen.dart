@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:demo2/theme/color.dart';
+import 'package:demo2/theme/theme.dart';
+
 import 'second_screen.dart';
 import 'login_screen.dart';
 
@@ -9,7 +12,7 @@ class GetStartedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-            color: Colors.white,
+            color: AppTheme.colors.tertiarycolor,
             child: Padding(
               padding: const EdgeInsets.all(30),
               child: Column(
@@ -58,7 +61,7 @@ class GetStartedScreen extends StatelessWidget {
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18))),
                           backgroundColor: MaterialStateProperty.all(
-                              const Color.fromARGB(255, 220, 63, 107)),
+                              AppTheme.colors.basecolor),
                         ),
                         child: const Text(
                           'Get Started',
