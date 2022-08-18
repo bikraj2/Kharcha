@@ -109,7 +109,6 @@ class _expenseAdderState extends State<expenseAdder> {
                     });
                     var expense = Expense(
                         _dateController.text, categories.toString(), money);
-                    var token1;
                     token.storage.read(key: "jwt").then((value) {
                       AuthService().getExpense(value).then((val) => {
                         print(val)
@@ -120,7 +119,6 @@ class _expenseAdderState extends State<expenseAdder> {
       ],
     ));
   }
-
   DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
       value: item,
       child: Text(

@@ -111,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return expenseAdder();
+                          return HomeScreen();
                         },
                       ),
                     );
