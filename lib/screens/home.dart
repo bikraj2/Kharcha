@@ -1,64 +1,30 @@
-
+import 'package:demo2/screens/top_card.dart';
 import 'package:flutter/material.dart';
-import '../main.dart' ; 
-import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
 
-class HomeScreen extends StatefulWidget {
- HomeScreen({Key? key}) : super(key: key);
   @override
-  State <HomeScreen> createState() => _HomeScreenState();
+  _HomeState createState() => _HomeState();
 }
 
-class _HomeScreenState extends State <HomeScreen> {
-
-  int _currentIndex = 0 ; 
-  final tabs = [
-    const Center(child: Text("Home")),
-    const Center(child: Text("Charts")),
-    const Center(child: Text("Profile")), 
-  ];
+class _HomeState extends State<Home> {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Home Page"), 
-      ),
-      body: tabs[_currentIndex] ,
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        showSelectedLabels: true, 
-        showUnselectedLabels: true,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home), 
-            
-            label: 'Home',
-            
-             
-          ), 
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map), 
-            label: 'Chart', 
-             
-          ), 
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person), 
-            label: 'Profile', 
-             
-          ), 
-          
-
-
-        ],
-        onTap: (index){
-          setState(() {
-            _currentIndex = index; 
-            
-          });
-
-        },
-      ),
-    ); 
+      body: Column(children: [
+        TopNewCard(),
+        Container(
+          height: 200,
+          color: Colors.blue,
+        ),
+        Container(
+          height: 25,
+          child: Center(child: Text('Button')),
+        )
+      ]),
+    );
   }
 }

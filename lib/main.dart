@@ -1,5 +1,6 @@
-import 'package:demo2/screens/login.dart';
+import 'package:demo2/screens/get_started_screen.dart';
 import 'package:demo2/services/authservices.dart';
+import 'package:demo2/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -14,15 +15,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowMaterialGrid: false,
+      debugShowCheckedModeBanner: false,
       title: _title,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch()
+            .copyWith(primary: AppTheme.colors.basecolor),
+      ),
       home: Scaffold(
         appBar: AppBar(
           title: const Text(_title),
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: AppTheme.colors.basecolor,
         ),
-        body: const LoginPage(),
+        body: const GetStartedScreen(),
       ),
     );
   }
 }
-
