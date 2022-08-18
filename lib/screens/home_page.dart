@@ -1,5 +1,6 @@
 import 'package:demo2/screens/top_card.dart';
 import 'package:flutter/material.dart';
+import 'package:pie_chart/pie_chart.dart';
 
 import '../theme/theme.dart';
 
@@ -12,6 +13,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   final tabs = [
+    const Center(
+      child: Text('Graphs'),
+    ),
     Column(children: [
       SizedBox(
         height: 10,
@@ -98,7 +102,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   )))),
     ]),
-    const Center(child: Text("Graphs")),
     Center(
         child: Column(
       children: [
@@ -125,15 +128,15 @@ class _HomeScreenState extends State<HomeScreen> {
         showUnselectedLabels: true,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(
               Icons.pie_chart_rounded,
               size: 35,
             ),
             label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
