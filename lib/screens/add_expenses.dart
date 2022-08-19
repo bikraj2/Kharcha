@@ -1,18 +1,16 @@
-import 'dart:ffi';
-
 import 'package:demo2/models/expenses.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:flutter/material.dart';
 import '../token/token.dart';
-import 'pie_chart.dart'; 
+import 'pie_chart.dart';
+
 class expenseTracker extends StatelessWidget {
   const expenseTracker({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-      resizeToAvoidBottomInset: false, 
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Add your expenses'),
       ),
@@ -113,9 +111,10 @@ class _expenseAdderState extends State<expenseAdder> {
                         _dateController.text, categories.toString(), money);
                     var token1;
                     token.storage.read(key: "jwt").then((value) {
-                      AuthService().getExpense(value).then((val) => {
-                        print(val.runtimeType) 
-                      });
+                      print(value);
+                      AuthService()
+                          .getExpense(value)
+                          .then((val) => {print(val)});
                     });
                   })),
         ),
@@ -125,21 +124,12 @@ class _expenseAdderState extends State<expenseAdder> {
               child: FloatingActionButton(
                   child: Text("Pie"),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return Piechart();
-                        },
-                      )
-                    ); 
-
-                   
-                   
-                  }
-                  
-                  )
-                  ),
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (BuildContext context) {
+                        return Piechart();
+                      },
+                    ));
+                  })),
         ),
       ],
     ));
