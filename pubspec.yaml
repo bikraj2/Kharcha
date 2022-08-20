@@ -34,6 +34,9 @@ dependencies:
   flutter_map: ^2.1.0
   bubbled_navigation_bar: ^0.0.4
   pie_chart: ^5.3.2
+  custom_navigation_bar: ^0.8.2
+  flutter_icons: ^1.1.0
+  dot_navigation_bar: ^1.0.1+4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
