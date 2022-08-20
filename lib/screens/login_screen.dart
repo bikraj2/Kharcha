@@ -1,10 +1,27 @@
 import 'package:demo2/screens/rough.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import '../services/authservices.dart';
+import 'add_expenses.dart';
 import 'home.dart';
-import 'home_screen.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../token/token.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  void dipose() {
+    usernameController.dispose();
+    passwordController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,6 +52,7 @@ class LoginScreen extends StatelessWidget {
               height: 20,
             ),
             TextField(
+              controller: usernameController,
               style: const TextStyle(fontSize: 18, color: Colors.black54),
               decoration: InputDecoration(
                 filled: true,
@@ -57,6 +75,7 @@ class LoginScreen extends StatelessWidget {
               height: 20,
             ),
             TextField(
+              controller: passwordController,
               obscureText: true,
               style: const TextStyle(fontSize: 18, color: Colors.black54),
               decoration: InputDecoration(
@@ -81,10 +100,24 @@ class LoginScreen extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (BuildContext context) {
-                  return HomeScreen();
-                }));
+                AuthService()
+                    .login(usernameController.text, passwordController.text)
+                    .then((val) {
+                  if (val.data["success"]) {
+                    token.storeToken(val.data["token"]);
+                    token.readToken();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return expenseAdder();
+                        },
+                      ),
+                    );
+                  } else {
+                    Fluttertoast.showToast(msg: val.data["msg"]);
+                  }
+                });
               },
               style: ButtonStyle(
                 padding: MaterialStateProperty.all(
