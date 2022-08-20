@@ -3,7 +3,7 @@ import 'package:demo2/theme/color.dart';
 import 'package:demo2/theme/theme.dart';
 
 import 'second_screen.dart';
-import '../users/login_screen.dart';
+import '../log/login_screen.dart';
 
 class GetStartedScreen extends StatelessWidget {
   const GetStartedScreen({Key? key}) : super(key: key);

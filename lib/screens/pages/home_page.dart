@@ -19,7 +19,12 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: AppTheme.colors.basecolor,
             radius: 30,
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => expenseAdder()),
+                );
+              },
               icon: Icon(Icons.add),
               color: AppTheme.colors.tertiarycolor,
               iconSize: 30,
