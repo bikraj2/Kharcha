@@ -1,8 +1,8 @@
-import 'package:demo2/screens/top_card.dart';
+import 'package:demo2/screens/bin/top_card.dart';
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 
-import '../theme/theme.dart';
+import '../../theme/theme.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);

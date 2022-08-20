@@ -1,14 +1,14 @@
-import 'package:demo2/screens/login_screen.dart';
+import 'package:demo2/screens/users/login_screen.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../models/user_info.dart';
+import '../../models/user_info.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../theme/theme.dart';
+import '../../theme/theme.dart';
 
-import '../theme/theme.dart';
+import '../../theme/theme.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);

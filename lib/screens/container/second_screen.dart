@@ -1,22 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:demo2/theme/color.dart';
-import 'package:demo2/theme/theme.dart';
+import 'get_started_screen.dart';
+import 'third_screen.dart';
+import '../log/sign_up.dart';
 
-import 'second_screen.dart';
-import 'login_screen.dart';
-
-class GetStartedScreen extends StatelessWidget {
-  const GetStartedScreen({Key? key}) : super(key: key);
+class SecondScreen extends StatelessWidget {
+  const SecondScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-            color: AppTheme.colors.tertiarycolor,
+            color: Colors.white,
             child: Padding(
               padding: const EdgeInsets.all(30),
               child: Column(
                 children: <Widget>[
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const GetStartedScreen()));
+                      },
+                      child: const Image(
+                        image: AssetImage(
+                          'assetss/images/10.png',
+                        ),
+                        height: 60,
+                        width: 900,
+                        alignment: Alignment.topLeft,
+                      )),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -28,13 +42,13 @@ class GetStartedScreen extends StatelessWidget {
                           decoration: const BoxDecoration(
                               shape: BoxShape.rectangle,
                               image: DecorationImage(
-                                  image: AssetImage('assetss/images/logo.png'),
+                                  image: AssetImage('assetss/images/sack.png'),
                                   fit: BoxFit.cover)),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                        const Text('Expense Tracking Application',
+                        const Text('Plan your Budget',
                             style: TextStyle(
                                 fontSize: 22,
                                 color: Color.fromARGB(255, 35, 45, 64)))
@@ -50,7 +64,7 @@ class GetStartedScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const SecondScreen()));
+                                  builder: (context) => const ThirdScreen()));
                         },
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(
@@ -61,15 +75,15 @@ class GetStartedScreen extends StatelessWidget {
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18))),
                           backgroundColor: MaterialStateProperty.all(
-                              AppTheme.colors.basecolor),
+                              const Color.fromARGB(255, 220, 63, 107)),
                         ),
                         child: const Text(
-                          'Get Started',
+                          'Next',
                           style: TextStyle(fontSize: 20),
                         ),
                       ),
                       const Image(
-                        image: AssetImage('assetss/images/img1.png'),
+                        image: AssetImage('assetss/images/6.png'),
                         height: 70,
                         width: 80,
                       )
@@ -78,22 +92,19 @@ class GetStartedScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        'Have an account?',
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
                       TextButton(
-                        child: const Text('Login',
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Color.fromARGB(255, 220, 63, 107))),
+                        child: const Text(
+                          'Skip',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Color.fromARGB(255, 220, 63, 107)),
+                          textAlign: TextAlign.center,
+                        ),
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const LoginScreen()));
+                                  builder: (context) => const SignUp()));
                         },
                       ),
                     ],

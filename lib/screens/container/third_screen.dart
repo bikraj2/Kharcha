@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'get_started_screen.dart';
-import 'third_screen.dart';
-import 'sign_up.dart';
+import 'second_screen.dart';
+import 'ready_screen.dart';
+import '../log/sign_up.dart';
 
-class SecondScreen extends StatelessWidget {
-  const SecondScreen({Key? key}) : super(key: key);
+class ThirdScreen extends StatelessWidget {
+  const ThirdScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +20,7 @@ class SecondScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    const GetStartedScreen()));
+                                builder: (context) => const SecondScreen()));
                       },
                       child: const Image(
                         image: AssetImage(
@@ -42,13 +41,13 @@ class SecondScreen extends StatelessWidget {
                           decoration: const BoxDecoration(
                               shape: BoxShape.rectangle,
                               image: DecorationImage(
-                                  image: AssetImage('assetss/images/sack.png'),
+                                  image: AssetImage('assetss/images/chart.png'),
                                   fit: BoxFit.cover)),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                        const Text('Plan your Budget',
+                        const Text('Analyze your Expenses',
                             style: TextStyle(
                                 fontSize: 22,
                                 color: Color.fromARGB(255, 35, 45, 64)))
@@ -64,7 +63,7 @@ class SecondScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const ThirdScreen()));
+                                  builder: (context) => const ReadyScreen()));
                         },
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(
@@ -83,7 +82,7 @@ class SecondScreen extends StatelessWidget {
                         ),
                       ),
                       const Image(
-                        image: AssetImage('assetss/images/6.png'),
+                        image: AssetImage('assetss/images/7.png'),
                         height: 70,
                         width: 80,
                       )

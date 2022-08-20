@@ -1,7 +1,7 @@
 import 'package:demo2/theme/theme.dart';
 import 'package:flutter/material.dart';
 
-import 'get_started_screen.dart';
+import '../container/get_started_screen.dart';
 
 void main() {
   runApp(const MyApp());

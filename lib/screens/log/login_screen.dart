@@ -1,13 +1,12 @@
-import 'package:demo2/screens/rough.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '../services/authservices.dart';
-import 'add_expenses.dart';
-import 'home.dart';
+import '../../services/authservices.dart';
+import '../pages/add_expenses.dart';
+import '../bin/home.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import '../token/token.dart';
-import '../services/authservices.dart';
-import 'add_expenses.dart'; 
+import '../../token/token.dart';
+import '../../services/authservices.dart';
+import '../pages/add_expenses.dart'; 
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);

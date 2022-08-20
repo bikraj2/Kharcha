@@ -1,4 +1,4 @@
-import 'package:demo2/screens/get_started_screen.dart';
+import 'package:demo2/screens/container/get_started_screen.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:demo2/theme/theme.dart';
 import 'package:flutter/material.dart';

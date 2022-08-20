@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'second_screen.dart';
-import 'ready_screen.dart';
-import 'sign_up.dart';
+import 'third_screen.dart';
+import '../log/sign_up.dart';
 
-class ThirdScreen extends StatelessWidget {
-  const ThirdScreen({Key? key}) : super(key: key);
+class ReadyScreen extends StatelessWidget {
+  const ReadyScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,7 @@ class ThirdScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const SecondScreen()));
+                                builder: (context) => const ThirdScreen()));
                       },
                       child: const Image(
                         image: AssetImage(
@@ -36,18 +35,18 @@ class ThirdScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          width: 200,
-                          height: 200,
+                          width: 400,
+                          height: 400,
                           decoration: const BoxDecoration(
                               shape: BoxShape.rectangle,
                               image: DecorationImage(
-                                  image: AssetImage('assetss/images/chart.png'),
+                                  image: AssetImage('assetss/images/tick.png'),
                                   fit: BoxFit.cover)),
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 0,
                         ),
-                        const Text('Analyze your Expenses',
+                        const Text("Let's Get Started !",
                             style: TextStyle(
                                 fontSize: 22,
                                 color: Color.fromARGB(255, 35, 45, 64)))
@@ -63,7 +62,7 @@ class ThirdScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const ReadyScreen()));
+                                  builder: (context) => const SignUp()));
                         },
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(
@@ -77,37 +76,32 @@ class ThirdScreen extends StatelessWidget {
                               const Color.fromARGB(255, 220, 63, 107)),
                         ),
                         child: const Text(
-                          'Next',
+                          'Sign Up',
                           style: TextStyle(fontSize: 20),
                         ),
                       ),
                       const Image(
-                        image: AssetImage('assetss/images/7.png'),
+                        image: AssetImage('assetss/images/11.png'),
                         height: 70,
                         width: 80,
                       )
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(
-                        child: const Text(
-                          'Skip',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Color.fromARGB(255, 220, 63, 107)),
-                          textAlign: TextAlign.center,
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SignUp()));
-                        },
-                      ),
-                    ],
-                  )
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     TextButton(
+                  //       child: const Text(
+                  //         'Skip',
+                  //         style: TextStyle(
+                  //             fontSize: 18,
+                  //             color: Color.fromARGB(255, 220, 63, 107)),
+                  //         textAlign: TextAlign.center,
+                  //       ),
+                  //       onPressed: () {},
+                  //     ),
+                  //   ],
+                  // )
                 ],
               ),
             )));

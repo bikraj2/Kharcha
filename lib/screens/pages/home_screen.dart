@@ -3,7 +3,7 @@ import 'package:demo2/screens/pages/home_page.dart';
 import 'package:demo2/screens/pages/profile_page.dart';
 import 'package:demo2/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'pages/home_page.dart';
+import 'home_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
