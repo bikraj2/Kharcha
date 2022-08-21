@@ -53,8 +53,8 @@ class AuthService {
 
   getExpense(token) async {
     try {
-      var value = await diio.post("https://kharcha-1.herokuapp.com/getExpense",
-          data: {"token": token},
+      var value = await diio.get("https://kharcha-1.herokuapp.com/getExpense",
+          queryParameters: {"token": token},
           options: Options(contentType: Headers.formUrlEncodedContentType));
       print(value);
       return value;
