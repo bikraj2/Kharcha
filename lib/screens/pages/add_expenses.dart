@@ -115,8 +115,25 @@ class _expenseAdderState extends State<expenseAdder> {
                       AuthService()
                           .addexpense(expense,value)
                           .then((val) => {
-                            responsevar = jsonDecode(val),
-                            print(responsevar[0])
+                            print(val)
+
+                            });
+                    });
+                  })),
+        ), 
+        Center(
+          child: Container(
+              padding: EdgeInsets.all(25),
+              child: FloatingActionButton(
+                  child: Text("GetData"),
+                  onPressed: () {
+                    token.storage.read(key: "jwt").then((value) {
+                      AuthService()
+                          .getExpense(value)
+                          .then((val) => {
+                            print(val.runtimeType),
+                            // responsevar = jsonDecode(val.toString()),
+                            // print(responsevar[0]),
 
                             });
                     });

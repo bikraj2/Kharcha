@@ -57,7 +57,7 @@ class AuthService {
           queryParameters: {"token": token},
           options: Options(contentType: Headers.formUrlEncodedContentType));
      
-      
+      return value; 
     } on DioError catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
     }
