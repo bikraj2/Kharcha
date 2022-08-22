@@ -1,9 +1,8 @@
-
-
 import 'package:demo2/models/expenses.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:flutter/material.dart';
 import '../../token/token.dart';
+import 'dart:convert';
 
 class expenseTracker extends StatelessWidget {
   const expenseTracker({Key? key}) : super(key: key);
@@ -31,6 +30,8 @@ class _expenseAdderState extends State<expenseAdder> {
   final _moneyController = TextEditingController();
   String date = " ";
   String? value;
+  List<dynamic> responsevar = [];  
+
   late double money;
   String? categories = "";
   final category = ['Health', 'Rent', 'Food', 'Luxury'];
@@ -100,26 +101,6 @@ class _expenseAdderState extends State<expenseAdder> {
           child: Container(
               padding: EdgeInsets.all(25),
               child: FloatingActionButton(
-                  child: Text("load"),
-                  onPressed: () {
-                    setState(() {
-                      date = _dateController.text;
-                      money = double.parse(_moneyController.text);
-                      categories = value;
-                    });
-                    var expense = Expense(
-                        _dateController.text, categories.toString(), money);
-                    token.storage.read(key: "jwt").then((value) {
-                      AuthService()
-                          .getExpense(value)
-                          .then((val) => {print(val)});
-                    });
-                  })),
-        ),
-        Center(
-          child: Container(
-              padding: EdgeInsets.all(25),
-              child: FloatingActionButton(
                   child: Text("Save"),
                   onPressed: () {
                     setState(() {
@@ -129,11 +110,34 @@ class _expenseAdderState extends State<expenseAdder> {
                     });
                     var expense = Expense(
                         _dateController.text, categories.toString(), money);
+
                     token.storage.read(key: "jwt").then((value) {
                       AuthService()
                           .addexpense(expense,value)
                           .then((val) => {
-                            print(val.data.runtimeType)});
+                            print(val)
+
+                            });
+                    });
+                  })),
+        ), 
+        Center(
+          child: Container(
+              padding: EdgeInsets.all(25),
+              child: FloatingActionButton(
+                  child: Text("GetData"),
+                  onPressed: () {
+                    token.storage.read(key: "jwt").then((value) {
+                      AuthService()
+
+                          .getExpense(value)
+                          .then((val) => {
+                            print(val.runtimeType),
+                            // responsevar = jsonDecode(val.toString()),
+                            // print(responsevar[0]),
+
+                            });
+
                     });
                   })),
         ),
