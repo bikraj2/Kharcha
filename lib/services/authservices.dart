@@ -53,11 +53,11 @@ class AuthService {
 
   getExpense(token) async {
     try {
-      var value = await diio.get("http://localhost:3000/getExpense",
+      var value = await diio.get("https://kharcha-1.herokuapp.com/getExpense",
           queryParameters: {"token": token},
           options: Options(contentType: Headers.formUrlEncodedContentType));
-     
-      return value; 
+      print(value);
+      return value;
     } on DioError catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
     }
