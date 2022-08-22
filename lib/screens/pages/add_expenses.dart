@@ -1,9 +1,11 @@
 import 'package:demo2/models/expenses.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:flutter/material.dart';
+import 'package:pie_chart/pie_chart.dart';
 import '../../token/token.dart';
 import 'dart:convert';
 import '../../models/chart.dart';
+import '../charts/pie_chart.dart'; 
 
 class expenseTracker extends StatelessWidget {
   const expenseTracker({Key? key}) : super(key: key);
@@ -30,7 +32,7 @@ class _expenseAdderState extends State<expenseAdder> {
   final _dateController = TextEditingController();
   final _moneyController = TextEditingController();
   String date = " ";
-  var chart = Chart(); 
+  
   int? cat;
   String? value;
   List<dynamic> responsevar = [];
@@ -132,28 +134,31 @@ class _expenseAdderState extends State<expenseAdder> {
                       token.storage.read(key: "jwt").then((value) {
                         AuthService().getExpense(value).then((val) => {
                                                            
-                              chart.userEntries= val.data["ans"].length,
+                              userEntries= val.data["ans"].length,
+                              
                               print(val.data["ans"][0]["category"].runtimeType),
-                              for(int i = 0 ; i<chart.userEntries; i++){
+                              for(int i = 0 ; i<userEntries; i++){
+                                
                                 
                                 if(val.data["ans"][i]["category"] == "Health"){
-                                  chart.healthAmount = val.data["ans"][i]["amount"] + chart.healthAmount, 
+                                  healthAmount = val.data["ans"][i]["amount"] + healthAmount, 
                                 },
                                 if(val.data["ans"][i]["category"] == "Luxury"){
-                                  chart.luxuryAmount = val.data["ans"][i]["amount"] + chart.luxuryAmount, 
+                                  luxuryAmount = val.data["ans"][i]["amount"] + luxuryAmount, 
                                 },
                                 if(val.data["ans"][i]["category"] == "Rent"){
-                                  chart.rentAmount = val.data["ans"][i]["amount"] + chart.rentAmount, 
+                                  rentAmount = val.data["ans"][i]["amount"] + rentAmount, 
                                 },
                                 if(val.data["ans"][i]["category"] == "Food"){
-                                  chart.foodAmount = val.data["ans"][i]["amount"] + chart.foodAmount, 
+                                  foodAmount = val.data["ans"][i]["amount"] + foodAmount, 
                                 }
                               
                               },
-                              print(chart.healthAmount),
-                              print(chart.luxuryAmount),
-                              print(chart.foodAmount),
-                              print(chart.rentAmount),
+                              print(healthAmount),
+                              print(luxuryAmount),
+                              print(foodAmount),
+                              print(rentAmount),
+                             
                               
                             });
                       });
@@ -162,6 +167,19 @@ class _expenseAdderState extends State<expenseAdder> {
                     }
                   })),
         ),
+        // Center(
+        //   child: Container(
+        //     padding: EdgeInsets.all(25), 
+        //     child: FloatingActionButton(
+        //       child: Text("Pie"), 
+        //       onPressed: (){
+        //         Navigator.push(
+        //           context,
+        //           MaterialPageRoute(builder: (context) => Piechart1()),
+        //         );
+        //       },
+        //     )
+        //     ),)
       ],
     ));
   }

@@ -1,4 +1,4 @@
-class Chart {
+
   late int userEntries;
 
   int healthAmount = 0 ; 
@@ -7,4 +7,4 @@ class Chart {
   int rentAmount = 0 ; 
 
 
-}
+

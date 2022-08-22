@@ -3,20 +3,20 @@ import 'package:pie_chart/pie_chart.dart';
 import '../pages/add_expenses.dart';
 import '../../models/chart.dart';
 
-class Piechart extends StatefulWidget {
-  const Piechart({Key? key}) : super(key: key);
+class Piechart1 extends StatefulWidget {
+  const Piechart1({Key? key}) : super(key: key);
 
   @override
-  State<Piechart> createState() => _PieChartState();
+  State<Piechart1> createState() => _PieChartState();
 }
 
-class _PieChartState extends State<Piechart> {
-  var chart = Chart(); 
+class _PieChartState extends State<Piechart1> {
+ 
   Map<String, double> dataMap = {
-    "Health": chart.healthAmount.toDouble(),
-    "Rent": chart.rentAmount.toDouble(),
-    "Food": chart.foodAmount.toDouble(),
-    "Luxury": chart.luxuryAmount.toDouble(),
+    "Health": healthAmount.toDouble(),
+    "Rent": rentAmount.toDouble(),
+    "Food": foodAmount.toDouble(),
+    "Luxury": luxuryAmount.toDouble(),
   };
 
   List<Color> colorList = [
