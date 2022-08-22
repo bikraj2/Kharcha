@@ -56,7 +56,7 @@ class AuthService {
       var value = await diio.get("http://192.168.1.69:3000/getExpense",
           queryParameters: {"token": token},
           options: Options(contentType: Headers.formUrlEncodedContentType));
-      print(value);
+     
       return value;
     } on DioError catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
-import '../pages/add_expenses.dart'; 
+import '../pages/add_expenses.dart';
+import '../../models/chart.dart';
+
 class Piechart extends StatefulWidget {
   const Piechart({Key? key}) : super(key: key);
 
@@ -9,14 +11,12 @@ class Piechart extends StatefulWidget {
 }
 
 class _PieChartState extends State<Piechart> {
+  var chart = Chart(); 
   Map<String, double> dataMap = {
-
-    
-
-    "Health": 18.47,
-    "Rent": 17.70,
-    "Food": 4.25,
-    "Luxury": 3.51,
+    "Health": chart.healthAmount.toDouble(),
+    "Rent": chart.rentAmount.toDouble(),
+    "Food": chart.foodAmount.toDouble(),
+    "Luxury": chart.luxuryAmount.toDouble(),
   };
 
   List<Color> colorList = [
@@ -27,7 +27,7 @@ class _PieChartState extends State<Piechart> {
   ];
 
   final gradientList = <List<Color>>[
-     [
+    [
       Color.fromRGBO(223, 250, 92, 1),
       Color.fromRGBO(129, 250, 112, 1),
     ],
@@ -40,8 +40,6 @@ class _PieChartState extends State<Piechart> {
       Color.fromRGBO(254, 154, 92, 1),
     ]
   ];
-
-  
 
   @override
   Widget build(BuildContext context) {

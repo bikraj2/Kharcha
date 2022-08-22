@@ -3,6 +3,7 @@ import 'package:demo2/services/authservices.dart';
 import 'package:flutter/material.dart';
 import '../../token/token.dart';
 import 'dart:convert';
+import '../../models/chart.dart';
 
 class expenseTracker extends StatelessWidget {
   const expenseTracker({Key? key}) : super(key: key);
@@ -29,9 +30,11 @@ class _expenseAdderState extends State<expenseAdder> {
   final _dateController = TextEditingController();
   final _moneyController = TextEditingController();
   String date = " ";
+  var chart = Chart(); 
+  int? cat;
   String? value;
   List<dynamic> responsevar = [];
-  String resstring = " "; 
+  String resstring = " ";
 
   late double money;
   String? categories = "";
@@ -128,8 +131,31 @@ class _expenseAdderState extends State<expenseAdder> {
                     try {
                       token.storage.read(key: "jwt").then((value) {
                         AuthService().getExpense(value).then((val) => {
-                          print(val.data["ans"][0]["amount"])
-                        });
+                                                           
+                              chart.userEntries= val.data["ans"].length,
+                              print(val.data["ans"][0]["category"].runtimeType),
+                              for(int i = 0 ; i<chart.userEntries; i++){
+                                
+                                if(val.data["ans"][i]["category"] == "Health"){
+                                  chart.healthAmount = val.data["ans"][i]["amount"] + chart.healthAmount, 
+                                },
+                                if(val.data["ans"][i]["category"] == "Luxury"){
+                                  chart.luxuryAmount = val.data["ans"][i]["amount"] + chart.luxuryAmount, 
+                                },
+                                if(val.data["ans"][i]["category"] == "Rent"){
+                                  chart.rentAmount = val.data["ans"][i]["amount"] + chart.rentAmount, 
+                                },
+                                if(val.data["ans"][i]["category"] == "Food"){
+                                  chart.foodAmount = val.data["ans"][i]["amount"] + chart.foodAmount, 
+                                }
+                              
+                              },
+                              print(chart.healthAmount),
+                              print(chart.luxuryAmount),
+                              print(chart.foodAmount),
+                              print(chart.rentAmount),
+                              
+                            });
                       });
                     } catch (e) {
                       print(e);
