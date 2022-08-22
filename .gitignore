@@ -32,6 +32,7 @@ server/node_modules/
 .pub/
 /build/
 .vscode/
+server/node_modules
 # Web related
 lib/generated_plugin_registrant.dart
 
