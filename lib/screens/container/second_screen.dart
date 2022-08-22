@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'get_started_screen.dart';
 import 'third_screen.dart';
-import 'sign_up.dart';
+import '../log/sign_up.dart';
 
-class ReadyScreen extends StatelessWidget {
-  const ReadyScreen({Key? key}) : super(key: key);
+class SecondScreen extends StatelessWidget {
+  const SecondScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,8 @@ class ReadyScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const ThirdScreen()));
+                                builder: (context) =>
+                                    const GetStartedScreen()));
                       },
                       child: const Image(
                         image: AssetImage(
@@ -35,18 +37,18 @@ class ReadyScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          width: 400,
-                          height: 400,
+                          width: 200,
+                          height: 200,
                           decoration: const BoxDecoration(
                               shape: BoxShape.rectangle,
                               image: DecorationImage(
-                                  image: AssetImage('assetss/images/tick.png'),
+                                  image: AssetImage('assetss/images/sack.png'),
                                   fit: BoxFit.cover)),
                         ),
                         const SizedBox(
-                          height: 0,
+                          height: 10,
                         ),
-                        const Text("Let's Get Started !",
+                        const Text('Plan your Budget',
                             style: TextStyle(
                                 fontSize: 22,
                                 color: Color.fromARGB(255, 35, 45, 64)))
@@ -62,7 +64,7 @@ class ReadyScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const SignUp()));
+                                  builder: (context) => const ThirdScreen()));
                         },
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(
@@ -76,32 +78,37 @@ class ReadyScreen extends StatelessWidget {
                               const Color.fromARGB(255, 220, 63, 107)),
                         ),
                         child: const Text(
-                          'Sign Up',
+                          'Next',
                           style: TextStyle(fontSize: 20),
                         ),
                       ),
                       const Image(
-                        image: AssetImage('assetss/images/11.png'),
+                        image: AssetImage('assetss/images/6.png'),
                         height: 70,
                         width: 80,
                       )
                     ],
                   ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: [
-                  //     TextButton(
-                  //       child: const Text(
-                  //         'Skip',
-                  //         style: TextStyle(
-                  //             fontSize: 18,
-                  //             color: Color.fromARGB(255, 220, 63, 107)),
-                  //         textAlign: TextAlign.center,
-                  //       ),
-                  //       onPressed: () {},
-                  //     ),
-                  //   ],
-                  // )
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                        child: const Text(
+                          'Skip',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Color.fromARGB(255, 220, 63, 107)),
+                          textAlign: TextAlign.center,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SignUp()));
+                        },
+                      ),
+                    ],
+                  )
                 ],
               ),
             )));

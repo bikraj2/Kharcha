@@ -1,12 +1,14 @@
-import 'package:demo2/screens/login_screen.dart';
+import 'package:demo2/screens/log/login_screen.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../models/user_info.dart';
+import '../../models/user_info.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../theme/theme.dart';
+import '../../theme/theme.dart';
+
+import '../../theme/theme.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -132,13 +134,13 @@ class _SignUpState extends State<SignUp> {
               height: 20,
             ),
             TextField(
-              controller: usernameController,
+              controller: emailController,
               obscureText: true,
               style: const TextStyle(fontSize: 18, color: Colors.black54),
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
-                hintText: 'username',
+                hintText: 'email',
                 contentPadding: const EdgeInsets.all(15),
                 focusedBorder: OutlineInputBorder(
                   borderSide:
@@ -156,13 +158,18 @@ class _SignUpState extends State<SignUp> {
               height: 20,
             ),
             TextField(
-              controller: emailController,
+              controller: usernameController,
               style: const TextStyle(fontSize: 18, color: Colors.black54),
               decoration: InputDecoration(
                 filled: true,
+<<<<<<< HEAD:lib/screens/sign_up.dart
 
                 fillColor: AppTheme.colors.tertiarycolor,
                hintText: 'Email',
+=======
+                fillColor: AppTheme.colors.tertiarycolor,
+                hintText: 'Username',
+>>>>>>> master:lib/screens/log/sign_up.dart
                 contentPadding: const EdgeInsets.all(15),
                 focusedBorder: OutlineInputBorder(
                   borderSide:

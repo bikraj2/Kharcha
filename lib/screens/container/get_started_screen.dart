@@ -1,36 +1,24 @@
+import 'package:demo2/screens/bin/home_page.dart';
 import 'package:flutter/material.dart';
-import 'get_started_screen.dart';
-import 'third_screen.dart';
-import 'sign_up.dart';
+import 'package:demo2/theme/color.dart';
+import 'package:demo2/theme/theme.dart';
 
-class SecondScreen extends StatelessWidget {
-  const SecondScreen({Key? key}) : super(key: key);
+import '../pages/home_screen.dart';
+import 'second_screen.dart';
+import '../log/login_screen.dart';
+
+class GetStartedScreen extends StatelessWidget {
+  const GetStartedScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-            color: Colors.white,
+            color: AppTheme.colors.tertiarycolor,
             child: Padding(
               padding: const EdgeInsets.all(30),
               child: Column(
                 children: <Widget>[
-                  TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const GetStartedScreen()));
-                      },
-                      child: const Image(
-                        image: AssetImage(
-                          'assetss/images/10.png',
-                        ),
-                        height: 60,
-                        width: 900,
-                        alignment: Alignment.topLeft,
-                      )),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -42,13 +30,13 @@ class SecondScreen extends StatelessWidget {
                           decoration: const BoxDecoration(
                               shape: BoxShape.rectangle,
                               image: DecorationImage(
-                                  image: AssetImage('assetss/images/sack.png'),
+                                  image: AssetImage('assetss/images/logo.png'),
                                   fit: BoxFit.cover)),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                        const Text('Plan your Budget',
+                        const Text('Expense Tracking Application',
                             style: TextStyle(
                                 fontSize: 22,
                                 color: Color.fromARGB(255, 35, 45, 64)))
@@ -64,7 +52,7 @@ class SecondScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const ThirdScreen()));
+                                  builder: (context) => const SecondScreen()));
                         },
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(
@@ -75,15 +63,15 @@ class SecondScreen extends StatelessWidget {
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18))),
                           backgroundColor: MaterialStateProperty.all(
-                              const Color.fromARGB(255, 220, 63, 107)),
+                              AppTheme.colors.basecolor),
                         ),
                         child: const Text(
-                          'Next',
+                          'Get Started',
                           style: TextStyle(fontSize: 20),
                         ),
                       ),
                       const Image(
-                        image: AssetImage('assetss/images/6.png'),
+                        image: AssetImage('assetss/images/img1.png'),
                         height: 70,
                         width: 80,
                       )
@@ -92,19 +80,22 @@ class SecondScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextButton(
-                        child: const Text(
-                          'Skip',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Color.fromARGB(255, 220, 63, 107)),
-                          textAlign: TextAlign.center,
+                      const Text(
+                        'Have an account?',
+                        style: TextStyle(
+                          fontSize: 18,
                         ),
+                      ),
+                      TextButton(
+                        child: const Text('Login',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Color.fromARGB(255, 220, 63, 107))),
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const SignUp()));
+                                  builder: (context) => LoginScreen()));
                         },
                       ),
                     ],
