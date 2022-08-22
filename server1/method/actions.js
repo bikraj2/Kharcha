@@ -81,7 +81,8 @@ var functions = {
         var token = req.query["token"];
         var decodedtoken =jwt.decode(token,config.secret)
         var userId1 = decodedtoken._id;
-        expense.find({userId:userId1}).then((result,next)=>{
+        expense.find({userId:userId1},{amount:true,category:true,_id:false}).then((result,next)=>{
+            console.log(result)
             res.json(result)
         }).catch((err)=>{
 

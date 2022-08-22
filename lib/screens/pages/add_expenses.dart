@@ -132,7 +132,8 @@ class _expenseAdderState extends State<expenseAdder> {
                     token.storage.read(key: "jwt").then((value) {
                       AuthService()
                           .addexpense(expense,value)
-                          .then((val) => {print(val)});
+                          .then((val) => {
+                            print(val.data.runtimeType)});
                     });
                   })),
         ),
