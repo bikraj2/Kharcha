@@ -30,7 +30,8 @@ class _expenseAdderState extends State<expenseAdder> {
   final _moneyController = TextEditingController();
   String date = " ";
   String? value;
-  List<dynamic> responsevar = [];  
+  List<dynamic> responsevar = [];
+  String resstring = " "; 
 
   late double money;
   String? categories = "";
@@ -113,30 +114,26 @@ class _expenseAdderState extends State<expenseAdder> {
 
                     token.storage.read(key: "jwt").then((value) {
                       AuthService()
-                          .addexpense(expense,value)
-                          .then((val) => {
-                            print(val)
-
-                            });
+                          .addexpense(expense, value)
+                          .then((val) => {print(val)});
                     });
                   })),
-        ), 
+        ),
         Center(
           child: Container(
               padding: EdgeInsets.all(25),
               child: FloatingActionButton(
-                  child: Text("GetData"),
+                  child: Text("Get"),
                   onPressed: () {
-                    token.storage.read(key: "jwt").then((value) {
-                      AuthService()
-                          .getExpense(value)
-                          .then((val) => {
-                            print(val.runtimeType),
-                            // responsevar = jsonDecode(val.toString()),
-                            // print(responsevar[0]),
-
-                            });
-                    });
+                    try {
+                      token.storage.read(key: "jwt").then((value) {
+                        AuthService().getExpense(value).then((val) => {
+                          print(val.data["ans"][0]["amount"])
+                        });
+                      });
+                    } catch (e) {
+                      print(e);
+                    }
                   })),
         ),
       ],

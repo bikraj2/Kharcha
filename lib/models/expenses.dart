@@ -10,6 +10,16 @@ class Expense {
     this.category = category;
     this.amount = amount;
   }
+   Expense.fromJson(Map<String, dynamic> json)
+      : amount = json['amount'],
+        category = json['category'];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'amount': amount,
+      'category': category,
+    };
+  }
   Object value() {
     return {"name": name, "category": category, "amount": amount,token:token.readToken()};
   }
