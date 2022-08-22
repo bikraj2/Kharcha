@@ -35,7 +35,7 @@ var functions = {
                 throw err
             }
             if(!user){
-                res.status(403).send({success:false,msg:'Authentication Failed,User not found'})
+                res.status(403).send({success:false,msg:'Authentication Failed,User not found',message:req.body.username})
             }
             else{
                 user.comparePassword(req.body.password, (err,isMatch)=>{
