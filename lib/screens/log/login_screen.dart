@@ -101,7 +101,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             ElevatedButton(
               onPressed: () {
-                print(passwordController.text);
                 AuthService()
                     .login(usernameController.text, passwordController.text)
                     .then((val) {
