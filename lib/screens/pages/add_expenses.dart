@@ -100,6 +100,26 @@ class _expenseAdderState extends State<expenseAdder> {
           child: Container(
               padding: EdgeInsets.all(25),
               child: FloatingActionButton(
+                  child: Text("load"),
+                  onPressed: () {
+                    setState(() {
+                      date = _dateController.text;
+                      money = double.parse(_moneyController.text);
+                      categories = value;
+                    });
+                    var expense = Expense(
+                        _dateController.text, categories.toString(), money);
+                    token.storage.read(key: "jwt").then((value) {
+                      AuthService()
+                          .getExpense(value)
+                          .then((val) => {print(val)});
+                    });
+                  })),
+        ),
+        Center(
+          child: Container(
+              padding: EdgeInsets.all(25),
+              child: FloatingActionButton(
                   child: Text("Save"),
                   onPressed: () {
                     setState(() {
@@ -109,10 +129,9 @@ class _expenseAdderState extends State<expenseAdder> {
                     });
                     var expense = Expense(
                         _dateController.text, categories.toString(), money);
-                    var token1;
                     token.storage.read(key: "jwt").then((value) {
                       AuthService()
-                          .getExpense(value)
+                          .addexpense(expense,value)
                           .then((val) => {print(val)});
                     });
                   })),
