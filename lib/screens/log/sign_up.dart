@@ -134,13 +134,13 @@ class _SignUpState extends State<SignUp> {
               height: 20,
             ),
             TextField(
-              controller: usernameController,
+              controller: emailController,
               obscureText: true,
               style: const TextStyle(fontSize: 18, color: Colors.black54),
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
-                hintText: 'username',
+                hintText: 'email',
                 contentPadding: const EdgeInsets.all(15),
                 focusedBorder: OutlineInputBorder(
                   borderSide:
@@ -158,7 +158,7 @@ class _SignUpState extends State<SignUp> {
               height: 20,
             ),
             TextField(
-              controller: emailController,
+              controller: usernameController,
               style: const TextStyle(fontSize: 18, color: Colors.black54),
               decoration: InputDecoration(
                 filled: true,

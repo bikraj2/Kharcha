@@ -113,7 +113,7 @@ class _expenseAdderState extends State<expenseAdder> {
 
                     token.storage.read(key: "jwt").then((value) {
                       AuthService()
-                          .getExpense(value)
+                          .addexpense(expense,value)
                           .then((val) => {
                             responsevar = jsonDecode(val),
                             print(responsevar[0])
