@@ -1,3 +1,5 @@
+import 'package:demo2/screens/pages/home_page.dart';
+import 'package:demo2/screens/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../services/authservices.dart';
@@ -104,6 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 AuthService()
                     .login(usernameController.text, passwordController.text)
                     .then((val) {
+                  print(val);
                   if (val.data["success"]) {
                     token.storeToken(val.data["token"]);
                     token.readToken();
@@ -111,13 +114,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return expenseTracker();
+                          return HomeScreen();
                         },
                       ),
                     );
                   } else {
                     Fluttertoast.showToast(msg: val.data["msg"]);
-                     
                   }
                 });
               },

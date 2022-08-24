@@ -5,7 +5,7 @@ import 'package:pie_chart/pie_chart.dart';
 import '../../token/token.dart';
 import 'dart:convert';
 import '../../models/chart.dart';
-import '../charts/pie_chart.dart'; 
+import '../charts/pie_chart.dart';
 
 class expenseTracker extends StatelessWidget {
   const expenseTracker({Key? key}) : super(key: key);
@@ -32,7 +32,7 @@ class _expenseAdderState extends State<expenseAdder> {
   final _dateController = TextEditingController();
   final _moneyController = TextEditingController();
   String date = " ";
-  
+
   int? cat;
   String? value;
   List<dynamic> responsevar = [];
@@ -124,54 +124,12 @@ class _expenseAdderState extends State<expenseAdder> {
                     });
                   })),
         ),
-        Center(
-          child: Container(
-              padding: EdgeInsets.all(25),
-              child: FloatingActionButton(
-                  child: Text("Get"),
-                  onPressed: () {
-                    try {
-                      token.storage.read(key: "jwt").then((value) {
-                        AuthService().getExpense(value).then((val) => {
-                                                           
-                              userEntries= val.data["ans"].length,
-                              
-                              print(val.data["ans"][0]["category"].runtimeType),
-                              for(int i = 0 ; i<userEntries; i++){
-                                
-                                
-                                if(val.data["ans"][i]["category"] == "Health"){
-                                  healthAmount = val.data["ans"][i]["amount"] + healthAmount, 
-                                },
-                                if(val.data["ans"][i]["category"] == "Luxury"){
-                                  luxuryAmount = val.data["ans"][i]["amount"] + luxuryAmount, 
-                                },
-                                if(val.data["ans"][i]["category"] == "Rent"){
-                                  rentAmount = val.data["ans"][i]["amount"] + rentAmount, 
-                                },
-                                if(val.data["ans"][i]["category"] == "Food"){
-                                  foodAmount = val.data["ans"][i]["amount"] + foodAmount, 
-                                }
-                              
-                              },
-                              print(healthAmount),
-                              print(luxuryAmount),
-                              print(foodAmount),
-                              print(rentAmount),
-                             
-                              
-                            });
-                      });
-                    } catch (e) {
-                      print(e);
-                    }
-                  })),
-        ),
+       
         // Center(
         //   child: Container(
-        //     padding: EdgeInsets.all(25), 
+        //     padding: EdgeInsets.all(25),
         //     child: FloatingActionButton(
-        //       child: Text("Pie"), 
+        //       child: Text("Pie"),
         //       onPressed: (){
         //         Navigator.push(
         //           context,

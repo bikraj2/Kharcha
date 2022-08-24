@@ -27,7 +27,7 @@ var functions = {
     },
     authenticate: function (req, res) {
         User.findOne({
-            name: req.body.name
+            username: req.body.username
         }, function (err, user) {
                 if (err) throw err
                 if (!user) {
@@ -38,7 +38,7 @@ var functions = {
                     user.comparePassword(req.body.password, function (err, isMatch) {
                         if (isMatch && !err) {
                             var token = jwt.encode(user, config.secret)
-                            res.json({success: true, token: token})
+                            res.json({success: true, token: token,username:req.body.username})
                         }
                         else {
                             return res.status(403).send({success: false, msg: 'Authentication failed, wrong password'})
