@@ -20,7 +20,7 @@ class ThirdScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const SecondScreen()));
+                                builder: (context) => SecondScreen()));
                       },
                       child: const Image(
                         image: AssetImage(
@@ -63,7 +63,7 @@ class ThirdScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const ReadyScreen()));
+                                  builder: (context) =>  ReadyScreen()));
                         },
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(
@@ -113,3 +113,19 @@ class ThirdScreen extends StatelessWidget {
             )));
   }
 }
+// import 'package:flutter/widgets.dart';
+
+// class FrameSize {
+//   //init method is static so no object creation is required
+//   static void init({
+//     required context,
+//   }) {
+//     _mediaQueryData = MediaQuery.of(context);
+//     height = _mediaQueryData.size.height;
+//     width = _mediaQueryData.size.width;
+//   }
+
+//   static late double width;
+//   static late double height;
+//   static late MediaQueryData _mediaQueryData;
+// }

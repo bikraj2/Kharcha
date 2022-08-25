@@ -1,17 +1,28 @@
-import 'package:demo2/screens/bin/home_page.dart';
+// import 'package:demo2/screens/bin/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:demo2/theme/color.dart';
+// import 'package:demo2/theme/color.dart';
 import 'package:demo2/theme/theme.dart';
 
+import '../../frame/framesize.dart';
 import '../pages/home_screen.dart';
 import 'second_screen.dart';
-import '../log/login_screen.dart';
+// import '../log/login_screen.dart';
 
 class GetStartedScreen extends StatelessWidget {
-  const GetStartedScreen({Key? key}) : super(key: key);
+  GetStartedScreen({Key? key}) : super(key: key);
+  var orientation, size, height, width;
+
+  // ignore: prefer_typing_uninitialized_variables
 
   @override
   Widget build(BuildContext context) {
+    orientation = MediaQuery.of(context).orientation;
+
+    //size of the window
+    size = MediaQuery.of(context).size;
+    height = size.height;
+    width = size.width;
+
     return Scaffold(
         body: Container(
             color: AppTheme.colors.tertiarycolor,
@@ -25,8 +36,8 @@ class GetStartedScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          width: 200,
-                          height: 200,
+                          width: width / 4,
+                          height: height / 3,
                           decoration: const BoxDecoration(
                               shape: BoxShape.rectangle,
                               image: DecorationImage(
@@ -52,7 +63,7 @@ class GetStartedScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const SecondScreen()));
+                                  builder: (context) => SecondScreen()));
                         },
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(
@@ -70,10 +81,10 @@ class GetStartedScreen extends StatelessWidget {
                           style: TextStyle(fontSize: 20),
                         ),
                       ),
-                      const Image(
+                      Image(
                         image: AssetImage('assetss/images/img1.png'),
-                        height: 70,
-                        width: 80,
+                        height: height / 10,
+                        width: width / 5,
                       )
                     ],
                   ),
@@ -95,7 +106,7 @@ class GetStartedScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginScreen()));
+                                  builder: (context) => HomeScreen()));
                         },
                       ),
                     ],

@@ -48,198 +48,200 @@ class _SignUpState extends State<SignUp> {
           },
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(15),
-        color: Colors.white,
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Image.asset(
-              'assetss/images/logo.png',
-              height: 130,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextField(
-              controller: firstNameController,
-              style: const TextStyle(fontSize: 18, color: Colors.black54),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                hintText: 'Firstname',
-                contentPadding: const EdgeInsets.all(15),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(15),
+          color: Colors.white,
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Image.asset(
+                'assetss/images/logo.png',
+                height: 130,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              TextField(
+                controller: firstNameController,
+                style: const TextStyle(fontSize: 18, color: Colors.black54),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  hintText: 'Firstname',
+                  contentPadding: const EdgeInsets.all(15),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 35, 45, 64)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 35, 45, 64)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextField(
-              controller: middleNameController,
-              obscureText: true,
-              style: const TextStyle(fontSize: 18, color: Colors.black54),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                hintText: 'MiddleName',
-                contentPadding: const EdgeInsets.all(15),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
+              const SizedBox(
+                height: 20,
+              ),
+              TextField(
+                controller: middleNameController,
+                // obscureText: true,
+                style: const TextStyle(fontSize: 18, color: Colors.black54),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  hintText: 'MiddleName',
+                  contentPadding: const EdgeInsets.all(15),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 35, 45, 64)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 35, 45, 64)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextField(
-              controller: lastNameController,
-              style: const TextStyle(fontSize: 18, color: Colors.black54),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                hintText: 'Lastname',
-                contentPadding: const EdgeInsets.all(15),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
+              const SizedBox(
+                height: 20,
+              ),
+              TextField(
+                controller: lastNameController,
+                style: const TextStyle(fontSize: 18, color: Colors.black54),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  hintText: 'Lastname',
+                  contentPadding: const EdgeInsets.all(15),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 35, 45, 64)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 35, 45, 64)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextField(
-              controller: emailController,
-              obscureText: true,
-              style: const TextStyle(fontSize: 18, color: Colors.black54),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                hintText: 'email',
-                contentPadding: const EdgeInsets.all(15),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
+              const SizedBox(
+                height: 20,
+              ),
+              TextField(
+                controller: emailController,
+                // obscureText: true,
+                style: const TextStyle(fontSize: 18, color: Colors.black54),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  hintText: 'Email',
+                  contentPadding: const EdgeInsets.all(15),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 35, 45, 64)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 35, 45, 64)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextField(
-              controller: usernameController,
-              style: const TextStyle(fontSize: 18, color: Colors.black54),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: AppTheme.colors.tertiarycolor,
-                hintText: 'Username',
-                contentPadding: const EdgeInsets.all(15),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
+              const SizedBox(
+                height: 20,
+              ),
+              TextField(
+                controller: usernameController,
+                style: const TextStyle(fontSize: 18, color: Colors.black54),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: AppTheme.colors.tertiarycolor,
+                  hintText: 'Username',
+                  contentPadding: const EdgeInsets.all(15),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 35, 45, 64)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 35, 45, 64)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              style: const TextStyle(fontSize: 18, color: Colors.black54),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                hintText: 'Password',
-                contentPadding: const EdgeInsets.all(15),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
+              const SizedBox(
+                height: 20,
+              ),
+              TextField(
+                controller: passwordController,
+                obscureText: true,
+                style: const TextStyle(fontSize: 18, color: Colors.black54),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  hintText: 'Password',
+                  contentPadding: const EdgeInsets.all(15),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 35, 45, 64)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 35, 45, 64)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Users newuser = Users(
-                    firstNameController.text,
-                    middleNameController.text,
-                    lastNameController.text,
-                    emailController.text,
-                    usernameController.text,
-                    passwordController.text);
-                AuthService().addUser(newuser).then((val) {
-                  if (val.data["success"]) {
-                    dispose();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LoginScreen()),
-                    );
-                  }
-                });
-              },
-              style: ButtonStyle(
-                padding: MaterialStateProperty.all(
-                  const EdgeInsets.all(10),
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Users newuser = Users(
+                      firstNameController.text,
+                      middleNameController.text,
+                      lastNameController.text,
+                      emailController.text,
+                      usernameController.text,
+                      passwordController.text);
+                  AuthService().addUser(newuser).then((val) {
+                    if (val.data["success"]) {
+                      dispose();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginScreen()),
+                      );
+                    }
+                  });
+                },
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(
+                    const EdgeInsets.all(10),
+                  ),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18))),
+                  backgroundColor: MaterialStateProperty.all(
+                      const Color.fromARGB(255, 220, 63, 107)),
                 ),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18))),
-                backgroundColor: MaterialStateProperty.all(
-                    const Color.fromARGB(255, 220, 63, 107)),
+                child: const Text(
+                  'Sign Up',
+                  style: TextStyle(fontSize: 20),
+                ),
               ),
-              child: const Text(
-                'Sign Up',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -4,10 +4,17 @@ import 'third_screen.dart';
 import '../log/sign_up.dart';
 
 class SecondScreen extends StatelessWidget {
-  const SecondScreen({Key? key}) : super(key: key);
+  SecondScreen({Key? key}) : super(key: key);
+  var orientation, size, height, width;
 
   @override
   Widget build(BuildContext context) {
+    orientation = MediaQuery.of(context).orientation;
+
+    //size of the window
+    size = MediaQuery.of(context).size;
+    height = size.height;
+    width = size.width;
     return Scaffold(
         body: Container(
             color: Colors.white,
@@ -20,8 +27,7 @@ class SecondScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    const GetStartedScreen()));
+                                builder: (context) => GetStartedScreen()));
                       },
                       child: const Image(
                         image: AssetImage(
@@ -37,8 +43,8 @@ class SecondScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          width: 200,
-                          height: 200,
+                          width: width / 6,
+                          height: height / 5,
                           decoration: const BoxDecoration(
                               shape: BoxShape.rectangle,
                               image: DecorationImage(

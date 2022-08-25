@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           primary: AppTheme.colors.basecolor
         ),
       ),
-      home: const GetStartedScreen(),
+      home:  GetStartedScreen(),
     );
   }
 }

@@ -3,10 +3,17 @@ import 'third_screen.dart';
 import '../log/sign_up.dart';
 
 class ReadyScreen extends StatelessWidget {
-  const ReadyScreen({Key? key}) : super(key: key);
+  ReadyScreen({Key? key}) : super(key: key);
+  var orientation, size, height, width;
 
   @override
   Widget build(BuildContext context) {
+    orientation = MediaQuery.of(context).orientation;
+
+    //size of the window
+    size = MediaQuery.of(context).size;
+    height = size.height;
+    width = size.width;
     return Scaffold(
         body: Container(
             color: Colors.white,
@@ -25,8 +32,8 @@ class ReadyScreen extends StatelessWidget {
                         image: AssetImage(
                           'assetss/images/10.png',
                         ),
-                        height: 60,
-                        width: 900,
+                        height: 40,
+                        width: 50,
                         alignment: Alignment.topLeft,
                       )),
                   Expanded(
@@ -35,8 +42,8 @@ class ReadyScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          width: 400,
-                          height: 400,
+                          width: width / 2,
+                          height: height / 2,
                           decoration: const BoxDecoration(
                               shape: BoxShape.rectangle,
                               image: DecorationImage(
