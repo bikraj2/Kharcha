@@ -9,7 +9,7 @@
 .history
 .svn/
 migrate_working_dir/
-
+server1/node_modules
 # IntelliJ related
 *.iml
 *.ipr
@@ -32,6 +32,7 @@ migrate_working_dir/
 .pub/
 /build/
 .vscode/
+server1/node_modules
 # Web related
 lib/generated_plugin_registrant.dart
 

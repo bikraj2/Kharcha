@@ -9,10 +9,10 @@ import '../token/token.dart';
 
 class AuthService {
   Dio diio = new Dio();
-  login(name, password) async {
+  login(username, password) async {
     try {
-      var value = await diio.post("https://kharcha-1.herokuapp.com/authenticate",
-          data: {"username": name, "password": password},
+      var value = await diio.post("http://kharcha-2.herokuapp.com/authenticate",
+          data: {"username": username, "password": password},
           options: Options(contentType: Headers.formUrlEncodedContentType));
       return value;
     } on DioError catch (e) {
@@ -24,7 +24,7 @@ class AuthService {
 
   addUser(Users user) async {
     try {
-      var value = await diio.post("https://kharcha-1.herokuapp.com/adduser",
+      var value = await diio.post("http://kharcha-2.herokuapp.com/adduser",
           data: user.value(),
           options: Options(contentType: Headers.formUrlEncodedContentType));
       return value;
@@ -36,7 +36,7 @@ class AuthService {
 
   addexpense(Expense expense, token) async {
     try {
-      var value = await diio.post("https://kharcha-1.herokuapp.com/addExpense",
+      var value = await diio.post("https://kharcha-2.herokuapp.com/addExpense",
           data: {
             "name": expense.name,
             "category": expense.category,
@@ -53,8 +53,8 @@ class AuthService {
 
   getExpense(token) async {
     try {
-      var value = await diio.post("https://kharcha-1.herokuapp.com/getExpense",
-          data: {"token": token},
+      var value = await diio.get("https://kharcha-2.herokuapp.com/getExpense",
+          queryParameters: {"token": token},
           options: Options(contentType: Headers.formUrlEncodedContentType));
       print(value);
       return value;

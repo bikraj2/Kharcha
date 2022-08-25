@@ -1,3 +1,5 @@
+import 'package:demo2/screens/pages/home_page.dart';
+import 'package:demo2/screens/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../services/authservices.dart';
@@ -6,7 +8,7 @@ import '../bin/home.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../token/token.dart';
 import '../../services/authservices.dart';
-import '../pages/add_expenses.dart'; 
+import '../pages/add_expenses.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -104,6 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 AuthService()
                     .login(usernameController.text, passwordController.text)
                     .then((val) {
+                  print(val);
                   if (val.data["success"]) {
                     token.storeToken(val.data["token"]);
                     token.readToken();
@@ -111,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return expenseTracker();
+                          return HomeScreen();
                         },
                       ),
                     );

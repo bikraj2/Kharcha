@@ -1,10 +1,12 @@
-import 'dart:ffi';
-
 import 'package:demo2/models/expenses.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:demo2/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:pie_chart/pie_chart.dart';
 import '../../token/token.dart';
+import 'dart:convert';
+import '../../models/chart.dart';
+import '../charts/pie_chart.dart';
 
 class expenseTracker extends StatelessWidget {
   const expenseTracker({Key? key}) : super(key: key);
@@ -31,7 +33,12 @@ class _expenseAdderState extends State<expenseAdder> {
   final _dateController = TextEditingController();
   final _moneyController = TextEditingController();
   String date = " ";
+
+  int? cat;
   String? value;
+  List<dynamic> responsevar = [];
+  String resstring = " ";
+
   late double money;
   String? categories = "";
   final category = ['Health', 'Rent', 'Food', 'Luxury'];
