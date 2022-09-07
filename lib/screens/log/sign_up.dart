@@ -162,14 +162,8 @@ class _SignUpState extends State<SignUp> {
               style: const TextStyle(fontSize: 18, color: Colors.black54),
               decoration: InputDecoration(
                 filled: true,
-<<<<<<< HEAD:lib/screens/sign_up.dart
-
-                fillColor: AppTheme.colors.tertiarycolor,
-               hintText: 'Email',
-=======
                 fillColor: AppTheme.colors.tertiarycolor,
                 hintText: 'Username',
->>>>>>> master:lib/screens/log/sign_up.dart
                 contentPadding: const EdgeInsets.all(15),
                 focusedBorder: OutlineInputBorder(
                   borderSide:

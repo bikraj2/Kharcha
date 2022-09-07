@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../services/authservices.dart';
+import '../home.dart';
 import '../pages/add_expenses.dart';
 import '../bin/home.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -112,11 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-<<<<<<< HEAD:lib/screens/login_screen.dart
                           return HomeScreen();
-=======
-                          return expenseTracker();
->>>>>>> master:lib/screens/log/login_screen.dart
                         },
                       ),
                     );
