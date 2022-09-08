@@ -5,14 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../models/user_info.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
-<<<<<<< HEAD:lib/screens/log/sign_up.dart
-import '../../theme/theme.dart';
-
-import '../../theme/theme.dart';
-=======
-import '../theme/theme.dart';
->>>>>>> ishan:lib/screens/sign_up.dart
+import 'package:demo2/theme/theme.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);

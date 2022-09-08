@@ -1,17 +1,10 @@
-<<<<<<< HEAD:lib/screens/pages/add_expenses.dart
 
 
 import 'package:demo2/models/expenses.dart';
+import 'package:demo2/screens/pie_chart.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:flutter/material.dart';
 import '../../token/token.dart';
-=======
-import 'package:demo2/models/expenses.dart';
-import 'package:demo2/services/authservices.dart';
-import 'package:flutter/material.dart';
-import '../token/token.dart';
-import 'pie_chart.dart';
->>>>>>> ishan:lib/screens/add_expenses.dart
 
 class expenseTracker extends StatelessWidget {
   const expenseTracker({Key? key}) : super(key: key);
@@ -119,10 +112,7 @@ class _expenseAdderState extends State<expenseAdder> {
                     var expense = Expense(
                         _dateController.text, categories.toString(), money);
                     token.storage.read(key: "jwt").then((value) {
-<<<<<<< HEAD:lib/screens/pages/add_expenses.dart
-=======
                       print(value);
->>>>>>> ishan:lib/screens/add_expenses.dart
                       AuthService()
                           .getExpense(value)
                           .then((val) => {print(val)});
