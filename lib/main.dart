@@ -4,10 +4,11 @@ import 'package:demo2/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+  // var orientation, size, height, width;
 
   static const String _title = 'Welcome';
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
           title: const Text(_title),
           backgroundColor: AppTheme.colors.basecolor,
         ),
-        body: const GetStartedScreen(),
+        body: GetStartedScreen(),
       ),
     );
   }
