@@ -9,10 +9,18 @@ import '../../models/chart.dart';
 import '../charts/pie_chart.dart';
 
 class expenseTracker extends StatelessWidget {
-  const expenseTracker({Key? key}) : super(key: key);
+  expenseTracker({Key? key}) : super(key: key);
+  var orientation, size, height, width;
 
   @override
   Widget build(BuildContext context) {
+    orientation = MediaQuery.of(context).orientation;
+
+    //size of the window
+    size = MediaQuery.of(context).size;
+    height = size.height;
+    width = size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add your expenses'),
@@ -30,6 +38,8 @@ class expenseAdder extends StatefulWidget {
 }
 
 class _expenseAdderState extends State<expenseAdder> {
+  var orientation, size, height, width;
+
   final _dateController = TextEditingController();
   final _moneyController = TextEditingController();
   String date = " ";
@@ -44,6 +54,12 @@ class _expenseAdderState extends State<expenseAdder> {
   final category = ['Health', 'Rent', 'Food', 'Luxury'];
   @override
   Widget build(BuildContext context) {
+    orientation = MediaQuery.of(context).orientation;
+
+    //size of the window
+    size = MediaQuery.of(context).size;
+    height = size.height;
+    width = size.width;
     return Scaffold(
       body: Center(
         child: Column(
@@ -51,7 +67,7 @@ class _expenseAdderState extends State<expenseAdder> {
             Container(
               padding: const EdgeInsets.only(top: 50, bottom: 10),
               alignment: Alignment.topLeft,
-              height: 180,
+              height: height / 6,
               child: Row(
                 children: [
                   const Image(
@@ -74,8 +90,8 @@ class _expenseAdderState extends State<expenseAdder> {
             ),
             Container(
                 margin: const EdgeInsets.only(top: 50),
-                height: 70,
-                width: 300,
+                height: height / 7,
+                width: width / 3,
                 child: TextField(
                     controller: _moneyController,
                     decoration: InputDecoration(

@@ -16,26 +16,15 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          width: 200,
-          height: 80,
-          margin: EdgeInsets.only(top: 20),
-          decoration: const BoxDecoration(
-              shape: BoxShape.rectangle,
-              image: DecorationImage(
-                  image: AssetImage('assetss/images/profile.png'),
-                  fit: BoxFit.cover)),
-        ),
-        Container(
-          child: Text('Username'),
-        ),
-        TopNewCard(),
+        profilePicture(),
+        const Text('Username'),
+        const TopNewCard(),
         Padding(
-          padding: EdgeInsets.only(left: 30, right: 30),
+          padding: const EdgeInsets.only(left: 30, right: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   // Navigator.push(
@@ -54,14 +43,16 @@ class _ProfilePageState extends State<ProfilePage> {
                       MaterialStateProperty.all(AppTheme.colors.tertiarycolor),
                   foregroundColor: MaterialStateProperty.resolveWith<Color>(
                       (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered))
+                    if (states.contains(MaterialState.hovered)) {
                       return Colors.white;
+                    }
                     return AppTheme.colors.basecolor;
                   }),
                   overlayColor: MaterialStateProperty.resolveWith<Color?>(
                     (Set<MaterialState> states) {
-                      if (states.contains(MaterialState.hovered))
-                        return AppTheme.colors.basecolor; //<-- SEE HERE
+                      if (states.contains(MaterialState.hovered)) {
+                        return AppTheme.colors.basecolor;
+                      } //<-- SEE HERE
                       return AppTheme.colors
                           .tertiarycolor; // Defer to the widget's default.
                     },
@@ -74,7 +65,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               ElevatedButton(
@@ -95,14 +86,16 @@ class _ProfilePageState extends State<ProfilePage> {
                       MaterialStateProperty.all(AppTheme.colors.tertiarycolor),
                   foregroundColor: MaterialStateProperty.resolveWith<Color>(
                       (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered))
+                    if (states.contains(MaterialState.hovered)) {
                       return Colors.white;
+                    }
                     return AppTheme.colors.basecolor;
                   }),
                   overlayColor: MaterialStateProperty.resolveWith<Color?>(
                     (Set<MaterialState> states) {
-                      if (states.contains(MaterialState.hovered))
-                        return AppTheme.colors.basecolor; //<-- SEE HERE
+                      if (states.contains(MaterialState.hovered)) {
+                        return AppTheme.colors.basecolor;
+                      } //<-- SEE HERE
                       return AppTheme.colors
                           .tertiarycolor; // Defer to the widget's default.
                     },
@@ -115,7 +108,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               ElevatedButton(
@@ -136,14 +129,16 @@ class _ProfilePageState extends State<ProfilePage> {
                       MaterialStateProperty.all(AppTheme.colors.tertiarycolor),
                   foregroundColor: MaterialStateProperty.resolveWith<Color>(
                       (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered))
+                    if (states.contains(MaterialState.hovered)) {
                       return Colors.white;
+                    }
                     return AppTheme.colors.basecolor;
                   }),
                   overlayColor: MaterialStateProperty.resolveWith<Color?>(
                     (Set<MaterialState> states) {
-                      if (states.contains(MaterialState.hovered))
-                        return AppTheme.colors.basecolor; //<-- SEE HERE
+                      if (states.contains(MaterialState.hovered)) {
+                        return AppTheme.colors.basecolor;
+                      } //<-- SEE HERE
                       return AppTheme.colors
                           .tertiarycolor; // Defer to the widget's default.
                     },
@@ -160,6 +155,68 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         )
       ],
+    );
+  }
+
+  Widget bottomCard() {
+    return Container(
+      height: 100,
+      width: MediaQuery.of(context).size.width,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 20,
+      ),
+      child: Column(
+        children: [
+          const Text("Choose Profile Picture", style: TextStyle(fontSize: 20)),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            children: [
+              TextButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(Icons.camera),
+                  label: const Text('Camera')),
+              TextButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(Icons.image),
+                  label: const Text('Gallery'))
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget profilePicture() {
+    return Center(
+      child: Stack(
+        children: [
+          // CircleAvatar(
+          //   radius: 45,
+          //   backgroundColor: AppTheme.colors.basecolor,
+          // ),
+          const Image(
+            image: AssetImage("assetss/images/profile.png"),
+            height: 100,
+            width: 100,
+          ),
+          Positioned(
+              bottom: 20,
+              right: 10,
+              child: InkWell(
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context, builder: ((builder) => bottomCard()));
+                  },
+                  child: Icon(
+                    Icons.camera_alt,
+                    color: AppTheme.colors.secondarycolor,
+                    size: 15,
+                  )))
+        ],
+      ),
     );
   }
 }
