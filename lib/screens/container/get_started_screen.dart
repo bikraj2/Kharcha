@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:demo2/theme/color.dart';
 import 'package:demo2/theme/theme.dart';
 
+<<<<<<< HEAD:lib/screens/container/get_started_screen.dart
 import '../pages/home_screen.dart';
+=======
+>>>>>>> ishan:lib/screens/get_started_screen.dart
 import 'second_screen.dart';
 import '../log/login_screen.dart';
 

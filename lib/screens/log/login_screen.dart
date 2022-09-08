@@ -1,3 +1,7 @@
+<<<<<<< HEAD:lib/screens/log/login_screen.dart
+=======
+import 'package:demo2/screens/rough.dart';
+>>>>>>> ishan:lib/screens/login_screen.dart
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../services/authservices.dart';
@@ -5,9 +9,15 @@ import '../home.dart';
 import '../pages/add_expenses.dart';
 import '../bin/home.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+<<<<<<< HEAD:lib/screens/log/login_screen.dart
 import '../../token/token.dart';
 import '../../services/authservices.dart';
 import '../pages/add_expenses.dart';
+=======
+import '../token/token.dart';
+import '../services/authservices.dart';
+import 'add_expenses.dart';
+>>>>>>> ishan:lib/screens/login_screen.dart
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -101,6 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 20,
             ),
             ElevatedButton(
+<<<<<<< HEAD:lib/screens/log/login_screen.dart
               onPressed: () {
                 print(passwordController.text);
                 AuthService()
@@ -122,6 +133,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                 });
               },
+=======
+>>>>>>> ishan:lib/screens/login_screen.dart
               style: ButtonStyle(
                 padding: MaterialStateProperty.all(
                   const EdgeInsets.all(10),
@@ -136,6 +149,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 'Login',
                 style: TextStyle(fontSize: 20),
               ),
+              onPressed: () {
+                AuthService()
+                    .login(usernameController.text, passwordController.text)
+                    .then((val) => {
+                          if (val.data["success"])
+                            {
+                              token.storeToken(val.data["token"]),
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const expenseAdder()),
+                              )
+                            }
+                        });
+              },
             ),
           ],
         ),
