@@ -1,4 +1,5 @@
 // import 'package:demo2/screens/bin/home_page.dart';
+import 'package:demo2/screens/log/login_screen.dart';
 import 'package:flutter/material.dart';
 // import 'package:demo2/theme/color.dart';
 import 'package:demo2/theme/theme.dart';
@@ -106,7 +107,7 @@ class GetStartedScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomeScreen()));
+                                  builder: (context) => LoginScreen()));
                         },
                       ),
                     ],
