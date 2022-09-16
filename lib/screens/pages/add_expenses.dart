@@ -152,6 +152,17 @@ class _expenseAdderState extends State<expenseAdder> {
                     backgroundColor: AppTheme.colors.secondarycolor,
                     child: const Text("Save"),
                     onPressed: () {
+                      showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) {
+              return AlertDialog(
+                title: Text("Expense will be added"),
+                content: Text("Are you sure"),
+                
+                actions: [
+                  FlatButton(
+                    onPressed: () {
                       setState(() {
                         date = _dateController.text;
                         money = double.parse(_moneyController.text);
@@ -160,33 +171,58 @@ class _expenseAdderState extends State<expenseAdder> {
                       var expense = Expense(
                           _dateController.text, categories.toString(), money);
                       var token1;
+
                       token.storage.read(key: "jwt").then((value) {
                         AuthService()
                             .getExpense(value)
                             .then((val) => {print(val)});
                       });
-                    })),
-            Center(
-              child: Container(
-                  padding: EdgeInsets.all(25),
-                  child: FloatingActionButton(
-                      child: Text("Save"),
-                      onPressed: () {
-                        setState(() {
-                          date = _dateController.text;
-                          money = double.parse(_moneyController.text);
-                          categories = value;
-                        });
-                        var expense = Expense(
-                            _dateController.text, categories.toString(), money);
+                      token.storage.read(key: "jwt").then((value) {
+                        AuthService()
+                            .addexpense(expense, value)
+                            .then((val) => {print(val)});
+                      });
+                      Navigator.of(context).pop();
 
-                        token.storage.read(key: "jwt").then((value) {
-                          AuthService()
-                              .addexpense(expense, value)
-                              .then((val) => {print(val)});
-                        });
-                      })),
-            ),
+                    },
+                    child: Text("YES"),
+                  ),
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+
+                      
+
+                    },
+                    child: Text("NO"),
+                  )
+                ],
+                
+              );
+            });
+                      
+                    })),
+            // Center(
+            //   child: Container(
+            //       padding: EdgeInsets.all(25),
+            //       child: FloatingActionButton(
+            //           child: Text("Save"),
+            //           onPressed: () {
+            //             setState(() {
+            //               date = _dateController.text;
+            //               money = double.parse(_moneyController.text);
+            //               categories = value;
+            //             });
+            //             var expense = Expense(
+            //                 _dateController.text, categories.toString(), money);
+
+            //             token.storage.read(key: "jwt").then((value) {
+            //               AuthService()
+            //                   .addexpense(expense, value)
+            //                   .then((val) => {print(val)});
+            //             });
+            //           })),
+            // ),
           ],
         ),
       ),
