@@ -1,4 +1,5 @@
 import 'package:demo2/models/chart.dart';
+import 'package:demo2/screens/charts/pie_chart.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:flutter/material.dart';
 import 'package:demo2/token/token.dart';
@@ -16,6 +17,7 @@ class _GraphsPageState extends State<GraphsPage> {
 
     @override
     Widget build(BuildContext context) {
+
       void get() {
     {
       try {
@@ -26,28 +28,37 @@ class _GraphsPageState extends State<GraphsPage> {
         token.storage.read(key: "jwt").then((value) {
           AuthService().getExpense(value).then((val) => {
                 userEntries = val.data["ans"].length,
+               //make a function here . 
+               //what kind of a function rey 
+              // tyo function jasle chai      
+
+
+
+               
                 print(val.data["ans"][0]["category"].runtimeType),
-                for (int i = 0; i < userEntries; i++)
-                  {
-                    if (val.data["ans"][i]["category"] == "Health")
-                      {
-                        healthAmount =
-                            val.data["ans"][i]["amount"] + healthAmount,
-                      },
-                    if (val.data["ans"][i]["category"] == "Luxury")
-                      {
-                        luxuryAmount =
-                            val.data["ans"][i]["amount"] + luxuryAmount,
-                      },
-                    if (val.data["ans"][i]["category"] == "Rent")
-                      {
-                        rentAmount = val.data["ans"][i]["amount"] + rentAmount,
-                      },
-                    if (val.data["ans"][i]["category"] == "Food")
-                      {
-                        foodAmount = val.data["ans"][i]["amount"] + foodAmount,
-                      }
-                  },
+                addExpenseFuction(userEntries, val)
+                // for (int i = 0; i < userEntries; i++)
+                //   {
+                //     if (val.data["ans"][i]["category"] == "Health")
+                //       {
+                //         healthAmount =
+                //             val.data["ans"][i]["amount"] + healthAmount,
+                //       },
+                //     if (val.data["ans"][i]["category"] == "Luxury")
+                //       {
+                //         luxuryAmount =
+                //             val.data["ans"][i]["amount"] + luxuryAmount,
+                //       },
+                //     if (val.data["ans"][i]["category"] == "Rent")
+                //       {
+                //         rentAmount = val.data["ans"][i]["amount"] + rentAmount,
+                //       },
+                //     if (val.data["ans"][i]["category"] == "Food")
+                //       {
+                //         foodAmount = val.data["ans"][i]["amount"] + foodAmount,
+                //       }
+                //   }
+                ,
                 print(healthAmount),
                 print(rentAmount),
                 print(foodAmount),

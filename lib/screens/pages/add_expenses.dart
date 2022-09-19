@@ -202,44 +202,11 @@ class _expenseAdderState extends State<expenseAdder> {
             });
                       
                     })),
-            // Center(
-            //   child: Container(
-            //       padding: EdgeInsets.all(25),
-            //       child: FloatingActionButton(
-            //           child: Text("Save"),
-            //           onPressed: () {
-            //             setState(() {
-            //               date = _dateController.text;
-            //               money = double.parse(_moneyController.text);
-            //               categories = value;
-            //             });
-            //             var expense = Expense(
-            //                 _dateController.text, categories.toString(), money);
-
-            //             token.storage.read(key: "jwt").then((value) {
-            //               AuthService()
-            //                   .addexpense(expense, value)
-            //                   .then((val) => {print(val)});
-            //             });
-            //           })),
-            // ),
+           
           ],
         ),
       ),
 
-      // Center(
-      //   child: Container(
-      //     padding: EdgeInsets.all(25),
-      //     child: FloatingActionButton(
-      //       child: Text("Pie"),
-      //       onPressed: (){
-      //         Navigator.push(
-      //           context,
-      //           MaterialPageRoute(builder: (context) => Piechart1()),
-      //         );
-      //       },
-      //     )
-      //     ),)
     );
   }
 
