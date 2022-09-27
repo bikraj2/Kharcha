@@ -103,25 +103,27 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             ElevatedButton(
               onPressed: () {
-                AuthService()
-                    .login(usernameController.text, passwordController.text)
-                    .then((val) {
-                  print(val);
-                  if (val.data["success"]) {
-                    token.storeToken(val.data["token"]);
-                    token.readToken();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return HomeScreen();
-                        },
-                      ),
-                    );
-                  } else {
-                    Fluttertoast.showToast(msg: val.data["msg"]);
-                  }
-                });
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()));
+                // AuthService()
+                //     .login(usernameController.text, passwordController.text)
+                //     .then((val) {
+                //   print(val);
+                //   if (val.data["success"]) {
+                //     token.storeToken(val.data["token"]);
+                //     token.readToken();
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (BuildContext context) {
+                //           return HomeScreen();
+                //         },
+                //       ),
+                //     );
+                //   } else {
+                //     Fluttertoast.showToast(msg: val.data["msg"]);
+                //   }
+                // });
               },
               style: ButtonStyle(
                 padding: MaterialStateProperty.all(
