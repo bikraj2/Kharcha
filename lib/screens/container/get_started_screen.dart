@@ -37,13 +37,12 @@ class GetStartedScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          width: width / 4,
-                          height: height / 3,
+                          width: width / 2,
+                          height: height / 2,
                           decoration: const BoxDecoration(
-                              shape: BoxShape.rectangle,
                               image: DecorationImage(
                                   image: AssetImage('assetss/images/logo.png'),
-                                  fit: BoxFit.cover)),
+                                  fit: BoxFit.contain)),
                         ),
                         const SizedBox(
                           height: 10,

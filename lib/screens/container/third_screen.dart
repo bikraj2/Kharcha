@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'second_screen.dart';
 import 'ready_screen.dart';
 import '../log/sign_up.dart';
+import 'package:demo2/theme/theme.dart';
 
 class ThirdScreen extends StatelessWidget {
   const ThirdScreen({Key? key}) : super(key: key);
@@ -15,29 +16,26 @@ class ThirdScreen extends StatelessWidget {
               padding: const EdgeInsets.all(30),
               child: Column(
                 children: <Widget>[
-                  TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SecondScreen()));
-                      },
-                      child: const Image(
-                        image: AssetImage(
-                          'assetss/images/10.png',
-                        ),
-                        height: 60,
-                        width: 900,
-                        alignment: Alignment.topLeft,
-                      )),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SecondScreen()),
+                      );
+                    },
+                    icon: Icon(Icons.arrow_back_ios_new_outlined),
+                    color: AppTheme.colors.secondarycolor,
+                    iconSize: 20,
+                    alignment: Alignment.topLeft,
+                  ),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          width: 200,
-                          height: 200,
+                          width: 170,
+                          height: 170,
                           decoration: const BoxDecoration(
                               shape: BoxShape.rectangle,
                               image: DecorationImage(
@@ -63,7 +61,7 @@ class ThirdScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>  ReadyScreen()));
+                                  builder: (context) => ReadyScreen()));
                         },
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(

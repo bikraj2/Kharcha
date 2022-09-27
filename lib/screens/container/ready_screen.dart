@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'third_screen.dart';
 import '../log/sign_up.dart';
+import 'package:demo2/theme/theme.dart';
 
 class ReadyScreen extends StatelessWidget {
   ReadyScreen({Key? key}) : super(key: key);
@@ -21,21 +22,18 @@ class ReadyScreen extends StatelessWidget {
               padding: const EdgeInsets.all(30),
               child: Column(
                 children: <Widget>[
-                  TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ThirdScreen()));
-                      },
-                      child: const Image(
-                        image: AssetImage(
-                          'assetss/images/10.png',
-                        ),
-                        height: 40,
-                        width: 50,
-                        alignment: Alignment.topLeft,
-                      )),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ThirdScreen()),
+                      );
+                    },
+                    icon: Icon(Icons.arrow_back_ios_new_outlined),
+                    color: AppTheme.colors.secondarycolor,
+                    iconSize: 20,
+                    alignment: Alignment.topLeft,
+                  ),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
