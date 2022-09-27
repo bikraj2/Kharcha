@@ -16,24 +16,25 @@ class ReadyScreen extends StatelessWidget {
     height = size.height;
     width = size.width;
     return Scaffold(
+        appBar: AppBar(
+          // title: Text('Login'),
+          toolbarHeight: 40,
+
+          elevation: 0,
+          backgroundColor: AppTheme.colors.basecolor,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
         body: Container(
             color: Colors.white,
             child: Padding(
               padding: const EdgeInsets.all(30),
               child: Column(
                 children: <Widget>[
-                  IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ThirdScreen()),
-                      );
-                    },
-                    icon: Icon(Icons.arrow_back_ios_new_outlined),
-                    color: AppTheme.colors.secondarycolor,
-                    iconSize: 20,
-                    alignment: Alignment.topLeft,
-                  ),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

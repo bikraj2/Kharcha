@@ -5,37 +5,56 @@ import '../log/sign_up.dart';
 import 'package:demo2/theme/theme.dart';
 
 class ThirdScreen extends StatelessWidget {
-  const ThirdScreen({Key? key}) : super(key: key);
+  ThirdScreen({Key? key}) : super(key: key);
+  var orientation, size, height, width;
 
   @override
   Widget build(BuildContext context) {
+    orientation = MediaQuery.of(context).orientation;
+
+    //size of the window
+    size = MediaQuery.of(context).size;
+    height = size.height;
+    width = size.width;
     return Scaffold(
+        appBar: AppBar(
+          // title: Text('Login'),
+          toolbarHeight: 40,
+          elevation: 0,
+          backgroundColor: AppTheme.colors.basecolor,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
         body: Container(
             color: Colors.white,
             child: Padding(
               padding: const EdgeInsets.all(30),
               child: Column(
                 children: <Widget>[
-                  IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SecondScreen()),
-                      );
-                    },
-                    icon: Icon(Icons.arrow_back_ios_new_outlined),
-                    color: AppTheme.colors.secondarycolor,
-                    iconSize: 20,
-                    alignment: Alignment.topLeft,
-                  ),
+                  // IconButton(
+                  //   onPressed: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(builder: (context) => SecondScreen()),
+                  //     );
+                  //   },
+                  //   icon: Icon(Icons.arrow_back_ios_new_outlined),
+                  //   color: AppTheme.colors.secondarycolor,
+                  //   iconSize: 20,
+                  //   alignment: Alignment.topLeft,
+                  // ),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          width: 170,
-                          height: 170,
+                          width: width / 2,
+                          height: height / 2,
                           decoration: const BoxDecoration(
                               shape: BoxShape.rectangle,
                               image: DecorationImage(
