@@ -1,4 +1,5 @@
 import 'package:demo2/models/expenses.dart';
+import 'package:demo2/screens/pages/bar_chart.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:demo2/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import '../../token/token.dart';
 import 'dart:convert';
 import '../../models/chart.dart';
 import '../charts/pie_chart.dart';
+import 'bar_chart.dart';
 
 class expenseTracker extends StatelessWidget {
   expenseTracker({Key? key}) : super(key: key);
@@ -153,60 +155,68 @@ class _expenseAdderState extends State<expenseAdder> {
                     child: const Text("Save"),
                     onPressed: () {
                       showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (context) {
-              return AlertDialog(
-                title: Text("Expense will be added"),
-                content: Text("Are you sure"),
-                
-                actions: [
-                  FlatButton(
-                    onPressed: () {
-                      setState(() {
-                        date = _dateController.text;
-                        money = double.parse(_moneyController.text);
-                        categories = value;
-                      });
-                      var expense = Expense(
-                          _dateController.text, categories.toString(), money);
-                      var token1;
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text("Expense will be added"),
+                              content: Text("Are you sure"),
+                              actions: [
+                                FlatButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      date = _dateController.text;
+                                      money =
+                                          double.parse(_moneyController.text);
+                                      categories = value;
+                                    });
+                                    var expense = Expense(_dateController.text,
+                                        categories.toString(), money);
+                               
 
-                      token.storage.read(key: "jwt").then((value) {
-                        AuthService()
-                            .getExpense(value)
-                            .then((val) => {print(val)});
-                      });
-                      token.storage.read(key: "jwt").then((value) {
-                        AuthService()
-                            .addexpense(expense, value)
-                            .then((val) => {print(val)});
-                      });
-                      Navigator.of(context).pop();
-
-                    },
-                    child: Text("YES"),
-                  ),
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-
-                      
-
-                    },
-                    child: Text("NO"),
-                  )
-                ],
-                
-              );
-            });
-                      
+                                    token.storage
+                                        .read(key: "jwt")
+                                        .then((value) {
+                                      AuthService()
+                                          .getExpense(value)
+                                          .then((val) => {print(val)});
+                                    });
+                                    token.storage
+                                        .read(key: "jwt")
+                                        .then((value) {
+                                      AuthService()
+                                          .addexpense(expense, value)
+                                          .then((val) => {print(val)});
+                                    });
+                                  
+                                  },
+                                  child: Text("YES"),
+                                ),
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text("NO"),
+                                )
+                              ],
+                            );
+                          });
                     })),
-           
+            // Container(
+            //     padding: const EdgeInsets.all(25),
+            //     child: FloatingActionButton(
+            //         hoverColor: AppTheme.colors.basecolor,
+            //         backgroundColor: AppTheme.colors.secondarycolor,
+            //         child: const Text("Bar"),
+            //         onPressed: () {
+            //           Navigator.push(
+            //             context,
+            //             MaterialPageRoute(builder: (context) => BarChart()),
+            //           );
+            //         }))
           ],
         ),
       ),
-
     );
   }
 
@@ -216,4 +226,8 @@ class _expenseAdderState extends State<expenseAdder> {
         item,
         style: const TextStyle(fontSize: 14),
       ));
+
+    
 }
+
+

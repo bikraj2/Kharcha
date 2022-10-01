@@ -1,9 +1,10 @@
 import 'package:demo2/models/chart.dart';
-import 'package:demo2/screens/charts/pie_chart.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:flutter/material.dart';
 import 'package:demo2/token/token.dart';
 import 'package:pie_chart/pie_chart.dart';
+import '../charts/pie_chart.dart';
+import 'package:intl/intl.dart'; 
 
 class GraphsPage extends StatefulWidget {
   const GraphsPage({Key? key}) : super(key: key);
@@ -14,62 +15,26 @@ class GraphsPage extends StatefulWidget {
 
 class _GraphsPageState extends State<GraphsPage> {
   
-
-    @override
-    Widget build(BuildContext context) {
-
-      void get() {
-    {
-      try {
-        healthAmount = 0;
-        foodAmount = 0;
-        luxuryAmount = 0;
-        rentAmount = 0;
-        token.storage.read(key: "jwt").then((value) {
-          AuthService().getExpense(value).then((val) => {
-                userEntries = val.data["ans"].length,
-               //make a function here . 
-               //what kind of a function rey 
-              // tyo function jasle chai      
-
-
-
-               
-                print(val.data["ans"][0]["category"].runtimeType),
-                addExpenseFuction(userEntries, val)
-                // for (int i = 0; i < userEntries; i++)
-                //   {
-                //     if (val.data["ans"][i]["category"] == "Health")
-                //       {
-                //         healthAmount =
-                //             val.data["ans"][i]["amount"] + healthAmount,
-                //       },
-                //     if (val.data["ans"][i]["category"] == "Luxury")
-                //       {
-                //         luxuryAmount =
-                //             val.data["ans"][i]["amount"] + luxuryAmount,
-                //       },
-                //     if (val.data["ans"][i]["category"] == "Rent")
-                //       {
-                //         rentAmount = val.data["ans"][i]["amount"] + rentAmount,
-                //       },
-                //     if (val.data["ans"][i]["category"] == "Food")
-                //       {
-                //         foodAmount = val.data["ans"][i]["amount"] + foodAmount,
-                //       }
-                //   }
-                ,
-                print(healthAmount),
-                print(rentAmount),
-                print(foodAmount),
-                print(luxuryAmount),
-              });
-        });
-      } catch (e) {
-        print(e);
+  @override
+  Widget build(BuildContext context) {
+    void get() {
+      {
+        try {
+          healthAmount = 0;
+          foodAmount = 0;
+          luxuryAmount = 0;
+          rentAmount = 0;
+          token.storage.read(key: "jwt").then((value) {
+            AuthService().getExpense(value).then((val) => {
+                  userEntries = val.data["ans"].length,
+                  testClass.addExpenseFuction(userEntries, val),
+                });
+          });
+        } catch (e) {
+          print(e);
+        }
       }
     }
-      }
 
     Map<String, double> dataMap = {
       "Health": healthAmount.toDouble(),
@@ -99,8 +64,8 @@ class _GraphsPageState extends State<GraphsPage> {
         Color.fromRGBO(254, 154, 92, 1),
       ]
     ];
-      get();
-      return Scaffold(
+    get();
+    return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Your weekly expenses"),
@@ -128,6 +93,6 @@ class _GraphsPageState extends State<GraphsPage> {
         ),
       ),
     );
-    }
   }
+}
 
