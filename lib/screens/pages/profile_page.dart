@@ -1,4 +1,5 @@
 import 'package:demo2/screens/bin/top_card.dart';
+import 'package:demo2/screens/log/login_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../theme/theme.dart';
@@ -113,10 +114,8 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => SecondScreen()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginScreen()));
                 },
                 style: ButtonStyle(
                   padding: MaterialStateProperty.all(
