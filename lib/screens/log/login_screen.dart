@@ -1,3 +1,4 @@
+import 'package:demo2/screens/container/get_started_screen.dart';
 import 'package:demo2/screens/pages/home_page.dart';
 import 'package:demo2/screens/pages/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,8 @@ class _LoginScreenState extends State<LoginScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => GetStartedScreen()));
           },
         ),
       ),
