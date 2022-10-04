@@ -27,7 +27,38 @@ class _GraphsPageState extends State<GraphsPage> {
           token.storage.read(key: "jwt").then((value) {
             AuthService().getExpense(value).then((val) => {
                   userEntries = val.data["ans"].length,
-                  testClass.addExpenseFuction(userEntries, val),
+                  //make a function here .
+                  //what kind of a function rey
+                  // tyo function jasle chai
+
+                  print(val.data["ans"][0]["category"].runtimeType),
+                  addExpenseFuction(userEntries, val)
+                  // for (int i = 0; i < userEntries; i++)
+                  //   {
+                  //     if (val.data["ans"][i]["category"] == "Health")
+                  //       {
+                  //         healthAmount =
+                  //             val.data["ans"][i]["amount"] + healthAmount,
+                  //       },
+                  //     if (val.data["ans"][i]["category"] == "Luxury")
+                  //       {
+                  //         luxuryAmount =
+                  //             val.data["ans"][i]["amount"] + luxuryAmount,
+                  //       },
+                  //     if (val.data["ans"][i]["category"] == "Rent")
+                  //       {
+                  //         rentAmount = val.data["ans"][i]["amount"] + rentAmount,
+                  //       },
+                  //     if (val.data["ans"][i]["category"] == "Food")
+                  //       {
+                  //         foodAmount = val.data["ans"][i]["amount"] + foodAmount,
+                  //       }
+                  //   }
+                  ,
+                  print(healthAmount),
+                  print(rentAmount),
+                  print(foodAmount),
+                  print(luxuryAmount),
                 });
           });
         } catch (e) {
@@ -67,6 +98,7 @@ class _GraphsPageState extends State<GraphsPage> {
     get();
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 40,
         centerTitle: true,
         title: const Text("Your weekly expenses"),
       ),
@@ -94,5 +126,6 @@ class _GraphsPageState extends State<GraphsPage> {
       ),
     );
   }
+  
+  addExpenseFuction(int userEntries, val) {}
 }
-
