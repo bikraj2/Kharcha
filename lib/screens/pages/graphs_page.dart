@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:demo2/token/token.dart';
 import 'package:pie_chart/pie_chart.dart';
 import '../charts/pie_chart.dart';
-import 'package:intl/intl.dart'; 
+import 'package:intl/intl.dart';
 
 class GraphsPage extends StatefulWidget {
   const GraphsPage({Key? key}) : super(key: key);
@@ -14,7 +14,6 @@ class GraphsPage extends StatefulWidget {
 }
 
 class _GraphsPageState extends State<GraphsPage> {
-  
   @override
   Widget build(BuildContext context) {
     void get() {
@@ -95,4 +94,3 @@ class _GraphsPageState extends State<GraphsPage> {
     );
   }
 }
-
