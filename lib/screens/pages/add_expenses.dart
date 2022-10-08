@@ -10,6 +10,7 @@ import 'dart:convert';
 import '../../models/chart.dart';
 import '../charts/pie_chart.dart';
 import 'bar_chart.dart';
+import 'home_screen.dart';
 
 class expenseTracker extends StatelessWidget {
   expenseTracker({Key? key}) : super(key: key);
@@ -25,21 +26,6 @@ class expenseTracker extends StatelessWidget {
     width = size.width;
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: AppTheme.colors.basecolor,
-        title: Text(
-          'Add your Expenses Here!',
-          style: TextStyle(fontStyle: FontStyle.italic, fontSize: 23),
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.person),
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HomePage()));
-          },
-        ),
-      ),
       body: const expenseAdder(),
     );
   }
@@ -76,41 +62,33 @@ class _expenseAdderState extends State<expenseAdder> {
     height = size.height;
     width = size.width;
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: AppTheme.colors.basecolor,
+        title: Text(
+          ' Add Expenses!',
+          style: TextStyle(fontStyle: FontStyle.italic, fontSize: height / 30),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          },
+        ),
+      ),
       body: Center(
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.only(top: 50, bottom: 10),
-              alignment: Alignment.topLeft,
-              height: height / 6,
-              child: Row(
-                children: [
-                  const Image(
-                    image: AssetImage(
-                      'assetss/images/logo.png',
-                    ),
-                  ),
-                  Text(
-                    ' Add Your Expenses Here  ',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontStyle: FontStyle.normal,
-                      color: AppTheme.colors.basecolor,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
                 margin: const EdgeInsets.only(top: 50),
                 height: height / 7,
-                width: width / 3,
+                width: width / 2,
                 child: TextField(
                     controller: _moneyController,
                     decoration: InputDecoration(
-                        hintText: 'Enter the amount ',
+                        labelText: 'Amount',
+                        hintText: 'Rs. ',
                         focusColor: AppTheme.colors.basecolor,
                         fillColor: AppTheme.colors.basecolor,
                         border: const OutlineInputBorder(),
@@ -124,13 +102,14 @@ class _expenseAdderState extends State<expenseAdder> {
                           ),
                         )))),
             SizedBox(
-                height: 90,
-                width: 300,
+                height: height / 7,
+                width: width / 2,
                 child: TextField(
                     controller: _dateController,
                     decoration: InputDecoration(
+                        labelText: 'Date',
                         fillColor: AppTheme.colors.basecolor,
-                        hintText: 'Is it sunday? ',
+                        hintText: ' M M / D D / Y Y ',
                         border: const OutlineInputBorder(),
                         suffixIcon: IconButton(
                           onPressed: () {
