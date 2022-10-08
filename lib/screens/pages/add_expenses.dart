@@ -140,8 +140,11 @@ class _expenseAdderState extends State<expenseAdder> {
               ),
             ),
             Container(
-                padding: const EdgeInsets.all(25),
+                width: width / 4,
+                padding: const EdgeInsets.all(20),
                 child: FloatingActionButton(
+                    shape: BeveledRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
                     hoverColor: AppTheme.colors.basecolor,
                     backgroundColor: AppTheme.colors.secondarycolor,
                     child: const Text("Save"),
@@ -154,7 +157,7 @@ class _expenseAdderState extends State<expenseAdder> {
                               title: Text("Expense will be added"),
                               content: Text("Are you sure"),
                               actions: [
-                                FlatButton(
+                                TextButton(
                                   onPressed: () {
                                     setState(() {
                                       date = _dateController.text;
