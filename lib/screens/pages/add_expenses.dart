@@ -67,7 +67,7 @@ class _expenseAdderState extends State<expenseAdder> {
         backgroundColor: AppTheme.colors.basecolor,
         title: Text(
           ' Add Expenses!',
-          style: TextStyle(fontStyle: FontStyle.italic, fontSize: height / 30),
+          style: TextStyle(fontSize: height / 30),
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
@@ -144,7 +144,7 @@ class _expenseAdderState extends State<expenseAdder> {
                 padding: const EdgeInsets.all(20),
                 child: FloatingActionButton(
                     shape: BeveledRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
+                        borderRadius: BorderRadius.all(Radius.circular(5))),
                     hoverColor: AppTheme.colors.basecolor,
                     backgroundColor: AppTheme.colors.secondarycolor,
                     child: const Text("Save"),
