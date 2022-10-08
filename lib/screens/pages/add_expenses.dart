@@ -1,5 +1,6 @@
 import 'package:demo2/models/expenses.dart';
 import 'package:demo2/screens/pages/bar_chart.dart';
+import 'package:demo2/screens/pages/transaction_history.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:demo2/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,19 @@ class expenseTracker extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add your expenses'),
+        elevation: 0,
+        backgroundColor: AppTheme.colors.basecolor,
+        title: Text(
+          'Add your Expenses Here!',
+          style: TextStyle(fontStyle: FontStyle.italic, fontSize: 23),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.person),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomePage()));
+          },
+        ),
       ),
       body: const expenseAdder(),
     );
@@ -172,7 +185,6 @@ class _expenseAdderState extends State<expenseAdder> {
                                     });
                                     var expense = Expense(_dateController.text,
                                         categories.toString(), money);
-                               
 
                                     token.storage
                                         .read(key: "jwt")
@@ -188,7 +200,6 @@ class _expenseAdderState extends State<expenseAdder> {
                                           .addexpense(expense, value)
                                           .then((val) => {print(val)});
                                     });
-                                  
                                   },
                                   child: Text("YES"),
                                 ),
@@ -226,8 +237,4 @@ class _expenseAdderState extends State<expenseAdder> {
         item,
         style: const TextStyle(fontSize: 14),
       ));
-
-    
 }
-
-
