@@ -72,12 +72,9 @@
 
 <details>
   <summary>Server</summary>
-  <ul>
-    
-    <li><a href="https://nodejs.org/en/">Node.js</a></li>
-    
-    
-  </ul>
+  
+    <li><a href="https://nodejs.org/en/">Node.js</a></li> 
+  
 </details>
 
 <details>
