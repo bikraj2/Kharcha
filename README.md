@@ -4,7 +4,7 @@
   <h1> Team Kharcha</h1>
   
   <p>
-    Managing Expenses
+    Manage Your Expenses!
   </p>
   </div>
   
@@ -175,4 +175,5 @@ Use this section to mention useful resources and libraries that you have used in
 
  - [Dio]
  - [Cupertico Icons]
+  -[fl_charts]
 
