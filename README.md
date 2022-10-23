@@ -94,9 +94,9 @@
 <!-- Features -->
 ### :dart: Features
 
-- Feature 1
-- Feature 2
-- Feature 3
+- Can help to manage your expenses.
+- Can visually represnt your spendings through charts and graphs.
+- 
 
 <!-- Color Reference -->
 ### :art: Color Reference
@@ -132,7 +132,7 @@ This project uses npm as package manager
 Clone the project
 
 ```bash
-  git clone https://github.com/Louis3797/awesome-readme-template.git](https://github.com/bikraj2/kuhackfest.git)
+  git clone https://github.com/bikraj2/Kharcha.git)
 ```
 
 Go to the project directory
@@ -156,7 +156,7 @@ Install dependencies
 
 ## :eyes: Usage
 
-Our app uses google map APIs to track the location of the user and find nearby sellers with their respective prices. 
+Our app flutter packages and dependicies to visually represent your expenses and help to manage your excessive spendings.  
 
 
 
@@ -173,7 +173,6 @@ Project Link: https://github.com/bikraj2/kuhackfest.git
 
 Use this section to mention useful resources and libraries that you have used in your projects.
 
- - [flutter_google_maps]([https://shields.io/](https://pub.dev/packages/google_maps_flutter))
- - [Dio]([https://github.com/matiassingers/awesome-readme](https://pub.dev/packages/dio))
- - [Cupertico Icons]([https://github.com/othneildrew/Best-README-Template](https://pub.dev/packages/cupertino_icons))
+ - [Dio]
+ - [Cupertico Icons]
 
