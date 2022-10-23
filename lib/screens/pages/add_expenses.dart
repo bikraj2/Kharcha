@@ -147,7 +147,7 @@ class _expenseAdderState extends State<expenseAdder> {
                         borderRadius: BorderRadius.all(Radius.circular(5))),
                     hoverColor: AppTheme.colors.basecolor,
                     backgroundColor: AppTheme.colors.secondarycolor,
-                    child: const Text("Save"),
+                    child: const Text("ADD"),
                     onPressed: () {
                       showDialog(
                           context: context,
