@@ -72,15 +72,14 @@
 
 <details>
   <summary>Server</summary>
-  
+   <ul>
     <li><a href="https://nodejs.org/en/">Node.js</a></li> 
-  
+  </ul>
 </details>
 
 <details>
 <summary>Database</summary>
   <ul>
-    
     <li><a href="https://www.mongodb.com/">MongoDB</a></li>
   </ul>
 </details>
