@@ -77,6 +77,10 @@ flutter:
     - assetss/images/sack.png
     - assetss/images/tick.png
     - assetss/images/profile.png
+    - assetss/images/profile_s.png
+    - assetss/images/graphs_s.png
+    - assetss/images/home_s.png
+    - assetss/images/addexpeses_s.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
