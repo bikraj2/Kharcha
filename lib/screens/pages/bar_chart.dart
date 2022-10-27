@@ -1,56 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:intl/intl.dart';
-import 'graphs_page.dart';
-import '../../models/chart.dart'; 
-import 'package:demo2/services/authservices.dart';
-import '../../token/token.dart';
-import '../charts/pie_chart.dart';
 
-
-
-class BarChart extends StatefulWidget {
-  BarChart({Key? key}) : super(key: key);
-
-  @override
-  State<BarChart> createState() => _BarChartState();
-}
-
-
-class _BarChartState extends State<BarChart> {
-  var date = DateTime.now();
-  late var weekday = DateFormat('EEEE').format(date);
+class BarChartClass extends StatelessWidget {
+  const BarChartClass({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    void get() {
-      {
-        try {
-          healthAmount = 0;
-          foodAmount = 0;
-          luxuryAmount = 0;
-          rentAmount = 0;
-          token.storage.read(key: "jwt").then((value) {
-            AuthService().getExpense(value).then((val) => {
-                  userEntries = val.data["ans"].length,
-                  testClass.addExpenseFuction(userEntries, val),
-                  testClass1().weekdaySelection(weekday),
-                  
-                  
-                });
-          });
-        } catch (e) {
-          print(e);
-        }
-      }
-    }
-    get(); 
     return Scaffold(
-      body: BarChart(
+      appBar: AppBar(
+        title: Text("Bar Chart Here!"),
+      ),
+      body: BarChartClass1(),
+    );
+  }
+}
 
+class BarChartClass1 extends StatefulWidget {
+  const BarChartClass1({Key? key}) : super(key: key);
 
-      )
+  @override
+  State<BarChartClass1> createState() => _BarChartClass1State();
+}
 
-    ); 
+class _BarChartClass1State extends State<BarChartClass1> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      child: BarChart(
+        BarChartData(
+          minY: 0, 
+          maxY : 10000, 
+          
+        )
+        
+      ),
+    );
   }
 }

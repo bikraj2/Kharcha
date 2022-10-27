@@ -63,6 +63,7 @@ class _expenseAdderState extends State<expenseAdder> {
     height = size.height;
     width = size.width;
     return Scaffold(
+      appBar: AppBar(title: Text("Add Your Expense Here")),
       body: Center(
         child: Column(
           children: [
@@ -78,7 +79,7 @@ class _expenseAdderState extends State<expenseAdder> {
                     ),
                   ),
                   Text(
-                    ' Add Your Expenses Here  ',
+                    ' Enter the fields below ',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 15,
@@ -93,7 +94,7 @@ class _expenseAdderState extends State<expenseAdder> {
             Container(
                 margin: const EdgeInsets.only(top: 50),
                 height: height / 7,
-                width: width / 3,
+                width: width / 2,
                 child: TextField(
                     controller: _moneyController,
                     decoration: InputDecoration(
@@ -111,8 +112,8 @@ class _expenseAdderState extends State<expenseAdder> {
                           ),
                         )))),
             SizedBox(
-                height: 90,
-                width: 300,
+                height: height / 7,
+                width: width / 2,
                 child: TextField(
                     controller: _dateController,
                     decoration: InputDecoration(
@@ -172,7 +173,6 @@ class _expenseAdderState extends State<expenseAdder> {
                                     });
                                     var expense = Expense(_dateController.text,
                                         categories.toString(), money);
-                               
 
                                     token.storage
                                         .read(key: "jwt")
@@ -188,7 +188,6 @@ class _expenseAdderState extends State<expenseAdder> {
                                           .addexpense(expense, value)
                                           .then((val) => {print(val)});
                                     });
-                                  
                                   },
                                   child: Text("YES"),
                                 ),
@@ -226,8 +225,4 @@ class _expenseAdderState extends State<expenseAdder> {
         item,
         style: const TextStyle(fontSize: 14),
       ));
-
-    
 }
-
-

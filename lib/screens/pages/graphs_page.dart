@@ -69,27 +69,25 @@ class _GraphsPageState extends State<GraphsPage> {
         centerTitle: true,
         title: const Text("Your weekly expenses"),
       ),
-      body: Center(
-        child: PieChart(
-          dataMap: dataMap,
-          colorList: colorList,
-          chartRadius: MediaQuery.of(context).size.width / 2,
-          centerText: "Expenses",
-          ringStrokeWidth: 24,
-          animationDuration: const Duration(seconds: 3),
-          chartValuesOptions: const ChartValuesOptions(
-              showChartValues: true,
-              showChartValuesOutside: true,
-              showChartValuesInPercentage: true,
-              showChartValueBackground: false),
-          legendOptions: const LegendOptions(
-              showLegends: true,
-              legendShape: BoxShape.rectangle,
-              legendTextStyle: TextStyle(fontSize: 15),
-              legendPosition: LegendPosition.bottom,
-              showLegendsInRow: true),
-          gradientList: gradientList,
-        ),
+      body: PieChart(
+        dataMap: dataMap,
+        colorList: colorList,
+        chartRadius: MediaQuery.of(context).size.width / 2,
+        centerText: "Expenses",
+        ringStrokeWidth: 24,
+        animationDuration: const Duration(seconds: 3),
+        chartValuesOptions: const ChartValuesOptions(
+            showChartValues: true,
+            showChartValuesOutside: true,
+            showChartValuesInPercentage: true,
+            showChartValueBackground: false),
+        legendOptions: const LegendOptions(
+            showLegends: true,
+            legendShape: BoxShape.rectangle,
+            legendTextStyle: TextStyle(fontSize: 15),
+            legendPosition: LegendPosition.bottom,
+            showLegendsInRow: true),
+        gradientList: gradientList,
       ),
     );
   }
