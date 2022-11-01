@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 import 'package:demo2/screens/log/login_screen.dart';
->>>>>>> master
 import 'package:demo2/screens/pages/add_expenses.dart';
 import 'package:demo2/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +13,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) => Scaffold(
-<<<<<<< HEAD
-=======
       appBar: AppBar(
         elevation: 0,
         backgroundColor: const Color.fromARGB(255, 35, 45, 64),
@@ -33,17 +28,12 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ),
->>>>>>> master
       body: Container(
           padding: EdgeInsets.all(20),
           alignment: Alignment.bottomRight,
           child: CircleAvatar(
             backgroundColor: AppTheme.colors.basecolor,
-<<<<<<< HEAD
-            radius: 30,
-=======
             radius: 25,
->>>>>>> master
             child: IconButton(
               onPressed: () {
                 Navigator.push(

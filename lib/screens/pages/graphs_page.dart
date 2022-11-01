@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import 'package:flutter/material.dart';
-class GraphsPage extends StatefulWidget {
-  const GraphsPage({ Key? key }) : super(key: key);
-=======
 import 'package:demo2/models/chart.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:flutter/material.dart';
@@ -13,22 +8,12 @@ import 'package:intl/intl.dart';
 
 class GraphsPage extends StatefulWidget {
   const GraphsPage({Key? key}) : super(key: key);
->>>>>>> master
 
   @override
   _GraphsPageState createState() => _GraphsPageState();
 }
 
 class _GraphsPageState extends State<GraphsPage> {
-<<<<<<< HEAD
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      
-    );
-  }
-}
-=======
   
   @override
   Widget build(BuildContext context) {
@@ -144,4 +129,3 @@ class _GraphsPageState extends State<GraphsPage> {
   
   addExpenseFuction(int userEntries, val) {}
 }
->>>>>>> master

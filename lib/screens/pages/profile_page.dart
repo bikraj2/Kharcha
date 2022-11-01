@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import 'package:flutter/material.dart';
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({ Key? key }) : super(key: key);
-=======
 import 'package:demo2/screens/bin/top_card.dart';
 import 'package:demo2/screens/log/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +7,6 @@ import '../../theme/theme.dart';
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);
   var orientation, size, height, width;
->>>>>>> master
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -21,13 +15,6 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    return Container(
-      
-    );
-  }
-}
-=======
     return Column(
       children: [
         profilePicture(),
@@ -232,4 +219,3 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
->>>>>>> master

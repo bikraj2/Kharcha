@@ -1,9 +1,5 @@
 // ignore_for_file: unnecessary_this
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 import '../token/token.dart';
 class Expense {
   late String name, category;

@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'get_started_screen.dart';
 import 'third_screen.dart';
 import '../log/sign_up.dart';
-<<<<<<< HEAD:lib/screens/container/second_screen.dart
-=======
 import 'package:demo2/theme/theme.dart';
->>>>>>> master:lib/screens/second_screen.dart
 
 class SecondScreen extends StatelessWidget {
   SecondScreen({Key? key}) : super(key: key);

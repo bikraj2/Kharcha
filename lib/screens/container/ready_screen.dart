@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'third_screen.dart';
 import '../log/sign_up.dart';
-<<<<<<< HEAD:lib/screens/container/ready_screen.dart
-=======
 import 'package:demo2/theme/theme.dart';
->>>>>>> master:lib/screens/ready_screen.dart
 
 class ReadyScreen extends StatelessWidget {
   ReadyScreen({Key? key}) : super(key: key);
