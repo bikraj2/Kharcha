@@ -9,7 +9,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
   // var orientation, size, height, width;
-
+  var orientation, size, height, width;
   static const String _title = 'Welcome';
 
   @override
@@ -24,7 +24,11 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text(_title),
+          toolbarHeight: 35,
+          title: const Text(
+            _title,
+            style: TextStyle(fontSize: 18),
+          ),
           backgroundColor: AppTheme.colors.basecolor,
         ),
         body: GetStartedScreen(),

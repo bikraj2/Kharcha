@@ -19,7 +19,7 @@ class ThirdScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           // title: Text('Login'),
-          toolbarHeight: 40,
+          toolbarHeight: width / 13,
           elevation: 0,
           backgroundColor: AppTheme.colors.basecolor,
           leading: IconButton(
@@ -59,14 +59,14 @@ class ThirdScreen extends StatelessWidget {
                               shape: BoxShape.rectangle,
                               image: DecorationImage(
                                   image: AssetImage('assetss/images/chart.png'),
-                                  fit: BoxFit.cover)),
+                                  fit: BoxFit.contain)),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         const Text('Analyze your Expenses',
                             style: TextStyle(
-                                fontSize: 22,
+                                fontSize: 20,
                                 color: Color.fromARGB(255, 35, 45, 64)))
                       ],
                     ),
@@ -98,10 +98,10 @@ class ThirdScreen extends StatelessWidget {
                           style: TextStyle(fontSize: 20),
                         ),
                       ),
-                      const Image(
+                      Image(
                         image: AssetImage('assetss/images/7.png'),
-                        height: 70,
-                        width: 80,
+                        height: height / 10,
+                        width: width / 5,
                       )
                     ],
                   ),
@@ -112,7 +112,8 @@ class ThirdScreen extends StatelessWidget {
                         child: const Text(
                           'Skip',
                           style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 16,
+                              decoration: TextDecoration.underline,
                               color: Color.fromARGB(255, 220, 63, 107)),
                           textAlign: TextAlign.center,
                         ),

@@ -57,19 +57,19 @@ class SecondScreen extends StatelessWidget {
                       children: [
                         Container(
                           width: width / 2,
-                          height: height / 1.5,
+                          height: height / 2,
                           decoration: const BoxDecoration(
                               shape: BoxShape.rectangle,
                               image: DecorationImage(
                                   image: AssetImage('assetss/images/sack.png'),
-                                  fit: BoxFit.cover)),
+                                  fit: BoxFit.contain)),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         const Text('Plan your Budget',
                             style: TextStyle(
-                                fontSize: 22,
+                                fontSize: 20,
                                 color: Color.fromARGB(255, 35, 45, 64)))
                       ],
                     ),
@@ -92,19 +92,20 @@ class SecondScreen extends StatelessWidget {
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18))),
+                                      borderRadius:
+                                          BorderRadius.circular(width / 2))),
                           backgroundColor: MaterialStateProperty.all(
                               const Color.fromARGB(255, 220, 63, 107)),
                         ),
                         child: const Text(
                           'Next',
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 18),
                         ),
                       ),
-                      const Image(
+                      Image(
                         image: AssetImage('assetss/images/6.png'),
-                        height: 70,
-                        width: 80,
+                        height: height / 10,
+                        width: width / 5,
                       )
                     ],
                   ),
@@ -115,7 +116,8 @@ class SecondScreen extends StatelessWidget {
                         child: const Text(
                           'Skip',
                           style: TextStyle(
-                              fontSize: 18,
+                              decoration: TextDecoration.underline,
+                              fontSize: 16,
                               color: Color.fromARGB(255, 220, 63, 107)),
                           textAlign: TextAlign.center,
                         ),

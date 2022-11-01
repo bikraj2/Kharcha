@@ -15,10 +15,10 @@ class ReadyScreen extends StatelessWidget {
     size = MediaQuery.of(context).size;
     height = size.height;
     width = size.width;
-    return Scaffold(
-        appBar: AppBar(
+  return Scaffold(
+      appBar: AppBar(
           // title: Text('Login'),
-          toolbarHeight: 40,
+          toolbarHeight: width / 10,
 
           elevation: 0,
           backgroundColor: AppTheme.colors.basecolor,

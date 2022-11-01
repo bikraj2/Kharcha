@@ -49,7 +49,7 @@ class GetStartedScreen extends StatelessWidget {
                         ),
                         const Text('Expense Tracking Application',
                             style: TextStyle(
-                                fontSize: 22,
+                                fontSize: 18,
                                 color: Color.fromARGB(255, 35, 45, 64)))
                       ],
                     ),
@@ -101,6 +101,7 @@ class GetStartedScreen extends StatelessWidget {
                         child: const Text('Login',
                             style: TextStyle(
                                 fontSize: 18,
+                                decoration: TextDecoration.underline,
                                 color: Color.fromARGB(255, 220, 63, 107))),
                         onPressed: () {
                           Navigator.push(
