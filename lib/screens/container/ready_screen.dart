@@ -1,42 +1,51 @@
 import 'package:flutter/material.dart';
 import 'third_screen.dart';
 import '../log/sign_up.dart';
+<<<<<<< HEAD:lib/screens/container/ready_screen.dart
+=======
+import 'package:demo2/theme/theme.dart';
+>>>>>>> master:lib/screens/ready_screen.dart
 
 class ReadyScreen extends StatelessWidget {
-  const ReadyScreen({Key? key}) : super(key: key);
+  ReadyScreen({Key? key}) : super(key: key);
+  var orientation, size, height, width;
 
   @override
   Widget build(BuildContext context) {
+    orientation = MediaQuery.of(context).orientation;
+
+    //size of the window
+    size = MediaQuery.of(context).size;
+    height = size.height;
+    width = size.width;
     return Scaffold(
+        appBar: AppBar(
+          // title: Text('Login'),
+          toolbarHeight: 40,
+
+          elevation: 0,
+          backgroundColor: AppTheme.colors.basecolor,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
         body: Container(
             color: Colors.white,
             child: Padding(
               padding: const EdgeInsets.all(30),
               child: Column(
                 children: <Widget>[
-                  TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ThirdScreen()));
-                      },
-                      child: const Image(
-                        image: AssetImage(
-                          'assetss/images/10.png',
-                        ),
-                        height: 60,
-                        width: 900,
-                        alignment: Alignment.topLeft,
-                      )),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          width: 400,
-                          height: 400,
+                          width: width / 2,
+                          height: height / 2,
                           decoration: const BoxDecoration(
                               shape: BoxShape.rectangle,
                               image: DecorationImage(

@@ -9,10 +9,12 @@ import '../token/token.dart';
 
 class AuthService {
   Dio diio = new Dio();
-  login(name, password) async {
+  login(username, password) async {
     try {
-      var value = await diio.post("https://kharcha-1.herokuapp.com/authenticate",
-          data: {"username": name, "password": password},
+      print(username);
+      print(password);
+      var value = await diio.post("http://kharcha-1.herokuapp.com/authenticate",
+          data: {"username": username, "password": password},
           options: Options(contentType: Headers.formUrlEncodedContentType));
       return value;
     } on DioError catch (e) {
@@ -27,6 +29,7 @@ class AuthService {
       var value = await diio.post("https://kharcha-1.herokuapp.com/adduser",
           data: user.value(),
           options: Options(contentType: Headers.formUrlEncodedContentType));
+      print(value);
       return value;
     } on DioError catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");

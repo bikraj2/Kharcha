@@ -314,6 +314,9 @@
 			showEnvVarsInLog = 0;
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 		E18CBABBB70A7F936597831E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -331,8 +334,11 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+<<<<<<< HEAD
 =======
 >>>>>>> ishan
+=======
+>>>>>>> master
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */

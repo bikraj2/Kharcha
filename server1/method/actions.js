@@ -25,6 +25,7 @@ var functions = {
             })
         } 
     },
+<<<<<<< HEAD
     authenticate: (req,res)=>{
         User.findOne({
             name:req.body.username
@@ -48,6 +49,28 @@ var functions = {
                     }
                 })
             }
+=======
+    authenticate: function (req, res) {
+        User.findOne({
+            username: req.body.username
+        }, function (err, user) {
+                if (err) throw err
+                if (!user) {
+                    res.status(403).send({success: false, msg: 'Authentication Failed, User not found'})
+                }
+
+                else {
+                    user.comparePassword(req.body.password, function (err, isMatch) {
+                        if (isMatch && !err) {
+                            var token = jwt.encode(user, config.secret)
+                            res.json({success: true, token: token,username:req.body.username})
+                        }
+                        else {
+                            return res.status(403).send({success: false, msg: 'Authentication failed, wrong password'})
+                        }
+                    })
+                }
+>>>>>>> master
         }
         )
     },
@@ -84,8 +107,16 @@ var functions = {
         var token = req.query["token"];
         var decodedtoken =jwt.decode(token,config.secret)
         var userId1 = decodedtoken._id;
+<<<<<<< HEAD
         expense.find({userId:userId1}).then((result,next)=>{
             res.json(result)
+=======
+
+        expense.find({userId:userId1},{"amount":true,"category":true,_id:false}).then((result,next)=>{
+            res.json({ans:result})
+
+
+>>>>>>> master
         }).catch((err)=>{
 
         })

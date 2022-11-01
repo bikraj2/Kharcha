@@ -34,7 +34,8 @@ class _LoginScreenState extends State<LoginScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => GetStartedScreen()));
           },
         ),
       ),
