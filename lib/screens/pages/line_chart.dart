@@ -27,7 +27,7 @@ class _LineChartClassState extends State<LineChartClass> {
   Widget build(BuildContext context) {
     return Card(
         color: Colors.white,
-        margin: EdgeInsets.all(100),
+        margin: EdgeInsets.all(30),
         child: LineChart(
           LineChartData(
             maxY: 10000,
