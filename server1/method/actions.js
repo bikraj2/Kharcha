@@ -25,31 +25,6 @@ var functions = {
             })
         } 
     },
-<<<<<<< HEAD
-    authenticate: (req,res)=>{
-        User.findOne({
-            name:req.body.username
-            
-        }, (err,user)=>{
-            if(err){
-                console.log(err)
-                throw err
-            }
-            if(!user){
-                res.status(403).send({success:false,msg:'Authentication Failed,User not found',message:req.body.username})
-            }
-            else{
-                user.comparePassword(req.body.password, (err,isMatch)=>{
-                    if(isMatch && !err){
-                        var token = jwt.encode(user,config.secret)
-                        res.json ({success:true,token:token})
-                    }
-                    else {
-                        return res.status(403).send({success:false,msg:'authentication failed wrong password'})
-                    }
-                })
-            }
-=======
     authenticate: function (req, res) {
         User.findOne({
             username: req.body.username
@@ -70,7 +45,6 @@ var functions = {
                         }
                     })
                 }
->>>>>>> master
         }
         )
     },
@@ -107,16 +81,9 @@ var functions = {
         var token = req.query["token"];
         var decodedtoken =jwt.decode(token,config.secret)
         var userId1 = decodedtoken._id;
-<<<<<<< HEAD
-        expense.find({userId:userId1}).then((result,next)=>{
-            res.json(result)
-=======
 
         expense.find({userId:userId1},{"amount":true,"category":true,_id:false}).then((result,next)=>{
             res.json({ans:result})
-
-
->>>>>>> master
         }).catch((err)=>{
 
         })
