@@ -111,10 +111,10 @@ class _expenseAdderState extends State<expenseAdder> {
                     print(money);
                     print(categories);
                     var expense = Expense(
-                        _dateController.text, categories.toString(), money);
+                        name:_dateController.text, category:categories.toString(), amount:money);
                     token.storage.read(key: "jwt").then((value) {
                       AuthService()
-                          .addexpense(expense, token)
+                          .addexpense(expense, value)
                           .then((val) => {print(val)});
                     });
                   })),

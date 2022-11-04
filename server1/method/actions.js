@@ -82,11 +82,15 @@ var functions = {
         var decodedtoken =jwt.decode(token,config.secret)
         var userId1 = decodedtoken._id;
 
-        expense.find({userId:userId1},{"amount":true,"category":true,_id:false}).then((result,next)=>{
-            res.json({ans:result})
-        }).catch((err)=>{
-
-        })
+        expense
+          .find(
+            { userId: userId1 },
+            { amount: true, category: true, name: true, date: true, _id: false }
+          )
+          .then((result, next) => {
+            res.status(200).json({ ans: result });
+          })
+          .catch((err) => {});
     
     }
 }

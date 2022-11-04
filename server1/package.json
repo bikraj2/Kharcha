@@ -3,11 +3,7 @@
   "version": "1.0.0",
   "description": "Authentication system for flutter apps",
   "main": "server.js",
-<<<<<<< HEAD
-    "scripts": {
-=======
   "scripts": {
->>>>>>> master
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
@@ -24,11 +20,7 @@
     "jwt-simple": "^0.5.6",
     "mongoose": "^5.9.20",
     "morgan": "^1.10.0",
-<<<<<<< HEAD
-    "nodemon": "^2.0.4",
-=======
     "nodemon": "^2.0.19",
->>>>>>> master
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0"
   }
