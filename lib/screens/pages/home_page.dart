@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => BarChartClass()),
+                    MaterialPageRoute(builder: (context) => BarClassSample1()),
                   );
                 },
                 icon: Icon(Icons.add),
