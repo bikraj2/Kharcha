@@ -213,11 +213,14 @@ class _SignUpState extends State<SignUp> {
                 AuthService().addUser(newuser).then((val) {
                   if (val.data["success"]) {
                     dispose();
+                    Fluttertoast.showToast(msg: val.data['msg']);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const LoginScreen()),
                     );
+                  }else{
+                    Fluttertoast.showToast(msg: val.data['msg']);
                   }
                 });
               },

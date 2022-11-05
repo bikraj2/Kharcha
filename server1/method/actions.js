@@ -4,25 +4,22 @@ var expense = require('../models/expense')
 var config = require('../config/dbconfig')
 
 var functions = {
-    addNew: function(req,res ){
+    addNew: async (req,res )=>{
         {
-            var newUser  =User({
-                firstName:req.body.firstName,
+            try{
+                var user = await User.create(
+                {firstName:req.body.firstName,
                 lastName:req.body.lastName,
                 middleName:req.body.middleName,
                 email:req.body.email,
                 username:req.body.username,
                 password:req.body.password,
-            });
-            newUser.save((err,newUser)=>{
-                    if(err) {
-                        res.json({success:false,msg:'Failed to save'})
-                        console.log(err)
-                    }
-                    else{
-                        res.json({success:true,msg:'Successfully saved'})
-                    }
-            })
+                })
+                res.status(200).json({success:true,msg:"userCreateda"})
+            }catch(e){
+                console.log(e)
+                res.status(500).json({success:true,msg:e })
+            }
         } 
     },
     authenticate: function (req, res) {

@@ -134,7 +134,6 @@ class _expenseAdderState extends State<expenseAdder> {
                         category: categories.toString(),
                         amount: money,
                         date1: currentDate);
-                    print(expense.date);
                     token.storage.read(key: "jwt").then((value) {
                       AuthService()
                           .addexpense(expense, value)

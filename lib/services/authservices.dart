@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:flutter/material.dart';
 import '../models/user_info.dart';
 import '../models/expenses.dart';
 import '../token/token.dart';
@@ -22,6 +22,8 @@ class AuthService {
       print(e);
       Fluttertoast.showToast(
         msg: e.response?.data['msg'],
+          textColor: Colors.white,
+          backgroundColor: Colors.red.shade300
       );
     }
   }
@@ -30,12 +32,13 @@ class AuthService {
     try {
       var value = await diio.post("${url}/adduser",
           data: user.value(),
-          options: Options(contentType: Headers.formUrlEncodedContentType));
-      print(value);
+          options: Options(contentType: Headers.formUrlEncodedContentType));;
       return value;
-    } on DioError catch (error, stacktrace) {
-      print("Exception occured: $error stackTrace: $stacktrace");
-      return error.response;
+    } on DioError catch (e) {
+      Fluttertoast.showToast(
+          msg: e.response?.data['msg'],
+          textColor: Colors.white,
+          backgroundColor: Colors.red.shade300);
     }
   }
 
