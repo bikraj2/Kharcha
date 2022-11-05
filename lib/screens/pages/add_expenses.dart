@@ -29,11 +29,23 @@ class expenseAdder extends StatefulWidget {
 class _expenseAdderState extends State<expenseAdder> {
   final _dateController = TextEditingController();
   final _moneyController = TextEditingController();
+  DateTime? currentDate = DateTime.now();
   String date = " ";
   String? value;
   late double money;
   String? categories = "";
   final category = ['Health', 'Rent', 'Food', 'Luxury'];
+  void getDate() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2018),
+            lastDate: DateTime.now())
+        .then((val) => {
+              setState(() => {currentDate = val}),
+            });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,6 +109,16 @@ class _expenseAdderState extends State<expenseAdder> {
           ),
         ),
         Center(
+          child: IconButton(
+            color: Theme.of(context).primaryColor,
+            hoverColor: Theme.of(context).bottomAppBarColor,
+            icon: Icon(Icons.calendar_month_outlined),
+            onPressed: () {
+              getDate();
+            },
+          ),
+        ),
+        Center(
           child: Container(
               padding: EdgeInsets.all(25),
               child: FloatingActionButton(
@@ -107,11 +129,12 @@ class _expenseAdderState extends State<expenseAdder> {
                       money = double.parse(_moneyController.text);
                       categories = value;
                     });
-                    print(date);
-                    print(money);
-                    print(categories);
                     var expense = Expense(
-                        name:_dateController.text, category:categories.toString(), amount:money);
+                        name: _dateController.text,
+                        category: categories.toString(),
+                        amount: money,
+                        date1: currentDate);
+                    print(expense.date);
                     token.storage.read(key: "jwt").then((value) {
                       AuthService()
                           .addexpense(expense, value)
@@ -119,19 +142,19 @@ class _expenseAdderState extends State<expenseAdder> {
                     });
                   })),
         ),
-        Center(
-          child: Container(
-              padding: EdgeInsets.all(25),
-              child: FloatingActionButton(
-                  child: Text("Pie"),
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(
-                      builder: (BuildContext context) {
-                        return Piechart();
-                      },
-                    ));
-                  })),
-        ),
+        // Center(
+        //   child: Container(
+        //       padding: EdgeInsets.all(25),
+        //       child: FloatingActionButton(
+        //           child: Text("Pie"),
+        //           onPressed: () {
+        //             Navigator.push(context, MaterialPageRoute(
+        //               builder: (BuildContext context) {
+        //                 return Piechart();
+        //               },
+        //             ));
+        //           })),
+        // ),
       ],
     ));
   }

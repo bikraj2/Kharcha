@@ -62,11 +62,13 @@ var functions = {
         var token = req.body.token;
         var decodedtoken =jwt.decode(token,config.secret)
         console.log(decodedtoken)
+        console.log(req.body.date);
         var newExpense = expense({
             name:req.body.name,
             amount:req.body.amount,
             category:req.body.category,
-            userId:decodedtoken._id
+            userId:decodedtoken._id,
+            date:req.body.date
         })
         newExpense.save((err,newExpense)=>{
             if(err){

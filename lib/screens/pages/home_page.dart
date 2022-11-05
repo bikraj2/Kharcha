@@ -46,10 +46,11 @@ class _HomePageState extends State<HomePage> {
         var tk = await token.storage.read(key: 'jwt');
         final res = await AuthService().getExpense(tk);
         for (Map i in res.data['ans']) {
+          print(i['date']);
           expenseList.add(Expense(
               amount: double.parse(i['amount'].toString()),
               name: i['name'],
-              date: DateTime.parse(i['date']),
+              date1: DateTime.parse(i['date']).toLocal(),
               category: i['category']));
         }
         return expenseList;

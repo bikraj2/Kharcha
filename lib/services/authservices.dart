@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -46,10 +47,10 @@ class AuthService {
             "name": expense.name,
             "category": expense.category,
             "amount": expense.amount,
-            "token": token
+            "token": token,
+            "date":expense.date
           },
           options: Options(contentType: Headers.formUrlEncodedContentType));
-      print(value);
       return value;
     } on DioError catch (error, stacktrace) {
       print(error);
