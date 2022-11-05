@@ -23,6 +23,7 @@ var functions = {
         } 
     },
     authenticate: function (req, res) {
+        console.log("hey")
         User.findOne({
             username: req.body.username
         }, function (err, user) {
@@ -30,7 +31,6 @@ var functions = {
                 if (!user) {
                     res.status(403).send({success: false, msg: 'Authentication Failed, User not found'})
                 }
-
                 else {
                     user.comparePassword(req.body.password, function (err, isMatch) {
                         if (isMatch && !err) {

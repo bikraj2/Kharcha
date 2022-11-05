@@ -8,7 +8,7 @@ import '../models/user_info.dart';
 import '../models/expenses.dart';
 import '../token/token.dart';
 
-const url = "http://192.168.1.75:3000";
+const url = "http://192.168.1.69:3000";
 
 class AuthService {
   Dio diio = new Dio();
@@ -17,14 +17,14 @@ class AuthService {
       var value = await diio.post("${url}/authenticate",
           data: {"username": username, "password": password},
           options: Options(contentType: Headers.formUrlEncodedContentType));
+      print(username);
       return value;
     } on DioError catch (e) {
       print(e);
       Fluttertoast.showToast(
-        msg: e.response?.data['msg'],
+          msg: e.response?.data['msg'],
           textColor: Colors.white,
-          backgroundColor: Colors.red.shade300
-      );
+          backgroundColor: Colors.red.shade300);
     }
   }
 
@@ -32,7 +32,8 @@ class AuthService {
     try {
       var value = await diio.post("${url}/adduser",
           data: user.value(),
-          options: Options(contentType: Headers.formUrlEncodedContentType));;
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+      ;
       return value;
     } on DioError catch (e) {
       Fluttertoast.showToast(
@@ -42,16 +43,15 @@ class AuthService {
     }
   }
 
-  addexpense(Expense expense,String? token ) async {
+  addexpense(Expense expense, String? token) async {
     try {
-
       var value = await diio.post("${url}/addExpense",
           data: {
             "name": expense.name,
             "category": expense.category,
             "amount": expense.amount,
             "token": token,
-            "date":expense.date
+            "date": expense.date
           },
           options: Options(contentType: Headers.formUrlEncodedContentType));
       return value;
