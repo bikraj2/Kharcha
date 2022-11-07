@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -8,8 +7,7 @@ import 'package:intl/intl.dart';
 import '../../models/expenses.dart';
 import 'package:demo2/token/token.dart';
 import 'package:demo2/services/authservices.dart';
-
-List<Expense> expenseList = [];
+import 'package:demo2/models/expenseList.dart';
 
 class BarChartSample1 extends StatefulWidget {
   const BarChartSample1({super.key});
@@ -28,23 +26,8 @@ class BarChartSample1 extends StatefulWidget {
 }
 
 class BarChartSample1State extends State<BarChartSample1> {
-  Future<List<Expense>> getData() async {
-    try {
-      var tk = await token.storage.read(key: 'jwt');
-      final res = await AuthService().getExpense(tk);
-      for (Map i in res.data['ans']) {
-        expenseList.add(Expense(
-            amount: double.parse(i['amount'].toString()),
-            name: i['name'],
-            date1: DateTime.parse(i['date']).toLocal(),
-            category: i['category']));
-      }
-      return expenseList;
-    } catch (e) {
-      throw e;
-    }
-  }
-
+  List<Map<String, Object>> value1 = expenseList.groupedData;
+  
   final Color barBackgroundColor = const Color(0xff72d8bf);
   final Duration animDuration = const Duration(milliseconds: 250);
   bool isLoading = true;
@@ -54,6 +37,7 @@ class BarChartSample1State extends State<BarChartSample1> {
 
   @override
   Widget build(BuildContext context) {
+    print(value1);
     return Scaffold(
       appBar: AppBar(),
       body: AspectRatio(
@@ -93,11 +77,8 @@ class BarChartSample1State extends State<BarChartSample1> {
                       height: 38,
                     ),
                     Expanded(
-                        child: FutureBuilder(
-                            future: getData(),
-                            builder: (context, snapshot) {
-                              return BarChart(mainBarData());
-                            })),
+                      child: Container(child: BarChart(mainBarData())),
+                    ),
                     const SizedBox(
                       height: 12,
                     ),
@@ -141,31 +122,28 @@ class BarChartSample1State extends State<BarChartSample1> {
   }
 
   List<BarChartGroupData> showingGroups() {
-    expenseList.map((val) {
-      print(val.amount);
-    });
     return List.generate(7, (i) {
       switch (i) {
         case 0:
-          return makeGroupData(0, expenseList[6].amount as double,
+          return makeGroupData(0, value1[6]['amount'] as double,
               isTouched: i == touchedIndex);
         case 1:
-          return makeGroupData(1, expenseList[5].amount as double,
+          return makeGroupData(1, value1[5]['amount'] as double,
               isTouched: i == touchedIndex);
         case 2:
-          return makeGroupData(2, expenseList[4].amount as double,
+          return makeGroupData(2, value1[4]['amount'] as double,
               isTouched: i == touchedIndex);
         case 3:
-          return makeGroupData(3, expenseList[3].amount as double,
+          return makeGroupData(3, value1[3]['amount'] as double,
               isTouched: i == touchedIndex);
         case 4:
-          return makeGroupData(4, expenseList[2].amount as double,
+          return makeGroupData(4, value1[2]['amount'] as double,
               isTouched: i == touchedIndex);
         case 5:
-          return makeGroupData(5, expenseList[1].amount as double,
+          return makeGroupData(5, value1[1]['amount'] as double,
               isTouched: i == touchedIndex);
         case 6:
-          return makeGroupData(6, expenseList[0].amount as double,
+          return makeGroupData(6, value1[0]['amount'] as double,
               isTouched: i == touchedIndex);
         default:
           return throw Error();
@@ -174,8 +152,6 @@ class BarChartSample1State extends State<BarChartSample1> {
   }
 
   BarChartData mainBarData() {
-    double total = value;
-    print(total);
     return BarChartData(
       barTouchData: BarTouchData(
         touchTooltipData: BarTouchTooltipData(
@@ -275,34 +251,35 @@ class BarChartSample1State extends State<BarChartSample1> {
       fontSize: 14,
     );
     Widget text;
+
     switch (value.toInt()) {
       case 0:
-        String temp = groupedTransactionValues[6]['day'] as String;
-        text = Text(temp, style: style);
+        String temp = value1[6]['day'] as String;
+        text = Text(temp[0], style: style);
         break;
       case 1:
-        String temp = groupedTransactionValues[5]['day'] as String;
-        text = Text(temp, style: style);
+        String temp = value1[5]['day'] as String;
+        text = Text(temp[0], style: style);
         break;
       case 2:
-        String temp = groupedTransactionValues[4]['day'] as String;
-        text = Text(temp, style: style);
+        String temp = value1[4]['day'] as String;
+        text = Text(temp[0], style: style);
         break;
       case 3:
-        String temp = groupedTransactionValues[3]['day'] as String;
-        text = Text(temp, style: style);
+        String temp = value1[3]['day'] as String;
+        text = Text(temp[0], style: style);
         break;
       case 4:
-        String temp = groupedTransactionValues[2]['day'] as String;
-        text = Text(temp, style: style);
+        String temp = value1[2]['day'] as String;
+        text = Text(temp[0], style: style);
         break;
       case 5:
-        String temp = groupedTransactionValues[1]['day'] as String;
-        text = Text(temp, style: style);
+        String temp = value1[1]['day'] as String;
+        text = Text(temp[0], style: style);
         break;
       case 6:
-        String temp = groupedTransactionValues[0]['day'] as String;
-        text = Text(temp, style: style);
+        String temp = value1[0]['day'] as String;
+        text = Text(temp[0], style: style);
         break;
       default:
         text = const Text('', style: style);
@@ -406,16 +383,6 @@ class BarChartSample1State extends State<BarChartSample1> {
       gridData: FlGridData(show: false),
     );
   }
-
-  Future<dynamic> refreshState() async {
-    setState(() {});
-    await Future<dynamic>.delayed(
-      animDuration + const Duration(milliseconds: 50),
-    );
-    if (isPlaying) {
-      await refreshState();
-    }
-  }
 }
 
 extension ColorExtension on Color {
@@ -430,31 +397,4 @@ extension ColorExtension on Color {
       (blue * value).round(),
     );
   }
-}
-
-List<Map<String, Object>> get groupedTransactionValues {
-  return List.generate(7, (index) {
-    final weekday = DateTime.now().subtract(
-      Duration(days: index),
-    );
-    var totalSum = 0.0;
-    for (var i = 0; i < expenseList.length; i++) {
-      if (expenseList[i].date?.day == weekday.day &&
-          expenseList[i].date?.month == weekday.month &&
-          expenseList[i].date?.year == weekday.year) {
-        totalSum += expenseList[i].amount as double;
-      }
-    }
-    return {'day': DateFormat.E().format(weekday)[0], 'amount': totalSum};
-  });
-}
-
-double get value {
-  double max = 0;
-  groupedTransactionValues.map((data) {
-    if (data['amount'] as double > max) {
-      max = data['amount'] as double;
-    }
-  });
-  return max;
 }

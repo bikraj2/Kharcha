@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../../services/authservices.dart';
 import '../home.dart';
 import '../pages/add_expenses.dart';
-import '';
+import 'package:demo2/models/expenseList.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../pages/home_screen.dart';
 import 'package:demo2/token/token.dart';
@@ -107,21 +107,23 @@ class _LoginScreenState extends State<LoginScreen> {
                 String password = passwordController.text;
                 if ((username == "")) {
                   Fluttertoast.showToast(
-                    msg: "Please enter your username",
-                    textColor: Colors.white,
-                    backgroundColor: Colors.red.shade300
-                  );
+                      msg: "Please enter your username",
+                      textColor: Colors.white,
+                      backgroundColor: Colors.red.shade300);
                 } else if ((password == "")) {
                   Fluttertoast.showToast(
-                    msg: "Please enter your password",
-                   textColor: Colors.white,
-                      backgroundColor: Colors.red.shade300
-                  );
+                      msg: "Please enter your password",
+                      textColor: Colors.white,
+                      backgroundColor: Colors.red.shade300);
                 } else {
                   AuthService().login(username, password).then((val) {
                     if (val.data["success"]) {
                       token.storeToken(val.data["token"]);
                       token.readToken();
+                      expenseList.getData().then((value) {
+                        expenseList.groupedTransactionValues();
+                      });
+
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -131,7 +133,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       );
                     } else {
-                      Fluttertoast.showToast(msg: val.data["msg"],
+                      Fluttertoast.showToast(
+                          msg: val.data["msg"],
                           textColor: Colors.white,
                           backgroundColor: Colors.red.shade300);
                     }

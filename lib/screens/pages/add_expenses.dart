@@ -3,6 +3,7 @@ import 'package:demo2/screens/pie_chart.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:flutter/material.dart';
 import '../../token/token.dart';
+import 'package:demo2/models/expenseList.dart';
 
 class expenseTracker extends StatelessWidget {
   const expenseTracker({Key? key}) : super(key: key);
@@ -137,7 +138,9 @@ class _expenseAdderState extends State<expenseAdder> {
                     token.storage.read(key: "jwt").then((value) {
                       AuthService()
                           .addexpense(expense, value)
-                          .then((val) => {print(val)});
+                          .then((val) => {expenseList.getData().then((value) {
+                        expenseList.groupedTransactionValues();
+                      })});
                     });
                   })),
         ),

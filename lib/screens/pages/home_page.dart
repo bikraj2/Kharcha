@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:demo2/models/expenses.dart';
 import 'package:demo2/screens/log/login_screen.dart';
@@ -18,20 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var data1 = [
-    {
-      "date": "2022-11-04T11:02:03.337Z",
-      "name": "mmo",
-      "amount": 1000,
-      "category": "Rent"
-    },
-    {
-      "date": "2022-11-04T11:02:03.337Z",
-      "name": "pizza",
-      "amount": 100,
-      "category": "Luxury"
-    }
-  ];
+
   @override
   Widget build(BuildContext context) {
     Widget title = Container(

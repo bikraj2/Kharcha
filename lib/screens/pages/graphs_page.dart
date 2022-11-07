@@ -13,17 +13,20 @@ class GraphPage extends StatefulWidget {
 class _GraphPageState extends State<GraphPage> {
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(),
       body: Container(
           child: Column(
         children: [
-          ElevatedButton(onPressed: () {
-            Navigator.push(context,
+          ElevatedButton(
+              onPressed: () {
+                Navigator.push(context,
                     MaterialPageRoute(builder: (BuildContext) {
                   return PieChartPage();
                 }));
-          }, child: Text("Pie Chart")),
+              },
+              child: Text("Pie Chart")),
           ElevatedButton(
               onPressed: () {
                 Navigator.push(context,
@@ -32,18 +35,14 @@ class _GraphPageState extends State<GraphPage> {
                 }));
               },
               child: Text("Line Chart")),
-          ElevatedButton(onPressed: () {
-            Navigator.push(context,
+          ElevatedButton(
+              onPressed: () {
+                Navigator.push(context,
                     MaterialPageRoute(builder: (BuildContext) {
                   return BarChartSample1();
                 }));
-          }, child: Text("bar Chart")),
-          ElevatedButton(onPressed: () {
-            Navigator.push(context,
-                    MaterialPageRoute(builder: (BuildContext) {
-                  return BarChartSample1();
-                }));
-          }, child: Text("bar Chart")),
+              },
+              child: Text("bar Chart")),
         ],
       )),
     );
