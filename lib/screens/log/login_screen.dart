@@ -1,14 +1,14 @@
-import 'package:demo2/screens/pages/home_page.dart';
-import 'package:demo2/screens/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../services/authservices.dart';
+import '../home.dart';
 import '../pages/add_expenses.dart';
 import '../bin/home.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../../token/token.dart';
 import '../../services/authservices.dart';
 import '../pages/add_expenses.dart';
+import '../pages/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -103,6 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             ElevatedButton(
               onPressed: () {
+                print(passwordController.text);
                 AuthService()
                     .login(usernameController.text, passwordController.text)
                     .then((val) {

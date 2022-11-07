@@ -60,4 +60,8 @@ userSchema1.methods.comparePassword = function (passw,cb){
         cb(null,isMatch)
     })
 }
+<<<<<<< HEAD
 module.exports = mongoose.model('User', userSchema1)
+=======
+module.exports = mongoose.model('User',userSchema1)
+>>>>>>> bikraj
