@@ -150,7 +150,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
     return Stack(
       children: <Widget>[
         AspectRatio(
-          aspectRatio: 1,
+          aspectRatio: 16.0 / 9.0,
           child: DecoratedBox(
             decoration: const BoxDecoration(
               color: Color(0xff232d37),
