@@ -1,11 +1,12 @@
+import 'package:demo2/screens/profile/top_card.dart';
 import 'package:flutter/material.dart';
-import 'second_screen.dart';
-import 'ready_screen.dart';
+import 'first_screen.dart';
+import 'third_screen.dart';
 import '../log/sign_up.dart';
 import 'package:demo2/theme/theme.dart';
 
-class ThirdScreen extends StatelessWidget {
-  ThirdScreen({Key? key}) : super(key: key);
+class SecondScreen extends StatelessWidget {
+  SecondScreen({Key? key}) : super(key: key);
   var orientation, size, height, width;
 
   @override
@@ -20,6 +21,7 @@ class ThirdScreen extends StatelessWidget {
         appBar: AppBar(
           // title: Text('Login'),
           toolbarHeight: 40,
+
           elevation: 0,
           backgroundColor: AppTheme.colors.basecolor,
           leading: IconButton(
@@ -39,7 +41,8 @@ class ThirdScreen extends StatelessWidget {
                   //   onPressed: () {
                   //     Navigator.push(
                   //       context,
-                  //       MaterialPageRoute(builder: (context) => SecondScreen()),
+                  //       MaterialPageRoute(
+                  //           builder: (context) => GetStartedScreen()),
                   //     );
                   //   },
                   //   icon: Icon(Icons.arrow_back_ios_new_outlined),
@@ -58,15 +61,15 @@ class ThirdScreen extends StatelessWidget {
                           decoration: const BoxDecoration(
                               shape: BoxShape.rectangle,
                               image: DecorationImage(
-                                  image: AssetImage('assetss/images/chart.png'),
-                                  fit: BoxFit.cover)),
+                                  image: AssetImage('assetss/images/sack.png'),
+                                  fit: BoxFit.contain)),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                        const Text('Analyze your Expenses',
+                        const Text('Plan your Budget',
                             style: TextStyle(
-                                fontSize: 22,
+                                fontSize: 20,
                                 color: Color.fromARGB(255, 35, 45, 64)))
                       ],
                     ),
@@ -80,7 +83,7 @@ class ThirdScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ReadyScreen()));
+                                  builder: (context) => ThirdScreen()));
                         },
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(
@@ -89,19 +92,20 @@ class ThirdScreen extends StatelessWidget {
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18))),
+                                      borderRadius:
+                                          BorderRadius.circular(width / 2))),
                           backgroundColor: MaterialStateProperty.all(
                               const Color.fromARGB(255, 220, 63, 107)),
                         ),
                         child: const Text(
                           'Next',
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 18),
                         ),
                       ),
-                      const Image(
-                        image: AssetImage('assetss/images/7.png'),
-                        height: 70,
-                        width: 80,
+                      Image(
+                        image: AssetImage('assetss/images/6.png'),
+                        height: height / 10,
+                        width: width / 5,
                       )
                     ],
                   ),
@@ -112,7 +116,8 @@ class ThirdScreen extends StatelessWidget {
                         child: const Text(
                           'Skip',
                           style: TextStyle(
-                              fontSize: 18,
+                              decoration: TextDecoration.underline,
+                              fontSize: 16,
                               color: Color.fromARGB(255, 220, 63, 107)),
                           textAlign: TextAlign.center,
                         ),
@@ -130,19 +135,3 @@ class ThirdScreen extends StatelessWidget {
             )));
   }
 }
-// import 'package:flutter/widgets.dart';
-
-// class FrameSize {
-//   //init method is static so no object creation is required
-//   static void init({
-//     required context,
-//   }) {
-//     _mediaQueryData = MediaQuery.of(context);
-//     height = _mediaQueryData.size.height;
-//     width = _mediaQueryData.size.width;
-//   }
-
-//   static late double width;
-//   static late double height;
-//   static late MediaQueryData _mediaQueryData;
-// }

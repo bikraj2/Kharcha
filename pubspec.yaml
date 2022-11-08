@@ -37,7 +37,6 @@ dependencies:
   pie_chart: ^5.3.2
   fl_chart: ^0.55.1
   intl: ^0.17.0
-  
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -77,6 +76,10 @@ flutter:
     - assetss/images/sack.png
     - assetss/images/tick.png
     - assetss/images/profile.png
+    - assetss/images/profile_s.png
+    - assetss/images/graphs_s.png
+    - assetss/images/home_s.png
+    - assetss/images/addexpeses_s.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

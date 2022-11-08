@@ -1,6 +1,6 @@
-import 'package:demo2/screens/pages/graphs_page.dart';
+import 'package:demo2/screens/charts/graphs_page.dart';
 import 'package:demo2/screens/pages/home_page.dart';
-import 'package:demo2/screens/pages/profile_page.dart';
+import 'package:demo2/screens/profile/profile_buttons.dart';
 import 'package:demo2/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'home_page.dart';
@@ -14,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
-  final screens = [const GraphsPage(), const HomePage(), ProfilePage()];
+  final screens = [const GraphPage(), const HomePage(), ProfilePage()];
   @override
   Widget build(BuildContext context) => Scaffold(
         body: screens[currentIndex],

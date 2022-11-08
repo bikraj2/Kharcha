@@ -4,28 +4,26 @@ var expense = require('../models/expense')
 var config = require('../config/dbconfig')
 
 var functions = {
-    addNew: function(req,res ){
+    addNew: async (req,res )=>{
         {
-            var newUser  =User({
-                firstName:req.body.firstName,
+            try{
+                var user = await User.create(
+                {firstName:req.body.firstName,
                 lastName:req.body.lastName,
                 middleName:req.body.middleName,
                 email:req.body.email,
                 username:req.body.username,
                 password:req.body.password,
-            });
-            newUser.save((err,newUser)=>{
-                    if(err) {
-                        res.json({success:false,msg:'Failed to save'})
-                        console.log(err)
-                    }
-                    else{
-                        res.json({success:true,msg:'Successfully saved'})
-                    }
-            })
+                })
+                res.status(200).json({success:true,msg:"userCreateda"})
+            }catch(e){
+                console.log(e)
+                res.status(500).json({success:true,msg:e })
+            }
         } 
     },
     authenticate: function (req, res) {
+        console.log("hey")
         User.findOne({
             username: req.body.username
         }, function (err, user) {
@@ -33,7 +31,6 @@ var functions = {
                 if (!user) {
                     res.status(403).send({success: false, msg: 'Authentication Failed, User not found'})
                 }
-
                 else {
                     user.comparePassword(req.body.password, function (err, isMatch) {
                         if (isMatch && !err) {
@@ -58,38 +55,6 @@ var functions = {
             return res.json({success:false,msg:'No Headers'})
         }
     },
-    addExpense:function (req,res) {
-        var token = req.body.token;
-        var decodedtoken =jwt.decode(token,config.secret)
-        console.log(decodedtoken)
-        var newExpense = expense({
-            name:req.body.name,
-            amount:req.body.amount,
-            category:req.body.category,
-            userId:decodedtoken._id
-        })
-        newExpense.save((err,newExpense)=>{
-            if(err){
-                res.json({success:false,msg:err})
-            }
-            else{
-                res.json({success:true,msg:"Expense added successfully"})
-            }
-        })
-    },
-    getExpense:function (req,res){
-        var token = req.query["token"];
-        var decodedtoken =jwt.decode(token,config.secret)
-        var userId1 = decodedtoken._id;
-
-        expense.find({userId:userId1},{"amount":true,"category":true,_id:false}).then((result,next)=>{
-            res.json({ans:result})
-
-
-        }).catch((err)=>{
-
-        })
-    
-    }
+   
 }
 module.exports = functions

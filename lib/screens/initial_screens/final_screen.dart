@@ -1,12 +1,10 @@
-import 'package:demo2/screens/bin/top_card.dart';
 import 'package:flutter/material.dart';
-import 'get_started_screen.dart';
 import 'third_screen.dart';
 import '../log/sign_up.dart';
 import 'package:demo2/theme/theme.dart';
 
-class SecondScreen extends StatelessWidget {
-  SecondScreen({Key? key}) : super(key: key);
+class ReadyScreen extends StatelessWidget {
+  ReadyScreen({Key? key}) : super(key: key);
   var orientation, size, height, width;
 
   @override
@@ -17,10 +15,10 @@ class SecondScreen extends StatelessWidget {
     size = MediaQuery.of(context).size;
     height = size.height;
     width = size.width;
-    return Scaffold(
-        appBar: AppBar(
+  return Scaffold(
+      appBar: AppBar(
           // title: Text('Login'),
-          toolbarHeight: 40,
+          toolbarHeight: width / 10,
 
           elevation: 0,
           backgroundColor: AppTheme.colors.basecolor,
@@ -37,19 +35,6 @@ class SecondScreen extends StatelessWidget {
               padding: const EdgeInsets.all(30),
               child: Column(
                 children: <Widget>[
-                  // IconButton(
-                  //   onPressed: () {
-                  //     Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //           builder: (context) => GetStartedScreen()),
-                  //     );
-                  //   },
-                  //   icon: Icon(Icons.arrow_back_ios_new_outlined),
-                  //   color: AppTheme.colors.secondarycolor,
-                  //   iconSize: 20,
-                  //   alignment: Alignment.topLeft,
-                  // ),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -57,17 +42,17 @@ class SecondScreen extends StatelessWidget {
                       children: [
                         Container(
                           width: width / 2,
-                          height: height / 1.5,
+                          height: height / 2,
                           decoration: const BoxDecoration(
                               shape: BoxShape.rectangle,
                               image: DecorationImage(
-                                  image: AssetImage('assetss/images/sack.png'),
+                                  image: AssetImage('assetss/images/tick.png'),
                                   fit: BoxFit.cover)),
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 0,
                         ),
-                        const Text('Plan your Budget',
+                        const Text("Let's Get Started !",
                             style: TextStyle(
                                 fontSize: 22,
                                 color: Color.fromARGB(255, 35, 45, 64)))
@@ -83,7 +68,7 @@ class SecondScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ThirdScreen()));
+                                  builder: (context) => const SignUp()));
                         },
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(
@@ -97,37 +82,32 @@ class SecondScreen extends StatelessWidget {
                               const Color.fromARGB(255, 220, 63, 107)),
                         ),
                         child: const Text(
-                          'Next',
+                          'Sign Up',
                           style: TextStyle(fontSize: 20),
                         ),
                       ),
                       const Image(
-                        image: AssetImage('assetss/images/6.png'),
+                        image: AssetImage('assetss/images/11.png'),
                         height: 70,
                         width: 80,
                       )
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(
-                        child: const Text(
-                          'Skip',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Color.fromARGB(255, 220, 63, 107)),
-                          textAlign: TextAlign.center,
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SignUp()));
-                        },
-                      ),
-                    ],
-                  )
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     TextButton(
+                  //       child: const Text(
+                  //         'Skip',
+                  //         style: TextStyle(
+                  //             fontSize: 18,
+                  //             color: Color.fromARGB(255, 220, 63, 107)),
+                  //         textAlign: TextAlign.center,
+                  //       ),
+                  //       onPressed: () {},
+                  //     ),
+                  //   ],
+                  // )
                 ],
               ),
             )));

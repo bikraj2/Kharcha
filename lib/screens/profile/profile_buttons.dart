@@ -1,4 +1,4 @@
-import 'package:demo2/screens/bin/top_card.dart';
+import 'package:demo2/screens/profile/top_card.dart';
 import 'package:demo2/screens/log/login_screen.dart';
 import 'package:flutter/material.dart';
 
