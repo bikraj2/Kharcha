@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // import 'package:demo2/theme/color.dart';
 import 'package:demo2/theme/theme.dart';
 
-import '../../frame/framesize.dart';
+
 import '../pages/home_screen.dart';
 import 'second_screen.dart';
 // import '../log/login_screen.dart';
