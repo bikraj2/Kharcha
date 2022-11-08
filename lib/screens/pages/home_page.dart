@@ -122,17 +122,18 @@ class _HomePageState extends State<HomePage> {
                                               try {
                                                 var tk = await token.storage
                                                     .read(key: 'jwt');
-                                                print(tk);
-                                                print(expenseList[index].id);
+                                  
                                                 AuthService()
                                                     .removeExpense(
                                                         tk as String,
                                                         expenseList[index].id
                                                             as String)
                                                     .then((val) {
-                                                  print(expenseList[index].id
-                                                      as String);
+                                                  
                                                   if (val.data['success']) {
+                                                    setState(() {
+                                                      
+                                                    });
                                                     Fluttertoast.showToast(
                                                         msg:
                                                             "Deleted Successfully",
