@@ -185,7 +185,7 @@ class _expenseAdderState extends State<expenseAdder> {
                                   },
                                   child: Text("YES"),
                                 ),
-                                FlatButton(
+                                TextButton(
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
