@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'bar_chart.dart';
-import 'line_chart.dart';
-import 'pie_chart.dart';
+
+import '../charts/line_chart.dart';
+import '../charts/pie_chart.dart';
+import '../charts/bar_chart.dart';
 
 class GraphPage extends StatefulWidget {
   const GraphPage({super.key});

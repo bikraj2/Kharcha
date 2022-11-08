@@ -1,6 +1,6 @@
-import 'package:demo2/screens/pages/graphs_page.dart';
+import 'package:demo2/screens/charts/graphs_page.dart';
 import 'package:demo2/screens/pages/home_page.dart';
-import 'package:demo2/screens/pages/profile_page.dart';
+import 'package:demo2/screens/profile/profile_buttons.dart';
 import 'package:demo2/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'home_page.dart';

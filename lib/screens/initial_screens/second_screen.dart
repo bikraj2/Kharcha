@@ -1,6 +1,6 @@
-import 'package:demo2/screens/bin/top_card.dart';
+import 'package:demo2/screens/profile/top_card.dart';
 import 'package:flutter/material.dart';
-import 'get_started_screen.dart';
+import 'first_screen.dart';
 import 'third_screen.dart';
 import '../log/sign_up.dart';
 import 'package:demo2/theme/theme.dart';

@@ -1,5 +1,5 @@
 import 'package:demo2/models/expenses.dart';
-import 'package:demo2/screens/pie_chart.dart';
+import 'package:demo2/screens/charts/pie_chart.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:flutter/material.dart';
 import '../../token/token.dart';

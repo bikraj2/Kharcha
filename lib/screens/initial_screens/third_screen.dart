@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'second_screen.dart';
-import 'ready_screen.dart';
+import 'final_screen.dart';
 import '../log/sign_up.dart';
 import 'package:demo2/theme/theme.dart';
 
