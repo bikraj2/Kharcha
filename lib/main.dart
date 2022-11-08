@@ -8,17 +8,14 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
-  // var orientation, size, height, width;
-  var orientation, size, height, width;
+  // var orientation, size, height, width; var orientation, size, height, width;
   static const String _title = 'Welcome';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowMaterialGrid: false,
-      debugShowCheckedModeBanner: false,
-      title: _title,
-      theme: ThemeData(
+      debugShowCheckedModeBanner: false, title: _title, theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch()
             .copyWith(primary: AppTheme.colors.basecolor),
       ),
