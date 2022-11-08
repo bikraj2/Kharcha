@@ -5,12 +5,19 @@ import '../token/token.dart';
 class Expense {
   late String? name, category;
   late double? amount;
-  late DateTime? date ;
-  Expense({String? name, String? category, double? amount, DateTime? date1}) {
+  late DateTime? date;
+  late String? id;
+  Expense(
+      {String? name,
+      String? category,
+      double? amount,
+      DateTime? date1,
+      String? id}) {
     this.name = name;
     this.category = category;
     this.amount = amount;
     this.date = date1;
+    this.id = id;
   }
   Expense.fromJson(Map<String, dynamic> json)
       : amount = json['amount'],

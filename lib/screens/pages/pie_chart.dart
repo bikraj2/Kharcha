@@ -24,7 +24,7 @@ class _PieChartPageState extends State<PieChartPage> {
           luxuryAmount = 0;
           rentAmount = 0;
           token.storage.read(key: "jwt").then((value) {
-            AuthService().getExpense(value).then((val) => {
+            AuthService().getExpense(value as String).then((val) => {
                   userEntries = val.data["ans"].length,
                   //make a function here .
                   //what kind of a function rey

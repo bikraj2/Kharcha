@@ -9,13 +9,14 @@ class expenseList {
   static Future<List<Expense>> getData() async {
     try {
       var tk = await token.storage.read(key: 'jwt');
-      final res = await AuthService().getExpense(tk);
+      final res = await AuthService().getExpense(tk as String);
       for (Map i in res.data['ans']) {
         data.add(Expense(
             amount: double.parse(i['amount'].toString()),
             name: i['name'],
             date1: DateTime.parse(i['date']).toLocal(),
-            category: i['category']));
+            category: i['category'],
+            id:i['id']));
       }
       return data;
     } catch (e) {

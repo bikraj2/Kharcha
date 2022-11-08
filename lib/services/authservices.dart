@@ -61,9 +61,21 @@ class AuthService {
     }
   }
 
-  getExpense(token) async {
+  getExpense(String token) async {
     try {
       var value = await diio.get("${url}/getExpense",
+          queryParameters: {"token": token},
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+      return value;
+    } on DioError catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+    }
+  }
+
+  removeExpense(String token, String id) async {
+    try {
+      print('${url}/${id}');
+      var value = await diio.get('${url}/${id}',
           queryParameters: {"token": token},
           options: Options(contentType: Headers.formUrlEncodedContentType));
       return value;

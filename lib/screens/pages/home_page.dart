@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:demo2/models/expenses.dart';
 import 'package:demo2/screens/log/login_screen.dart';
 import 'package:demo2/screens/pages/add_expenses.dart';
@@ -7,7 +5,7 @@ import 'package:demo2/theme/theme.dart';
 import 'package:demo2/token/token.dart';
 import 'package:flutter/material.dart';
 import "package:demo2/services/authservices.dart";
-import "package:demo2/token/token.dart";
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,7 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   Widget build(BuildContext context) {
     Widget title = Container(
@@ -30,13 +27,16 @@ class _HomePageState extends State<HomePage> {
     Future<List<Expense>> getData() async {
       try {
         var tk = await token.storage.read(key: 'jwt');
-        final res = await AuthService().getExpense(tk);
+        final res = await AuthService().getExpense(tk as String);
         for (Map i in res.data['ans']) {
-          expenseList.add(Expense(
-              amount: double.parse(i['amount'].toString()),
-              name: i['name'],
-              date1: DateTime.parse(i['date']).toLocal(),
-              category: i['category']));
+          expenseList.add(
+            Expense(id: i['_id'],
+                amount: double.parse(i['amount'].toString()),
+                name: i['name'],
+                date1: DateTime.parse(i['date']).toLocal(),
+                category: i['category']),
+                
+          );
         }
         return expenseList;
       } catch (e) {
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                             itemBuilder: ((context, index) {
                               return Container(
                                   height:
-                                      MediaQuery.of(context).size.height * 0.15,
+                                      MediaQuery.of(context).size.height * 0.20,
                                   width: MediaQuery.of(context).size.width,
                                   padding: EdgeInsets.all(10),
                                   margin: EdgeInsets.all(10),
@@ -112,8 +112,42 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       Text('\$${expenseList[index].amount}'),
                                       Text('${expenseList[index].category}'),
-                                      Text(
-                                          '${expenseList[index].date.toString().split(' ')[0]}'),
+                                      Row(
+                                        children: [
+                                          Text(
+                                              '${expenseList[index].date.toString().split(' ')[0]}'),
+                                          IconButton(
+                                            icon: Icon(Icons.delete),
+                                            onPressed: () async {
+                                              try {
+                                                var tk = await token.storage
+                                                    .read(key: 'jwt');
+                                                print(tk);
+                                                print(expenseList[index].id);
+                                                AuthService()
+                                                    .removeExpense(
+                                                        tk as String,
+                                                        expenseList[index].id
+                                                            as String)
+                                                    .then((val) {
+                                                  print(expenseList[index].id
+                                                      as String);
+                                                  if (val.data['success']) {
+                                                    Fluttertoast.showToast(
+                                                        msg:
+                                                            "Deleted Successfully",
+                                                        backgroundColor:
+                                                            Colors.red);
+                                                  }
+                                                });
+                                              } catch (e) {
+                                                Fluttertoast.showToast(
+                                                    msg: e.toString());
+                                              }
+                                            },
+                                          )
+                                        ],
+                                      )
                                     ],
                                   ));
                             }));

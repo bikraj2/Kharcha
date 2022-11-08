@@ -42,9 +42,11 @@ var functions = {
   },
   deleteExpense: async (req,res)=>{
     try{
+       var token = req.query['token'];
+       var decodedtoken = jwt.decode(token, config.secret);
         var expenseId = req.params.id
        var oneExpense= await expense.findOneAndDelete({_id:expenseId})
-        res.status(400).json({success:true,msg:"Deleted Succesfully",data:oneExpense})
+        res.status(200).json({success:true,msg:"Deleted Succesfully",data:oneExpense})
     }catch(e)
     {
         res.status(500).json({success:false,msg:e})
