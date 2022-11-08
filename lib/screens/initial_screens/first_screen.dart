@@ -1,13 +1,19 @@
-import 'package:demo2/screens/bin/top_card.dart';
+// import 'package:demo2/screens/bin/home_page.dart';
+import 'package:demo2/screens/log/login_screen.dart';
 import 'package:flutter/material.dart';
-import 'get_started_screen.dart';
-import 'third_screen.dart';
-import '../log/sign_up.dart';
+// import 'package:demo2/theme/color.dart';
 import 'package:demo2/theme/theme.dart';
 
-class SecondScreen extends StatelessWidget {
-  SecondScreen({Key? key}) : super(key: key);
+
+import '../pages/home_screen.dart';
+import 'second_screen.dart';
+// import '../log/login_screen.dart';
+
+class GetStartedScreen extends StatelessWidget {
+  GetStartedScreen({Key? key}) : super(key: key);
   var orientation, size, height, width;
+
+  // ignore: prefer_typing_uninitialized_variables
 
   @override
   Widget build(BuildContext context) {
@@ -17,39 +23,14 @@ class SecondScreen extends StatelessWidget {
     size = MediaQuery.of(context).size;
     height = size.height;
     width = size.width;
-    return Scaffold(
-        appBar: AppBar(
-          // title: Text('Login'),
-          toolbarHeight: 40,
 
-          elevation: 0,
-          backgroundColor: AppTheme.colors.basecolor,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ),
+    return Scaffold(
         body: Container(
-            color: Colors.white,
+            color: AppTheme.colors.tertiarycolor,
             child: Padding(
               padding: const EdgeInsets.all(30),
               child: Column(
                 children: <Widget>[
-                  // IconButton(
-                  //   onPressed: () {
-                  //     Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //           builder: (context) => GetStartedScreen()),
-                  //     );
-                  //   },
-                  //   icon: Icon(Icons.arrow_back_ios_new_outlined),
-                  //   color: AppTheme.colors.secondarycolor,
-                  //   iconSize: 20,
-                  //   alignment: Alignment.topLeft,
-                  // ),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -59,17 +40,16 @@ class SecondScreen extends StatelessWidget {
                           width: width / 2,
                           height: height / 2,
                           decoration: const BoxDecoration(
-                              shape: BoxShape.rectangle,
                               image: DecorationImage(
-                                  image: AssetImage('assetss/images/sack.png'),
+                                  image: AssetImage('assetss/images/logo.png'),
                                   fit: BoxFit.contain)),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                        const Text('Plan your Budget',
+                        const Text('Expense Tracking Application',
                             style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 18,
                                 color: Color.fromARGB(255, 35, 45, 64)))
                       ],
                     ),
@@ -83,7 +63,7 @@ class SecondScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ThirdScreen()));
+                                  builder: (context) => SecondScreen()));
                         },
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(
@@ -92,18 +72,17 @@ class SecondScreen extends StatelessWidget {
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(width / 2))),
+                                      borderRadius: BorderRadius.circular(18))),
                           backgroundColor: MaterialStateProperty.all(
-                              const Color.fromARGB(255, 220, 63, 107)),
+                              AppTheme.colors.basecolor),
                         ),
                         child: const Text(
-                          'Next',
-                          style: TextStyle(fontSize: 18),
+                          'Get Started',
+                          style: TextStyle(fontSize: 20),
                         ),
                       ),
                       Image(
-                        image: AssetImage('assetss/images/6.png'),
+                        image: AssetImage('assetss/images/img1.png'),
                         height: height / 10,
                         width: width / 5,
                       )
@@ -112,20 +91,23 @@ class SecondScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextButton(
-                        child: const Text(
-                          'Skip',
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              fontSize: 16,
-                              color: Color.fromARGB(255, 220, 63, 107)),
-                          textAlign: TextAlign.center,
+                      const Text(
+                        'Have an account?',
+                        style: TextStyle(
+                          fontSize: 18,
                         ),
+                      ),
+                      TextButton(
+                        child: const Text('Login',
+                            style: TextStyle(
+                                fontSize: 18,
+                                decoration: TextDecoration.underline,
+                                color: Color.fromARGB(255, 220, 63, 107))),
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const SignUp()));
+                                  builder: (context) => LoginScreen()));
                         },
                       ),
                     ],

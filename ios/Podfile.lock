@@ -3,10 +3,25 @@ PODS:
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> master
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ishan
   - flutter_secure_storage (3.3.1):
     - Flutter
 =======
 >>>>>>> ui
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> master
+=======
+>>>>>>> ishan
+=======
+>>>>>>> master
 >>>>>>> master
   - fluttertoast (0.0.2):
     - Flutter
@@ -18,9 +33,24 @@ DEPENDENCIES:
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> master
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
 =======
 >>>>>>> ui
+>>>>>>> master
+=======
+  - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
+=======
+>>>>>>> ui
+<<<<<<< HEAD
+>>>>>>> ishan
+=======
+>>>>>>> master
 >>>>>>> master
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
 
@@ -34,10 +64,25 @@ EXTERNAL SOURCES:
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> master
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ishan
   flutter_secure_storage:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
 =======
 >>>>>>> ui
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> master
+=======
+>>>>>>> ishan
+=======
+>>>>>>> master
 >>>>>>> master
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
@@ -47,9 +92,24 @@ SPEC CHECKSUMS:
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> master
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
   flutter_secure_storage: 7953c38a04c3fdbb00571bcd87d8e3b5ceb9daec
 =======
 >>>>>>> ui
+>>>>>>> master
+=======
+  flutter_secure_storage: 7953c38a04c3fdbb00571bcd87d8e3b5ceb9daec
+=======
+>>>>>>> ui
+<<<<<<< HEAD
+>>>>>>> ishan
+=======
+>>>>>>> master
 >>>>>>> master
   fluttertoast: 16fbe6039d06a763f3533670197d01fc73459037
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196

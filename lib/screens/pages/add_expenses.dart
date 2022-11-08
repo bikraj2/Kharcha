@@ -1,31 +1,20 @@
 import 'package:demo2/models/expenses.dart';
-import 'package:demo2/screens/pages/bar_chart.dart';
-import 'package:demo2/screens/pages/transaction_history.dart';
+import 'package:demo2/screens/charts/pie_chart.dart';
 import 'package:demo2/services/authservices.dart';
-import 'package:demo2/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:pie_chart/pie_chart.dart';
 import '../../token/token.dart';
-import 'dart:convert';
-import '../../models/chart.dart';
-import '../charts/pie_chart.dart';
-import 'bar_chart.dart';
-import 'home_screen.dart';
+import 'package:demo2/models/expenseList.dart';
 
 class expenseTracker extends StatelessWidget {
-  expenseTracker({Key? key}) : super(key: key);
-  var orientation, size, height, width;
+  const expenseTracker({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    orientation = MediaQuery.of(context).orientation;
-
-    //size of the window
-    size = MediaQuery.of(context).size;
-    height = size.height;
-    width = size.width;
-
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: Text('Add your expenses'),
+      ),
       body: const expenseAdder(),
     );
   }
@@ -39,184 +28,143 @@ class expenseAdder extends StatefulWidget {
 }
 
 class _expenseAdderState extends State<expenseAdder> {
-  var orientation, size, height, width;
-
   final _dateController = TextEditingController();
   final _moneyController = TextEditingController();
+  DateTime? currentDate = DateTime.now();
   String date = " ";
-
-  int? cat;
   String? value;
-  List<dynamic> responsevar = [];
-  String resstring = " ";
-
   late double money;
   String? categories = "";
   final category = ['Health', 'Rent', 'Food', 'Luxury'];
+  void getDate() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2018),
+            lastDate: DateTime.now())
+        .then((val) => {
+              setState(() => {currentDate = val}),
+            });
+  }
+
   @override
   Widget build(BuildContext context) {
-    orientation = MediaQuery.of(context).orientation;
-
-    //size of the window
-    size = MediaQuery.of(context).size;
-    height = size.height;
-    width = size.width;
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: AppTheme.colors.basecolor,
-        title: Text(
-          ' Add Expenses!',
-          style: TextStyle(fontSize: height / 30),
+        body: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Center(
+          child: Column(
+            children: [
+              Container(
+                  padding: EdgeInsets.all(15),
+                  child: TextField(
+                      controller: _moneyController,
+                      decoration: InputDecoration(
+                          hintText: 'Enter the amount ',
+                          border: OutlineInputBorder(),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              _moneyController.clear();
+                            },
+                            icon: Icon(Icons.clear),
+                          ))))
+            ],
+          ),
         ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HomeScreen()));
-          },
+        Center(
+          child: Column(
+            children: [
+              Container(
+                  padding: EdgeInsets.all(15),
+                  child: TextField(
+                      controller: _dateController,
+                      decoration: InputDecoration(
+                          hintText: 'Is it sunday? ',
+                          border: OutlineInputBorder(),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              _dateController.clear();
+                            },
+                            icon: Icon(Icons.clear),
+                          ))))
+            ],
+          ),
         ),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            Container(
-                margin: const EdgeInsets.only(top: 50),
-                height: height / 7,
-                width: width / 2,
-                child: TextField(
-                    controller: _moneyController,
-                    decoration: InputDecoration(
-                        labelText: 'Amount',
-                        hintText: 'Rs. ',
-                        focusColor: AppTheme.colors.basecolor,
-                        fillColor: AppTheme.colors.basecolor,
-                        border: const OutlineInputBorder(),
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            _moneyController.clear();
-                          },
-                          icon: const Icon(
-                            Icons.clear,
-                            // color: AppTheme.colors.basecolor,
-                          ),
-                        )))),
-            SizedBox(
-                height: height / 7,
-                width: width / 2,
-                child: TextField(
-                    controller: _dateController,
-                    decoration: InputDecoration(
-                        labelText: 'Date',
-                        fillColor: AppTheme.colors.basecolor,
-                        hintText: ' M M / D D / Y Y ',
-                        border: const OutlineInputBorder(),
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            _dateController.clear();
-                          },
-                          icon: const Icon(
-                            Icons.clear,
-                            // color: AppTheme.colors.basecolor,
-                          ),
-                        )))),
-            Container(
-              width: 350,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-              // decoration: BoxDecoration(
-              //     border: Border.all(
-              //         color: AppTheme.colors.secondarycolor, width: 1),
-              //     borderRadius: BorderRadius.circular(10)),
-              child: DropdownButton<String>(
-                value: value,
-                isExpanded: true,
-                iconSize: 36,
-                icon: Icon(Icons.arrow_drop_down,
-                    color: AppTheme.colors.basecolor),
-                items: category.map(buildMenuItem).toList(),
-                onChanged: (value) => setState(() {
-                  this.value = value;
-                }),
-              ),
+        Center(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.black, width: 4),
+                borderRadius: BorderRadius.circular(10)),
+            child: DropdownButton<String>(
+              value: value,
+              isExpanded: true,
+              iconSize: 36,
+              icon: Icon(Icons.arrow_drop_down, color: Colors.black),
+              items: category.map(buildMenuItem).toList(),
+              onChanged: (value) => setState(() {
+                this.value = value;
+              }),
             ),
-            Container(
-                width: width / 4,
-                padding: const EdgeInsets.all(20),
-                child: FloatingActionButton(
-                    shape: BeveledRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5))),
-                    hoverColor: AppTheme.colors.basecolor,
-                    backgroundColor: AppTheme.colors.secondarycolor,
-                    child: const Text("ADD"),
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text("Expense will be added"),
-                              content: Text("Are you sure"),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      date = _dateController.text;
-                                      money =
-                                          double.parse(_moneyController.text);
-                                      categories = value;
-                                    });
-                                    var expense = Expense(_dateController.text,
-                                        categories.toString(), money);
-
-                                    token.storage
-                                        .read(key: "jwt")
-                                        .then((value) {
-                                      AuthService()
-                                          .getExpense(value)
-                                          .then((val) => {print(val)});
-                                    });
-                                    token.storage
-                                        .read(key: "jwt")
-                                        .then((value) {
-                                      AuthService()
-                                          .addexpense(expense, value)
-                                          .then((val) => {print(val)});
-                                    });
-                                  },
-                                  child: Text("YES"),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text("NO"),
-                                )
-                              ],
-                            );
-                          });
-                    })),
-            // Container(
-            //     padding: const EdgeInsets.all(25),
-            //     child: FloatingActionButton(
-            //         hoverColor: AppTheme.colors.basecolor,
-            //         backgroundColor: AppTheme.colors.secondarycolor,
-            //         child: const Text("Bar"),
-            //         onPressed: () {
-            //           Navigator.push(
-            //             context,
-            //             MaterialPageRoute(builder: (context) => BarChart()),
-            //           );
-            //         }))
-          ],
+          ),
         ),
-      ),
-    );
+        Center(
+          child: IconButton(
+            color: Theme.of(context).primaryColor,
+            hoverColor: Theme.of(context).bottomAppBarColor,
+            icon: Icon(Icons.calendar_month_outlined),
+            onPressed: () {
+              getDate();
+            },
+          ),
+        ),
+        Center(
+          child: Container(
+              padding: EdgeInsets.all(25),
+              child: FloatingActionButton(
+                  child: Text("Save"),
+                  onPressed: () {
+                    setState(() {
+                      date = _dateController.text;
+                      money = double.parse(_moneyController.text);
+                      categories = value;
+                    });
+                    var expense = Expense(
+                        name: _dateController.text,
+                        category: categories.toString(),
+                        amount: money,
+                        date1: currentDate);
+                    token.storage.read(key: "jwt").then((value) {
+                      AuthService().addexpense(expense, value).then((val) => {
+                            expenseList.getData().then((value) {
+                              expenseList.groupedTransactionValues();
+                            })
+                          });
+                    });
+                  })),
+        ),
+        // Center(
+        //   child: Container(
+        //       padding: EdgeInsets.all(25),
+        //       child: FloatingActionButton(
+        //           child: Text("Pie"),
+        //           onPressed: () {
+        //             Navigator.push(context, MaterialPageRoute(
+        //               builder: (BuildContext context) {
+        //                 return Piechart();
+        //               },
+        //             ));
+        //           })),
+        // ),
+      ],
+    ));
   }
 
   DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
       value: item,
       child: Text(
         item,
-        style: const TextStyle(fontSize: 14),
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
       ));
 }

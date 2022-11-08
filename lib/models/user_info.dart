@@ -1,7 +1,7 @@
 // ignore_for_file: unnecessary_this
 
 class Users {
-  late String firstName, middleName, lastName, email, username, password;
+  late String? firstName, middleName, lastName, email, username, password;
   Users(String f, String m, String l, String e, String u, String p) {
     this.firstName = f;
     this.middleName = m;

@@ -1,5 +1,6 @@
 const express = require('express')
 var actions = require('../method/actions')
+var expenseActions = require('../method/expense')
 const router = express.Router()
 
 router.get('/',(req,res)=>{
@@ -17,7 +18,7 @@ router.get('/getinfo',actions.getinfo)
 router.get('/helloa',(req,res)=>{
     res.send("hello hi")
 })
-router.post('/addExpense',actions.addExpense)
-router.get('/getExpense',actions.getExpense)
-
+router.post('/addExpense',expenseActions.addExpense)
+router.get('/getExpense',expenseActions.getExpenses)
+router.get('/:id',expenseActions.deleteExpense)
 module.exports =router 
