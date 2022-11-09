@@ -1,3 +1,4 @@
+import 'package:demo2/models/expenseList.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -92,6 +93,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
       fontWeight: FontWeight.bold,
       fontSize: 15,
     );
+    
     String text;
     switch (value.toInt()) {
       case 1:

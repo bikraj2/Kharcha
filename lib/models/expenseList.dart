@@ -3,10 +3,11 @@ import 'package:demo2/token/token.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:intl/intl.dart';
 
-class expenseList {
+class ExpenseList {
   static List<Expense> data = [];
-  static List<Map<String,Object>>groupedData =[];
+  static List<Map<String, Object>> groupedData = [];
   static Future<List<Expense>> getData() async {
+    data = [];
     try {
       var tk = await token.storage.read(key: 'jwt');
       final res = await AuthService().getExpense(tk as String);
@@ -16,7 +17,7 @@ class expenseList {
             name: i['name'],
             date1: DateTime.parse(i['date']).toLocal(),
             category: i['category'],
-            id:i['id']));
+            id: i['id']));
       }
       return data;
     } catch (e) {
@@ -24,9 +25,10 @@ class expenseList {
     }
   }
 
-  static  groupedTransactionValues() {
+  static groupedTransactionValues() {
+    groupedData = [];
     print("This is groupTransactionValues");
-    groupedData =List.generate(7, (index) {
+    groupedData = List.generate(7, (index) {
       final weekday = DateTime.now().subtract(
         Duration(days: index),
       );
