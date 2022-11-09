@@ -6,7 +6,7 @@ var config = require('../config/dbconfig');
 
 var functions = {
   addExpense: function (req, res) {
-    var token = req.body.token;
+    var token = req.query('token');
     var decodedtoken = jwt.decode(token, config.secret);
     console.log(decodedtoken);
     console.log(req.body.date);
