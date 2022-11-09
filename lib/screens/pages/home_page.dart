@@ -47,12 +47,22 @@ class _HomePageState extends State<HomePage> {
 
   Widget build(BuildContext context) {
     Widget title = Container(
-      child: Text(
-        "Recent Expenses",
-        style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-      ),
-    );
-
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Text(
+          "  Recent Expenses ",
+          style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w600,
+              fontStyle: FontStyle.italic,
+              color: AppTheme.colors.basecolor),
+        ),
+        IconButton(onPressed: () {}, icon: Icon(Icons.search_outlined))
+      ],
+    ));
+    List<Expense> expenseList = [];
     Future<List<Expense>> getData() async {
       try {
         var tk = await token.storage.read(key: 'jwt');
@@ -79,7 +89,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: const Color.fromARGB(255, 35, 45, 64),
         title: Text(
           'Hi Username!',
-          style: TextStyle(fontStyle: FontStyle.italic, fontSize: 23),
+          style: TextStyle(fontStyle: FontStyle.normal, fontSize: 20),
         ),
         leading: IconButton(
           icon: const Icon(Icons.person),
@@ -134,35 +144,120 @@ class _HomePageState extends State<HomePage> {
                                 ? expenseList.length
                                 : count,
                             itemBuilder: ((context, index) {
-                              print("I am getting rendered");
+                              List<Expense> newList = expenseList;
+                              String getK(double amount) {
+                                if (amount > 10000) {
+                                  //code ot dchange value
+                                  amount = amount / 1000.0;
+                                }
+                                String val = '\$${amount}' + "k";
+
+                                return val;
+                              }
+
                               return Container(
                                   height:
-                                      MediaQuery.of(context).size.height * 0.20,
+                                      MediaQuery.of(context).size.height / 5,
                                   width: MediaQuery.of(context).size.width,
-                                  padding: EdgeInsets.all(10),
-                                  margin: EdgeInsets.all(10),
+                                  padding: EdgeInsets.only(left: 10, right: 10),
+                                  margin: EdgeInsets.only(
+                                      top: 20, left: 10, right: 10),
                                   decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 218, 202, 202),
+                                      color: Colors.white,
                                       border: Border.all(
                                         width: 1,
-                                        color: Colors.black,
+                                        color: AppTheme.colors.secondarycolor,
                                       ),
-                                      borderRadius: BorderRadius.circular(10)),
+                                      borderRadius: BorderRadius.circular(30)),
                                   child: Column(
                                     children: [
                                       Container(
-                                        padding: EdgeInsets.all(10),
-                                        child: Text(
-                                          '${expenseList[index].name}',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                      ),
-                                      Text('\$${expenseView[index].amount}'),
-                                      Text('${expenseView[index].category}'),
+                                          padding: EdgeInsets.all(10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              IconButton(
+                                                  onPressed: () {},
+                                                  icon: Icon(Icons.home)),
+                                              Row(
+                                                children: [
+                                                  IconButton(
+                                                    onPressed: () {},
+                                                    icon: Icon(
+                                                      Icons.edit_note_rounded,
+                                                      color: AppTheme
+                                                          .colors.basecolor,
+                                                    ),
+                                                    iconSize: 25,
+                                                  ),
+                                                  IconButton(
+                                                    icon: Icon(Icons.delete,
+                                                        color: AppTheme.colors
+                                                            .secondarycolor),
+                                                    iconSize: 25,
+                                                    onPressed: () async {
+                                                      try {
+                                                        var tk = await token
+                                                            .storage
+                                                            .read(key: 'jwt');
+
+                                                        AuthService()
+                                                            .removeExpense(
+                                                                tk as String,
+                                                                expenseList[index]
+                                                                        .id
+                                                                    as String)
+                                                            .then((val) {
+                                                          if (val.data[
+                                                              'success']) {
+                                                            setState(() {});
+                                                            Fluttertoast.showToast(
+                                                                msg:
+                                                                    "Deleted Successfully",
+                                                                backgroundColor:
+                                                                    Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            158,
+                                                                            11,
+                                                                            0));
+                                                          }
+                                                        });
+                                                      } catch (e) {
+                                                        Fluttertoast.showToast(
+                                                            msg: e.toString());
+                                                      }
+                                                    },
+                                                  )
+                                                ],
+                                              ),
+                                            ],
+                                          )),
                                       Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              getK(expenseList[index].amount
+                                                  as double),
+                                              style: TextStyle(
+                                                color: AppTheme
+                                                    .colors.secondarycolor,
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 22,
+                                              ),
+                                            ),
+                                          ]),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
                                         children: [
                                           Text(
                                               '${expenseView[index].date.toString().split(' ')[0]}'),
