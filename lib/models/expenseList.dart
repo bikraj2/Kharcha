@@ -42,5 +42,6 @@ class ExpenseList {
       }
       return {'day': DateFormat.E().format(weekday), 'amount': totalSum};
     });
+    print(groupedData);
   }
 }

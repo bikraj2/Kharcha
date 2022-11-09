@@ -7,16 +7,44 @@ import 'package:flutter/material.dart';
 import "package:demo2/services/authservices.dart";
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:demo2/models/expenseList.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  int? count;
+  HomePage({Key? key, count}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  int count = 10;
+  List<Expense> expenseView = [];
+  List<Expense> expenseList = [];
+  ScrollController _scrollController = ScrollController();
   @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        count = count + 5;
+        if (count > expenseList.length) {
+          Fluttertoast.showToast(
+              msg: "End of the data.",
+              textColor: Colors.white,
+              backgroundColor: Colors.red);
+        } else {
+          Future.delayed(Duration(seconds: 1, milliseconds: 500), () {
+            if (mounted) {
+              setState(() {});
+            }
+          });
+        }
+      }
+    });
+  }
+
   Widget build(BuildContext context) {
     Widget title = Container(
         child: Row(
@@ -91,10 +119,30 @@ class _HomePageState extends State<HomePage> {
                     future: getData(),
                     builder: ((context, snapshot) {
                       if (!snapshot.hasData) {
-                        return Text("Loading...");
+                        return Center(
+                            child: Column(
+                          children: [
+                            LoadingAnimationWidget.staggeredDotsWave(
+                                color: Colors.black, size: 40),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            const Text("Please Wait"),
+                          ],
+                        ));
                       } else {
+                        print(count);
+                        expenseView += expenseList.sublist(
+                            0,
+                            expenseList.length < count
+                                ? expenseList.length
+                                : count);
+
                         return ListView.builder(
-                            itemCount: expenseList.length,
+                            controller: _scrollController,
+                            itemCount: expenseList.length < count
+                                ? expenseList.length
+                                : count,
                             itemBuilder: ((context, index) {
                               List<Expense> newList = expenseList;
                               String getK(double amount) {
@@ -212,7 +260,7 @@ class _HomePageState extends State<HomePage> {
                                             CrossAxisAlignment.end,
                                         children: [
                                           Text(
-                                              '${expenseList[index].date.toString().split(' ')[0]}'),
+                                              '${expenseView[index].date.toString().split(' ')[0]}'),
                                           IconButton(
                                             icon: Icon(Icons.delete),
                                             onPressed: () async {
@@ -223,7 +271,7 @@ class _HomePageState extends State<HomePage> {
                                                 AuthService()
                                                     .removeExpense(
                                                         tk as String,
-                                                        expenseList[index].id
+                                                        expenseView[index].id
                                                             as String)
                                                     .then((val) {
                                                   if (val.data['success']) {
