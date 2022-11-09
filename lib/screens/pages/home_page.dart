@@ -6,6 +6,7 @@ import 'package:demo2/token/token.dart';
 import 'package:flutter/material.dart';
 import "package:demo2/services/authservices.dart";
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:demo2/models/expenseList.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -30,12 +31,12 @@ class _HomePageState extends State<HomePage> {
         final res = await AuthService().getExpense(tk as String);
         for (Map i in res.data['ans']) {
           expenseList.add(
-            Expense(id: i['_id'],
+            Expense(
+                id: i['_id'],
                 amount: double.parse(i['amount'].toString()),
                 name: i['name'],
                 date1: DateTime.parse(i['date']).toLocal(),
                 category: i['category']),
-                
           );
         }
         return expenseList;
@@ -122,17 +123,19 @@ class _HomePageState extends State<HomePage> {
                                               try {
                                                 var tk = await token.storage
                                                     .read(key: 'jwt');
-                                  
+
                                                 AuthService()
                                                     .removeExpense(
                                                         tk as String,
                                                         expenseList[index].id
                                                             as String)
                                                     .then((val) {
-                                                  
                                                   if (val.data['success']) {
                                                     setState(() {
-                                                      
+                                                      ExpenseList.getData()
+                                                          .then((value) {
+                                                        ExpenseList.groupedTransactionValues();
+                                                      });
                                                     });
                                                     Fluttertoast.showToast(
                                                         msg:

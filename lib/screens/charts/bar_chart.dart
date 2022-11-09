@@ -26,7 +26,7 @@ class BarChartSample1 extends StatefulWidget {
 }
 
 class BarChartSample1State extends State<BarChartSample1> {
-  List<Map<String, Object>> value1 = expenseList.groupedData;
+  List<Map<String, Object>> value1=[];
 
   final Color barBackgroundColor = const Color(0xff72d8bf);
   final Duration animDuration = const Duration(milliseconds: 250);
@@ -37,6 +37,7 @@ class BarChartSample1State extends State<BarChartSample1> {
 
   @override
   Widget build(BuildContext context) {
+     value1= ExpenseList.groupedData;
     print(value1);
     return Scaffold(
       appBar: AppBar(),

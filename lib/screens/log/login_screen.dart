@@ -120,8 +120,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     if (val.data["success"]) {
                       token.storeToken(val.data["token"]);
                       token.readToken();
-                      expenseList.getData().then((value) {
-                        expenseList.groupedTransactionValues();
+                      ExpenseList.getData().then((value) {
+                        ExpenseList.groupedTransactionValues();
                       });
 
                       Navigator.push(
