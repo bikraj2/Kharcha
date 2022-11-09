@@ -14,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
-  final screens = [const GraphPage(), const HomePage(), ProfilePage()];
+  final screens = [const GraphPage(), HomePage(count:10), ProfilePage()];
   @override
   Widget build(BuildContext context) => Scaffold(
         body: screens[currentIndex],

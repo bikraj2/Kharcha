@@ -25,7 +25,7 @@ var functions = {
     });
   },
   getExpenses: function (req, res) {
-    var token = req.headers.authorization;
+    var token = req.query['token'];
     console.log(req.headers);
     var decodedtoken = jwt.decode(token, config.secret);
     var userId1 = decodedtoken._id;

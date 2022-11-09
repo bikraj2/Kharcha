@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:demo2/models/expenses.dart';
 import 'package:demo2/screens/charts/pie_chart.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../../token/token.dart';
 import 'package:demo2/models/expenseList.dart';
 
@@ -135,14 +138,20 @@ class _expenseAdderState extends State<expenseAdder> {
                         category: categories.toString(),
                         amount: money,
                         date1: currentDate);
+                        
                     token.storage.read(key: "jwt").then((value) {
                       AuthService().addexpense(expense, value).then((val) {
-                        setState(() {
-                          ExpenseList.getData().then((val) {
-                            ExpenseList.groupedTransactionValues();
-                            print(ExpenseList.groupedData);
-                          });
-                        });
+                        if (val.data['success']) {
+                          Fluttertoast.showToast(
+                              msg: val.data['msg'],
+                              textColor: Colors.white,
+                              backgroundColor: Colors.green);
+                        } else {
+                          Fluttertoast.showToast(
+                              msg: val.data['msg'],
+                              textColor: Colors.white,
+                              backgroundColor: Colors.green);
+                        }
                       });
                     });
                   })),
