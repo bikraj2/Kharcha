@@ -12,9 +12,19 @@ class ProfilePage extends StatefulWidget {
   _ProfilePageState createState() => _ProfilePageState();
 }
 
+final _dateController = TextEditingController();
+final _moneyController = TextEditingController();
+
+var orientation, height, size, width;
+
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
+    orientation = MediaQuery.of(context).orientation;
+    //size of the window
+    size = MediaQuery.of(context).size;
+    height = size.height;
+    width = size.width;
     return Column(
       children: [
         profilePicture(),
@@ -71,6 +81,48 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               ElevatedButton(
                 onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text("Add income"),
+                      actions: [
+                        Container(
+                            width: width,
+                            height: height / 8,
+                            padding: EdgeInsets.all(15),
+                            margin: EdgeInsets.only(top: 10),
+                            child: TextField(
+                                controller: _moneyController,
+                                decoration: InputDecoration(
+                                    labelText: 'Income ',
+                                    border: OutlineInputBorder(),
+                                    suffixIcon: IconButton(
+                                      onPressed: () {
+                                        _moneyController.clear();
+                                      },
+                                      icon: Icon(Icons.clear),
+                                      iconSize: 14,
+                                    )))),
+                        Center(
+                          child: Container(
+                              padding: EdgeInsets.all(15),
+                              child: ElevatedButton(
+                                  style: ButtonStyle(),
+                                  // shape: BeveledRectangleBorder(
+                                  //     borderRadius: BorderRadius.all(Radius.circular(5))),
+                                  // hoverColor: AppTheme.colors.basecolor,
+                                  // backgroundColor: AppTheme.colors.secondarycolor,
+                                  child: const Text(
+                                    "Save",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  onPressed: () {})),
+                        )
+                      ],
+                    ),
+                  );
                   // Navigator.push(
                   //     context,
                   //     MaterialPageRoute(
@@ -103,7 +155,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 child: const Text(
-                  'My Transactions',
+                  'MY BUDGET',
                   style: TextStyle(
                     fontSize: 14,
                   ),

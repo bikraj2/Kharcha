@@ -1,5 +1,8 @@
 import 'dart:math';
 
+import 'package:demo2/theme/theme.dart';
+import '../../theme/theme.dart';
+
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
@@ -12,13 +15,14 @@ import 'package:demo2/models/expenseList.dart';
 class BarChartSample1 extends StatefulWidget {
   const BarChartSample1({super.key});
 
-  List<Color> get availableColors => const <Color>[
-        Colors.purpleAccent,
-        Colors.yellow,
-        Colors.lightBlue,
-        Colors.orange,
-        Colors.pink,
-        Colors.redAccent,
+  List<Color> get availableColors => <Color>[
+        AppTheme.colors.secondarycolor,
+        AppTheme.colors.basecolor,
+        AppTheme.colors.boxcolor,
+        Color.fromARGB(255, 239, 45, 100),
+        Color.fromARGB(255, 15, 50, 66),
+        Color.fromARGB(255, 142, 44, 77),
+        Color.fromARGB(255, 3, 6, 37),
       ];
 
   @override
@@ -28,8 +32,8 @@ class BarChartSample1 extends StatefulWidget {
 class BarChartSample1State extends State<BarChartSample1> {
   List<Map<String, Object>> value1 = [];
 
-  final Color barBackgroundColor = const Color(0xff72d8bf);
-  final Duration animDuration = const Duration(milliseconds: 250);
+  final Color barBackgroundColor = AppTheme.colors.basecolor;
+  final Duration animDuration = Duration(milliseconds: 250);
   bool isLoading = true;
   int touchedIndex = -1;
 
@@ -42,54 +46,55 @@ class BarChartSample1State extends State<BarChartSample1> {
     return Scaffold(
       appBar: AppBar(),
       body: AspectRatio(
-        aspectRatio: MediaQuery.of(context).size.width /
-            MediaQuery.of(context).size.width.toDouble(),
-        child: Card(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-          color: const Color(0xff81e5cd),
-          child: Stack(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    const Text(
-                      'BarChart',
-                      style: TextStyle(
-                        color: Color(0xff0f4a3c),
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
+          aspectRatio: MediaQuery.of(context).size.width /
+              MediaQuery.of(context).size.width.toDouble(),
+          child: Center(
+            child: Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5)),
+              color: Colors.white,
+              child: Stack(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        Text(
+                          'BarChart',
+                          style: TextStyle(
+                            color: AppTheme.colors.secondarycolor,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          'Your Weekly Expenses ',
+                          style: TextStyle(
+                            color: AppTheme.colors.basecolor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 38,
+                        ),
+                        Expanded(
+                          child: Container(child: BarChart(mainBarData())),
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                      ],
                     ),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    const Text(
-                      'Your Weekly Expenses ',
-                      style: TextStyle(
-                        color: Color(0xff379982),
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 38,
-                    ),
-                    Expanded(
-                      child: Container(child: BarChart(mainBarData())),
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-      ),
+            ),
+          )),
     );
   }
 
@@ -97,8 +102,8 @@ class BarChartSample1State extends State<BarChartSample1> {
     int x,
     double y, {
     bool isTouched = false,
-    Color barColor = Colors.white,
-    double width = 22,
+    Color barColor = const Color.fromARGB(255, 35, 45, 64),
+    double width = 20,
     List<int> showTooltips = const [],
   }) {
     return BarChartGroupData(
@@ -110,7 +115,7 @@ class BarChartSample1State extends State<BarChartSample1> {
           width: width,
           borderSide: isTouched
               ? BorderSide(color: Colors.yellow.darken())
-              : const BorderSide(color: Colors.white, width: 0),
+              : const BorderSide(color: Colors.red, width: 0),
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
             toY: 20,
@@ -185,8 +190,8 @@ class BarChartSample1State extends State<BarChartSample1> {
 
   Widget getTitles(double value, TitleMeta meta) {
     const style = TextStyle(
-      color: Colors.white,
-      fontWeight: FontWeight.bold,
+      color: const Color.fromARGB(255, 35, 45, 64),
+      fontWeight: FontWeight.w700,
       fontSize: 14,
     );
     Widget text;
@@ -226,7 +231,7 @@ class BarChartSample1State extends State<BarChartSample1> {
     }
     return SideTitleWidget(
       axisSide: meta.axisSide,
-      space: 16,
+      space: 15,
       child: text,
     );
   }
