@@ -75,7 +75,7 @@ class AuthService {
   removeExpense(String token, String id) async {
     try {
       print('${url}/${id}');
-      var value = await diio.get('${url}/${id}',
+      var value = await diio.delete('${url}/${id}',
           queryParameters: {"token": token},
           options: Options(contentType: Headers.formUrlEncodedContentType));
       return value;

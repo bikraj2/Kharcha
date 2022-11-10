@@ -6,7 +6,9 @@ var config = require('../config/dbconfig');
 var functions = {
   addExpense: async (req, res) =>{
     try{
-    var token = req.query['token'];
+      console.log("hey")
+    var token = req.body.token;
+    console.log(token)
     var decodedtoken = jwt.decode(token, config.secret);
     var newExpense = expense({
       name: req.body.name,
@@ -30,7 +32,7 @@ var functions = {
     const value = newExpense.save()
     res.status(200).json({success:true,msg:"Added Successfully"})
     }catch(e){
-      res.status(400).json({success:false,amsg:e.message})
+      res.status(400).json({success:false,msg:e.message})
     }
   },
   getExpenses: function (req, res) {
@@ -98,6 +100,7 @@ var functions = {
   addIncome: async (req, res) => {
     try {
       var token = req.query['token'];
+      console.log(token)
       var decodedtoken = jwt.decode(token, config.secret);
       var userId = decodedtoken._id;
       var user = await User.findOne({ _id: userId });

@@ -10,8 +10,8 @@ import 'package:demo2/models/expenseList.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HomePage extends StatefulWidget {
-  int? count;
-  HomePage({Key? key, count}) : super(key: key);
+
+  const HomePage({Key? key, count}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -32,11 +32,11 @@ class _HomePageState extends State<HomePage> {
         print(count);
         print(expenseList);
 
-          Future.delayed(Duration(seconds: 1, milliseconds: 500), () {
-            if (mounted) {
-              setState(() {});
-            }
-          });
+        Future.delayed(Duration(seconds: 1, milliseconds: 500), () {
+          if (mounted) {
+            setState(() {});
+          }
+        });
       }
     });
   }

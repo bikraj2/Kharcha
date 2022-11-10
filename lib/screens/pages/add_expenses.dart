@@ -194,6 +194,7 @@ class _expenseAdderState extends State<expenseAdder> {
                               date1: currentDate);
 
                           token.storage.read(key: "jwt").then((value) {
+                            print(value);
                             AuthService()
                                 .addexpense(expense, value)
                                 .then((val) {
