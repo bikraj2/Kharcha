@@ -45,20 +45,10 @@ class _GraphPageState extends State<GraphPage> {
                             return PieChartPage();
                           }));
                         },
-                        icon: Icon(Icons.pie_chart_rounded),
+                        icon: Image.asset("assetss/images/2.png"),
                         iconSize: width / 2.5,
                         color: AppTheme.colors.secondarycolor,
-                      )
-                      // child: Container(
-                      //     height: height / 4.5,
-                      //     width: width / 3,
-                      //     decoration: const BoxDecoration(
-                      //         color: Colors.white,
-                      //         image: DecorationImage(
-                      //           image: AssetImage('assetss/images/pie.png'),
-                      //           fit: BoxFit.cover,
-                      //         ))),
-                      ),
+                      )),
                   Container(
                     child: Text(
                         "\n Something about pie chart \n i really love pie chart "),
@@ -81,16 +71,9 @@ class _GraphPageState extends State<GraphPage> {
                           return LineChartClass1();
                         }));
                       },
-                      icon: Icon(Icons.stacked_line_chart_rounded),
+                      icon: Image.asset("assetss/images/3.png"),
                       color: AppTheme.colors.basecolor,
                       iconSize: width / 2.5,
-                      // child: Container(
-                      //     height: height / 4.5,
-                      //     width: width / 4,
-                      //     decoration: const BoxDecoration(
-                      //         image: DecorationImage(
-                      //             image: AssetImage('assetss/images/chart.png'),
-                      //             fit: BoxFit.cover)))
                     ),
                   ),
                 ],
@@ -104,16 +87,9 @@ class _GraphPageState extends State<GraphPage> {
                         return BarChartSample1();
                       }));
                     },
-                    icon: Icon(Icons.stacked_bar_chart_rounded),
+                    icon: Image.asset("assetss/images/1.png"),
                     color: AppTheme.colors.secondarycolor,
                     iconSize: width / 2.5,
-                    // child: Container(
-                    //     height: height / 4.5,
-                    //     width: width / 4,
-                    //     decoration: const BoxDecoration(
-                    //         image: DecorationImage(
-                    //             image: AssetImage('assetss/images/pie.png'),
-                    //             fit: BoxFit.cover)))
                   ),
                 )
               ]),

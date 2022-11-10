@@ -254,47 +254,23 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                           ]),
                                       Row(
+                                        children: [
+                                          Text(" ${expenseList[index].name}",
+                                              style: TextStyle(
+                                                  color:
+                                                      AppTheme.colors.basecolor,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w400)),
+                                        ],
+                                      ),
+                                      Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                            MainAxisAlignment.end,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.end,
                                         children: [
                                           Text(
                                               '${expenseView[index].date.toString().split(' ')[0]}'),
-                                          IconButton(
-                                            icon: Icon(Icons.delete),
-                                            onPressed: () async {
-                                              try {
-                                                var tk = await token.storage
-                                                    .read(key: 'jwt');
-
-                                                AuthService()
-                                                    .removeExpense(
-                                                        tk as String,
-                                                        expenseView[index].id
-                                                            as String)
-                                                    .then((val) {
-                                                  if (val.data['success']) {
-                                                    setState(() {
-                                                      ExpenseList.getData()
-                                                          .then((value) {
-                                                        ExpenseList
-                                                            .groupedTransactionValues();
-                                                      });
-                                                    });
-                                                    Fluttertoast.showToast(
-                                                        msg:
-                                                            "Deleted Successfully",
-                                                        backgroundColor:
-                                                            Colors.red);
-                                                  }
-                                                });
-                                              } catch (e) {
-                                                Fluttertoast.showToast(
-                                                    msg: e.toString());
-                                              }
-                                            },
-                                          )
                                         ],
                                       )
                                     ],
