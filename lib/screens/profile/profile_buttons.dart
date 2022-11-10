@@ -1,6 +1,9 @@
 import 'package:demo2/screens/profile/top_card.dart';
 import 'package:demo2/screens/log/login_screen.dart';
+import 'package:demo2/services/authservices.dart';
+import 'package:demo2/token/token.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../theme/theme.dart';
 
@@ -98,6 +101,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     border: OutlineInputBorder(),
                                     suffixIcon: IconButton(
                                       onPressed: () {
+                                        
                                         _moneyController.clear();
                                       },
                                       icon: Icon(Icons.clear),
@@ -118,7 +122,33 @@ class _ProfilePageState extends State<ProfilePage> {
                                         color: Colors.white,
                                         fontWeight: FontWeight.w600),
                                   ),
-                                  onPressed: () {})),
+                                  onPressed: () {
+                                    token.storage
+                                        .read(key: 'jwt')
+                                        .then((value) => {
+                                              AuthService()
+                                                  .addIncome(
+                                                      value as String,
+                                                      double.parse(
+                                                          _moneyController
+                                                              .text))
+                                                  .then((value) {
+                                                if (value.data['success']) {
+                                                  Fluttertoast.showToast(
+                                                      msg: value.data['msg'],
+                                                      textColor: Colors.white,
+                                                      backgroundColor: Colors
+                                                          .green.shade300);
+                                                } else {
+                                                  Fluttertoast.showToast(
+                                                      msg: value.data['msg'],
+                                                      textColor: Colors.white,
+                                                      backgroundColor:
+                                                          Colors.red.shade300);
+                                                }
+                                              })
+                                            });
+                                  })),
                         )
                       ],
                     ),

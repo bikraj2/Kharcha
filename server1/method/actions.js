@@ -14,6 +14,7 @@ var functions = {
                 email:req.body.email,
                 username:req.body.username,
                 password:req.body.password,
+
                 })
                 res.status(200).json({success:true,msg:"userCreateda"})
             }catch(e){

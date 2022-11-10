@@ -1,3 +1,4 @@
+import 'package:demo2/models/finance.dart';
 import 'package:demo2/screens/initial_screens/first_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -123,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ExpenseList.getData().then((value) {
                         ExpenseList.groupedTransactionValues();
                       });
-
+Finance.getFinance();
                       Navigator.push(
                         context,
                         MaterialPageRoute(

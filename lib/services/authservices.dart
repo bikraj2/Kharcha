@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
@@ -8,7 +9,7 @@ import '../models/user_info.dart';
 import '../models/expenses.dart';
 import '../token/token.dart';
 
-const url = "http://localhost:3000";
+const url = "http://192.168.1.75:3000";
 
 class AuthService {
   Dio diio = new Dio();
@@ -83,4 +84,33 @@ class AuthService {
       print("Exception occured: $error stackTrace: $stacktrace");
     }
   }
-}
+
+  addIncome(String token, double amount) async {
+    try {
+      var value = await diio.post('${url}/income',
+          data: {"amount": amount},
+          queryParameters: {"token": token},
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+      return value;
+    } on DioError catch (e) {
+       Fluttertoast.showToast(
+          msg: e.response?.data['msg'],
+          textColor: Colors.white,
+          backgroundColor: Colors.red.shade300);
+    }
+    }
+  getAmount (String token) async{
+     try {
+      var value = await diio.get('${url}/income',
+          queryParameters: {"token": token},
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+      return value;
+    } on DioError catch (e) {
+      Fluttertoast.showToast(
+          msg: e.response?.data['msg'],
+          textColor: Colors.white,
+          backgroundColor: Colors.red.shade300);
+    }
+  }
+  }
+

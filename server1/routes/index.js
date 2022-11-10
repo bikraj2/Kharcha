@@ -22,4 +22,5 @@ router.post('/addExpense',expenseActions.addExpense)
 router.get('/getExpense',expenseActions.getExpenses)
 router.delete('/:id',expenseActions.deleteExpense)
 router.post('/income',expenseActions.addIncome)
+router.get('/income', expenseActions.getIncome);
 module.exports =router 
