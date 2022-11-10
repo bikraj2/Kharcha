@@ -2,34 +2,39 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt')
 var userSchema1 = new Schema({
-   firstName:{
-    type:String,
-    require:true,
-   },
-   middleName:{
-    type:String,
-    require:true,
-   },
-   lastName:{
-    type:String,
-    require:true,
-   },
-   email:{
-    type:String,
-    require:true,
-   },
-   username:{
-    type:String,
-    require:true,
-   },
-   password:{
-    type:String,
-    require:true,
-   },
-    
-
-
-})
+  firstName: {
+    type: String,
+    required: true,
+  },
+  middleName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  username: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    require: true,
+  },
+  budget: {
+    type: mongoose.Types.Decimal128,
+    default: 0,
+  },
+  expense: {
+    type: mongoose.Types.Decimal128,
+    default: 0,
+  },
+});
 
 userSchema1.pre('save',function (next){
     var user = this;
@@ -60,4 +65,5 @@ userSchema1.methods.comparePassword = function (passw,cb){
         cb(null,isMatch)
     })
 }
+
 module.exports = mongoose.model('User', userSchema1)

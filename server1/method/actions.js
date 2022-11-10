@@ -32,6 +32,7 @@ var functions = {
                     res.status(403).send({success: false, msg: 'Authentication Failed, User not found'})
                 }
                 else {
+                    console.log(user)
                     user.comparePassword(req.body.password, function (err, isMatch) {
                         if (isMatch && !err) {
                             var token = jwt.encode(user, config.secret)

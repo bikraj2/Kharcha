@@ -152,6 +152,9 @@ class _expenseAdderState extends State<expenseAdder> {
                               textColor: Colors.white,
                               backgroundColor: Colors.green);
                         }
+                        ExpenseList.getData().then((val){
+                          ExpenseList.groupedTransactionValues();
+                        });
                       });
                     });
                   })),

@@ -20,5 +20,6 @@ router.get('/helloa',(req,res)=>{
 })
 router.post('/addExpense',expenseActions.addExpense)
 router.get('/getExpense',expenseActions.getExpenses)
-router.get('/:id',expenseActions.deleteExpense)
+router.delete('/:id',expenseActions.deleteExpense)
+router.post('/income',expenseActions.addIncome)
 module.exports =router 

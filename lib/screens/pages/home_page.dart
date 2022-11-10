@@ -29,18 +29,14 @@ class _HomePageState extends State<HomePage> {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
         count = count + 5;
-        if (count > expenseList.length) {
-          Fluttertoast.showToast(
-              msg: "End of the data.",
-              textColor: Colors.white,
-              backgroundColor: Colors.red);
-        } else {
+        print(count);
+        print(expenseList);
+
           Future.delayed(Duration(seconds: 1, milliseconds: 500), () {
             if (mounted) {
               setState(() {});
             }
           });
-        }
       }
     });
   }
