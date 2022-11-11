@@ -3,19 +3,36 @@ var jwt = require('jwt-simple');
 var expense = require('../models/expense');
 var config = require('../config/dbconfig');
 
+
+ function getNextMonth (month){
+  var months = new Date(month);
+      function getLastDayOfMonth(year, month) {
+        return new Date(year, month + 1, 0);
+      }
+      var value = getLastDayOfMonth(months.getFullYear(), months.getMonth());
+      var nextMonth = new Date(value.setDate(value.getDate()+1))
+  return nextMonth
+}
+
+function getLastMonth (year){
+  var date = new Date(year)
+var lastMonth = new Date(date.getFullYear(),12,0)
+lastMonth.setDate(lastMonth.getDate()+1)
+return lastMonth
+}
+
 var functions = {
   addExpense: async (req, res) => {
     try {
-      console.log('hey');
       var token = req.body.token;
-      console.log(token);
+      console.log(req.body.date);
       var decodedtoken = jwt.decode(token, config.secret);
       var newExpense = expense({
         name: req.body.name,
         amount: req.body.amount,
         category: req.body.category,
         userId: decodedtoken._id,
-        date: req.body.date,
+        date: req.body.date.split(' ')[0],
       });
       var userId = decodedtoken._id;
       var user = await User.findOne({ _id: userId });
@@ -43,20 +60,35 @@ var functions = {
     console.log(req.headers);
     var decodedtoken = jwt.decode(token, config.secret);
     var userId1 = decodedtoken._id;
-    var { category, date, name } = req.query;
+    var { category, date, name, month ,year} = req.query;
     const queryObject = { userId: userId1 };
+    
+      var nextMonth = getNextMonth(month)
+ 
+    var lastMonth = getLastMonth(year)
     if (category) {
       queryObject.category = category;
     }
     if (date) {
-      queryObject.date = date;
+      queryObject.date = { $eq: new Date(date) };
     }
+
     if (name) {
-      queryObject.name = name;
+      queryObject.name = { $regex: name, $options: 'i' };
     }
+    if(month) {
+      queryObject.date = {$gte :new Date(month),$lte :nextMonth}
+    }
+    if(year){
+      queryObject.date = {$gte :new Date(year), $lte:lastMonth}
+    }
+    console.log(queryObject)
     //for Sorting
     var { sortDate, sortAmount } = req.query;
-    const sortQuery = { sortDate: -1 };
+    const sortQuery = {
+      date: sortDate ? sortDate : -1,
+      amount: sortAmount ? sortAmount : -1,
+    };
     if (sortAmount) {
       sortQuery.amount = sortAmount;
     }
@@ -134,7 +166,9 @@ var functions = {
       var user = await User.findOne({ _id: userId });
       const budget = parseFloat(+user.budget.toString());
       const expenses = parseFloat(+user.expense.toString());
-      res.status(200).json({success:true,value:{budget:budget,expense:expenses}})
+      res
+        .status(200)
+        .json({ success: true, value: { budget: budget, expense: expenses } });
     } catch (e) {
       res.status(400).json({ success: false, msg: e.message });
     }
