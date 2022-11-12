@@ -27,7 +27,6 @@ class ExpenseList {
 
   static groupedTransactionValues() {
     groupedData = [];
-    print("This is groupTransactionValues");
     groupedData = List.generate(7, (index) {
       final weekday = DateTime.now().subtract(
         Duration(days: index),
@@ -42,6 +41,7 @@ class ExpenseList {
       }
       return {'day': DateFormat.E().format(weekday), 'amount': totalSum};
     });
+    
     print(groupedData);
   }
 }

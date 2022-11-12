@@ -126,8 +126,7 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ));
                       } else {
-                        print(count);
-                        expenseView += expenseList.sublist(
+                        expenseView = expenseList.sublist(
                             0,
                             expenseList.length < count
                                 ? expenseList.length

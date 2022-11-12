@@ -112,5 +112,16 @@ class AuthService {
           backgroundColor: Colors.red.shade300);
     }
   }
+
+  getMonthlyExpense (String token, String month ){
+
+  }
+  getYearlyExpense(String token, String month) {
+
+  }
+
+  getExpenseStartTofinish (String token, DateTime start, DateTime finish){
+    
+  }
   }
 
