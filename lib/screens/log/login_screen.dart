@@ -124,7 +124,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ExpenseList.getData().then((value) {
                         ExpenseList.groupedTransactionValues();
                       });
-Finance.getFinance();
+                      Finance.getFinance();
+                      ExpenseList.findMax();
                       Navigator.push(
                         context,
                         MaterialPageRoute(

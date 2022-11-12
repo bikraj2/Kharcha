@@ -2,10 +2,15 @@ import 'expenses.dart';
 import 'package:demo2/token/token.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:intl/intl.dart';
+import 'dart:math';
+
+List<double> array = [];
 
 class ExpenseList {
   static List<Expense> data = [];
   static List<Map<String, Object>> groupedData = [];
+  static double temp = 0;
+  ExpenseList() {}
   static Future<List<Expense>> getData() async {
     data = [];
     try {
@@ -42,6 +47,45 @@ class ExpenseList {
       }
       return {'day': DateFormat.E().format(weekday), 'amount': totalSum};
     });
-    print(groupedData);
+  }
+
+  static double findMax() {
+    var lineData = ExpenseList.groupedData;
+
+    var max = lineData.reduce((currentUser, nextUser) =>
+        (currentUser['amount'] as double) > (nextUser['amount'] as double)
+            ? currentUser
+            : nextUser);
+    num maxA = max["amount"] as num;
+    print(maxA.ceil() * 2.round());
+    num a = (maxA.toString().length);
+    temp = (pow(10, a )).toDouble();
+    print(temp);
+    return temp;
+  }
+
+  static String zeros(double a) {
+    if (a >= 1000 && a <= 10000) {
+      return '${a ~/ 1000} K';
+    } else if (a <= 10000 && a >= 1000) {
+      return '${a ~/ 1000} K';
+    } else if (a <= 100000 && a >= 10000) {
+      return '${a ~/ 1000} K';
+    } else if (a <= 1000000 && a >= 100000) {
+      return '${a ~/ 1000000} M';
+    } else if (a <= 10000000 && a >= 1000000) {
+      return '${a ~/ 1000000} M';
+    } else if (a >= 100000000 && a <= 1000000000) {
+      return '${a ~/ 1000000} M';
+    } else {
+      return a.toString();
+    }
+  }
+
+  static List arraylist() {
+    for (var i = 0; i < 7; i++) {
+      array.add(groupedData[i]['amount'] as double);
+    }
+    return array;
   }
 }
