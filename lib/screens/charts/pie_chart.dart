@@ -1,5 +1,6 @@
 import 'package:demo2/models/chart.dart';
 import 'package:demo2/services/authservices.dart';
+import 'package:demo2/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:demo2/token/token.dart';
 import 'package:pie_chart/pie_chart.dart';
@@ -72,25 +73,16 @@ class _PieChartPageState extends State<PieChartPage> {
     };
 
     List<Color> colorList = [
-      const Color.fromRGBO(129, 250, 112, 1),
-      const Color.fromRGBO(91, 253, 199, 1),
-      const Color.fromRGBO(254, 154, 92, 1),
-      const Color.fromRGBO(55, 100, 32, 22),
+      AppTheme.colors.basecolor,
+      AppTheme.colors.secondarycolor,
+      Color.fromARGB(255, 232, 100, 137),
+      Color.fromARGB(255, 13, 17, 23),
     ];
 
     final gradientList = <List<Color>>[
-      [
-        Color.fromRGBO(223, 250, 92, 1),
-        Color.fromRGBO(129, 250, 112, 1),
-      ],
-      [
-        Color.fromRGBO(129, 182, 205, 1),
-        Color.fromRGBO(91, 253, 199, 1),
-      ],
-      [
-        Color.fromRGBO(175, 63, 62, 1.0),
-        Color.fromRGBO(254, 154, 92, 1),
-      ]
+      [AppTheme.colors.basecolor, AppTheme.colors.secondarycolor],
+      [Color.fromARGB(255, 232, 100, 137), Color.fromARGB(255, 13, 17, 23)],
+      [AppTheme.colors.secondarycolor, Color.fromARGB(0, 63, 62, 62)]
     ];
     get();
     return Scaffold(

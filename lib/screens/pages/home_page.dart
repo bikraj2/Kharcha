@@ -10,7 +10,6 @@ import 'package:demo2/models/expenseList.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HomePage extends StatefulWidget {
-
   const HomePage({Key? key, count}) : super(key: key);
 
   @override
@@ -209,6 +208,13 @@ class _HomePageState extends State<HomePage> {
                                                             .then((val) {
                                                           if (val.data[
                                                               'success']) {
+                                                            ExpenseList
+                                                                    .getData()
+                                                                .then(
+                                                                    (value) => {
+                                                                          ExpenseList
+                                                                              .groupedTransactionValues(),
+                                                                        });
                                                             setState(() {});
                                                             Fluttertoast.showToast(
                                                                 msg:

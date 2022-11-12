@@ -1,4 +1,5 @@
 import 'package:demo2/models/expenseList.dart';
+import 'package:demo2/theme/theme.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:basic_utils/basic_utils.dart';
@@ -11,7 +12,7 @@ class LineChartClass1 extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Your Monthly Expenses"),
-        backgroundColor: Color.fromARGB(255, 12, 30, 65),
+        backgroundColor: AppTheme.colors.secondarycolor,
       ),
       body: LineChartSample2(),
     );
@@ -27,8 +28,8 @@ class LineChartSample2 extends StatefulWidget {
 
 class _LineChartSample2State extends State<LineChartSample2> {
   List<Color> gradientColors = [
-    const Color(0xff23b6e6),
-    const Color(0xff02d39a),
+    AppTheme.colors.basecolor,
+    AppTheme.colors.boxcolor,
   ];
 
   var lineChartdata = ExpenseList.groupedData;
