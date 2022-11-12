@@ -169,19 +169,18 @@ class _LineChartSample2State extends State<LineChartSample2> {
         border: Border.all(color: const Color(0xff37434d)),
       ),
       minX: 0,
-      maxX: 11,
-      minY: 0,
-      maxY: 6,
+      maxX: 7,
+      minY: -1,
+      maxY: 123*2,
       lineBarsData: [
         LineChartBarData(
-          spots: const [
-            FlSpot(0, 3),
-            FlSpot(2.6, 2),
-            FlSpot(4.9, 5),
-            FlSpot(6.8, 3.1),
-            FlSpot(8, 4),
-            FlSpot(9.5, 3),
-            FlSpot(11, 4),
+          spots: [
+            ...List.generate(ExpenseList.groupedData.length, (index) {
+              print((double.parse(index.toString())));
+              print(ExpenseList.groupedData[index]['amount'] as double);
+              return FlSpot(double.parse(index.toString()),
+                  ExpenseList.groupedData[index]['amount'] as double);
+            })
           ],
           isCurved: true,
           gradient: LinearGradient(
