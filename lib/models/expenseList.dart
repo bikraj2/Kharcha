@@ -32,7 +32,6 @@ class ExpenseList {
 
   static groupedTransactionValues() {
     groupedData = [];
-    print("This is groupTransactionValues");
     groupedData = List.generate(7, (index) {
       final weekday = DateTime.now().subtract(
         Duration(days: index),
@@ -57,9 +56,8 @@ class ExpenseList {
             ? currentUser
             : nextUser);
     num maxA = max["amount"] as num;
-    print(maxA.ceil() * 2.round());
-    num a = (maxA.toString().length);
-    temp = (pow(10, a)).toDouble();
+
+    temp = maxA * 1.5;
     print(temp);
     return temp;
   }
@@ -83,9 +81,11 @@ class ExpenseList {
   }
 
   static List arraylist() {
+    array = [];
     for (var i = 0; i < 7; i++) {
       array.add(groupedData[i]['amount'] as double);
     }
+    print(array);
     return array;
   }
 }
