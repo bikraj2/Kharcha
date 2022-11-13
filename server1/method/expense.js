@@ -60,12 +60,13 @@ var functions = {
     console.log(req.headers);
     var decodedtoken = jwt.decode(token, config.secret);
     var userId1 = decodedtoken._id;
-    var { category, date, name, month ,year} = req.query;
+    var { category, date, name, month ,year,number} = req.query;
     const queryObject = { userId: userId1 };
     
       var nextMonth = getNextMonth(month)
  
     var lastMonth = getLastMonth(year)
+    
     if (category) {
       queryObject.category = category;
     }
@@ -99,7 +100,7 @@ var functions = {
         name: true,
         date: true,
         _id: true,
-      })
+      }).limit(number)
       .sort(sortQuery)
       .then((result, next) => {
         res.status(200).json({ ans: result });

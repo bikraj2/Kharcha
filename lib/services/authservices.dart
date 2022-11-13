@@ -12,7 +12,7 @@ import '../token/token.dart';
 const url = "http://192.168.1.75:3000";
 
 class AuthService {
-  Dio diio =  Dio();
+  Dio diio = Dio();
   login(username, password) async {
     try {
       var value = await diio.post("${url}/authenticate",
@@ -114,15 +114,37 @@ class AuthService {
     }
   }
 
-  getMonthlyExpense (String token, String month ){
-
+  getMonthlyExpense(String token, String month) async {
+    try {
+      var value = await diio.get("${url}/getExpense",
+          queryParameters: {"token": token, "month": month},
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+      print(value);
+    } on DioError catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+    }
   }
-  getYearlyExpense(String token, String month) {
 
+  getYearlyExpense(String token, String month) async {
+    try {
+      var value = await diio.get("${url}/getExpense",
+          queryParameters: {"token": token, "year": month},
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+          print(value);
+      return value;
+    } on DioError catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+    }
   }
 
-  getExpenseStartTofinish (String token, DateTime start, DateTime finish){
-    
+  getExpenseStartTofinish(String token, DateTime start, DateTime finish) async {
+    try {
+      var value = await diio.get("${url}/getExpense",
+          queryParameters: {"token": token, "start": start, "finish": finish},
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+      return value;
+    } on DioError catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+    }
   }
-  }
-
+}
