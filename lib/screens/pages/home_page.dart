@@ -139,15 +139,7 @@ class _HomePageState extends State<HomePage> {
                                 : count,
                             itemBuilder: ((context, index) {
                               List<Expense> newList = expenseList;
-                              String getK(double amount) {
-                                if (amount > 10000) {
-                                  //code ot dchange value
-                                  amount = amount / 1000.0;
-                                }
-                                String val = '\$${amount}' + "k";
-
-                                return val;
-                              }
+                             
 
                               return Container(
                                   height:
@@ -244,7 +236,7 @@ class _HomePageState extends State<HomePage> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              getK(expenseList[index].amount
+                                              ExpenseList.zeros(expenseList[index].amount
                                                   as double),
                                               style: TextStyle(
                                                 color: AppTheme
