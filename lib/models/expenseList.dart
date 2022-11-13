@@ -59,7 +59,7 @@ class ExpenseList {
     num maxA = max["amount"] as num;
     print(maxA.ceil() * 2.round());
     num a = (maxA.toString().length);
-    temp = (pow(10, a )).toDouble();
+    temp = (pow(10, a)).toDouble();
     print(temp);
     return temp;
   }
@@ -75,8 +75,8 @@ class ExpenseList {
       return '${a ~/ 1000000} M';
     } else if (a <= 10000000 && a >= 1000000) {
       return '${a ~/ 1000000} M';
-    } else if (a >= 100000000 && a <= 1000000000) {
-      return '${a ~/ 1000000} M';
+    } else if (a <= 100000000 && a >= 10000000) {
+      return '${a ~/ 10000000} M';
     } else {
       return a.toString();
     }
