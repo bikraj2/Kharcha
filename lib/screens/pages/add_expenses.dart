@@ -207,7 +207,7 @@ class _expenseAdderState extends State<expenseAdder> {
                                 Fluttertoast.showToast(
                                     msg: val.data['msg'],
                                     textColor: Colors.white,
-                                    backgroundColor: Colors.green);
+                                    backgroundColor: Colors.red);
                               }
                             });
                           });

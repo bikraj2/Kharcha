@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
@@ -9,10 +8,10 @@ import '../models/user_info.dart';
 import '../models/expenses.dart';
 import '../token/token.dart';
 
-const url = "http://192.168.1.75:3000";
+const url = "http://localhost:3000";
 
 class AuthService {
-  Dio diio = new Dio();
+  Dio diio = Dio();
   login(username, password) async {
     try {
       var value = await diio.post("${url}/authenticate",
@@ -21,7 +20,7 @@ class AuthService {
       print(username);
       return value;
     } on DioError catch (e) {
-      print(e);
+      print("Error occured");
       Fluttertoast.showToast(
           msg: e.response?.data['msg'],
           textColor: Colors.white,
@@ -93,14 +92,15 @@ class AuthService {
           options: Options(contentType: Headers.formUrlEncodedContentType));
       return value;
     } on DioError catch (e) {
-       Fluttertoast.showToast(
+      Fluttertoast.showToast(
           msg: e.response?.data['msg'],
           textColor: Colors.white,
           backgroundColor: Colors.red.shade300);
     }
-    }
-  getAmount (String token) async{
-     try {
+  }
+
+  getAmount(String token) async {
+    try {
       var value = await diio.get('${url}/income',
           queryParameters: {"token": token},
           options: Options(contentType: Headers.formUrlEncodedContentType));
@@ -112,5 +112,4 @@ class AuthService {
           backgroundColor: Colors.red.shade300);
     }
   }
-  }
-
+}

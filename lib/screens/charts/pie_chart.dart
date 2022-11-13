@@ -79,11 +79,11 @@ class _PieChartPageState extends State<PieChartPage> {
       Color.fromARGB(255, 13, 17, 23),
     ];
 
-    final gradientList = <List<Color>>[
-      [AppTheme.colors.basecolor, AppTheme.colors.secondarycolor],
-      [Color.fromARGB(255, 232, 100, 137), Color.fromARGB(255, 13, 17, 23)],
-      [AppTheme.colors.secondarycolor, Color.fromARGB(0, 63, 62, 62)]
-    ];
+    // final gradientList = <List<Color>>[
+    //   [AppTheme.colors.basecolor, AppTheme.colors.secondarycolor],
+    //   [Color.fromARGB(255, 232, 100, 137), Color.fromARGB(255, 13, 17, 23)],
+    //   [AppTheme.colors.secondarycolor, Color.fromARGB(0, 63, 62, 62)]
+    // ];
     get();
     return Scaffold(
       appBar: AppBar(
@@ -97,10 +97,14 @@ class _PieChartPageState extends State<PieChartPage> {
           colorList: colorList,
           chartRadius: MediaQuery.of(context).size.width / 2,
           centerText: "Expenses",
-          ringStrokeWidth: 24,
+          centerTextStyle: const TextStyle(
+              color: Colors.white, fontWeight: FontWeight.w600, fontSize: 16),
+
+          ringStrokeWidth: 100,
           animationDuration: const Duration(seconds: 3),
           chartValuesOptions: const ChartValuesOptions(
               showChartValues: true,
+              chartValueStyle: defaultChartValueStyle,
               showChartValuesOutside: true,
               showChartValuesInPercentage: true,
               showChartValueBackground: false),
@@ -110,7 +114,8 @@ class _PieChartPageState extends State<PieChartPage> {
               legendTextStyle: TextStyle(fontSize: 15),
               legendPosition: LegendPosition.bottom,
               showLegendsInRow: true),
-          gradientList: gradientList,
+
+          // gradientList: gradientList,
         ),
       ),
     );
