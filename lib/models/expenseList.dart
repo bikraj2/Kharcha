@@ -9,7 +9,7 @@ List<double> array = [];
 class ExpenseList {
   static List<Expense> data = [];
   static List<Map<String, Object>> groupedData = [];
-  static double temp = 0;
+  static double temp = 0.0;
   ExpenseList() {}
   static Future<List<Expense>> getData() async {
     data = [];
@@ -55,28 +55,32 @@ class ExpenseList {
         (currentUser['amount'] as double) > (nextUser['amount'] as double)
             ? currentUser
             : nextUser);
-    num maxA = max["amount"] as num;
+    double maxA = max["amount"] as double;
 
     temp = maxA * 1.5;
+    temp = double.parse(temp.toStringAsFixed(2));
     print(temp);
     return temp;
   }
-
+  //dont use truncating operator its is not good it rounds up to 0
   static String zeros(double a) {
     if (a >= 1000 && a <= 10000) {
-      return '${a ~/ 1000} K';
+      return ('${(a / 1000).toStringAsPrecision(1)}K');
     } else if (a <= 10000 && a >= 1000) {
-      return '${a ~/ 1000} K';
+      return '${(a / 10000).toStringAsPrecision(1)}K';
     } else if (a <= 100000 && a >= 10000) {
-      return '${a ~/ 1000} K';
+      return '${(a / 1000).toStringAsPrecision(1)}K';
     } else if (a <= 1000000 && a >= 100000) {
-      return '${a ~/ 1000000} M';
+      
+      return '${(a / 1000000).toStringAsPrecision(1)}M';
     } else if (a <= 10000000 && a >= 1000000) {
-      return '${a ~/ 1000000} M';
+      return '${(a / 1000000).toStringAsPrecision(1)}M';
     } else if (a <= 100000000 && a >= 10000000) {
-      return '${a ~/ 10000000} M';
+      return '${(a / 1000000).toStringAsPrecision(1)}M';
+    } else if (a <= 10000000000 && a >= 1000000000) {
+      return '${(a / 1000000000).toStringAsPrecision(1)}B';
     } else {
-      return a.toString();
+      return ' ';
     }
   }
 
