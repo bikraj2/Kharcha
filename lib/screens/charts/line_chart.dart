@@ -11,7 +11,7 @@ class LineChartClass1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Your Monthly Expenses"),
+        title:const Text("Your Monthly Expenses"),
         backgroundColor: AppTheme.colors.secondarycolor,
       ),
       body: LineChartSample2(),
@@ -124,8 +124,11 @@ class _LineChartSample2State extends State<LineChartSample2> {
     String text;
 
     switch (value.toInt()) {
+      case 0:
+        text = '0';
+        break;
+
       case 1:
-        print(ExpenseList.zeros(ExpenseList.temp));
         text = ExpenseList.zeros(ExpenseList.temp * .2);
         break;
       case 2:
@@ -136,9 +139,13 @@ class _LineChartSample2State extends State<LineChartSample2> {
         break;
       case 4:
         text = ExpenseList.zeros(ExpenseList.temp * .8);
+        
         break;
       case 5:
         text = ExpenseList.zeros(ExpenseList.temp);
+        break;
+      case 6:
+        text = ExpenseList.zeros(ExpenseList.temp * 1.2);
         break;
 
       default:
@@ -158,13 +165,13 @@ class _LineChartSample2State extends State<LineChartSample2> {
         getDrawingHorizontalLine: (value) {
           return FlLine(
             color: const Color(0xff37434d),
-            strokeWidth: 1,
+            strokeWidth: 1.5,
           );
         },
         getDrawingVerticalLine: (value) {
           return FlLine(
             color: const Color(0xff37434d),
-            strokeWidth: 1,
+            strokeWidth: 1.5,
           );
         },
       ),
@@ -204,13 +211,13 @@ class _LineChartSample2State extends State<LineChartSample2> {
       lineBarsData: [
         LineChartBarData(
           spots: [
-            FlSpot(0, flspotarray[0] * 5 / ExpenseList.temp),
-            FlSpot(1, flspotarray[1] * 5 / ExpenseList.temp),
-            FlSpot(2, flspotarray[2] * 5 / ExpenseList.temp),
+            FlSpot(0, flspotarray[6] * 5 / ExpenseList.temp),
+            FlSpot(1, flspotarray[5] * 5 / ExpenseList.temp),
+            FlSpot(2, flspotarray[4] * 5 / ExpenseList.temp),
             FlSpot(3, flspotarray[3] * 5 / ExpenseList.temp),
-            FlSpot(4, flspotarray[4] * 5 / ExpenseList.temp),
-            FlSpot(5, flspotarray[5] * 5 / ExpenseList.temp),
-            FlSpot(6, flspotarray[6] * 5 / ExpenseList.temp),
+            FlSpot(4, flspotarray[2] * 5 / ExpenseList.temp),
+            FlSpot(5, flspotarray[1] * 5 / ExpenseList.temp),
+            FlSpot(6, flspotarray[0] * 5 / ExpenseList.temp),
           ],
           isCurved: false,
           gradient: LinearGradient(
