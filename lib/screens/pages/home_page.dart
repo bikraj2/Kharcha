@@ -1,6 +1,9 @@
 import 'package:demo2/models/expenses.dart';
 import 'package:demo2/screens/log/login_screen.dart';
 import 'package:demo2/screens/pages/add_expenses.dart';
+import 'package:demo2/screens/pages/filterPage.dart';
+import 'package:demo2/screens/pages/filterbyExpenses.dart';
+import 'package:demo2/screens/pages/fiterbyDate.dart';
 import 'package:demo2/theme/theme.dart';
 import 'package:demo2/token/token.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +20,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int currentIndex = 0;
+  final screens = [
+    const FilterbyDate(),
+    const FilterbyDate(),
+    FilterbyExpenses()
+  ];
   int count = 10;
   List<Expense> expenseView = [];
   List<Expense> expenseList = [];
@@ -54,7 +63,15 @@ class _HomePageState extends State<HomePage> {
               fontStyle: FontStyle.italic,
               color: AppTheme.colors.basecolor),
         ),
-        IconButton(onPressed: () {}, icon: Icon(Icons.search_outlined))
+        IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => FilterPage()),
+              );
+            },
+            icon: Icon(Icons.search_outlined))
       ],
     ));
     List<Expense> expenseList = [];
