@@ -9,6 +9,7 @@ import 'package:demo2/models/expenseList.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../pages/home_screen.dart';
 import 'package:demo2/token/token.dart';
+import 'forgotPassword.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -102,6 +103,13 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 20,
             ),
+            TextButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ForgotPasswowrd();
+                  }));
+                },
+                child: Text("Forgot Password?")),
             ElevatedButton(
               onPressed: () {
                 String username = usernameController.text;

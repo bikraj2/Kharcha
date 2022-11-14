@@ -19,38 +19,38 @@ class _changePasswordState extends State<changePassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Column(
-        children: [
-          TextField(
-            controller: _oldPasswordController,
-            decoration: InputDecoration(
-              hintText: "Old Password",
+        child: Column(
+          children: [
+            TextField(
+              controller: _oldPasswordController,
+              decoration: InputDecoration(
+                hintText: "Old Password",
+              ),
             ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          TextField(
-            controller: _newPasswordController2,
-            decoration: InputDecoration(
-              hintText: "New Password",
+            SizedBox(
+              height: 20,
             ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          TextField(
-            controller: _newPasswordController1,
-            decoration: InputDecoration(
-              hintText: "Confirm Password",
+            TextField(
+              controller: _newPasswordController2,
+              decoration: InputDecoration(
+                hintText: "New Password",
+              ),
             ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          TextButton(
+            SizedBox(
+              height: 20,
+            ),
+            TextField(
+              controller: _newPasswordController1,
+              decoration: InputDecoration(
+                hintText: "Confirm Password",
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            TextButton(
               onPressed: () async {
-                 String oldPassword = _oldPasswordController.text;
+                String oldPassword = _oldPasswordController.text;
                 String newPassword = _newPasswordController1.text;
                 String confirmPassword = _newPasswordController2.text;
                 if (newPassword != confirmPassword) {
@@ -61,19 +61,17 @@ class _changePasswordState extends State<changePassword> {
                 } else {
                   try {
                     var tk = await token.storage.read(key: 'jwt');
-                    
+
                     var value = await AuthService()
                         .changePassword(tk as String, oldPassword, newPassword);
-                   
-                  
-                  } catch (e) {
-                    
-                }
+                  } catch (e) {}
                 }
               },
-              child: Text("change Password"),),
-        ],
-      )),
+              child: Text("change Password"),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

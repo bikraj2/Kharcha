@@ -59,7 +59,7 @@ var functions = {
   },
   getinfo: function (req, res) {
     if (
-      req.headers.authorization &&
+      req.headers.authorization && 
       req.headers.authorization.split(' ')[0] === 'Bearer'
     ) {
       var token = req.headers.authorization.split(' ')[1];
@@ -77,15 +77,14 @@ var functions = {
     if (token) {
       var decodedtoken = jwt.decode(token, config.secret);
       var userId1 = decodedtoken._id;
-      console.log(userId1)
     } else {
     }
-    
+   
     try {
       var user = userId1
         ? await User.findOne({ _id: userId1 })
         : await User.findOne({ email: email });
-        if(user){
+        if(user &&token){
       user.comparePassword(password, (err, isMatch) => {
         if (isMatch && !err) {
           user.password = newPassword;
@@ -99,7 +98,14 @@ var functions = {
             msg: 'Authentication failed, wrong password',
           });
         }
-      });}else{
+      });}
+     else if(user){
+        user.password = newPassword;
+        user.save()
+        return res
+          .status(200)
+          .json({ success: true, msg: 'Password changed.' });
+      }else{
         throw Error('Cannot find user Registered with this email.');
       }
     } catch (e) {
@@ -117,7 +123,7 @@ var functions = {
       console.log(user)
       var username = user.username;
       sendMail(email, username, otp);
-      res.status(200).json({ success: true, data: { otp: otp, email: email } });
+      res.status(200).json({ success: true, data: { otp: otp, email: email },msg:"Token is sent to the email." });
     } catch (e) {
       res.status(400).json({ success: false, msg: e.message });
     }
