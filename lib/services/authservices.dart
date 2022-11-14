@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'dart:math';
 
 import 'package:demo2/screens/log/forgotPassword.dart';
@@ -22,7 +21,7 @@ class AuthService {
       print(username);
       return value;
     } on DioError catch (e) {
-      print(e);
+      print("Error occured");
       Fluttertoast.showToast(
           msg: e.response?.data['msg'],
           textColor: Colors.white,

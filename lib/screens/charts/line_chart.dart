@@ -2,7 +2,7 @@ import 'package:demo2/models/expenseList.dart';
 import 'package:demo2/theme/theme.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:basic_utils/basic_utils.dart';
+// import 'package:basic_utils/basic_utils.dart';
 
 class LineChartClass1 extends StatelessWidget {
   const LineChartClass1({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class LineChartClass1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:const Text("Your Monthly Expenses"),
+        title: const Text("Your Monthly Expenses"),
         backgroundColor: AppTheme.colors.secondarycolor,
       ),
       body: LineChartSample2(),
@@ -139,7 +139,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
         break;
       case 4:
         text = ExpenseList.zeros(ExpenseList.temp * .8);
-        
+
         break;
       case 5:
         text = ExpenseList.zeros(ExpenseList.temp);
