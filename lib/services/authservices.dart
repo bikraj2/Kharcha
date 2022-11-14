@@ -112,4 +112,38 @@ class AuthService {
           backgroundColor: Colors.red.shade300);
     }
   }
+
+  getMonthlyExpense(String token, String month) async {
+    try {
+      var value = await diio.get("${url}/getExpense",
+          queryParameters: {"token": token, "month": month},
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+      print(value);
+    } on DioError catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+    }
+  }
+
+  getYearlyExpense(String token, String month) async {
+    try {
+      var value = await diio.get("${url}/getExpense",
+          queryParameters: {"token": token, "year": month},
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+      print(value);
+      return value;
+    } on DioError catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+    }
+  }
+
+  getExpenseStartTofinish(String token, DateTime start, DateTime finish) async {
+    try {
+      var value = await diio.get("${url}/getExpense",
+          queryParameters: {"token": token, "start": start, "finish": finish},
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+      return value;
+    } on DioError catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+    }
+  }
 }

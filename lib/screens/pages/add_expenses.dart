@@ -199,6 +199,10 @@ class _expenseAdderState extends State<expenseAdder> {
                                 .addexpense(expense, value)
                                 .then((val) {
                               if (val.data['success']) {
+                                ExpenseList.getData().then((value) {
+                                  ExpenseList.groupedTransactionValues();
+                                });
+                                ExpenseList.findMax();
                                 Fluttertoast.showToast(
                                     msg: val.data['msg'],
                                     textColor: Colors.white,

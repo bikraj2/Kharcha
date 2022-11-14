@@ -13,34 +13,30 @@ import 'package:demo2/models/expenseList.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key, count}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  int currentIndex = 0;
-  final screens = [
-    const FilterbyDate(),
-    const FilterbyDate(),
-    FilterbyExpenses()
-  ];
-  int count = 10;
+  int nextCount = ExpenseList.data.length < 10 ? ExpenseList.data.length : 10;
+
+  int prevCount = 0;
   List<Expense> expenseView = [];
   List<Expense> expenseList = [];
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        count = count + 5;
-        print(count);
-        print(expenseList);
-
-        Future.delayed(Duration(seconds: 1, milliseconds: 500), () {
+        prevCount = nextCount - 1;
+        nextCount = ExpenseList.data.length < nextCount + 5
+            ? ExpenseList.data.length
+            : nextCount + 5;
+        Future.delayed(const Duration(seconds: 1, milliseconds: 500), () {
           if (mounted) {
             setState(() {});
           }
@@ -55,6 +51,13 @@ class _HomePageState extends State<HomePage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
+        ElevatedButton(
+            onPressed: () {
+              token.storage.read(key: 'jwt').then((val) {
+                AuthService().getMonthlyExpense(val as String, "2022-10");
+              }).then((value) => {print(value.runtimeType)});
+            },
+            child: Text("GetMothlyExpense")),
         Text(
           "  Recent Expenses ",
           style: TextStyle(
@@ -74,7 +77,6 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.search_outlined))
       ],
     ));
-    List<Expense> expenseList = [];
     Future<List<Expense>> getData() async {
       try {
         var tk = await token.storage.read(key: 'jwt');
@@ -143,29 +145,17 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ));
                       } else {
-                        print(count);
                         expenseView += expenseList.sublist(
-                            0,
-                            expenseList.length < count
+                            prevCount,
+                            expenseList.length < nextCount
                                 ? expenseList.length
-                                : count);
+                                : nextCount);
 
                         return ListView.builder(
                             controller: _scrollController,
-                            itemCount: expenseList.length < count
-                                ? expenseList.length
-                                : count,
+                            itemCount: nextCount,
                             itemBuilder: ((context, index) {
                               List<Expense> newList = expenseList;
-                              String getK(double amount) {
-                                if (amount > 10000) {
-                                  //code ot dchange value
-                                  amount = amount / 1000.0;
-                                }
-                                String val = '\$${amount}' + "k";
-
-                                return val;
-                              }
 
                               return Container(
                                   height:
@@ -262,8 +252,9 @@ class _HomePageState extends State<HomePage> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              getK(expenseList[index].amount
-                                                  as double),
+                                              ExpenseList.zeros(
+                                                  expenseList[index].amount
+                                                      as double),
                                               style: TextStyle(
                                                 color: AppTheme
                                                     .colors.secondarycolor,

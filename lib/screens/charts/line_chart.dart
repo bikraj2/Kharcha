@@ -2,6 +2,7 @@ import 'package:demo2/models/expenseList.dart';
 import 'package:demo2/theme/theme.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+// import 'package:basic_utils/basic_utils.dart';
 
 class LineChartClass1 extends StatelessWidget {
   const LineChartClass1({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class LineChartClass1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Your Monthly Expenses"),
+        title: const Text("Your Monthly Expenses"),
         backgroundColor: AppTheme.colors.secondarycolor,
       ),
       body: LineChartSample2(),
@@ -31,10 +32,14 @@ class _LineChartSample2State extends State<LineChartSample2> {
     AppTheme.colors.boxcolor,
   ];
 
+  var lineChartdata = ExpenseList.groupedData;
   bool showAvg = false;
+  List<double> flspotarray = ExpenseList.arraylist() as List<double>;
 
   @override
   Widget build(BuildContext context) {
+    print(lineChartdata);
+
     return Stack(
       children: <Widget>[
         AspectRatio(
@@ -66,17 +71,38 @@ class _LineChartSample2State extends State<LineChartSample2> {
       fontWeight: FontWeight.bold,
       fontSize: 16,
     );
+    String temp1 = lineChartdata[6]['day'].toString();
+    String temp2 = lineChartdata[5]['day'].toString();
+    String temp3 = lineChartdata[4]['day'].toString();
+    String temp4 = lineChartdata[3]['day'].toString();
+    String temp5 = lineChartdata[2]['day'].toString();
+    String temp6 = lineChartdata[1]['day'].toString();
+    String temp7 = lineChartdata[0]['day'].toString();
+
     Widget text;
     switch (value.toInt()) {
+      case 0:
+        text = Text(temp1[0], style: style);
+        break;
+      case 1:
+        text = Text(temp2[0], style: style);
+        break;
       case 2:
-        text = const Text('MAR', style: style);
+        text = Text(temp3[0], style: style);
+        break;
+      case 3:
+        text = Text(temp4[0], style: style);
+        break;
+      case 4:
+        text = Text(temp5[0], style: style);
         break;
       case 5:
-        text = const Text('JUN', style: style);
+        text = Text(temp6[0], style: style);
         break;
-      case 8:
-        text = const Text('SEP', style: style);
+      case 6:
+        text = Text(temp7[0], style: style);
         break;
+
       default:
         text = const Text('', style: style);
         break;
@@ -96,22 +122,32 @@ class _LineChartSample2State extends State<LineChartSample2> {
     );
 
     String text;
+
     switch (value.toInt()) {
+      case 0:
+        text = '0';
+        break;
+
       case 1:
-        text = '1k';
+        text = ExpenseList.zeros(ExpenseList.temp * .2);
         break;
       case 2:
-        text = "2k";
+        text = ExpenseList.zeros(ExpenseList.temp * .4);
         break;
       case 3:
-        text = '3k';
+        text = ExpenseList.zeros(ExpenseList.temp * .6);
         break;
       case 4:
-        text = '4k';
+        text = ExpenseList.zeros(ExpenseList.temp * .8);
+
         break;
       case 5:
-        text = '5k';
+        text = ExpenseList.zeros(ExpenseList.temp);
         break;
+      case 6:
+        text = ExpenseList.zeros(ExpenseList.temp * 1.2);
+        break;
+
       default:
         return Container();
     }
@@ -129,13 +165,13 @@ class _LineChartSample2State extends State<LineChartSample2> {
         getDrawingHorizontalLine: (value) {
           return FlLine(
             color: const Color(0xff37434d),
-            strokeWidth: 1,
+            strokeWidth: 1.5,
           );
         },
         getDrawingVerticalLine: (value) {
           return FlLine(
             color: const Color(0xff37434d),
-            strokeWidth: 1,
+            strokeWidth: 1.5,
           );
         },
       ),
@@ -169,27 +205,28 @@ class _LineChartSample2State extends State<LineChartSample2> {
         border: Border.all(color: const Color(0xff37434d)),
       ),
       minX: 0,
-      maxX: 7,
-      minY: -1,
-      maxY: 123*2,
+      maxX: 6,
+      minY: 0,
+      maxY: 6,
       lineBarsData: [
         LineChartBarData(
           spots: [
-            ...List.generate(ExpenseList.groupedData.length, (index) {
-              print((double.parse(index.toString())));
-              print(ExpenseList.groupedData[index]['amount'] as double);
-              return FlSpot(double.parse(index.toString()),
-                  ExpenseList.groupedData[index]['amount'] as double);
-            })
+            FlSpot(0, flspotarray[6] * 5 / ExpenseList.temp),
+            FlSpot(1, flspotarray[5] * 5 / ExpenseList.temp),
+            FlSpot(2, flspotarray[4] * 5 / ExpenseList.temp),
+            FlSpot(3, flspotarray[3] * 5 / ExpenseList.temp),
+            FlSpot(4, flspotarray[2] * 5 / ExpenseList.temp),
+            FlSpot(5, flspotarray[1] * 5 / ExpenseList.temp),
+            FlSpot(6, flspotarray[0] * 5 / ExpenseList.temp),
           ],
-          isCurved: true,
+          isCurved: false,
           gradient: LinearGradient(
             colors: gradientColors,
           ),
           barWidth: 5,
           isStrokeCapRound: true,
           dotData: FlDotData(
-            show: false,
+            show: true,
           ),
           belowBarData: BarAreaData(
             show: true,
