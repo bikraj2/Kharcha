@@ -1,4 +1,5 @@
 import 'package:demo2/screens/charts/graphs_page.dart';
+import 'package:demo2/screens/pages/home_screen.dart';
 import 'package:demo2/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -13,10 +14,8 @@ class FilterPage extends StatefulWidget {
 
 class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
   String? value;
-
-  String? categories = "";
+  String? value2;
   final years_list = ['2020', '2021', '2022', '2023'];
-  String? category = "";
   final months_list = [
     "Jan",
     "Feb",
@@ -37,10 +36,21 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
     TabController tabController = TabController(length: 3, vsync: this);
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 40,
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return HomeScreen();
+                  },
+                ),
+              );
+            },
+            icon: Icon(Icons.arrow_back_ios),
+            iconSize: 20,
           ),
           Card(
             shape:
@@ -106,42 +116,88 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           SizedBox(
-                            height: 30,
+                            height: 50,
                           ),
-                          Text(
-                            "Filter by year",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                                fontSize: 17,
-                                color: AppTheme.colors.basecolor,
-                                fontWeight: FontWeight.w600),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                "Filter by year",
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    color: AppTheme.colors.secondarycolor,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              Container(
+                                height: 30,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30)),
+                                child: IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.search_rounded),
+                                  color: AppTheme.colors.secondarycolor,
+                                  splashRadius: 22,
+                                  hoverColor: AppTheme.colors.basecolor
+                                      .withOpacity(0.2),
+                                  iconSize: 25,
+                                ),
+                              )
+                            ],
                           ),
-                          DropdownButton<String>(
-                            value: value,
-                            iconSize: 20,
-                            isDense: false,
-                            isExpanded: true,
-                            iconEnabledColor: AppTheme.colors.basecolor,
-                            icon: Icon(Icons.arrow_drop_down_circle,
-                                color: AppTheme.colors.secondarycolor),
-                            items: years_list.map(buildMenuItem).toList(),
-                            onChanged: (value) => setState(() {
-                              this.value = value;
-                            }),
+                          Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15)),
+                            child: DropdownButton<String>(
+                              value: value,
+                              iconSize: 20,
+                              isDense: false,
+                              isExpanded: true,
+                              iconEnabledColor: AppTheme.colors.basecolor,
+                              icon: Icon(Icons.arrow_drop_down_circle,
+                                  color: AppTheme.colors.secondarycolor),
+                              items: years_list.map(buildMenuItem).toList(),
+                              onChanged: (value) => setState(
+                                () => this.value = value,
+                              ),
+                            ),
                           ),
                           SizedBox(
-                            height: 40,
+                            height: 50,
                           ),
-                          Text(
-                            "Filter by month",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                                fontSize: 17,
-                                color: AppTheme.colors.basecolor,
-                                fontWeight: FontWeight.w600),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                "Filter by month",
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    color: AppTheme.colors.secondarycolor,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              Container(
+                                height: 30,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30)),
+                                child: IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.search_rounded),
+                                  color: AppTheme.colors.secondarycolor,
+                                  iconSize: 25,
+                                  splashRadius: 22,
+                                  hoverColor: AppTheme.colors.basecolor
+                                      .withOpacity(0.2),
+                                ),
+                              )
+                            ],
                           ),
                           DropdownButton<String>(
-                            value: value,
+                            value: value2,
                             iconSize: 20,
                             isDense: false,
                             isExpanded: true,
@@ -149,44 +205,67 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                             icon: Icon(Icons.arrow_drop_down_circle,
                                 color: AppTheme.colors.secondarycolor),
                             items: months_list.map(buildMenuItem).toList(),
-                            onChanged: (value) => setState(() {
-                              this.value = value;
+                            onChanged: (value2) => setState(() {
+                              this.value2 = value2;
                             }),
                           ),
                           SizedBox(
-                            height: 20,
+                            height: 50,
                           ),
-                          Text(
-                            "Filter by start and end date",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                                fontSize: 17,
-                                color: AppTheme.colors.basecolor,
-                                fontWeight: FontWeight.w600),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                "Filter by start and end date",
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    color: AppTheme.colors.secondarycolor,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              Container(
+                                height: 30,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30)),
+                                child: IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.search_rounded),
+                                  color: AppTheme.colors.secondarycolor,
+                                  iconSize: 25,
+                                  splashRadius: 22,
+                                  hoverColor: AppTheme.colors.basecolor
+                                      .withOpacity(0.2),
+                                ),
+                              )
+                            ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  width: width / 2.5,
+                                  margin: EdgeInsets.only(top: 20),
+                                  width: width / 2.2,
                                   height: height / 9,
                                   padding: EdgeInsets.all(15),
                                   child: TextField(
                                       controller: _dateController,
                                       decoration: InputDecoration(
+                                        hintText: "DD-MM-YYYY",
                                         labelText: 'Start Date ',
                                         border: OutlineInputBorder(),
                                       ))),
                               Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  width: width / 2.5,
+                                  margin: EdgeInsets.only(top: 20),
+                                  width: width / 2.2,
                                   height: height / 9,
                                   padding: EdgeInsets.all(15),
                                   child: TextField(
                                       controller: _dateController,
                                       decoration: InputDecoration(
+                                        hintText: "DD-MM-YYYY",
                                         labelText: ' End Date',
                                         border: OutlineInputBorder(),
                                       ))),
@@ -207,7 +286,7 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           SizedBox(
-                            height: 30,
+                            height: 50,
                           ),
                           Text(
                             "Filter by Category",
@@ -216,6 +295,9 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                                 fontSize: 17,
                                 color: AppTheme.colors.basecolor,
                                 fontWeight: FontWeight.w600),
+                          ),
+                          SizedBox(
+                            height: 40,
                           ),
                           SizedBox(
                             height: 20,
@@ -228,11 +310,15 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                                 onPressed: () {},
                                 icon: Icon(Icons.fastfood),
                                 iconSize: 60,
+                                hoverColor: AppTheme.colors.secondarycolor
+                                    .withOpacity(0.3),
                               ),
                               IconButton(
                                 onPressed: () {},
                                 icon: Icon(Icons.shopping_basket_rounded),
                                 iconSize: 60,
+                                hoverColor: AppTheme.colors.secondarycolor
+                                    .withOpacity(0.3),
                               )
                             ],
                           ),
@@ -247,11 +333,15 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                                 onPressed: () {},
                                 icon: Icon(Icons.house_rounded),
                                 iconSize: 60,
+                                hoverColor: AppTheme.colors.secondarycolor
+                                    .withOpacity(0.3),
                               ),
                               IconButton(
                                 onPressed: () {},
                                 icon: Icon(Icons.health_and_safety_rounded),
                                 iconSize: 60,
+                                hoverColor: AppTheme.colors.secondarycolor
+                                    .withOpacity(0.3),
                               )
                             ],
                           ),
@@ -266,14 +356,21 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                                 onPressed: () {},
                                 icon: Icon(Icons.laptop_mac_rounded),
                                 iconSize: 60,
+                                hoverColor: AppTheme.colors.secondarycolor
+                                    .withOpacity(0.3),
                               ),
                               IconButton(
                                 onPressed: () {},
                                 icon: Icon(Icons.soap_rounded),
                                 iconSize: 60,
-                              )
+                                hoverColor: AppTheme.colors.secondarycolor
+                                    .withOpacity(0.3),
+                              ),
                             ],
-                          )
+                          ),
+                          SizedBox(
+                            height: 40,
+                          ),
                         ],
                       ),
                     );
