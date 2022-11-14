@@ -101,7 +101,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                     border: OutlineInputBorder(),
                                     suffixIcon: IconButton(
                                       onPressed: () {
-                                        
                                         _moneyController.clear();
                                       },
                                       icon: Icon(Icons.clear),
