@@ -1,3 +1,4 @@
+import 'package:demo2/screens/log/changePassword.dart';
 import 'package:demo2/screens/profile/top_card.dart';
 import 'package:demo2/screens/log/login_screen.dart';
 import 'package:demo2/services/authservices.dart';
@@ -193,6 +194,14 @@ class _ProfilePageState extends State<ProfilePage> {
               const SizedBox(
                 height: 10,
               ),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => changePassword()));
+                  },
+                  child: Text("Change Password")),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(context,

@@ -8,7 +8,7 @@ import '../models/user_info.dart';
 import '../models/expenses.dart';
 import '../token/token.dart';
 
-const url = "http://localhost:3000";
+const url = "http://192.168.1.75:3000";
 
 class AuthService {
   Dio diio = Dio();
@@ -34,6 +34,26 @@ class AuthService {
           data: user.value(),
           options: Options(contentType: Headers.formUrlEncodedContentType));
       ;
+      return value;
+    } on DioError catch (e) {
+      Fluttertoast.showToast(
+          msg: e.response?.data['msg'],
+          textColor: Colors.white,
+          backgroundColor: Colors.red.shade300);
+    }
+  }
+
+  changePassword(String token, String oldPassword, String newPassword) async {
+    try {
+      print(token);
+      var value = await diio.post('${url}/changePassword',
+          data: {"oldPassword":oldPassword, "newPassword":newPassword},
+          queryParameters: {'token':token}
+          );
+           Fluttertoast.showToast(
+          msg: value.data['msg'].toString(),
+          textColor: Colors.white,
+          backgroundColor: Colors.red.shade300);
       return value;
     } on DioError catch (e) {
       Fluttertoast.showToast(

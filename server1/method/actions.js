@@ -72,11 +72,12 @@ var functions = {
   async changePassword(req, res) {
     var password = req.body.oldPassword;
     var newPassword = req.body.newPassword;
-    var token = req.headers.authorization;
-    var email = req.headers.email;
+    var token = req.query['token'];
+    var email = req.query['email'];
     if (token) {
       var decodedtoken = jwt.decode(token, config.secret);
       var userId1 = decodedtoken._id;
+      console.log(userId1)
     } else {
     }
     
