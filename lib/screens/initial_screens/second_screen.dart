@@ -55,22 +55,20 @@ class SecondScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
-                          width: width / 2,
-                          height: height / 2,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              image: DecorationImage(
-                                  image: AssetImage('assetss/images/sack.png'),
-                                  fit: BoxFit.contain)),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Image(
+                              image: AssetImage("assetss/images/sack.png")),
+                          iconSize: 300,
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                        const Text('Plan your Budget',
+                        Text('Plan your Budget',
                             style: TextStyle(
-                                fontSize: 20,
-                                color: Color.fromARGB(255, 35, 45, 64)))
+                                fontSize: 22,
+                                color: AppTheme.colors.secondarycolor,
+                                fontWeight: FontWeight.w600))
                       ],
                     ),
                   ),
@@ -95,7 +93,7 @@ class SecondScreen extends StatelessWidget {
                                       borderRadius:
                                           BorderRadius.circular(width / 2))),
                           backgroundColor: MaterialStateProperty.all(
-                              const Color.fromARGB(255, 220, 63, 107)),
+                              AppTheme.colors.basecolor),
                         ),
                         child: const Text(
                           'Next',
@@ -113,19 +111,20 @@ class SecondScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton(
-                        child: const Text(
+                        child: Text(
                           'Skip',
                           style: TextStyle(
                               decoration: TextDecoration.underline,
-                              fontSize: 16,
-                              color: Color.fromARGB(255, 220, 63, 107)),
+                              fontSize: 15,
+                              color: AppTheme.colors.basecolor,
+                              fontWeight: FontWeight.w600),
                           textAlign: TextAlign.center,
                         ),
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const SignUp()));
+                                  builder: (context) => SignUp()));
                         },
                       ),
                     ],

@@ -69,7 +69,6 @@ flutter:
     - assetss/images/7.png
     - assetss/images/8.png
     - assetss/images/9.png
-    - assetss/images/10.png
     - assetss/images/11.png
     - assetss/images/chart.png
     - assetss/images/img1.png
@@ -85,6 +84,10 @@ flutter:
     - assetss/images/1.png
     - assetss/images/2.png
     - assetss/images/3.png
+    - assetss/images/forgot.png
+    - assetss/images/login.png
+    - assetss/images/loginn.png
+    - assetss/images/12.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

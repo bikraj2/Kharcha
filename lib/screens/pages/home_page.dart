@@ -51,13 +51,6 @@ class _HomePageState extends State<HomePage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        ElevatedButton(
-            onPressed: () {
-              token.storage.read(key: 'jwt').then((val) {
-                AuthService().getMonthlyExpense(val as String, "2022-10");
-              }).then((value) => {print(value.runtimeType)});
-            },
-            child: Text("GetMothlyExpense")),
         Text(
           "  Recent Expenses ",
           style: TextStyle(

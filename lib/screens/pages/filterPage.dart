@@ -36,7 +36,7 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
     TabController tabController = TabController(length: 3, vsync: this);
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           IconButton(
             onPressed: () {
@@ -58,44 +58,48 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
             elevation: 5,
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
+                color: AppTheme.colors.basecolor,
+                borderRadius: BorderRadius.circular(15),
               ),
-              child: TabBar(
-                indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: AppTheme.colors.basecolor,
-                ),
-                controller: tabController,
-                labelColor: Colors.black,
-                isScrollable: true,
-                labelPadding: EdgeInsets.symmetric(horizontal: 20),
-                tabs: [
-                  Tab(
-                    child: Container(
-                        child: Text(
-                      "Date",
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black),
-                    )),
-                  ),
-                  Tab(
-                    child: Container(
-                        child: Text("Category",
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black))),
-                  ),
-                  Tab(
-                    child: Container(
-                        child: Text("Expenses",
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black))),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TabBar(
+                    indicatorColor: AppTheme.colors.backgroundcolor,
+                    indicatorWeight: 5,
+                    indicatorSize: TabBarIndicatorSize.label,
+                    controller: tabController,
+                    labelColor: Colors.white,
+                    isScrollable: true,
+                    labelPadding: EdgeInsets.symmetric(horizontal: 20),
+                    tabs: [
+                      Tab(
+                        child: Container(
+                            child: Text(
+                          "  Date  ",
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white),
+                        )),
+                      ),
+                      Tab(
+                        child: Container(
+                            child: Text("Category",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white))),
+                      ),
+                      Tab(
+                        child: Container(
+                            child: Text("Expenses",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white))),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -247,7 +251,7 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                             children: [
                               Container(
                                   margin: EdgeInsets.only(top: 20),
-                                  width: width / 2.2,
+                                  width: width / 2.5,
                                   height: height / 9,
                                   padding: EdgeInsets.all(15),
                                   child: TextField(
@@ -259,7 +263,7 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                                       ))),
                               Container(
                                   margin: EdgeInsets.only(top: 20),
-                                  width: width / 2.2,
+                                  width: width / 2.5,
                                   height: height / 9,
                                   padding: EdgeInsets.all(15),
                                   child: TextField(

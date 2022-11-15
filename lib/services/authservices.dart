@@ -9,7 +9,7 @@ import '../models/user_info.dart';
 import '../models/expenses.dart';
 import '../token/token.dart';
 
-const url = "http://192.168.1.75:3000";
+const url = "http://localhost:3000";
 
 class AuthService {
   Dio diio = Dio();
@@ -61,11 +61,12 @@ class AuthService {
           backgroundColor: Colors.red.shade300);
     }
   }
-  changeForgottenPassword(String email,  String newPassword) async {
+
+  changeForgottenPassword(String email, String newPassword) async {
     try {
       print(token);
       var value = await diio.post('${url}/changePassword',
-          data: { "newPassword": newPassword},
+          data: {"newPassword": newPassword},
           queryParameters: {'email': email});
       Fluttertoast.showToast(
           msg: value.data['msg'].toString(),

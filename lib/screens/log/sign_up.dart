@@ -8,7 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:demo2/theme/theme.dart';
 
 class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+  SignUp({Key? key}) : super(key: key);
 
   @override
   State<SignUp> createState() => _SignUpState();
@@ -30,12 +30,18 @@ void dipose() {
 }
 
 class _SignUpState extends State<SignUp> {
+  var orientation, size, height, width;
+
   @override
   Widget build(BuildContext context) {
+    orientation = MediaQuery.of(context).orientation;
+    size = MediaQuery.of(context).size;
+    width = size.width;
+    height = size.height;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppTheme.colors.tertiarycolor,
-        // title: Text('Login'),
+        title: Text(''),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
@@ -45,17 +51,18 @@ class _SignUpState extends State<SignUp> {
           },
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(15),
-        color: Colors.white,
-        width: double.infinity,
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Image.asset(
-              'assetss/images/logo.png',
-              height: 130,
+            IconButton(
+              onPressed: () {},
+              icon: Image(
+                  image: AssetImage(
+                'assetss/images/loginn.png',
+              )),
+              iconSize: 250,
             ),
             const SizedBox(
               height: 20,
@@ -66,7 +73,7 @@ class _SignUpState extends State<SignUp> {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
-                hintText: 'Firstname',
+                labelText: 'Firstname',
                 contentPadding: const EdgeInsets.all(15),
                 focusedBorder: OutlineInputBorder(
                   borderSide:
@@ -90,7 +97,7 @@ class _SignUpState extends State<SignUp> {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
-                hintText: 'MiddleName',
+                labelText: 'MiddleName',
                 contentPadding: const EdgeInsets.all(15),
                 focusedBorder: OutlineInputBorder(
                   borderSide:
@@ -113,7 +120,7 @@ class _SignUpState extends State<SignUp> {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
-                hintText: 'Lastname',
+                labelText: 'Lastname',
                 contentPadding: const EdgeInsets.all(15),
                 focusedBorder: OutlineInputBorder(
                   borderSide:
@@ -130,24 +137,26 @@ class _SignUpState extends State<SignUp> {
             const SizedBox(
               height: 20,
             ),
-            TextField(
-              controller: emailController,
-              obscureText: true,
-              style: const TextStyle(fontSize: 18, color: Colors.black54),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                hintText: 'email',
-                contentPadding: const EdgeInsets.all(15),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
+            Container(
+              child: TextField(
+                controller: emailController,
+                obscureText: true,
+                style: const TextStyle(fontSize: 18, color: Colors.black54),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  labelText: 'email',
+                  contentPadding: const EdgeInsets.all(15),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 35, 45, 64)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 35, 45, 64)),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                 ),
               ),
             ),
@@ -160,7 +169,7 @@ class _SignUpState extends State<SignUp> {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: AppTheme.colors.tertiarycolor,
-                hintText: 'Username',
+                labelText: 'Username',
                 contentPadding: const EdgeInsets.all(15),
                 focusedBorder: OutlineInputBorder(
                   borderSide:
@@ -184,7 +193,7 @@ class _SignUpState extends State<SignUp> {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
-                hintText: 'Password',
+                labelText: 'Password',
                 contentPadding: const EdgeInsets.all(15),
                 focusedBorder: OutlineInputBorder(
                   borderSide:
@@ -219,21 +228,11 @@ class _SignUpState extends State<SignUp> {
                       MaterialPageRoute(
                           builder: (context) => const LoginScreen()),
                     );
-                  }else{
+                  } else {
                     Fluttertoast.showToast(msg: val.data['msg']);
                   }
                 });
               },
-              style: ButtonStyle(
-                padding: MaterialStateProperty.all(
-                  const EdgeInsets.all(10),
-                ),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18))),
-                backgroundColor: MaterialStateProperty.all(
-                    const Color.fromARGB(255, 220, 63, 107)),
-              ),
               child: const Text(
                 'Sign Up',
                 style: TextStyle(fontSize: 20),

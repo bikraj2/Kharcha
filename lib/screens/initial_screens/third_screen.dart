@@ -19,7 +19,7 @@ class ThirdScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           // title: Text('Login'),
-          toolbarHeight: width / 13,
+          toolbarHeight: width / 9.5,
           elevation: 0,
           backgroundColor: AppTheme.colors.basecolor,
           leading: IconButton(
@@ -52,22 +52,20 @@ class ThirdScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
-                          width: width / 2,
-                          height: height / 2,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              image: DecorationImage(
-                                  image: AssetImage('assetss/images/chart.png'),
-                                  fit: BoxFit.contain)),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Image(
+                              image: AssetImage("assetss/images/chart.png")),
+                          iconSize: 300,
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                        const Text('Analyze your Expenses',
+                        Text('Analyze your Expenses',
                             style: TextStyle(
-                                fontSize: 20,
-                                color: Color.fromARGB(255, 35, 45, 64)))
+                                fontSize: 22,
+                                color: AppTheme.colors.secondarycolor,
+                                fontWeight: FontWeight.w600))
                       ],
                     ),
                   ),
@@ -91,7 +89,7 @@ class ThirdScreen extends StatelessWidget {
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18))),
                           backgroundColor: MaterialStateProperty.all(
-                              const Color.fromARGB(255, 220, 63, 107)),
+                              AppTheme.colors.basecolor),
                         ),
                         child: const Text(
                           'Next',
@@ -109,19 +107,19 @@ class ThirdScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton(
-                        child: const Text(
+                        child: Text(
                           'Skip',
                           style: TextStyle(
                               fontSize: 16,
                               decoration: TextDecoration.underline,
-                              color: Color.fromARGB(255, 220, 63, 107)),
+                              color: AppTheme.colors.basecolor),
                           textAlign: TextAlign.center,
                         ),
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const SignUp()));
+                                  builder: (context) => SignUp()));
                         },
                       ),
                     ],

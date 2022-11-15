@@ -1,5 +1,6 @@
 import 'package:demo2/models/finance.dart';
 import 'package:demo2/screens/initial_screens/first_screen.dart';
+import 'package:demo2/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../services/authservices.dart';
@@ -32,6 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         // title: Text('Login'),
         elevation: 0,
+        title: Text("Login"),
         backgroundColor: const Color.fromARGB(255, 35, 45, 64),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
@@ -49,9 +51,12 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Image.asset(
-              'assetss/images/logo.png',
-              height: 130,
+            IconButton(
+              onPressed: () {},
+              icon: Image(
+                image: AssetImage("assetss/images/loginn.png"),
+              ),
+              iconSize: 350,
             ),
             const SizedBox(
               height: 20,
@@ -60,21 +65,11 @@ class _LoginScreenState extends State<LoginScreen> {
               controller: usernameController,
               style: const TextStyle(fontSize: 18, color: Colors.black54),
               decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                hintText: 'Username',
-                contentPadding: const EdgeInsets.all(15),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-              ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  labelText: 'Username',
+                  contentPadding: const EdgeInsets.all(15),
+                  border: OutlineInputBorder()),
             ),
             const SizedBox(
               height: 20,
@@ -86,18 +81,9 @@ class _LoginScreenState extends State<LoginScreen> {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
-                hintText: 'Password',
+                labelText: 'Password',
                 contentPadding: const EdgeInsets.all(15),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
+                border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(
@@ -158,8 +144,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18))),
-                backgroundColor: MaterialStateProperty.all(
-                    const Color.fromARGB(255, 220, 63, 107)),
+                backgroundColor:
+                    MaterialStateProperty.all(AppTheme.colors.basecolor),
               ),
               child: const Text(
                 'login',

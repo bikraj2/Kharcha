@@ -36,19 +36,17 @@ class _GraphPageState extends State<GraphPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                      color: Colors.white,
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (BuildContext) {
-                            return PieChartPage();
-                          }));
-                        },
-                        icon: Image.asset("assetss/images/2.png"),
-                        iconSize: width / 2.5,
-                        color: AppTheme.colors.secondarycolor,
-                      )),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (BuildContext) {
+                        return PieChartPage();
+                      }));
+                    },
+                    icon: Image.asset("assetss/images/2.png"),
+                    iconSize: width / 2.5,
+                    color: AppTheme.colors.secondarycolor,
+                  ),
                   Container(
                     child: Text(
                         "\n Something about pie chart \n i really love pie chart "),
@@ -63,35 +61,31 @@ class _GraphPageState extends State<GraphPage> {
                     height: height / 5,
                     width: width / 1.8,
                   ),
-                  Container(
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (BuildContext) {
-                          return LineChartClass1();
-                        }));
-                      },
-                      icon: Image.asset("assetss/images/3.png"),
-                      color: AppTheme.colors.basecolor,
-                      iconSize: width / 2.5,
-                    ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (BuildContext) {
+                        return LineChartClass1();
+                      }));
+                    },
+                    icon: Image.asset("assetss/images/3.png"),
+                    color: AppTheme.colors.basecolor,
+                    iconSize: width / 2.5,
                   ),
                 ],
               ),
               Row(children: [
-                Container(
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (BuildContext) {
-                        return BarChartSample1();
-                      }));
-                    },
-                    icon: Image.asset("assetss/images/1.png"),
-                    color: AppTheme.colors.secondarycolor,
-                    iconSize: width / 2.5,
-                  ),
-                )
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (BuildContext) {
+                      return BarChartSample1();
+                    }));
+                  },
+                  icon: Image.asset("assetss/images/1.png"),
+                  color: AppTheme.colors.secondarycolor,
+                  iconSize: width / 2.5,
+                ),
               ]),
             ],
           ),

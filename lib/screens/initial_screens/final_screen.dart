@@ -15,10 +15,10 @@ class ReadyScreen extends StatelessWidget {
     size = MediaQuery.of(context).size;
     height = size.height;
     width = size.width;
-  return Scaffold(
-      appBar: AppBar(
+    return Scaffold(
+        appBar: AppBar(
           // title: Text('Login'),
-          toolbarHeight: width / 10,
+          toolbarHeight: width / 9.5,
 
           elevation: 0,
           backgroundColor: AppTheme.colors.basecolor,
@@ -40,22 +40,20 @@ class ReadyScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
-                          width: width / 2,
-                          height: height / 2,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.rectangle,
-                              image: DecorationImage(
-                                  image: AssetImage('assetss/images/tick.png'),
-                                  fit: BoxFit.cover)),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Image(
+                              image: AssetImage("assetss/images/tick.png")),
+                          iconSize: 300,
                         ),
                         const SizedBox(
                           height: 0,
                         ),
-                        const Text("Let's Get Started !",
+                        Text("Let's Get Started !",
                             style: TextStyle(
                                 fontSize: 22,
-                                color: Color.fromARGB(255, 35, 45, 64)))
+                                color: AppTheme.colors.secondarycolor,
+                                fontWeight: FontWeight.w600))
                       ],
                     ),
                   ),
@@ -68,7 +66,7 @@ class ReadyScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const SignUp()));
+                                  builder: (context) => SignUp()));
                         },
                         style: ButtonStyle(
                           padding: MaterialStateProperty.all(
@@ -79,7 +77,7 @@ class ReadyScreen extends StatelessWidget {
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18))),
                           backgroundColor: MaterialStateProperty.all(
-                              const Color.fromARGB(255, 220, 63, 107)),
+                              AppTheme.colors.basecolor),
                         ),
                         child: const Text(
                           'Sign Up',
