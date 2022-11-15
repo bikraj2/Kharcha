@@ -33,9 +33,9 @@ class _HomePageState extends State<HomePage> {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
         prevCount = nextCount - 1;
-        nextCount = ExpenseList.data.length < nextCount + 5
+        nextCount = ExpenseList.data.length < nextCount +10
             ? ExpenseList.data.length
-            : nextCount + 5;
+            : nextCount + 10;
         Future.delayed(const Duration(seconds: 1, milliseconds: 500), () {
           if (mounted) {
             setState(() {});
@@ -75,6 +75,7 @@ class _HomePageState extends State<HomePage> {
         var tk = await token.storage.read(key: 'jwt');
         final res = await AuthService().getExpense(tk as String);
         for (Map i in res.data['ans']) {
+          print(i['date']);
           expenseList.add(
             Expense(
                 id: i['_id'],
@@ -84,6 +85,7 @@ class _HomePageState extends State<HomePage> {
                 category: i['category']),
           );
         }
+        expenseList.map((e) => print(e.date));
         return expenseList;
       } catch (e) {
         throw e;
@@ -143,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                             expenseList.length < nextCount
                                 ? expenseList.length
                                 : nextCount);
-
+                        print(expenseList);
                         return ListView.builder(
                             controller: _scrollController,
                             itemCount: nextCount,

@@ -1,7 +1,17 @@
 import 'package:demo2/models/expenseList.dart';
+import 'package:demo2/services/authservices.dart';
 import 'package:demo2/theme/theme.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:basic_utils/basic_utils.dart';
+import 'package:demo2/token/token.dart';
+import 'package:quiver/time.dart';
+
+List<Color> gradientColors = [
+  AppTheme.colors.basecolor,
+  AppTheme.colors.boxcolor,
+];
+LineChartData choice = 0 as LineChartData;
 // import 'package:basic_utils/basic_utils.dart';
 
 class LineChartClass1 extends StatelessWidget {
@@ -27,23 +37,16 @@ class LineChartSample2 extends StatefulWidget {
 }
 
 class _LineChartSample2State extends State<LineChartSample2> {
-  List<Color> gradientColors = [
-    AppTheme.colors.basecolor,
-    AppTheme.colors.boxcolor,
-  ];
-
   var lineChartdata = ExpenseList.groupedData;
   bool showAvg = false;
-  List<double> flspotarray = ExpenseList.arraylist() as List<double>;
+  List<double> flspotarray = ExpenseList.weeklyarraylist() as List<double>;
 
   @override
   Widget build(BuildContext context) {
-    print(lineChartdata);
-
     return Stack(
       children: <Widget>[
         AspectRatio(
-          aspectRatio: 16.0 / 9.0,
+          aspectRatio: 19.0 / 9.0,
           child: DecoratedBox(
             decoration: const BoxDecoration(
               color: Color(0xff232d37),
@@ -56,11 +59,77 @@ class _LineChartSample2State extends State<LineChartSample2> {
                 bottom: 25,
               ),
               child: LineChart(
-                mainData(),
+                check ? monthData() : yearData(),
+
+                //cant seem to solve the issue of trying to display different data without refreshing the page .
               ),
             ),
           ),
         ),
+        ElevatedButton(
+          child: Padding(padding: EdgeInsets.all(10), child: Text("hello")),
+          onPressed: () {
+            check = !check;
+            print(check);
+          },
+        ),
+        ElevatedButton(
+            onPressed: () async {
+              // ExpenseList.getMonthData('2022-01').then((value) {
+              //   ExpenseList.groupMonthlyValues(2022, 01, daysInMonth(2022, 01));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+              // ExpenseList.getMonthData('2022-02').then((value) {
+              //   ExpenseList.groupMonthlyValues(2022, 02, daysInMonth(2022, 02));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+              // ExpenseList.getMonthData('2022-03').then((value) {
+              //   ExpenseList.groupMonthlyValues(2022, 03, daysInMonth(2022, 03));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+              // ExpenseList.getMonthData('2022-04').then((value) {
+              //   ExpenseList.groupMonthlyValues(2022, 04, daysInMonth(2022, 04));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+              // ExpenseList.getMonthData('2022-05').then((value) {
+              //   ExpenseList.groupMonthlyValues(2022, 05, daysInMonth(2022, 05));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+              // ExpenseList.getMonthData('2022-06').then((value) {
+              //   ExpenseList.groupMonthlyValues(2022, 06, daysInMonth(2022, 06));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+              // ExpenseList.getMonthData('2022-07').then((value) {
+              //   ExpenseList.groupMonthlyValues(2022, 07, daysInMonth(2022, 07));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+
+              // ExpenseList.getMonthData('2022-08').then((value) {
+              //   ExpenseList.groupMonthlyValues(2022, 08, daysInMonth(2022, 08));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+              // ExpenseList.getMonthData('2022-09').then((value) {
+              //   ExpenseList.groupMonthlyValues(2022, 09, daysInMonth(2022, 09));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+              try {
+                var value = await ExpenseList.getMonthData('2022-10');
+                value.map((e) => {print(e.date)});
+                print(ExpenseList.groupMonthlyValues(
+                    2022, 10, daysInMonth(2022, 10)));
+              } catch (e) {}
+              // print(ExpenseList.monthlyArrayList());
+              // ExpenseList.getMonthData('2022-11').then((value) {
+              //   print(ExpenseList.groupMonthlyValues(
+              //       2022, 11, daysInMonth(2022, 11)));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+              // ExpenseList.getMonthData('2022-12').then((value) {
+              //   ExpenseList.groupMonthlyValues(2022, 12, daysInMonth(2022, 12));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+            },
+            child: const Text("Month")),
       ],
     );
   }
@@ -129,23 +198,23 @@ class _LineChartSample2State extends State<LineChartSample2> {
         break;
 
       case 1:
-        text = ExpenseList.zeros(ExpenseList.temp * .2);
+        text = ExpenseList.zeros(ExpenseList.weektemp * .2);
         break;
       case 2:
-        text = ExpenseList.zeros(ExpenseList.temp * .4);
+        text = ExpenseList.zeros(ExpenseList.weektemp * .4);
         break;
       case 3:
-        text = ExpenseList.zeros(ExpenseList.temp * .6);
+        text = ExpenseList.zeros(ExpenseList.weektemp * .6);
         break;
       case 4:
-        text = ExpenseList.zeros(ExpenseList.temp * .8);
+        text = ExpenseList.zeros(ExpenseList.weektemp * .8);
 
         break;
       case 5:
-        text = ExpenseList.zeros(ExpenseList.temp);
+        text = ExpenseList.zeros(ExpenseList.weektemp);
         break;
       case 6:
-        text = ExpenseList.zeros(ExpenseList.temp * 1.2);
+        text = ExpenseList.zeros(ExpenseList.weektemp * 1.2);
         break;
 
       default:
@@ -211,13 +280,13 @@ class _LineChartSample2State extends State<LineChartSample2> {
       lineBarsData: [
         LineChartBarData(
           spots: [
-            FlSpot(0, flspotarray[6] * 5 / ExpenseList.temp),
-            FlSpot(1, flspotarray[5] * 5 / ExpenseList.temp),
-            FlSpot(2, flspotarray[4] * 5 / ExpenseList.temp),
-            FlSpot(3, flspotarray[3] * 5 / ExpenseList.temp),
-            FlSpot(4, flspotarray[2] * 5 / ExpenseList.temp),
-            FlSpot(5, flspotarray[1] * 5 / ExpenseList.temp),
-            FlSpot(6, flspotarray[0] * 5 / ExpenseList.temp),
+            FlSpot(0, flspotarray[6] * 5 / ExpenseList.weektemp),
+            FlSpot(1, flspotarray[5] * 5 / ExpenseList.weektemp),
+            FlSpot(2, flspotarray[4] * 5 / ExpenseList.weektemp),
+            FlSpot(3, flspotarray[3] * 5 / ExpenseList.weektemp),
+            FlSpot(4, flspotarray[2] * 5 / ExpenseList.weektemp),
+            FlSpot(5, flspotarray[1] * 5 / ExpenseList.weektemp),
+            FlSpot(6, flspotarray[0] * 5 / ExpenseList.weektemp),
           ],
           isCurved: false,
           gradient: LinearGradient(
@@ -240,4 +309,358 @@ class _LineChartSample2State extends State<LineChartSample2> {
       ],
     );
   }
+}
+
+LineChartData monthData() {
+  return LineChartData(
+    gridData: FlGridData(
+      show: true,
+      drawVerticalLine: true,
+      horizontalInterval: 1,
+      verticalInterval: 1,
+      getDrawingHorizontalLine: (value) {
+        return FlLine(
+          color: const Color(0xff37434d),
+          strokeWidth: 1.5,
+        );
+      },
+      getDrawingVerticalLine: (value) {
+        return FlLine(
+          color: const Color(0xff37434d),
+          strokeWidth: 1.5,
+        );
+      },
+    ),
+    titlesData: FlTitlesData(
+      show: true,
+      rightTitles: AxisTitles(
+        sideTitles: SideTitles(showTitles: false),
+      ),
+      topTitles: AxisTitles(
+        sideTitles: SideTitles(showTitles: false),
+      ),
+      bottomTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: true,
+          reservedSize: 30,
+          interval: 1,
+          getTitlesWidget: bottomTitlemonthWidgets,
+        ),
+      ),
+      leftTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: true,
+          interval: 1,
+          getTitlesWidget: leftTitlemonthWidgets,
+          reservedSize: 42,
+        ),
+      ),
+    ),
+    borderData: FlBorderData(
+      show: true,
+      border: Border.all(color: const Color(0xff37434d)),
+    ),
+    minX: 0,
+    maxX: 7,
+    minY: 0,
+    maxY: 6,
+    lineBarsData: [
+      LineChartBarData(
+        spots: [
+          FlSpot(0, 1),
+          FlSpot(1, 1),
+          FlSpot(2, 1),
+          FlSpot(3.4, 8),
+          FlSpot(3, 1),
+          FlSpot(4, 3),
+          FlSpot(5, 1),
+          FlSpot(6, 1),
+        ],
+        isCurved: false,
+        gradient: LinearGradient(
+          colors: gradientColors,
+        ),
+        barWidth: 5,
+        isStrokeCapRound: true,
+        dotData: FlDotData(
+          show: true,
+        ),
+        belowBarData: BarAreaData(
+          show: true,
+          gradient: LinearGradient(
+            colors:
+                gradientColors.map((color) => color.withOpacity(0.3)).toList(),
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+Widget leftTitlemonthWidgets(double value, TitleMeta meta) {
+  const style = TextStyle(
+    color: Color(0xff67727d),
+    fontWeight: FontWeight.bold,
+    fontSize: 15,
+  );
+
+  String text;
+
+  switch (value.toInt()) {
+    case 0:
+      text = '0';
+      break;
+
+    case 1:
+      text = ExpenseList.zeros(ExpenseList.weektemp * .2);
+      break;
+    case 2:
+      text = ExpenseList.zeros(ExpenseList.weektemp * .4);
+      break;
+    case 3:
+      text = ExpenseList.zeros(ExpenseList.weektemp * .6);
+      break;
+    case 4:
+      text = ExpenseList.zeros(ExpenseList.weektemp * .8);
+
+      break;
+    case 5:
+      text = ExpenseList.zeros(ExpenseList.weektemp);
+      break;
+    case 6:
+      text = ExpenseList.zeros(ExpenseList.weektemp * 1.2);
+      break;
+
+    default:
+      return Container();
+  }
+
+  return Text(text, style: style, textAlign: TextAlign.left);
+}
+
+Widget bottomTitlemonthWidgets(double value, TitleMeta meta) {
+  const style = TextStyle(
+    color: Color(0xff68737d),
+    fontWeight: FontWeight.bold,
+    fontSize: 16,
+  );
+
+  Widget text;
+  switch (value.toInt()) {
+    case 0:
+      text = Text("0", style: style);
+      break;
+    case 1:
+      text = Text("5th", style: style);
+      break;
+    case 2:
+      text = Text("10th", style: style);
+      break;
+    case 3:
+      text = Text("15th", style: style);
+      break;
+    case 4:
+      text = Text("20th", style: style);
+      break;
+    case 5:
+      text = Text("25th", style: style);
+      break;
+    case 6:
+      text = Text("30th", style: style);
+      break;
+    case 7:
+      text = Text("35th", style: style);
+      break;
+    default:
+      text = const Text('', style: style);
+      break;
+  }
+
+  return SideTitleWidget(
+    axisSide: meta.axisSide,
+    child: text,
+  );
+}
+
+LineChartData yearData() {
+  return LineChartData(
+    gridData: FlGridData(
+      show: true,
+      drawVerticalLine: true,
+      horizontalInterval: 1,
+      verticalInterval: 1,
+      getDrawingHorizontalLine: (value) {
+        return FlLine(
+          color: const Color(0xff37434d),
+          strokeWidth: 1.5,
+        );
+      },
+      getDrawingVerticalLine: (value) {
+        return FlLine(
+          color: const Color(0xff37434d),
+          strokeWidth: 1.5,
+        );
+      },
+    ),
+    titlesData: FlTitlesData(
+      show: true,
+      rightTitles: AxisTitles(
+        sideTitles: SideTitles(showTitles: false),
+      ),
+      topTitles: AxisTitles(
+        sideTitles: SideTitles(showTitles: false),
+      ),
+      bottomTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: true,
+          reservedSize: 30,
+          interval: 1,
+          getTitlesWidget: bottomTitleYearWidgets,
+        ),
+      ),
+      leftTitles: AxisTitles(
+        sideTitles: SideTitles(
+          showTitles: true,
+          interval: 1,
+          getTitlesWidget: leftTitleYearWidgets,
+          reservedSize: 42,
+        ),
+      ),
+    ),
+    borderData: FlBorderData(
+      show: true,
+      border: Border.all(color: const Color(0xff37434d)),
+    ),
+    minX: 0,
+    maxX: 11,
+    minY: 0,
+    maxY: 6,
+    lineBarsData: [
+      LineChartBarData(
+        spots: [
+          FlSpot(0, 1),
+          FlSpot(1, 1),
+          FlSpot(2, 1),
+          FlSpot(3, 1),
+          FlSpot(4, 3),
+          FlSpot(5, 1),
+          FlSpot(6, 1),
+        ],
+        isCurved: false,
+        gradient: LinearGradient(
+          colors: gradientColors,
+        ),
+        barWidth: 5,
+        isStrokeCapRound: true,
+        dotData: FlDotData(
+          show: true,
+        ),
+        belowBarData: BarAreaData(
+          show: true,
+          gradient: LinearGradient(
+            colors:
+                gradientColors.map((color) => color.withOpacity(0.3)).toList(),
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+Widget leftTitleYearWidgets(double value, TitleMeta meta) {
+  const style = TextStyle(
+    color: Color(0xff67727d),
+    fontWeight: FontWeight.bold,
+    fontSize: 15,
+  );
+
+  String text;
+
+  switch (value.toInt()) {
+    case 0:
+      text = '0';
+      break;
+
+    case 1:
+      text = ExpenseList.zeros(ExpenseList.weektemp * .2);
+      break;
+    case 2:
+      text = ExpenseList.zeros(ExpenseList.weektemp * .4);
+      break;
+    case 3:
+      text = ExpenseList.zeros(ExpenseList.weektemp * .6);
+      break;
+    case 4:
+      text = ExpenseList.zeros(ExpenseList.weektemp * .8);
+
+      break;
+    case 5:
+      text = ExpenseList.zeros(ExpenseList.weektemp);
+      break;
+    case 6:
+      text = ExpenseList.zeros(ExpenseList.weektemp * 1.2);
+      break;
+
+    default:
+      return Container();
+  }
+
+  return Text(text, style: style, textAlign: TextAlign.left);
+}
+
+Widget bottomTitleYearWidgets(double value, TitleMeta meta) {
+  const style = TextStyle(
+    color: Color(0xff68737d),
+    fontWeight: FontWeight.bold,
+    fontSize: 16,
+  );
+
+  Widget text;
+  switch (value.toInt()) {
+    case 0:
+      text = Text("Jan", style: style);
+      break;
+    case 1:
+      text = Text("Feb", style: style);
+      break;
+    case 2:
+      text = Text("Mar", style: style);
+      break;
+    case 3:
+      text = Text("Apr", style: style);
+      break;
+    case 4:
+      text = Text("May", style: style);
+      break;
+    case 5:
+      text = Text("June", style: style);
+      break;
+    case 6:
+      text = Text("July", style: style);
+      break;
+    case 7:
+      text = Text("Aug", style: style);
+      break;
+    case 8:
+      text = Text("Sep", style: style);
+      break;
+    case 9:
+      text = Text("Oct", style: style);
+      break;
+    case 10:
+      text = Text("Nov", style: style);
+      break;
+    case 11:
+      text = Text("Dec", style: style);
+      break;
+
+    default:
+      text = const Text('', style: style);
+      break;
+  }
+
+  return SideTitleWidget(
+    axisSide: meta.axisSide,
+    child: text,
+  );
 }
