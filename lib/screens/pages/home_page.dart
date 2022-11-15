@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
         var tk = await token.storage.read(key: 'jwt');
         final res = await AuthService().getExpense(tk as String);
         for (Map i in res.data['ans']) {
-          print(i['date']);
+          
           expenseList.add(
             Expense(
                 id: i['_id'],
@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                 category: i['category']),
           );
         }
-        expenseList.map((e) => print(e.date));
+        
         return expenseList;
       } catch (e) {
         throw e;
@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                             expenseList.length < nextCount
                                 ? expenseList.length
                                 : nextCount);
-                        print(expenseList);
+                        
                         return ListView.builder(
                             controller: _scrollController,
                             itemCount: nextCount,

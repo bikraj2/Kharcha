@@ -66,6 +66,7 @@ class ExpenseList {
     for (var i = 0; i < 7; i++) {
       weekarray.add(groupedData[i]['amount'] as double);
     }
+    findMaxweek();
 
     return weekarray;
   }
@@ -83,8 +84,8 @@ class ExpenseList {
             date1: DateTime.parse(i['date']).toLocal(),
             category: i['category'],
             id: i['id']));
-        
       }
+      groupMonthlyValues(2022, 10, daysInMonth(2022, 10));
 
       return monthdata;
     } catch (e) {
@@ -114,6 +115,7 @@ class ExpenseList {
         'amount': totalSuminMonth
       };
     });
+
   }
 
   static List monthlyArrayList() {
@@ -127,21 +129,19 @@ class ExpenseList {
     return montharray;
   }
 
-  // static double findMaxmonth() {
-  // //   var lineData = ExpenseList.groupedData;
-
-  // //   var max = lineData.reduce((currentUser, nextUser) =>
-  // //       (currentUser['amount'] as double) > (nextUser['amount'] as double)
-  // //           ? currentUser
-  // //           : nextUser);
-  // //   double maxA = max["amount"] as double;
-
-  // //   weektemp = maxA * 1.5;
-  // //   weektemp = double.parse(weektemp.toStringAsFixed(2));
-
-  // //   return weektemp;
-  // //
-  // }
+  static double findMaxmonth() {
+    
+    var lineData = ExpenseList.monthgroupedData;
+    var max = lineData.reduce((currentUser, nextUser) =>
+        (currentUser['amount'] as double) > (nextUser['amount'] as double)
+            ? currentUser
+            : nextUser);
+    double maxA = max["amount"] as double;
+    monthtemp = maxA * 1.5;
+    monthtemp = double.parse(monthtemp.toStringAsFixed(2));
+    
+    return monthtemp;
+  }
 
   static double findMaxweek() {
     var lineData = ExpenseList.groupedData;
