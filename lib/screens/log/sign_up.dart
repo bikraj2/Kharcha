@@ -219,7 +219,7 @@ class _SignUpState extends State<SignUp> {
                       MaterialPageRoute(
                           builder: (context) => const LoginScreen()),
                     );
-                  }else{
+                  } else {
                     Fluttertoast.showToast(msg: val.data['msg']);
                   }
                 });

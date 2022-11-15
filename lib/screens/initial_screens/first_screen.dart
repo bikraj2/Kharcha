@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 // import 'package:demo2/theme/color.dart';
 import 'package:demo2/theme/theme.dart';
 
-
 import '../pages/home_screen.dart';
 import 'second_screen.dart';
 // import '../log/login_screen.dart';
@@ -25,71 +24,84 @@ class GetStartedScreen extends StatelessWidget {
     width = size.width;
 
     return Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 40,
+        ),
         body: Container(
             color: AppTheme.colors.tertiarycolor,
             child: Padding(
               padding: const EdgeInsets.all(30),
               child: Column(
                 children: <Widget>[
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: Image(
+                            image: AssetImage("assetss/images/login.png")),
+                        iconSize: 300,
+                      ),
+                      // Container(
+                      //   width: width / 2,
+                      //   height: height / 2,
+                      //   decoration: const BoxDecoration(
+                      //       image: DecorationImage(
+                      //           image: AssetImage('assetss/images/login.png'),
+                      //           fit: BoxFit.contain)),
+                      // ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text('Expense Tracking Application',
+                          style: TextStyle(
+                              fontSize: 22,
+                              color: AppTheme.colors.secondarycolor,
+                              fontWeight: FontWeight.w600))
+                    ],
+                  ),
                   Expanded(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Container(
-                          width: width / 2,
-                          height: height / 2,
-                          decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage('assetss/images/logo.png'),
-                                  fit: BoxFit.contain)),
+                        SizedBox(
+                          height: 60,
                         ),
-                        const SizedBox(
-                          height: 10,
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SecondScreen()));
+                          },
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all(
+                              const EdgeInsets.all(10),
+                            ),
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15))),
+                            backgroundColor: MaterialStateProperty.all(
+                                AppTheme.colors.basecolor),
+                          ),
+                          child: const Text(
+                            'Get Started',
+                            style: TextStyle(fontSize: 20),
+                          ),
                         ),
-                        const Text('Expense Tracking Application',
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Color.fromARGB(255, 35, 45, 64)))
+                        Image(
+                          image: AssetImage('assetss/images/img1.png'),
+                          height: height / 10,
+                          width: width / 5,
+                        )
                       ],
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SecondScreen()));
-                        },
-                        style: ButtonStyle(
-                          padding: MaterialStateProperty.all(
-                            const EdgeInsets.all(10),
-                          ),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18))),
-                          backgroundColor: MaterialStateProperty.all(
-                              AppTheme.colors.basecolor),
-                        ),
-                        child: const Text(
-                          'Get Started',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ),
-                      Image(
-                        image: AssetImage('assetss/images/img1.png'),
-                        height: height / 10,
-                        width: width / 5,
-                      )
-                    ],
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Text(
                         'Have an account?',
@@ -98,11 +110,11 @@ class GetStartedScreen extends StatelessWidget {
                         ),
                       ),
                       TextButton(
-                        child: const Text('Login',
+                        child: Text('Login',
                             style: TextStyle(
                                 fontSize: 18,
                                 decoration: TextDecoration.underline,
-                                color: Color.fromARGB(255, 220, 63, 107))),
+                                color: AppTheme.colors.basecolor)),
                         onPressed: () {
                           Navigator.push(
                               context,
