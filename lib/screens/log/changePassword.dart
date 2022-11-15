@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:demo2/token/token.dart';
 
+import '../pages/home_screen.dart';
+
 class changePassword extends StatefulWidget {
   const changePassword({super.key});
 
@@ -20,7 +22,22 @@ class _changePasswordState extends State<changePassword> {
     return Scaffold(
       body: SafeArea(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return HomeScreen();
+                    },
+                  ),
+                );
+              },
+              icon: Icon(Icons.arrow_back_ios),
+              iconSize: 20,
+            ),
             TextField(
               controller: _oldPasswordController,
               decoration: InputDecoration(
