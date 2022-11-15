@@ -1,6 +1,6 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var bcrypt = require('bcrypt')
+var bcrypt = require('bcrypt');
 var userSchema1 = new Schema({
   firstName: {
     type: String,
@@ -36,34 +36,35 @@ var userSchema1 = new Schema({
   },
 });
 
-userSchema1.pre('save',function (next){
-    var user = this;
-    if (this.isModified('password') || this.isNew){
-        bcrypt.genSalt(10,(err,salt) => {
-            if(err){
-                return next(err)
-            }
-        console.log(user.password)
-           bcrypt.hash(user.password,salt, (err,hash)=>{
-            if (err){
-                return next(err)
-            }
-            user.password  = hash;
-            next()
-           })
-        })
-    }
-    else {
-        return next()
-    }
-})
-userSchema1.methods.comparePassword = function (passw,cb){
-    bcrypt.compare(passw,this.password,(err,isMatch)=>{
-        if(err){
-            return cb(err)
+userSchema1.pre('save', function (next) {
+  var user = this;
+  if (this.isModified('password') || this.isNew) {
+    
+    bcrypt.genSalt(10, (err, salt) => {
+      
+      if (err) {
+        return next(err);
+      }
+      console.log(user.password);
+      bcrypt.hash(user.password, salt, (err, hash) => {
+        if (err) {
+          return next(err);
         }
-        cb(null,isMatch)
-    })
-}
+        user.password = hash;
+        next();
+      });
+    });
+  } else {
+    return next();
+  }
+});
+userSchema1.methods.comparePassword = function (passw, cb) {
+  bcrypt.compare(passw, this.password, (err, isMatch) => {
+    if (err) {
+      return cb(err);
+    }
+    cb(null, isMatch);
+  });
+};
 
-module.exports = mongoose.model('User', userSchema1)
+module.exports = mongoose.model('User', userSchema1);

@@ -1,7 +1,7 @@
 import 'dart:async';
-
 import 'dart:math';
 
+import 'package:demo2/screens/log/forgotPassword.dart';
 import 'package:dio/dio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +9,7 @@ import '../models/user_info.dart';
 import '../models/expenses.dart';
 import '../token/token.dart';
 
-const url = "http://localhost:3000";
+const url = "http://192.168.1.75:3000";
 
 class AuthService {
   Dio diio = Dio();
@@ -34,6 +34,63 @@ class AuthService {
           data: user.value(),
           options: Options(contentType: Headers.formUrlEncodedContentType));
       ;
+      return value;
+    } on DioError catch (e) {
+      Fluttertoast.showToast(
+          msg: e.response?.data['msg'],
+          textColor: Colors.white,
+          backgroundColor: Colors.red.shade300);
+    }
+  }
+
+  changePassword(String token, String oldPassword, String newPassword) async {
+    try {
+      print(token);
+      var value = await diio.post('${url}/changePassword',
+          data: {"oldPassword": oldPassword, "newPassword": newPassword},
+          queryParameters: {'token': token});
+      Fluttertoast.showToast(
+          msg: value.data['msg'].toString(),
+          textColor: Colors.white,
+          backgroundColor: Colors.red.shade300);
+      return value;
+    } on DioError catch (e) {
+      Fluttertoast.showToast(
+          msg: e.response?.data['msg'],
+          textColor: Colors.white,
+          backgroundColor: Colors.red.shade300);
+    }
+  }
+  changeForgottenPassword(String email,  String newPassword) async {
+    try {
+      print(token);
+      var value = await diio.post('${url}/changePassword',
+          data: { "newPassword": newPassword},
+          queryParameters: {'email': email});
+      Fluttertoast.showToast(
+          msg: value.data['msg'].toString(),
+          textColor: Colors.white,
+          backgroundColor: Colors.red.shade300);
+      return value;
+    } on DioError catch (e) {
+      Fluttertoast.showToast(
+          msg: e.response?.data['msg'],
+          textColor: Colors.white,
+          backgroundColor: Colors.red.shade300);
+    }
+  }
+
+  forgotPasswowrd(String? token1, String email) async {
+    try {
+      var value = await diio.post('${url}/forgotPassword',
+          data: {"email": email}, queryParameters: {'token': token1});
+      var otp = value.data['data']['otp'];
+      token.storage.write(key: 'otp', value: otp);
+      token.storage.write(key: 'email', value: email);
+      Fluttertoast.showToast(
+          msg: value.data['msg'].toString(),
+          textColor: Colors.white,
+          backgroundColor: Colors.red.shade300);
       return value;
     } on DioError catch (e) {
       Fluttertoast.showToast(
