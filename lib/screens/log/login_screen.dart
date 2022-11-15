@@ -125,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ExpenseList.groupedTransactionValues();
                       });
                       Finance.getFinance();
-                      ExpenseList.findMax();
+                      ExpenseList.findMaxweek();
                       Navigator.push(
                         context,
                         MaterialPageRoute(

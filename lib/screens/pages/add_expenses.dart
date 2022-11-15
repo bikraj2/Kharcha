@@ -202,7 +202,7 @@ class _expenseAdderState extends State<expenseAdder> {
                                 ExpenseList.getData().then((value) {
                                   ExpenseList.groupedTransactionValues();
                                 });
-                                ExpenseList.findMax();
+                                ExpenseList.findMaxweek();
                                 Fluttertoast.showToast(
                                     msg: val.data['msg'],
                                     textColor: Colors.white,

@@ -18,10 +18,9 @@ class AuthService {
       var value = await diio.post("${url}/authenticate",
           data: {"username": username, "password": password},
           options: Options(contentType: Headers.formUrlEncodedContentType));
-      print(username);
+
       return value;
     } on DioError catch (e) {
-      print(e);
       Fluttertoast.showToast(
           msg: e.response?.data['msg'],
           textColor: Colors.white,
@@ -119,7 +118,7 @@ class AuthService {
       var value = await diio.get("${url}/getExpense",
           queryParameters: {"token": token, "month": month},
           options: Options(contentType: Headers.formUrlEncodedContentType));
-      print(value);
+      return value;
     } on DioError catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
     }
@@ -130,7 +129,7 @@ class AuthService {
       var value = await diio.get("${url}/getExpense",
           queryParameters: {"token": token, "year": month},
           options: Options(contentType: Headers.formUrlEncodedContentType));
-          print(value);
+      print(value);
       return value;
     } on DioError catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
