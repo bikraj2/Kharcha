@@ -47,7 +47,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
       child: Column(
         children: <Widget>[
           AspectRatio(
-            aspectRatio: 0.9,
+            aspectRatio: MediaQuery.of(context).size.aspectRatio,
             child: DecoratedBox(
               decoration: const BoxDecoration(
                 color: Color(0xff232d37),
@@ -71,7 +71,6 @@ class _LineChartSample2State extends State<LineChartSample2> {
             child: Padding(padding: EdgeInsets.all(10), child: Text("hello")),
             onPressed: () {
               check = !check;
-              
             },
           ),
           ElevatedButton(
@@ -368,7 +367,6 @@ LineChartData monthData() {
     minY: 0,
     maxY: 6,
     lineBarsData: [
-     
       LineChartBarData(
         spots: [
           ...List.generate(ExpenseList.monthgroupedData.length, (index) {

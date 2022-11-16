@@ -15,26 +15,27 @@ bool check = true;
 class ExpenseList {
   static List<Expense> data = [];
 
+  static List<Expense> expenseList = []; //for expense shown in home_page
   static List<Expense> monthdata = [];
   static List<Map<String, Object>> groupedData = [];
   static List<Map<String, Object>> monthgroupedData = [];
   static double weektemp = 0.0;
   static double monthtemp = 0.0;
-  ExpenseList() {}
+
   static Future<List<Expense>> getData() async {
-    data = [];
+    expenseList = [];
     try {
       var tk = await token.storage.read(key: 'jwt');
       final res = await AuthService().getExpense(tk as String);
       for (Map i in res.data['ans']) {
-        data.add(Expense(
+        expenseList.add(Expense(
             amount: double.parse(i['amount'].toString()),
             name: i['name'],
             date1: DateTime.parse(i['date']).toLocal(),
             category: i['category'],
             id: i['id']));
       }
-      return data;
+      return expenseList;
     } catch (e) {
       throw e;
     }
@@ -115,7 +116,6 @@ class ExpenseList {
         'amount': totalSuminMonth
       };
     });
-
   }
 
   static List monthlyArrayList() {
@@ -130,7 +130,6 @@ class ExpenseList {
   }
 
   static double findMaxmonth() {
-    
     var lineData = ExpenseList.monthgroupedData;
     var max = lineData.reduce((currentUser, nextUser) =>
         (currentUser['amount'] as double) > (nextUser['amount'] as double)
@@ -139,7 +138,7 @@ class ExpenseList {
     double maxA = max["amount"] as double;
     monthtemp = maxA * 1.5;
     monthtemp = double.parse(monthtemp.toStringAsFixed(2));
-    
+
     return monthtemp;
   }
 
