@@ -1,7 +1,7 @@
 import 'package:demo2/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import '../charts/line_chart.dart';
 import '../charts/pie_chart.dart';
 import '../charts/bar_chart.dart';
@@ -23,18 +23,23 @@ class _GraphPageState extends State<GraphPage> {
     height = size.height;
     width = size.width;
     return Scaffold(
-        appBar: AppBar(),
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisSize: MainAxisSize.max,
-            verticalDirection: VerticalDirection.down,
-            textBaseline: TextBaseline.alphabetic,
-            children: [
-              Row(
+      appBar: AppBar(),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisSize: MainAxisSize.max,
+          verticalDirection: VerticalDirection.down,
+          textBaseline: TextBaseline.alphabetic,
+          children: [
+            Container(
+              padding: EdgeInsets.only(bottom: 0),
+              margin: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: AppTheme.colors.backgroundcolor,
+                  borderRadius: BorderRadius.circular(40)),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   IconButton(
                     onPressed: () {
@@ -44,51 +49,106 @@ class _GraphPageState extends State<GraphPage> {
                       }));
                     },
                     icon: Image.asset("assetss/images/2.png"),
-                    iconSize: width / 2.5,
+                    iconSize: width / 2.7,
                     color: AppTheme.colors.secondarycolor,
                   ),
                   Container(
+                    margin: EdgeInsets.only(top: 0, right: 10),
+                    padding: EdgeInsets.all(0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: AppTheme.colors.backgroundcolor,
+                    ),
                     child: Text(
-                        "\n Something about pie chart \n i really love pie chart "),
-                  )
+                      "Pie chart is a circular statistical \ngraphic divided into slices to \nillustrate a numerical proportion.\nYou can view the expenses \nusing the chart and find their \nproportions ",
+                      style: GoogleFonts.lato(
+                          fontSize: 13,
+                          color: AppTheme.colors.secondarycolor,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.end,
+            ),
+            Container(
+              padding: EdgeInsets.only(bottom: 0),
+              margin: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: AppTheme.colors.backgroundcolor,
+                  borderRadius: BorderRadius.circular(40)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    height: height / 5,
-                    width: width / 1.8,
-                  ),
                   IconButton(
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (BuildContext) {
-                        return LineChartClass1();
+                        return LineChartSample2();
                       }));
                     },
                     icon: Image.asset("assetss/images/3.png"),
-                    color: AppTheme.colors.basecolor,
-                    iconSize: width / 2.5,
+                    iconSize: width / 2.7,
+                    color: AppTheme.colors.secondarycolor,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 0, right: 10),
+                    padding: EdgeInsets.all(0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: AppTheme.colors.backgroundcolor,
+                    ),
+                    child: Text(
+                      "Line Chart is a circular statistical \ngraphic divided into slices to \nillustrate a numerical proportion.\nYou can view the expenses \nusing the chart and find their \nproportions ",
+                      style: GoogleFonts.lato(
+                          fontSize: 13,
+                          color: AppTheme.colors.secondarycolor,
+                          fontWeight: FontWeight.w400),
+                    ),
                   ),
                 ],
               ),
-              Row(children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (BuildContext) {
-                      return BarChartSample1();
-                    }));
-                  },
-                  icon: Image.asset("assetss/images/1.png"),
-                  color: AppTheme.colors.secondarycolor,
-                  iconSize: width / 2.5,
-                ),
-              ]),
-            ],
-          ),
-        ));
+            ),
+            Container(
+              padding: EdgeInsets.only(bottom: 0),
+              margin: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: AppTheme.colors.backgroundcolor,
+                  borderRadius: BorderRadius.circular(40)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (BuildContext) {
+                        return BarChartSample1();
+                      }));
+                    },
+                    icon: Image.asset("assetss/images/1.png"),
+                    iconSize: width / 2.7,
+                    color: AppTheme.colors.secondarycolor,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 0, right: 10),
+                    padding: EdgeInsets.all(0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: AppTheme.colors.backgroundcolor,
+                    ),
+                    child: Text(
+                      "Bar chart is a circular statistical \ngraphic divided into slices to \nillustrate a numerical proportion.\nYou can view the expenses \nusing the chart and find their \nproportions ",
+                      style: GoogleFonts.lato(
+                          fontSize: 13,
+                          color: AppTheme.colors.secondarycolor,
+                          fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

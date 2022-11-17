@@ -60,13 +60,15 @@ var functions = {
     console.log(req.headers);
     var decodedtoken = jwt.decode(token, config.secret);
     var userId1 = decodedtoken._id;
-    var { category, date, name, month ,year,number} = req.query;
+    var { category, date, name, month ,year,number,start,finish} = req.query;
     const queryObject = { userId: userId1 };
     
       var nextMonth = getNextMonth(month)
  
     var lastMonth = getLastMonth(year)
-    
+    if(start && finish){
+      queryObject.date={$gte:start.split(' ')[0],$lte:finish.split(' ')[0]}
+    }
     if (category) {
       queryObject.category = category;
     }

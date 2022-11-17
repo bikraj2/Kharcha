@@ -73,10 +73,10 @@ class _PieChartPageState extends State<PieChartPage> {
     };
 
     List<Color> colorList = [
+      Color.fromARGB(255, 4, 26, 47),
+      Color.fromARGB(255, 135, 122, 64),
+      Color.fromARGB(255, 216, 141, 27),
       AppTheme.colors.basecolor,
-      AppTheme.colors.secondarycolor,
-      Color.fromARGB(255, 232, 100, 137),
-      Color.fromARGB(255, 13, 17, 23),
     ];
 
     // final gradientList = <List<Color>>[

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:demo2/screens/log/ForgotPassword.dart';
 import 'package:demo2/screens/log/forgotPassword.dart';
 import 'package:dio/dio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -81,9 +82,9 @@ class AuthService {
     }
   }
 
-  forgotPasswowrd(String? token1, String email) async {
+  ForgotPassword(String? token1, String email) async {
     try {
-      var value = await diio.post('${url}/forgotPassword',
+      var value = await diio.post('${url}/ForgotPassword',
           data: {"email": email}, queryParameters: {'token': token1});
       var otp = value.data['data']['otp'];
       token.storage.write(key: 'otp', value: otp);
@@ -194,7 +195,8 @@ class AuthService {
     }
   }
 
-  getExpenseStartTofinish(String token, DateTime start, DateTime finish) async {
+  getExpenseStartTofinish(
+      String token, DateTime? start, DateTime? finish) async {
     try {
       var value = await diio.get("${url}/getExpense",
           queryParameters: {"token": token, "start": start, "finish": finish},
@@ -202,6 +204,51 @@ class AuthService {
       return value;
     } on DioError catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
+    }
+  }
+
+  getExpenseCategory(String token, String category) async {
+    try {
+      var value = await diio.get("${url}/getExpense",
+          queryParameters: {"token": token, "category": category},
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+      return value;
+    } on DioError catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+    }
+  }
+
+  getExpenseByName(String token, String name) async {
+    try {
+      var value = await diio.get("${url}/getExpense",
+          queryParameters: {"token": token, "name": name},
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+      return value;
+    } on DioError catch (e) {
+      Fluttertoast.showToast(
+          msg: e.response?.data['msg'],
+          textColor: Colors.white,
+          backgroundColor: Colors.red.shade300);
+    }
+  }
+
+  getExpenseSorted(String token, String sortAmount, String sortDate) async {
+    try {
+     
+      var value = await diio.get("${url}/getExpense",
+          queryParameters: {
+            "token": token,
+            "sortAmount": sortAmount,
+            "sortDate": sortDate
+          },
+          options: Options(contentType: Headers.formUrlEncodedContentType));
+
+      return value;
+    } on DioError catch (e) {
+      Fluttertoast.showToast(
+          msg: e.response?.data['msg'],
+          textColor: Colors.white,
+          backgroundColor: Colors.red.shade300);
     }
   }
 }

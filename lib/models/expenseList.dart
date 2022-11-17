@@ -43,13 +43,15 @@ class ExpenseList {
     try {
       var tk = await token.storage.read(key: 'jwt');
       final res = await AuthService().getExpense(tk as String);
+      print(res);
       for (Map i in res.data['ans']) {
+        print(i['id']);
         expenseList.add(Expense(
             amount: double.parse(i['amount'].toString()),
             name: i['name'],
             date1: DateTime.parse(i['date']).toLocal(),
             category: i['category'],
-            id: i['id']));
+            id: i['_id']));
       }
       return expenseList;
     } catch (e) {
