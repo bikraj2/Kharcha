@@ -20,6 +20,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String state = "";
+
   int nextCount =
       ExpenseList.expenseList.length < 10 ? ExpenseList.expenseList.length : 10;
 
@@ -33,21 +35,19 @@ class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController = ScrollController();
   @override
   void initState() {
-    print(nextCount);
+    print('Wxpense is ${ExpenseList.expenseList.length}');
     super.initState();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        prevCount = nextCount - 1;
+        prevCount = nextCount;
         nextCount = ExpenseList.expenseList.length < nextCount + 10
             ? ExpenseList.expenseList.length
             : nextCount + 10;
-        print(nextCount);
-        Future.delayed(const Duration(seconds: 1, milliseconds: 500), () {
-          if (mounted) {
-            setState(() {});
-          }
-        });
+        expenseView += ExpenseList.expenseList.sublist(prevCount, nextCount);
+        if (mounted) {
+          setState(() {});
+        }
       }
     });
   }
@@ -66,11 +66,6 @@ class _HomePageState extends State<HomePage> {
   );
 
   Widget build(BuildContext context) {
-    expenseView += ExpenseList.expenseList.sublist(
-        prevCount,
-        ExpenseList.expenseList.length < nextCount
-            ? ExpenseList.expenseList.length
-            : nextCount);
     Widget title = Container(
         child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -114,118 +109,140 @@ class _HomePageState extends State<HomePage> {
             height: MediaQuery.of(context).size.height -
                 appBar.preferredSize.height -
                 158,
-            child: expenseView.length==0?ListView.builder(
-                controller: _scrollController,
-                itemCount: nextCount,
-                itemBuilder: ((context, index) {
-                  print("asdf");
-                  return Container(
-                    height: MediaQuery.of(context).size.height / 5,
-                    width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.only(left: 10, right: 10),
-                    margin: EdgeInsets.only(top: 20, left: 10, right: 10),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                          width: 1,
-                          color: AppTheme.colors.secondarycolor,
-                        ),
-                        borderRadius: BorderRadius.circular(30)),
-                    child: Column(
-                      children: [
-                        Container(
-                            padding: EdgeInsets.all(10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                IconButton(
-                                    onPressed: () {}, icon: Icon(Icons.home)),
-                                Row(
+            child: expenseView.isNotEmpty
+                ? ListView.builder(
+                    key: Key(state),
+                    controller: _scrollController,
+                    itemCount: nextCount,
+                    itemBuilder: ((context, index) {
+                      return Container(
+                        height: MediaQuery.of(context).size.height / 5,
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.only(left: 10, right: 10),
+                        margin: EdgeInsets.only(top: 20, left: 10, right: 10),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(
+                              width: 1,
+                              color: AppTheme.colors.secondarycolor,
+                            ),
+                            borderRadius: BorderRadius.circular(30)),
+                        child: Column(
+                          children: [
+                            Container(
+                                padding: EdgeInsets.all(10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.edit_note_rounded,
-                                        color: AppTheme.colors.basecolor,
-                                      ),
-                                      iconSize: 25,
-                                    ),
-                                    IconButton(
-                                      icon: Icon(Icons.delete,
-                                          color:
-                                              AppTheme.colors.secondarycolor),
-                                      iconSize: 25,
-                                      onPressed: () async {
-                                        try {
-                                          var tk = await token.storage
-                                              .read(key: 'jwt');
+                                        onPressed: () {},
+                                        icon: Icon(Icons.home)),
+                                    Row(
+                                      children: [
+                                        IconButton(
+                                          onPressed: () {},
+                                          icon: Icon(
+                                            Icons.edit_note_rounded,
+                                            color: AppTheme.colors.basecolor,
+                                          ),
+                                          iconSize: 25,
+                                        ),
+                                        IconButton(
+                                          icon: Icon(Icons.delete,
+                                              color: AppTheme
+                                                  .colors.secondarycolor),
+                                          iconSize: 25,
+                                          onPressed: () async {
+                                            try {
+                                              var tk = await token.storage
+                                                  .read(key: 'jwt');
 
-                                          AuthService()
-                                              .removeExpense(
-                                                  tk as String,
-                                                  ExpenseList.expenseList[index]
-                                                      .id as String)
-                                              .then((val) {
-                                            if (val.data['success']) {
-                                              ExpenseList.getData()
-                                                  .then((value) => {
-                                                        ExpenseList
-                                                            .groupedTransactionValues(),
-                                                      });
-                                              setState(() {});
+                                              AuthService()
+                                                  .removeExpense(
+                                                      tk as String,
+                                                      ExpenseList
+                                                          .expenseList[index]
+                                                          .id as String)
+                                                  .then((val) {
+                                                if (val.data['success']) {
+                                                  setState(() {
+                                                    nextCount = ExpenseList
+                                                                .expenseList
+                                                                .length <
+                                                            10
+                                                        ? ExpenseList
+                                                            .expenseList.length
+                                                        : 10;
+
+                                                    prevCount = 0;
+                                                    Expense expenseTobeRemoved =
+                                                        expenseView[index];
+
+                                                    expenseView.remove(
+                                                        expenseTobeRemoved);
+                                                    ExpenseList.expenseList
+                                                        .remove(
+                                                            expenseTobeRemoved);
+                                                    state += state;
+                                                    print(expenseView);
+                                                  });
+                                                  Fluttertoast.showToast(
+                                                      msg:
+                                                          "Deleted Successfully",
+                                                      backgroundColor:
+                                                          Color.fromARGB(
+                                                              255, 158, 11, 0));
+                                                }
+                                              });
+                                            } catch (e) {
                                               Fluttertoast.showToast(
-                                                  msg: "Deleted Successfully",
-                                                  backgroundColor:
-                                                      Color.fromARGB(
-                                                          255, 158, 11, 0));
+                                                  msg: e.toString());
                                             }
-                                          });
-                                        } catch (e) {
-                                          Fluttertoast.showToast(
-                                              msg: e.toString());
-                                        }
-                                      },
-                                    )
+                                          },
+                                        )
+                                      ],
+                                    ),
                                   ],
-                                ),
+                                )),
+                            Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    ExpenseList.zeros(
+                                        expenseView[index].amount as double),
+                                    style: TextStyle(
+                                      color: AppTheme.colors.secondarycolor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 22,
+                                    ),
+                                  ),
+                                ]),
+                            Row(
+                              children: [
+                                Text(" ${expenseView[index].name}",
+                                    style: TextStyle(
+                                        color: AppTheme.colors.basecolor,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w400)),
                               ],
-                            )),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                ExpenseList.zeros(ExpenseList
-                                    .expenseList[index].amount as double),
-                                style: TextStyle(
-                                  color: AppTheme.colors.secondarycolor,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 22,
-                                ),
-                              ),
-                            ]),
-                        Row(
-                          children: [
-                            Text(" ${ExpenseList.expenseList[index].name}",
-                                style: TextStyle(
-                                    color: AppTheme.colors.basecolor,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w400)),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                    '${expenseView[index].date.toString().split(' ')[0]}'),
+                              ],
+                            )
                           ],
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                                '${expenseView[index].date.toString().split(' ')[0]}'),
-                          ],
-                        )
-                      ],
-                    ),
-                  );
-                })):Text("No expenses To Display"),
+                      );
+                    }))
+                : Text("No expenses To Display"),
           )
         ]),
       ]),

@@ -54,7 +54,6 @@ class _expenseAdderState extends State<expenseAdder> {
               setState(() => {currentDate = val}),
             });
   }
-
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
