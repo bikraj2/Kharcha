@@ -26,6 +26,7 @@ class ExpenseList {
   static double novembertemp = 0.0;
   static double decembertemp = 0.0;
 
+  static List<Expense> expenseList = []; //for expense shown in home_page
   static List<Expense> monthdata = [];
   static int month = 0;
   static List<Expense> yeardata = [];
@@ -38,19 +39,19 @@ class ExpenseList {
 
   ExpenseList() {}
   static Future<List<Expense>> getData() async {
-    data = [];
+    expenseList = [];
     try {
       var tk = await token.storage.read(key: 'jwt');
       final res = await AuthService().getExpense(tk as String);
       for (Map i in res.data['ans']) {
-        data.add(Expense(
+        expenseList.add(Expense(
             amount: double.parse(i['amount'].toString()),
             name: i['name'],
             date1: DateTime.parse(i['date']).toLocal(),
             category: i['category'],
             id: i['id']));
       }
-      return data;
+      return expenseList;
     } catch (e) {
       throw e;
     }

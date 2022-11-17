@@ -1,9 +1,14 @@
+import 'package:demo2/models/expenseList.dart';
 import 'package:demo2/screens/charts/graphs_page.dart';
 import 'package:demo2/screens/pages/home_screen.dart';
 import 'package:demo2/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import '../../models/expenses.dart';
+import 'home_page.dart';
+import 'package:demo2/services/authservices.dart';
+import 'package:demo2/token/token.dart';
 
 class FilterPage extends StatefulWidget {
   FilterPage({super.key});
@@ -13,9 +18,11 @@ class FilterPage extends StatefulWidget {
 }
 
 class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
-  String? value;
-  String? value2;
-  final years_list = ['2020', '2021', '2022', '2023'];
+  String? year;
+  String? month;
+  final years_list = [
+    ...List.generate(23, (index) => (2000 + index).toString())
+  ];
   final months_list = [
     "Jan",
     "Feb",
@@ -29,8 +36,8 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
     "November",
     "December"
   ];
-  final _dateController = TextEditingController();
-
+  final _startDate = TextEditingController();
+  final _endDate = TextEditingController();
   @override
   Widget build(BuildContext context) {
     TabController tabController = TabController(length: 3, vsync: this);
@@ -140,7 +147,32 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30)),
                                 child: IconButton(
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    try {
+                                      var tk =
+                                          await token.storage.read(key: 'jwt');
+                                      var value = await AuthService()
+                                          .getYearlyExpense(
+                                              tk as String, year as String);
+                                              ExpenseList.expenseList = [];
+                                      for (Map i in value.data['ans']) {
+                                        
+                                        ExpenseList.expenseList.add(
+                                          Expense(
+                                              id: i['_id'],
+                                              amount: double.parse(
+                                                  i['amount'].toString()),
+                                              name: i['name'],
+                                              date1: DateTime.parse(i['date'])
+                                                  .toLocal(),
+                                              category: i['category']),
+                                        );
+                                      }
+                                      print(ExpenseList.expenseList);
+                                    } catch (e) {
+                                      print(e);
+                                    }
+                                  },
                                   icon: Icon(Icons.search_rounded),
                                   color: AppTheme.colors.secondarycolor,
                                   splashRadius: 22,
@@ -155,7 +187,7 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15)),
                             child: DropdownButton<String>(
-                              value: value,
+                              value: year,
                               iconSize: 20,
                               isDense: false,
                               isExpanded: true,
@@ -164,7 +196,9 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                                   color: AppTheme.colors.secondarycolor),
                               items: years_list.map(buildMenuItem).toList(),
                               onChanged: (value) => setState(
-                                () => this.value = value,
+                                () {
+                                  this.year = value;
+                                },
                               ),
                             ),
                           ),
@@ -189,7 +223,32 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30)),
                                 child: IconButton(
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    try {
+                                      var tk =
+                                          await token.storage.read(key: 'jwt');
+                                      var value = await AuthService()
+                                          .getMonthlyExpense(
+                                              tk as String, "${year}-${10}");
+                                              ExpenseList.expenseList = [];
+                                      for (Map i in value.data['ans']) {
+                                        
+                                        ExpenseList.expenseList.add(
+                                          Expense(
+                                              id: i['_id'],
+                                              amount: double.parse(
+                                                  i['amount'].toString()),
+                                              name: i['name'],
+                                              date1: DateTime.parse(i['date'])
+                                                  .toLocal(),
+                                              category: i['category']),
+                                        );
+                                      }
+                                      print(ExpenseList.expenseList);
+                                    } catch (e) {
+                                      print(e);
+                                    }
+                                  },
                                   icon: Icon(Icons.search_rounded),
                                   color: AppTheme.colors.secondarycolor,
                                   iconSize: 25,
@@ -201,7 +260,7 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                             ],
                           ),
                           DropdownButton<String>(
-                            value: value2,
+                            value: month,
                             iconSize: 20,
                             isDense: false,
                             isExpanded: true,
@@ -210,7 +269,7 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                                 color: AppTheme.colors.secondarycolor),
                             items: months_list.map(buildMenuItem).toList(),
                             onChanged: (value2) => setState(() {
-                              this.value2 = value2;
+                              this.month = value2;
                             }),
                           ),
                           SizedBox(
@@ -255,7 +314,7 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                                   height: height / 9,
                                   padding: EdgeInsets.all(15),
                                   child: TextField(
-                                      controller: _dateController,
+                                      controller: _startDate,
                                       decoration: InputDecoration(
                                         hintText: "DD-MM-YYYY",
                                         labelText: 'Start Date ',
@@ -267,7 +326,7 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                                   height: height / 9,
                                   padding: EdgeInsets.all(15),
                                   child: TextField(
-                                      controller: _dateController,
+                                      controller: _endDate,
                                       decoration: InputDecoration(
                                         hintText: "DD-MM-YYYY",
                                         labelText: ' End Date',
@@ -406,7 +465,7 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                               height: height / 9,
                               padding: EdgeInsets.all(15),
                               child: TextField(
-                                  controller: _dateController,
+                                  controller: _startDate,
                                   decoration: InputDecoration(
                                     labelText: 'Sort the Expenses by Category ',
                                     border: OutlineInputBorder(),
