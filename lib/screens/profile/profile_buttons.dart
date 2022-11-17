@@ -37,171 +37,209 @@ class _ProfilePageState extends State<ProfilePage> {
         Padding(
           padding: const EdgeInsets.only(left: 30, right: 30),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => ));
-                },
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(
-                    const EdgeInsets.all(10),
-                  ),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18))),
-                  backgroundColor:
-                      MaterialStateProperty.all(AppTheme.colors.tertiarycolor),
-                  foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                      (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered)) {
-                      return Colors.white;
-                    }
-                    return AppTheme.colors.basecolor;
-                  }),
-                  overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                    (Set<MaterialState> states) {
-                      if (states.contains(MaterialState.hovered)) {
-                        return AppTheme.colors.basecolor;
-                      } //<-- SEE HERE
-                      return AppTheme.colors
-                          .tertiarycolor; // Defer to the widget's default.
-                    },
-                  ),
-                ),
-                child: const Text(
-                  'Personal Details',
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: Text("Add income"),
-                      actions: [
-                        Container(
-                            width: width,
-                            height: height / 8,
-                            padding: EdgeInsets.all(15),
-                            margin: EdgeInsets.only(top: 10),
-                            child: TextField(
-                                controller: _moneyController,
-                                decoration: InputDecoration(
-                                    labelText: 'Income ',
-                                    border: OutlineInputBorder(),
-                                    suffixIcon: IconButton(
-                                      onPressed: () {
-                                        _moneyController.clear();
-                                      },
-                                      icon: Icon(Icons.clear),
-                                      iconSize: 14,
-                                    )))),
-                        Center(
-                          child: Container(
-                              padding: EdgeInsets.all(15),
-                              child: ElevatedButton(
-                                  style: ButtonStyle(),
-                                  // shape: BeveledRectangleBorder(
-                                  //     borderRadius: BorderRadius.all(Radius.circular(5))),
-                                  // hoverColor: AppTheme.colors.basecolor,
-                                  // backgroundColor: AppTheme.colors.secondarycolor,
-                                  child: const Text(
-                                    "Save",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                  onPressed: () {
-                                    token.storage
-                                        .read(key: 'jwt')
-                                        .then((value) => {
-                                              AuthService()
-                                                  .addIncome(
-                                                      value as String,
-                                                      double.parse(
-                                                          _moneyController
-                                                              .text))
-                                                  .then((value) {
-                                                if (value.data['success']) {
-                                                  Fluttertoast.showToast(
-                                                      msg: value.data['msg'],
-                                                      textColor: Colors.white,
-                                                      backgroundColor: Colors
-                                                          .green.shade300);
-                                                } else {
-                                                  Fluttertoast.showToast(
-                                                      msg: value.data['msg'],
-                                                      textColor: Colors.white,
-                                                      backgroundColor:
-                                                          Colors.red.shade300);
-                                                }
-                                              })
-                                            });
-                                  })),
-                        )
-                      ],
-                    ),
-                  );
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => SecondScreen()));
-                },
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(
-                    const EdgeInsets.all(10),
-                  ),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18))),
-                  backgroundColor:
-                      MaterialStateProperty.all(AppTheme.colors.tertiarycolor),
-                  foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                      (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered)) {
-                      return Colors.white;
-                    }
-                    return AppTheme.colors.basecolor;
-                  }),
-                  overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                    (Set<MaterialState> states) {
-                      if (states.contains(MaterialState.hovered)) {
-                        return AppTheme.colors.basecolor;
-                      } //<-- SEE HERE
-                      return AppTheme.colors
-                          .tertiarycolor; // Defer to the widget's default.
-                    },
-                  ),
-                ),
-                child: const Text(
-                  'MY BUDGET',
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              ElevatedButton(
+              const SizedBox(height: 40),
+              SizedBox(
+                width: 150,
+                child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => changePassword()));
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => ));
                   },
-                  child: Text("Change Password")),
+                  style: ButtonStyle(
+                    padding: MaterialStateProperty.all(
+                      const EdgeInsets.all(10),
+                    ),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18))),
+                    backgroundColor:
+                        MaterialStateProperty.all(AppTheme.colors.basecolor),
+                    foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                        (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.hovered)) {
+                        return AppTheme.colors.basecolor;
+                      }
+                      return AppTheme.colors.tertiarycolor;
+                    }),
+                    overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                      (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.hovered)) {
+                          return AppTheme.colors.tertiarycolor;
+                        } //<-- SEE HERE
+                        return AppTheme
+                            .colors.basecolor; // Defer to the widget's default.
+                      },
+                    ),
+                  ),
+                  child: const Text(
+                    'Personal Details',
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              SizedBox(
+                width: 150,
+                child: ElevatedButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text("Add income"),
+                        actions: [
+                          Container(
+                              width: width,
+                              height: height / 8,
+                              padding: EdgeInsets.all(15),
+                              margin: EdgeInsets.only(top: 10),
+                              child: TextField(
+                                  controller: _moneyController,
+                                  decoration: InputDecoration(
+                                      labelText: 'Income ',
+                                      border: OutlineInputBorder(),
+                                      suffixIcon: IconButton(
+                                        onPressed: () {
+                                          _moneyController.clear();
+                                        },
+                                        icon: Icon(Icons.clear),
+                                        iconSize: 14,
+                                      )))),
+                          Center(
+                            child: Container(
+                                padding: EdgeInsets.all(15),
+                                child: ElevatedButton(
+                                    style: ButtonStyle(),
+                                    // shape: BeveledRectangleBorder(
+                                    //     borderRadius: BorderRadius.all(Radius.circular(5))),
+                                    // hoverColor: AppTheme.colors.basecolor,
+                                    // backgroundColor: AppTheme.colors.secondarycolor,
+                                    child: const Text(
+                                      "Save",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    onPressed: () {
+                                      token.storage
+                                          .read(key: 'jwt')
+                                          .then((value) => {
+                                                AuthService()
+                                                    .addIncome(
+                                                        value as String,
+                                                        double.parse(
+                                                            _moneyController
+                                                                .text))
+                                                    .then((value) {
+                                                  if (value.data['success']) {
+                                                    Fluttertoast.showToast(
+                                                        msg: value.data['msg'],
+                                                        textColor: Colors.white,
+                                                        backgroundColor: Colors
+                                                            .green.shade300);
+                                                  } else {
+                                                    Fluttertoast.showToast(
+                                                        msg: value.data['msg'],
+                                                        textColor: Colors.white,
+                                                        backgroundColor: Colors
+                                                            .red.shade300);
+                                                  }
+                                                })
+                                              });
+                                    })),
+                          )
+                        ],
+                      ),
+                    );
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => SecondScreen()));
+                  },
+                  style: ButtonStyle(
+                    padding: MaterialStateProperty.all(
+                      const EdgeInsets.all(10),
+                    ),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18))),
+                    backgroundColor:
+                        MaterialStateProperty.all(AppTheme.colors.basecolor),
+                    foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                        (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.hovered)) {
+                        return AppTheme.colors.basecolor;
+                      }
+                      return AppTheme.colors.tertiarycolor;
+                    }),
+                    overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                      (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.hovered)) {
+                          return AppTheme.colors.tertiarycolor;
+                        } //<-- SEE HERE
+                        return AppTheme
+                            .colors.basecolor; // Defer to the widget's default.
+                      },
+                    ),
+                  ),
+                  child: const Text(
+                    'Budget',
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              SizedBox(
+                width: 150,
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => changePassword()));
+                    },
+                    style: ButtonStyle(
+                      padding: MaterialStateProperty.all(
+                        const EdgeInsets.all(10),
+                      ),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18))),
+                      backgroundColor:
+                          MaterialStateProperty.all(AppTheme.colors.basecolor),
+                      foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.hovered)) {
+                          return AppTheme.colors.basecolor;
+                        }
+                        return AppTheme.colors.tertiarycolor;
+                      }),
+                      overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                        (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.hovered)) {
+                            return AppTheme.colors.tertiarycolor;
+                          } //<-- SEE HERE
+                          return AppTheme.colors
+                              .basecolor; // Defer to the widget's default.
+                        },
+                      ),
+                    ),
+                    child: Text("Change Password")),
+              ),
+              SizedBox(
+                height: 30,
+              ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(context,
@@ -219,17 +257,17 @@ class _ProfilePageState extends State<ProfilePage> {
                   foregroundColor: MaterialStateProperty.resolveWith<Color>(
                       (Set<MaterialState> states) {
                     if (states.contains(MaterialState.hovered)) {
-                      return Colors.white;
+                      return AppTheme.colors.basecolor;
                     }
                     return AppTheme.colors.basecolor;
                   }),
                   overlayColor: MaterialStateProperty.resolveWith<Color?>(
                     (Set<MaterialState> states) {
                       if (states.contains(MaterialState.hovered)) {
-                        return AppTheme.colors.basecolor;
+                        return AppTheme.colors.tertiarycolor;
                       } //<-- SEE HERE
-                      return AppTheme.colors
-                          .tertiarycolor; // Defer to the widget's default.
+                      return AppTheme
+                          .colors.basecolor; // Defer to the widget's default.
                     },
                   ),
                 ),

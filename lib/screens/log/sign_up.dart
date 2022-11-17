@@ -40,8 +40,8 @@ class _SignUpState extends State<SignUp> {
     height = size.height;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppTheme.colors.tertiarycolor,
-        title: Text(''),
+        backgroundColor: AppTheme.colors.secondarycolor,
+        title: Text('Sign Up'),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
@@ -75,16 +75,6 @@ class _SignUpState extends State<SignUp> {
                 fillColor: Colors.white,
                 labelText: 'Firstname',
                 contentPadding: const EdgeInsets.all(15),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
               ),
             ),
             const SizedBox(
@@ -99,16 +89,6 @@ class _SignUpState extends State<SignUp> {
                 fillColor: Colors.white,
                 labelText: 'MiddleName',
                 contentPadding: const EdgeInsets.all(15),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
               ),
             ),
             const SizedBox(
@@ -122,22 +102,13 @@ class _SignUpState extends State<SignUp> {
                 fillColor: Colors.white,
                 labelText: 'Lastname',
                 contentPadding: const EdgeInsets.all(15),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
               ),
             ),
             const SizedBox(
               height: 20,
             ),
             Container(
+              width: 200,
               child: TextField(
                 controller: emailController,
                 obscureText: true,
@@ -147,16 +118,7 @@ class _SignUpState extends State<SignUp> {
                   fillColor: Colors.white,
                   labelText: 'email',
                   contentPadding: const EdgeInsets.all(15),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 35, 45, 64)),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 35, 45, 64)),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
+                  border: OutlineInputBorder(),
                 ),
               ),
             ),
@@ -171,16 +133,6 @@ class _SignUpState extends State<SignUp> {
                 fillColor: AppTheme.colors.tertiarycolor,
                 labelText: 'Username',
                 contentPadding: const EdgeInsets.all(15),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
               ),
             ),
             const SizedBox(
@@ -195,16 +147,6 @@ class _SignUpState extends State<SignUp> {
                 fillColor: Colors.white,
                 labelText: 'Password',
                 contentPadding: const EdgeInsets.all(15),
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: Color.fromARGB(255, 35, 45, 64)),
-                  borderRadius: BorderRadius.circular(5),
-                ),
               ),
             ),
             const SizedBox(
