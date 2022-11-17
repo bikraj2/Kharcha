@@ -1,3 +1,4 @@
+import 'package:demo2/main.dart';
 import 'package:demo2/models/expenseList.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:demo2/theme/theme.dart';
@@ -19,6 +20,7 @@ class LineChartClass1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(ExpenseList.jantemp);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Your Monthly Expenses"),
@@ -37,17 +39,29 @@ class LineChartSample2 extends StatefulWidget {
 }
 
 class _LineChartSample2State extends State<LineChartSample2> {
-  var lineChartdata = ExpenseList.groupedData;
-  bool showAvg = false;
+  var weeklineChartdata = ExpenseList.groupedData;
   List<double> flspotarray = ExpenseList.weeklyarraylist() as List<double>;
-
+  int check = 0;
   @override
   Widget build(BuildContext context) {
+    LineChartData dataForGraph = mainData();
+
+    switch (check) {
+      case 0:
+        dataForGraph = mainData();
+        break;
+      case 1:
+        dataForGraph = monthData();
+        break;
+      case 2:
+        dataForGraph = yearData();
+        break;
+    }
     return Container(
       child: Column(
         children: <Widget>[
           AspectRatio(
-            aspectRatio: 0.9,
+            aspectRatio: 1.2,
             child: DecoratedBox(
               decoration: const BoxDecoration(
                 color: Color(0xff232d37),
@@ -59,19 +73,20 @@ class _LineChartSample2State extends State<LineChartSample2> {
                   top: 25,
                   bottom: 25,
                 ),
-                child: LineChart(
-                  check ? monthData() : yearData(),
+                child: LineChart(dataForGraph
 
-                  //cant seem to solve the issue of trying to display different data without refreshing the page .
-                ),
+                    //cant seem to solve the issue of trying to display different data without refreshing the page .
+                    ),
               ),
             ),
           ),
           ElevatedButton(
-            child: Padding(padding: EdgeInsets.all(10), child: Text("hello")),
+            child: Padding(padding: EdgeInsets.all(10), child: Text("change")),
             onPressed: () {
-              check = !check;
-              
+              setState(() {
+                check = check + 1;
+                check = check % 3;
+              });
             },
           ),
           ElevatedButton(
@@ -115,11 +130,11 @@ class _LineChartSample2State extends State<LineChartSample2> {
                 // print(ExpenseList.monthlyArrayList());
                 try {
                   var value = await ExpenseList.getMonthData('2022-10');
+
+                  setState(() {});
                   // print(ExpenseList.groupMonthlyValues(
                   //     2022, 10, daysInMonth(2022, 10)));
-                } catch (e) {
-                  print(e);
-                }
+                } catch (e) {}
                 // print(ExpenseList.monthlyArrayList());
                 // ExpenseList.getMonthData('2022-11').then((value) {
                 //   print(ExpenseList.groupMonthlyValues(
@@ -131,7 +146,22 @@ class _LineChartSample2State extends State<LineChartSample2> {
                 // });
                 // print(ExpenseList.monthlyArrayList());
               },
-              child: const Text("Month")),
+              child: const Text("MonthTrigger")),
+          ElevatedButton(
+              onPressed: () async {
+                var value1 = await ExpenseList.getYearData('2022');
+
+                setState(() {});
+              },
+              child: Text("YearTrigger")),
+          ElevatedButton(
+              onPressed: () {
+                try {
+                  // print(ExpenseList.groupMonthlyValues(
+                  //     2022, 10, daysInMonth(2022, 10)));
+                } catch (e) {}
+              },
+              child: Text(ExpenseList.monthName(ExpenseList.month))),
         ],
       ),
     );
@@ -141,15 +171,15 @@ class _LineChartSample2State extends State<LineChartSample2> {
     const style = TextStyle(
       color: Color(0xff68737d),
       fontWeight: FontWeight.bold,
-      fontSize: 16,
+      fontSize: 12,
     );
-    String temp1 = lineChartdata[6]['day'].toString();
-    String temp2 = lineChartdata[5]['day'].toString();
-    String temp3 = lineChartdata[4]['day'].toString();
-    String temp4 = lineChartdata[3]['day'].toString();
-    String temp5 = lineChartdata[2]['day'].toString();
-    String temp6 = lineChartdata[1]['day'].toString();
-    String temp7 = lineChartdata[0]['day'].toString();
+    String temp1 = weeklineChartdata[6]['day'].toString();
+    String temp2 = weeklineChartdata[5]['day'].toString();
+    String temp3 = weeklineChartdata[4]['day'].toString();
+    String temp4 = weeklineChartdata[3]['day'].toString();
+    String temp5 = weeklineChartdata[2]['day'].toString();
+    String temp6 = weeklineChartdata[1]['day'].toString();
+    String temp7 = weeklineChartdata[0]['day'].toString();
 
     Widget text;
     switch (value.toInt()) {
@@ -190,7 +220,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
     const style = TextStyle(
       color: Color(0xff67727d),
       fontWeight: FontWeight.bold,
-      fontSize: 15,
+      fontSize: 12,
     );
 
     String text;
@@ -229,6 +259,18 @@ class _LineChartSample2State extends State<LineChartSample2> {
 
   LineChartData mainData() {
     return LineChartData(
+      lineTouchData: LineTouchData(
+          enabled: true,
+          touchTooltipData: LineTouchTooltipData(
+            getTooltipItems: (touchedSpots) {
+              return List.generate(touchedSpots.length, (index) {
+                return LineTooltipItem(
+                    (touchedSpots[index].y * ExpenseList.weektemp / 5)
+                        .toString(),
+                    TextStyle());
+              });
+            },
+          )),
       gridData: FlGridData(
         show: true,
         drawVerticalLine: true,
@@ -283,6 +325,13 @@ class _LineChartSample2State extends State<LineChartSample2> {
       lineBarsData: [
         LineChartBarData(
           spots: [
+            // ...List.generate(ExpenseList.groupedData.length, (index) {
+            //   return FlSpot(
+            //       index.toDouble(),
+            //       (ExpenseList.groupedData[index]['amount'] as double) *
+            //           6 /
+            //           ExpenseList.weektemp);
+            // })
             FlSpot(0, flspotarray[6] * 5 / ExpenseList.weektemp),
             FlSpot(1, flspotarray[5] * 5 / ExpenseList.weektemp),
             FlSpot(2, flspotarray[4] * 5 / ExpenseList.weektemp),
@@ -292,13 +341,11 @@ class _LineChartSample2State extends State<LineChartSample2> {
             FlSpot(6, flspotarray[0] * 5 / ExpenseList.weektemp),
           ],
           isCurved: false,
-          gradient: LinearGradient(
-            colors: gradientColors,
-          ),
-          barWidth: 5,
+          color: Colors.white,
+          barWidth: 3,
           isStrokeCapRound: true,
           dotData: FlDotData(
-            show: true,
+            show: false,
           ),
           belowBarData: BarAreaData(
             show: true,
@@ -316,6 +363,18 @@ class _LineChartSample2State extends State<LineChartSample2> {
 
 LineChartData monthData() {
   return LineChartData(
+    lineTouchData: LineTouchData(
+        enabled: true,
+        touchTooltipData: LineTouchTooltipData(
+          getTooltipItems: (touchedSpots) {
+            return List.generate(touchedSpots.length, (index) {
+              return LineTooltipItem(
+                  (touchedSpots[index].y * ExpenseList.monthtemp / 5)
+                      .toString(),
+                  TextStyle());
+            });
+          },
+        )),
     gridData: FlGridData(
       show: true,
       drawVerticalLine: true,
@@ -368,15 +427,13 @@ LineChartData monthData() {
     minY: 0,
     maxY: 6,
     lineBarsData: [
-     
       LineChartBarData(
         spots: [
           ...List.generate(ExpenseList.monthgroupedData.length, (index) {
-            print(ExpenseList.monthgroupedData[index]);
             return FlSpot(
                 index.toDouble() / 5,
                 (ExpenseList.monthgroupedData[index]['amount'] as double) *
-                    5 /
+                    6 /
                     ExpenseList.monthtemp);
           })
         ],
@@ -385,10 +442,10 @@ LineChartData monthData() {
         barWidth: 1,
         isStrokeCapRound: false,
         dotData: FlDotData(
-          show: true,
+          show: false,
         ),
         belowBarData: BarAreaData(
-          show: false,
+          show: true,
           gradient: LinearGradient(
             colors:
                 gradientColors.map((color) => color.withOpacity(0.3)).toList(),
@@ -403,9 +460,8 @@ Widget leftTitlemonthWidgets(double value, TitleMeta meta) {
   const style = TextStyle(
     color: Color(0xff67727d),
     fontWeight: FontWeight.bold,
-    fontSize: 15,
+    fontSize: 12,
   );
-  ExpenseList.findMaxmonth();
   String text;
 
   switch (value.toInt()) {
@@ -442,7 +498,7 @@ Widget bottomTitlemonthWidgets(double value, TitleMeta meta) {
   const style = TextStyle(
     color: Color(0xff68737d),
     fontWeight: FontWeight.bold,
-    fontSize: 16,
+    fontSize: 12,
   );
 
   Widget text;
@@ -484,6 +540,17 @@ Widget bottomTitlemonthWidgets(double value, TitleMeta meta) {
 
 LineChartData yearData() {
   return LineChartData(
+    lineTouchData: LineTouchData(
+        enabled: true,
+        touchTooltipData: LineTouchTooltipData(
+          getTooltipItems: (touchedSpots) {
+            return List.generate(touchedSpots.length, (index) {
+              return LineTooltipItem(
+                  (touchedSpots[index].y * ExpenseList.yeartemp / 6).toString(),
+                  TextStyle());
+            });
+          },
+        )),
     gridData: FlGridData(
       show: true,
       drawVerticalLine: true,
@@ -538,22 +605,20 @@ LineChartData yearData() {
     lineBarsData: [
       LineChartBarData(
         spots: [
-          FlSpot(0, 1),
-          FlSpot(1, 1),
-          FlSpot(2, 1),
-          FlSpot(3, 1),
-          FlSpot(4, 3),
-          FlSpot(5, 1),
-          FlSpot(6, 1),
+          ...List.generate(ExpenseList.yeargroupedData.length, (index) {
+            return FlSpot(
+                index.toDouble(),
+                (ExpenseList.yeargroupedData[index]['amount'] as double) *
+                    6 /
+                    ExpenseList.yeartemp);
+          })
         ],
         isCurved: false,
-        gradient: LinearGradient(
-          colors: gradientColors,
-        ),
-        barWidth: 5,
+        gradient: LinearGradient(colors: gradientColors),
+        barWidth: 3,
         isStrokeCapRound: true,
         dotData: FlDotData(
-          show: true,
+          show: false,
         ),
         belowBarData: BarAreaData(
           show: true,
@@ -571,7 +636,7 @@ Widget leftTitleYearWidgets(double value, TitleMeta meta) {
   const style = TextStyle(
     color: Color(0xff67727d),
     fontWeight: FontWeight.bold,
-    fontSize: 15,
+    fontSize: 12,
   );
 
   String text;
@@ -582,23 +647,22 @@ Widget leftTitleYearWidgets(double value, TitleMeta meta) {
       break;
 
     case 1:
-      text = ExpenseList.zeros(ExpenseList.weektemp * .2);
+      text = ExpenseList.zeros(ExpenseList.yeartemp * .2);
       break;
     case 2:
-      text = ExpenseList.zeros(ExpenseList.weektemp * .4);
+      text = ExpenseList.zeros(ExpenseList.yeartemp * .4);
       break;
     case 3:
-      text = ExpenseList.zeros(ExpenseList.weektemp * .6);
+      text = ExpenseList.zeros(ExpenseList.yeartemp * .6);
       break;
     case 4:
-      text = ExpenseList.zeros(ExpenseList.weektemp * .8);
-
+      text = ExpenseList.zeros(ExpenseList.yeartemp * .8);
       break;
     case 5:
-      text = ExpenseList.zeros(ExpenseList.weektemp);
+      text = ExpenseList.zeros(ExpenseList.yeartemp);
       break;
     case 6:
-      text = ExpenseList.zeros(ExpenseList.weektemp * 1.2);
+      text = ExpenseList.zeros(ExpenseList.yeartemp * 1.2);
       break;
 
     default:
@@ -612,7 +676,7 @@ Widget bottomTitleYearWidgets(double value, TitleMeta meta) {
   const style = TextStyle(
     color: Color(0xff68737d),
     fontWeight: FontWeight.bold,
-    fontSize: 16,
+    fontSize: 12,
   );
 
   Widget text;

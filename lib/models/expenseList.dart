@@ -9,17 +9,33 @@ import 'package:quiver/time.dart';
 
 List<double> weekarray = [];
 List<double> montharray = [];
-
-bool check = true;
+List<double> yeararray = [];
 
 class ExpenseList {
   static List<Expense> data = [];
+  static double jantemp = 0.0;
+  static double febtemp = 0.0;
+  static double marchtemp = 0.0;
+  static double apriltemp = 0.0;
+  static double maytemp = 0.0;
+  static double junetemp = 0.0;
+  static double julytemp = 0.0;
+  static double augusttemp = 0.0;
+  static double septembertemp = 0.0;
+  static double octobertemp = 0.0;
+  static double novembertemp = 0.0;
+  static double decembertemp = 0.0;
 
   static List<Expense> monthdata = [];
+  static int month = 0;
+  static List<Expense> yeardata = [];
   static List<Map<String, Object>> groupedData = [];
   static List<Map<String, Object>> monthgroupedData = [];
+  static List<Map<String, Object>> yeargroupedData = [];
   static double weektemp = 0.0;
   static double monthtemp = 0.0;
+  static double yeartemp = 0.0;
+
   ExpenseList() {}
   static Future<List<Expense>> getData() async {
     data = [];
@@ -71,6 +87,21 @@ class ExpenseList {
     return weekarray;
   }
 
+  static double findMaxweek() {
+    var lineData = ExpenseList.groupedData;
+
+    var max = lineData.reduce((currentUser, nextUser) =>
+        (currentUser['amount'] as double) > (nextUser['amount'] as double)
+            ? currentUser
+            : nextUser);
+    double maxA = max["amount"] as double;
+
+    weektemp = maxA * 1.5;
+    weektemp = double.parse(weektemp.toStringAsFixed(2));
+
+    return weektemp;
+  }
+
   static Future<List<Expense>> getMonthData(String a) async {
     monthdata = [];
     try {
@@ -85,7 +116,12 @@ class ExpenseList {
             category: i['category'],
             id: i['id']));
       }
-      groupMonthlyValues(2022, 10, daysInMonth(2022, 10));
+
+      int year = int.parse(a.substring(0, 4));
+
+      month = int.parse(a.substring(5, 7));
+
+      ExpenseList.groupMonthlyValues(year, month, daysInMonth(year, month));
 
       return monthdata;
     } catch (e) {
@@ -96,9 +132,8 @@ class ExpenseList {
   static groupMonthlyValues(int year, int month, int day) {
     monthgroupedData = [];
     monthgroupedData = List.generate(day, (index) {
-      final weekday = DateTime.utc(year, month, day).subtract(
-        Duration(days: index),
-      );
+      final weekday = DateTime.utc(year, month, index);
+
       var totalSuminMonth = 0.0;
 
       for (var i = 0; i < monthdata.length; i++) {
@@ -108,7 +143,6 @@ class ExpenseList {
           totalSuminMonth += monthdata[i].amount as double;
         }
       }
-
       return {
         'day': weekday.day,
         'month': weekday.month,
@@ -116,6 +150,7 @@ class ExpenseList {
       };
     });
 
+    ExpenseList.findMaxmonth();
   }
 
   static List monthlyArrayList() {
@@ -130,32 +165,90 @@ class ExpenseList {
   }
 
   static double findMaxmonth() {
-    
     var lineData = ExpenseList.monthgroupedData;
+
     var max = lineData.reduce((currentUser, nextUser) =>
         (currentUser['amount'] as double) > (nextUser['amount'] as double)
             ? currentUser
             : nextUser);
     double maxA = max["amount"] as double;
+
     monthtemp = maxA * 1.5;
     monthtemp = double.parse(monthtemp.toStringAsFixed(2));
-    
+
     return monthtemp;
   }
 
-  static double findMaxweek() {
-    var lineData = ExpenseList.groupedData;
+  static Future<List<Expense>> getYearData(String a) async {
+    yeardata = [];
+    try {
+      var tk1 = await token.storage.read(key: "jwt");
+      final value = await AuthService().getYearlyExpense(tk1 as String, a);
+      var yearData = value.data['ans'];
+      for (Map i in yearData) {
+        yeardata.add(Expense(
+            amount: double.parse(i['amount'].toString()),
+            name: i['name'],
+            date1: DateTime.parse(i['date']).toLocal(),
+            category: i['category'],
+            id: i['id']));
+      }
 
+      int year = int.parse(a);
+
+      ExpenseList.groupYearlyValues(year);
+
+      return yeardata;
+    } catch (e) {
+      throw (e);
+    }
+  }
+
+  static void groupYearlyValues(int year) {
+    yeargroupedData = [];
+    DateTime weekday;
+
+    yeargroupedData = List.generate(12, (index) {
+      weekday = DateTime.utc(year, index + 1);
+      double totalsumInYear = 0.0;
+
+      for (var i = 0; i < yeardata.length; i++) {
+        if (weekday.month == yeardata[i].date?.month &&
+            weekday.year == yeardata[i].date?.year) {
+          totalsumInYear += yeardata[i].amount as double;
+        }
+      }
+      return {
+        "month": weekday.month,
+        "amount": totalsumInYear,
+      };
+    });
+    print(yeargroupedData);
+    ExpenseList.findMaxyear();
+
+    return;
+  }
+
+  static int days_in_year(int a) {
+    int totaldays = 0;
+    for (int i = 0; i < 13; i++) {
+      totaldays = totaldays + daysInMonth(a, i);
+    }
+    return totaldays;
+  }
+
+  static double findMaxyear() {
+    var lineData = ExpenseList.yeargroupedData;
     var max = lineData.reduce((currentUser, nextUser) =>
         (currentUser['amount'] as double) > (nextUser['amount'] as double)
             ? currentUser
             : nextUser);
     double maxA = max["amount"] as double;
 
-    weektemp = maxA * 1.5;
-    weektemp = double.parse(weektemp.toStringAsFixed(2));
+    yeartemp = maxA * 1.5;
+    yeartemp = double.parse(yeartemp.toStringAsFixed(2));
 
-    return weektemp;
+    return yeartemp;
   }
 
   //dont use truncating operator its is not good it rounds up decimal numbers to  0
@@ -176,7 +269,7 @@ class ExpenseList {
     } else if (a <= 10000000000 && a >= 1000000000) {
       return '${(a / 1000000000).toStringAsFixed(2)}B';
     } else {
-      return ' ';
+      return a.toStringAsFixed(1);
     }
   }
 
@@ -207,6 +300,36 @@ class ExpenseList {
       return 12;
     } else {
       return 1;
+    }
+  }
+
+  static String monthName(int a) {
+    if (a == 1) {
+      return "January";
+    } else if (a == 2) {
+      return "February";
+    } else if (a == 3) {
+      return "March";
+    } else if (a == 4) {
+      return "April";
+    } else if (a == 5) {
+      return "May";
+    } else if (a == 6) {
+      return "June";
+    } else if (a == 7) {
+      return "July";
+    } else if (a == 8) {
+      return "August";
+    } else if (a == 9) {
+      return "September";
+    } else if (a == 10) {
+      return "October";
+    } else if (a == 11) {
+      return "November";
+    } else if (a == 12) {
+      return "December";
+    } else {
+      return " ";
     }
   }
 }

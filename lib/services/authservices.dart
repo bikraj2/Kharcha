@@ -182,12 +182,12 @@ class AuthService {
     }
   }
 
-  getYearlyExpense(String token, String month) async {
+  getYearlyExpense(String token, String year) async {
     try {
       var value = await diio.get("${url}/getExpense",
-          queryParameters: {"token": token, "year": month},
+          queryParameters: {"token": token, "year": year},
           options: Options(contentType: Headers.formUrlEncodedContentType));
-      print(value);
+      
       return value;
     } on DioError catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
