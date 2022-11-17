@@ -43,25 +43,21 @@ class _LoginScreenState extends State<LoginScreen> {
           },
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(15),
-        color: Colors.white,
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            IconButton(
-              onPressed: () {},
-              icon: Image(
-                image: AssetImage("assetss/images/loginn.png"),
-              ),
-              iconSize: 350,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          IconButton(
+            onPressed: () {},
+            icon: Image(
+              image: AssetImage("assetss/images/loginn.png"),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextField(
+            iconSize: 350,
+          ),
+          SizedBox(
+            width: 250,
+            height: 40,
+            child: TextField(
               controller: usernameController,
               style: const TextStyle(fontSize: 18, color: Colors.black54),
               decoration: InputDecoration(
@@ -71,10 +67,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   contentPadding: const EdgeInsets.all(15),
                   border: OutlineInputBorder()),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextField(
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          SizedBox(
+            width: 250,
+            height: 40,
+            child: TextField(
               controller: passwordController,
               obscureText: true,
               style: const TextStyle(fontSize: 18, color: Colors.black54),
@@ -86,74 +86,80 @@ class _LoginScreenState extends State<LoginScreen> {
                 border: OutlineInputBorder(),
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return ForgotPasswowrd();
-                  }));
-                },
-                child: Text("Forgot Password?")),
-            ElevatedButton(
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          TextButton(
               onPressed: () {
-                String username = usernameController.text;
-                String password = passwordController.text;
-                if ((username == "")) {
-                  Fluttertoast.showToast(
-                      msg: "Please enter your username",
-                      textColor: Colors.white,
-                      backgroundColor: Colors.red.shade300);
-                } else if ((password == "")) {
-                  Fluttertoast.showToast(
-                      msg: "Please enter your password",
-                      textColor: Colors.white,
-                      backgroundColor: Colors.red.shade300);
-                } else {
-                  AuthService().login(username, password).then((val) {
-                    if (val.data["success"]) {
-                      token.storeToken(val.data["token"]);
-                      token.readToken();
-                      ExpenseList.getData().then((value) {
-                        ExpenseList.groupedTransactionValues();
-                      });
-                      Finance.getFinance();
-                      ExpenseList.findMaxweek();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) {
-                            return HomeScreen();
-                          },
-                        ),
-                      );
-                    } else {
-                      Fluttertoast.showToast(
-                          msg: val.data["msg"],
-                          textColor: Colors.white,
-                          backgroundColor: Colors.red.shade300);
-                    }
-                  });
-                }
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ForgotPassword();
+                }));
               },
-              style: ButtonStyle(
-                padding: MaterialStateProperty.all(
-                  const EdgeInsets.all(10),
-                ),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18))),
-                backgroundColor:
-                    MaterialStateProperty.all(AppTheme.colors.basecolor),
+              child: Text(
+                "Forgot Password?",
+                style: TextStyle(decoration: TextDecoration.underline),
+              )),
+          SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              String username = usernameController.text;
+              String password = passwordController.text;
+              if ((username == "")) {
+                Fluttertoast.showToast(
+                    msg: "Please enter your username",
+                    textColor: Colors.white,
+                    backgroundColor: Colors.red.shade300);
+              } else if ((password == "")) {
+                Fluttertoast.showToast(
+                    msg: "Please enter your password",
+                    textColor: Colors.white,
+                    backgroundColor: Colors.red.shade300);
+              } else {
+                AuthService().login(username, password).then((val) {
+                  if (val.data["success"]) {
+                    token.storeToken(val.data["token"]);
+                    token.readToken();
+                    ExpenseList.getData().then((value) {
+                      ExpenseList.groupedTransactionValues();
+                    });
+                    Finance.getFinance();
+                    ExpenseList.findMaxweek();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return HomeScreen();
+                        },
+                      ),
+                    );
+                  } else {
+                    Fluttertoast.showToast(
+                        msg: val.data["msg"],
+                        textColor: Colors.white,
+                        backgroundColor: Colors.red.shade300);
+                  }
+                });
+              }
+            },
+            style: ButtonStyle(
+              padding: MaterialStateProperty.all(
+                const EdgeInsets.all(5),
               ),
-              child: const Text(
-                'login',
-                style: TextStyle(fontSize: 20),
-              ),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5))),
+              backgroundColor:
+                  MaterialStateProperty.all(AppTheme.colors.basecolor),
             ),
-          ],
-        ),
+            child: const Text(
+              'Login',
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+            ),
+          ),
+        ],
       ),
     );
   }

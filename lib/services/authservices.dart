@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:demo2/screens/log/ForgotPassword.dart';
 import 'package:demo2/screens/log/forgotPassword.dart';
 import 'package:dio/dio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -81,9 +82,9 @@ class AuthService {
     }
   }
 
-  forgotPasswowrd(String? token1, String email) async {
+  ForgotPassword(String? token1, String email) async {
     try {
-      var value = await diio.post('${url}/forgotPassword',
+      var value = await diio.post('${url}/ForgotPassword',
           data: {"email": email}, queryParameters: {'token': token1});
       var otp = value.data['data']['otp'];
       token.storage.write(key: 'otp', value: otp);
@@ -187,7 +188,7 @@ class AuthService {
       var value = await diio.get("${url}/getExpense",
           queryParameters: {"token": token, "year": year},
           options: Options(contentType: Headers.formUrlEncodedContentType));
-      print(value);
+      
       return value;
     } on DioError catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
