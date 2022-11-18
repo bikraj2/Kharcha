@@ -10,7 +10,7 @@ import '../models/user_info.dart';
 import '../models/expenses.dart';
 import '../token/token.dart';
 
-const url = "http://192.168.1.75:3000";
+const url = "http://localhost:3000";
 
 class AuthService {
   Dio diio = Dio();
@@ -188,7 +188,7 @@ class AuthService {
       var value = await diio.get("${url}/getExpense",
           queryParameters: {"token": token, "year": year},
           options: Options(contentType: Headers.formUrlEncodedContentType));
-      
+
       return value;
     } on DioError catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
