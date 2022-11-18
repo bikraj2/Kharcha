@@ -37,7 +37,6 @@ class ExpenseList {
   static double monthtemp = 0.0;
   static double yeartemp = 0.0;
 
-  ExpenseList() {}
   static Future<List<Expense>> getData() async {
     expenseList = [];
     try {
@@ -45,7 +44,7 @@ class ExpenseList {
       final res = await AuthService().getExpense(tk as String);
       print(res);
       for (Map i in res.data['ans']) {
-        print(i['id']);
+        print(i['amount']);
         expenseList.add(Expense(
             amount: double.parse(i['amount'].toString()),
             name: i['name'],
@@ -53,9 +52,10 @@ class ExpenseList {
             category: i['category'],
             id: i['_id']));
       }
+      groupedTransactionValues();
       return expenseList;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -78,6 +78,7 @@ class ExpenseList {
         'amount': totalSum,
       };
     });
+    weeklyarraylist();
   }
 
   static List weeklyarraylist() {

@@ -42,11 +42,8 @@ dependencies:
   loading_animation_widget : ^1.2.0+2
   cupertino_icons : ^1.0.2
   basic_utils: ^5.4.2
-<<<<<<< HEAD
   auto_size_text: ^3.0.0
-=======
   readmore: ^2.2.0
->>>>>>> bebf2a75e65677aeb4fd2fb8c11fcb9d755f44bd
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
 
@@ -70,7 +67,6 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
   assets:
     - assetss/images/6.png
     - assetss/images/7.png
