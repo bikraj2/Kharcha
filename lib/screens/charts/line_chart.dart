@@ -38,6 +38,7 @@ class LineChartSample2 extends StatefulWidget {
 }
 
 class _LineChartSample2State extends State<LineChartSample2> {
+  var a = ExpenseList.getData();
   var weeklineChartdata = ExpenseList.groupedData;
   List<double> flspotarray = ExpenseList.weeklyarraylist() as List<double>;
 
@@ -270,7 +271,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
             getTooltipItems: (touchedSpots) {
               return List.generate(touchedSpots.length, (index) {
                 return LineTooltipItem(
-                    (touchedSpots[index].y * ExpenseList.weektemp / 5)
+                    (touchedSpots[index].y * ExpenseList.weektemp / 6)
                         .toString(),
                     TextStyle(
                       fontSize: 12,
@@ -340,13 +341,13 @@ class _LineChartSample2State extends State<LineChartSample2> {
             //           6 /
             //           ExpenseList.weektemp);
             // })
-            FlSpot(0, flspotarray[6] * 5 / ExpenseList.weektemp),
-            FlSpot(1, flspotarray[5] * 5 / ExpenseList.weektemp),
-            FlSpot(2, flspotarray[4] * 5 / ExpenseList.weektemp),
-            FlSpot(3, flspotarray[3] * 5 / ExpenseList.weektemp),
-            FlSpot(4, flspotarray[2] * 5 / ExpenseList.weektemp),
-            FlSpot(5, flspotarray[1] * 5 / ExpenseList.weektemp),
-            FlSpot(6, flspotarray[0] * 5 / ExpenseList.weektemp),
+            FlSpot(0, flspotarray[6] * 6 / ExpenseList.weektemp),
+            FlSpot(1, flspotarray[5] * 6 / ExpenseList.weektemp),
+            FlSpot(2, flspotarray[4] * 6 / ExpenseList.weektemp),
+            FlSpot(3, flspotarray[3] * 6 / ExpenseList.weektemp),
+            FlSpot(4, flspotarray[2] * 6 / ExpenseList.weektemp),
+            FlSpot(5, flspotarray[1] * 6 / ExpenseList.weektemp),
+            FlSpot(6, flspotarray[0] * 6 / ExpenseList.weektemp),
           ],
           isCurved: false,
           color: Colors.white,
@@ -377,7 +378,7 @@ LineChartData monthData() {
           getTooltipItems: (touchedSpots) {
             return List.generate(touchedSpots.length, (index) {
               return LineTooltipItem(
-                  (touchedSpots[index].y * ExpenseList.monthtemp / 5)
+                  (touchedSpots[index].y * ExpenseList.monthtemp / 6)
                       .toString(),
                   TextStyle(
                     fontSize: 12,
