@@ -1,5 +1,5 @@
+import 'package:demo2/models/finance.dart';
 import 'package:demo2/screens/log/changePassword.dart';
-import 'package:demo2/screens/profile/top_card.dart';
 import 'package:demo2/screens/log/login_screen.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:demo2/token/token.dart';
@@ -22,6 +22,7 @@ final _moneyController = TextEditingController();
 var orientation, height, size, width;
 
 class _ProfilePageState extends State<ProfilePage> {
+  String state = "";
   @override
   Widget build(BuildContext context) {
     orientation = MediaQuery.of(context).orientation;
@@ -33,7 +34,140 @@ class _ProfilePageState extends State<ProfilePage> {
       children: [
         profilePicture(),
         const Text('Username'),
-        const TopNewCard(),
+        FutureBuilder(
+            key: Key(state),
+            future: Finance.getFinance(),
+            builder: ((context, snapshot) {
+              if (!snapshot.hasData) {
+                return Text("Loading");
+              } else {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 200,
+                    margin: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.grey[300],
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey.shade500,
+                              offset: Offset(4.0, 4.0),
+                              blurRadius: 15.0,
+                              spreadRadius: 1.0),
+                          BoxShadow(
+                              color: Colors.white,
+                              offset: Offset(-4.0, -4.0),
+                              blurRadius: 15.0,
+                              spreadRadius: 1.0),
+                        ]),
+                    child: Center(
+                        child: Column(
+                      children: [
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Text(
+                          'B A L A N C E',
+                          style: TextStyle(color: Colors.grey[500]),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          '\$' + Finance.income.toString(),
+                          style:
+                              TextStyle(color: Colors.grey[800], fontSize: 25),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.grey[200],
+                                    ),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.arrow_upward,
+                                        color: Colors.green,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text('Income',
+                                          style: TextStyle(
+                                              color: Colors.grey[600])),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text('\$' + Finance.income.toString(),
+                                          style: TextStyle(
+                                              color: Colors.grey[700],
+                                              fontWeight: FontWeight.bold)),
+                                    ],
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.grey[200],
+                                    ),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.arrow_downward,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text('Expense',
+                                          style: TextStyle(
+                                              color: Colors.grey[600])),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text('\$' + Finance.expense.toString(),
+                                          style: TextStyle(
+                                              color: Colors.grey[700],
+                                              fontWeight: FontWeight.bold)),
+                                    ],
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    )),
+                  ),
+                );
+              }
+            })),
         Padding(
           padding: const EdgeInsets.only(left: 30, right: 30),
           child: Column(

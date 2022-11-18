@@ -37,23 +37,25 @@ class ExpenseList {
   static double monthtemp = 0.0;
   static double yeartemp = 0.0;
 
-  ExpenseList() {}
   static Future<List<Expense>> getData() async {
     expenseList = [];
     try {
       var tk = await token.storage.read(key: 'jwt');
       final res = await AuthService().getExpense(tk as String);
+      print(res);
       for (Map i in res.data['ans']) {
+        print(i['amount']);
         expenseList.add(Expense(
             amount: double.parse(i['amount'].toString()),
             name: i['name'],
             date1: DateTime.parse(i['date']).toLocal(),
             category: i['category'],
-            id: i['id']));
+            id: i['_id']));
       }
+      groupedTransactionValues();
       return expenseList;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
@@ -76,6 +78,7 @@ class ExpenseList {
         'amount': totalSum,
       };
     });
+    weeklyarraylist();
   }
 
   static List weeklyarraylist() {

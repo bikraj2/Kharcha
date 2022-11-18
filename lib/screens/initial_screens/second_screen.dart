@@ -1,4 +1,3 @@
-import 'package:demo2/screens/profile/top_card.dart';
 import 'package:flutter/material.dart';
 import 'first_screen.dart';
 import 'third_screen.dart';
