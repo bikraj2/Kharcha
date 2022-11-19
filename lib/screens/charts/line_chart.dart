@@ -82,10 +82,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
                       ),
                 ),
               ),
-              child: LineChart(dataForGraph
-
-                  //cant seem to solve the issue of trying to display different data without refreshing the page .
-                  ),
+              
             ),
             ElevatedButton(
               child: Padding(padding: EdgeInsets.all(10), child: Text("change")),

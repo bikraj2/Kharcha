@@ -54,6 +54,7 @@ class _expenseAdderState extends State<expenseAdder> {
               setState(() => {currentDate = val}),
             });
   }
+
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
@@ -167,35 +168,35 @@ class _expenseAdderState extends State<expenseAdder> {
                   },
                 ),
                 Container(
-                    padding: EdgeInsets.all(15),
-                    child: ElevatedButton(
-                        style: ButtonStyle(),
-                        // shape: BeveledRectangleBorder(
-                        //     borderRadius: BorderRadius.all(Radius.circular(5))),
-                        // hoverColor: AppTheme.colors.basecolor,
-                        // backgroundColor: AppTheme.colors.secondarycolor,
-                        child: const Text(
-                          "Save",
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.w600),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            date = _dateController.text;
-                            money = double.parse(_moneyController.text);
-                            categories = value;
-                          });
-                          var expense = Expense(
-                              name: _dateController.text,
-                              category: categories.toString(),
-                              amount: money,
-                              date1: currentDate);
+                  padding: EdgeInsets.all(15),
+                  child: ElevatedButton(
+                    style: ButtonStyle(),
+                    // shape: BeveledRectangleBorder(
+                    //     borderRadius: BorderRadius.all(Radius.circular(5))),
+                    // hoverColor: AppTheme.colors.basecolor,
+                    // backgroundColor: AppTheme.colors.secondarycolor,
+                    child: const Text(
+                      "Save",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.w600),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        date = _dateController.text;
+                        money = double.parse(_moneyController.text);
+                        categories = value;
+                      });
+                      var expense = Expense(
+                          name: _dateController.text,
+                          category: categories.toString(),
+                          amount: money,
+                          date1: currentDate);
 
-                          token.storage.read(key: "jwt").then((value) {
-                            print(value);
-                            AuthService()
-                                .addexpense(expense, value)
-                                .then((val) {
+                      token.storage.read(key: "jwt").then(
+                        (value) {
+                          print(value);
+                          AuthService().addexpense(expense, value).then(
+                            (val) {
                               if (val.data['success']) {
                                 ExpenseList.getData().then((value) {
                                   ExpenseList.groupedTransactionValues();
@@ -211,9 +212,13 @@ class _expenseAdderState extends State<expenseAdder> {
                                     textColor: Colors.white,
                                     backgroundColor: Colors.red);
                               }
-                            });
-                          });
-                        })),
+                            },
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           )

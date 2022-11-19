@@ -180,5 +180,22 @@ var functions = {
       res.status(400).json({ success: false, msg: e.message });
     }
   },
+  editExpense: async (req,res) =>{
+    try {
+      var token = req.query['token'];
+      var decodedtoken = jwt.decode(token, config.secret);
+      var userId = decodedtoken._id;
+      var user = User.find({_id:userId})
+      if(!user){
+        res.status(400).json({success:false,msg:"User not foumd."})
+      }
+      var expenseId = req.params.id;
+      console.log(expenseId)
+      var oneExpense = await expense.findOneAndUpdate({ _id: expenseId },req.body);
+      res.status(200).json({success:true,msg:"Expense Edited Successfully",data: oneExpense})
+    } catch (error) {
+      res.status(400).json({ success: false, msg: error});
+    }
+  } 
 };
 module.exports = functions;

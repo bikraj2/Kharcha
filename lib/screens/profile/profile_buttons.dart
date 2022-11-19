@@ -230,22 +230,25 @@ class _ProfilePageState extends State<ProfilePage> {
                         title: Text("Add income"),
                         actions: [
                           Container(
-                              width: width,
-                              height: height / 8,
-                              padding: EdgeInsets.all(15),
-                              margin: EdgeInsets.only(top: 10),
-                              child: TextField(
-                                  controller: _moneyController,
-                                  decoration: InputDecoration(
-                                      labelText: 'Income ',
-                                      border: OutlineInputBorder(),
-                                      suffixIcon: IconButton(
-                                        onPressed: () {
-                                          _moneyController.clear();
-                                        },
-                                        icon: Icon(Icons.clear),
-                                        iconSize: 14,
-                                      )))),
+                            width: width,
+                            height: height / 8,
+                            padding: EdgeInsets.all(15),
+                            margin: EdgeInsets.only(top: 10),
+                            child: TextField(
+                              controller: _moneyController,
+                              decoration: InputDecoration(
+                                labelText: 'Income ',
+                                border: OutlineInputBorder(),
+                                suffixIcon: IconButton(
+                                  onPressed: () {
+                                    _moneyController.clear();
+                                  },
+                                  icon: Icon(Icons.clear),
+                                  iconSize: 14,
+                                ),
+                              ),
+                            ),
+                          ),
                           Center(
                             child: Container(
                                 padding: EdgeInsets.all(15),
