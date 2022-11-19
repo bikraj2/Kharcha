@@ -136,12 +136,8 @@ class _GraphPageState extends State<GraphPage> {
                       color: AppTheme.colors.backgroundcolor,
                     ),
                     child: Text(
-                      "Bar chart is a circular statistical \ngraphic divided into slices to \nillustrate a numerical proportion.\nYou can view the expenses \nusing the chart and find their \nproportions ",
-                      style: GoogleFonts.lato(
-                          fontSize: 13,
-                          color: AppTheme.colors.secondarycolor,
-                          fontWeight: FontWeight.w400),
-                    ),
+                        "Bar chart is a circular statistical \ngraphic divided into slices to \nillustrate a numerical proportion.\nYou can view the expenses \nusing the chart and find their \nproportions ",
+                        style: AppTheme.fonts.boxText),
                   ),
                 ],
               ),

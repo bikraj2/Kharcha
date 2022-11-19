@@ -10,7 +10,7 @@ import '../models/user_info.dart';
 import '../models/expenses.dart';
 import '../token/token.dart';
 
-const url = "http://192.168.1.75:3000";
+const url = "https:localhost:3000";
 
 class AuthService {
   Dio diio = Dio();
@@ -234,7 +234,6 @@ class AuthService {
 
   getExpenseSorted(String token, String sortAmount, String sortDate) async {
     try {
-     
       var value = await diio.get("${url}/getExpense",
           queryParameters: {
             "token": token,
@@ -251,7 +250,8 @@ class AuthService {
           backgroundColor: Colors.red.shade300);
     }
   }
-   editExpense(Expense expense, String? token) async {
+
+  editExpense(Expense expense, String? token) async {
     try {
       var value = await diio.patch("${url}/addExpense",
           data: {

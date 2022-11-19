@@ -71,7 +71,7 @@ class _SignUpState extends State<SignUp> {
               width: 200,
               child: TextField(
                 controller: firstNameController,
-                style: GoogleFonts.lato(fontSize: 17),
+                style: AppTheme.fonts.boxText,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
@@ -90,7 +90,7 @@ class _SignUpState extends State<SignUp> {
               child: TextField(
                 controller: middleNameController,
                 obscureText: true,
-                style: GoogleFonts.lato(fontSize: 17),
+                style: AppTheme.fonts.boxText,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
@@ -108,7 +108,7 @@ class _SignUpState extends State<SignUp> {
               width: 200,
               child: TextField(
                 controller: lastNameController,
-                style: const TextStyle(fontSize: 18, color: Colors.black54),
+                style: AppTheme.fonts.boxText,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
@@ -127,7 +127,7 @@ class _SignUpState extends State<SignUp> {
               child: TextField(
                 controller: emailController,
                 obscureText: true,
-                style: GoogleFonts.lato(fontSize: 17),
+                style: AppTheme.fonts.boxText,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
@@ -145,7 +145,7 @@ class _SignUpState extends State<SignUp> {
               width: 200,
               child: TextField(
                 controller: usernameController,
-                style: GoogleFonts.lato(fontSize: 17),
+                style: AppTheme.fonts.boxText,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: AppTheme.colors.tertiarycolor,
@@ -164,7 +164,7 @@ class _SignUpState extends State<SignUp> {
               child: TextField(
                 controller: passwordController,
                 obscureText: true,
-                style: GoogleFonts.lato(fontSize: 17),
+                style: AppTheme.fonts.boxText,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
