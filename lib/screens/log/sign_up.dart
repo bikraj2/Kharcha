@@ -202,7 +202,7 @@ class _SignUpState extends State<SignUp> {
               },
               child: Text(
                 'Sign Up',
-                style: GoogleFonts.lato(fontSize: 17),
+                style: AppTheme.fonts.boxText,
               ),
             ),
             SizedBox(
