@@ -3,9 +3,11 @@ import 'package:demo2/services/authservices.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../models/user_info.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:demo2/theme/theme.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignUp extends StatefulWidget {
   SignUp({Key? key}) : super(key: key);
@@ -54,7 +56,7 @@ class _SignUpState extends State<SignUp> {
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             IconButton(
               onPressed: () {},
@@ -64,89 +66,112 @@ class _SignUpState extends State<SignUp> {
               )),
               iconSize: 250,
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextField(
-              controller: firstNameController,
-              style: const TextStyle(fontSize: 18, color: Colors.black54),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                labelText: 'Firstname',
-                contentPadding: const EdgeInsets.all(15),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextField(
-              controller: middleNameController,
-              obscureText: true,
-              style: const TextStyle(fontSize: 18, color: Colors.black54),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                labelText: 'MiddleName',
-                contentPadding: const EdgeInsets.all(15),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextField(
-              controller: lastNameController,
-              style: const TextStyle(fontSize: 18, color: Colors.black54),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                labelText: 'Lastname',
-                contentPadding: const EdgeInsets.all(15),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Container(
+            SizedBox(
+              height: 40,
               width: 200,
               child: TextField(
-                controller: emailController,
+                controller: firstNameController,
+                style: GoogleFonts.lato(fontSize: 17),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  labelText: 'Firstname',
+                  border: OutlineInputBorder(),
+                  contentPadding: const EdgeInsets.all(15),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 40,
+              width: 200,
+              child: TextField(
+                controller: middleNameController,
                 obscureText: true,
+                style: GoogleFonts.lato(fontSize: 17),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  labelText: 'Middle Name',
+                  border: OutlineInputBorder(),
+                  contentPadding: const EdgeInsets.all(15),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 40,
+              width: 200,
+              child: TextField(
+                controller: lastNameController,
                 style: const TextStyle(fontSize: 18, color: Colors.black54),
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
-                  labelText: 'email',
+                  labelText: 'Lastname',
+                  border: OutlineInputBorder(),
+                  contentPadding: const EdgeInsets.all(15),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 40,
+              width: 200,
+              child: TextField(
+                controller: emailController,
+                obscureText: true,
+                style: GoogleFonts.lato(fontSize: 17),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  labelText: 'E-mail',
                   contentPadding: const EdgeInsets.all(15),
                   border: OutlineInputBorder(),
                 ),
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: 10,
             ),
-            TextField(
-              controller: usernameController,
-              style: const TextStyle(fontSize: 18, color: Colors.black54),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: AppTheme.colors.tertiarycolor,
-                labelText: 'Username',
-                contentPadding: const EdgeInsets.all(15),
+            SizedBox(
+              height: 40,
+              width: 200,
+              child: TextField(
+                controller: usernameController,
+                style: GoogleFonts.lato(fontSize: 17),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: AppTheme.colors.tertiarycolor,
+                  labelText: 'Username',
+                  border: OutlineInputBorder(),
+                  contentPadding: const EdgeInsets.all(15),
+                ),
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: 10,
             ),
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              style: const TextStyle(fontSize: 18, color: Colors.black54),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                labelText: 'Password',
-                contentPadding: const EdgeInsets.all(15),
+            SizedBox(
+              height: 40,
+              width: 200,
+              child: TextField(
+                controller: passwordController,
+                obscureText: true,
+                style: GoogleFonts.lato(fontSize: 17),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  labelText: 'Password',
+                  border: OutlineInputBorder(),
+                  contentPadding: const EdgeInsets.all(15),
+                ),
               ),
             ),
             const SizedBox(
@@ -175,11 +200,14 @@ class _SignUpState extends State<SignUp> {
                   }
                 });
               },
-              child: const Text(
+              child: Text(
                 'Sign Up',
-                style: TextStyle(fontSize: 20),
+                style: GoogleFonts.lato(fontSize: 17),
               ),
             ),
+            SizedBox(
+              height: 30,
+            )
           ],
         ),
       ),

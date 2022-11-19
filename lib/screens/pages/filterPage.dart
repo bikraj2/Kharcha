@@ -8,7 +8,6 @@ import '../../models/expenses.dart';
 import 'home_page.dart';
 import 'package:demo2/services/authservices.dart';
 import 'package:demo2/token/token.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 
 class FilterPage extends StatefulWidget {
   FilterPage({super.key});
@@ -278,7 +277,6 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                             IconButton(
                                 onPressed: () async {
                                   try {
-                                   
                                     var tk =
                                         await token.storage.read(key: 'jwt');
                                     var value = await AuthService()
@@ -532,7 +530,7 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                                   padding: EdgeInsets.all(15),
                                   child: Row(
                                     children: [
-                                      AutoSizeText(
+                                      Text(
                                           '${DateFormat.yMMMMd('en_US').format(_startDate as DateTime)}'),
                                       IconButton(
                                           onPressed: () {
@@ -550,7 +548,7 @@ class _FilterPageState extends State<FilterPage> with TickerProviderStateMixin {
                                   padding: EdgeInsets.all(15),
                                   child: Row(
                                     children: [
-                                      AutoSizeText(
+                                      Text(
                                           '${DateFormat.yMMMMd('en_US').format(_endDate as DateTime)}'),
                                       IconButton(
                                           onPressed: () {
