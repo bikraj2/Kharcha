@@ -120,8 +120,9 @@ class _LoginScreenState extends State<LoginScreen> {
               } else {
                 AuthService().login(username, password).then((val) {
                   if (val.data["success"]) {
-                    token.storeToken(val.data["token"]);
-                    token.readToken();
+                    
+                    token.storage.write(key: 'jwt', value: val.data['token']);
+                    
                     ExpenseList.getData().then((value) {
                       ExpenseList.groupedTransactionValues();
                     });

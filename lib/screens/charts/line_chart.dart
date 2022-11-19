@@ -20,7 +20,6 @@ class LineChartClass1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(ExpenseList.jantemp);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Your Monthly Expenses"),
@@ -39,8 +38,10 @@ class LineChartSample2 extends StatefulWidget {
 }
 
 class _LineChartSample2State extends State<LineChartSample2> {
+  var a = ExpenseList.getData();
   var weeklineChartdata = ExpenseList.groupedData;
   List<double> flspotarray = ExpenseList.weeklyarraylist() as List<double>;
+
   int check = 0;
   @override
   Widget build(BuildContext context) {
@@ -57,113 +58,118 @@ class _LineChartSample2State extends State<LineChartSample2> {
         dataForGraph = yearData();
         break;
     }
-    return Container(
-      child: Column(
-        children: <Widget>[
-          AspectRatio(
-            aspectRatio: 1.2,
-            child: DecoratedBox(
-              decoration: const BoxDecoration(
-                color: Color(0xff232d37),
+    return Column(
+      children: <Widget>[
+        AspectRatio(
+          aspectRatio: 1.6,
+          child: DecoratedBox(
+            decoration: const BoxDecoration(
+              color: Color(0xff232d37),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(
+                right: 25,
+                left: 25,
+                top: 25,
+                bottom: 25,
               ),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  right: 25,
-                  left: 25,
-                  top: 25,
-                  bottom: 25,
-                ),
-                child: LineChart(dataForGraph
+              child: LineChart(dataForGraph
 
-                    //cant seem to solve the issue of trying to display different data without refreshing the page .
-                    ),
-              ),
+                  //cant seem to solve the issue of trying to display different data without refreshing the page .
+                  ),
             ),
           ),
-          ElevatedButton(
-            child: Padding(padding: EdgeInsets.all(10), child: Text("change")),
-            onPressed: () {
-              setState(() {
-                check = check + 1;
-                check = check % 3;
-              });
-            },
-          ),
-          ElevatedButton(
-              onPressed: () async {
-                // ExpenseList.getMonthData('2022-01').then((value) {
-                //   ExpenseList.groupMonthlyValues(2022, 01, daysInMonth(2022, 01));
-                // });
-                // print(ExpenseList.monthlyArrayList());
-                // ExpenseList.getMonthData('2022-02').then((value) {
-                //   ExpenseList.groupMonthlyValues(2022, 02, daysInMonth(2022, 02));
-                // });
-                // print(ExpenseList.monthlyArrayList());
-                // ExpenseList.getMonthData('2022-03').then((value) {
-                //   ExpenseList.groupMonthlyValues(2022, 03, daysInMonth(2022, 03));
-                // });
-                // print(ExpenseList.monthlyArrayList());
-                // ExpenseList.getMonthData('2022-04').then((value) {
-                //   ExpenseList.groupMonthlyValues(2022, 04, daysInMonth(2022, 04));
-                // });
-                // print(ExpenseList.monthlyArrayList());
-                // ExpenseList.getMonthData('2022-05').then((value) {
-                //   ExpenseList.groupMonthlyValues(2022, 05, daysInMonth(2022, 05));
-                // });
-                // print(ExpenseList.monthlyArrayList());
-                // ExpenseList.getMonthData('2022-06').then((value) {
-                //   ExpenseList.groupMonthlyValues(2022, 06, daysInMonth(2022, 06));
-                // });
-                // print(ExpenseList.monthlyArrayList());
-                // ExpenseList.getMonthData('2022-07').then((value) {
-                //   ExpenseList.groupMonthlyValues(2022, 07, daysInMonth(2022, 07));
-                // });
-                // print(ExpenseList.monthlyArrayList());
+        ),
+        ElevatedButton(
+          child: Padding(padding: EdgeInsets.all(10), child: Text("change")),
+          onPressed: () {
+            setState(() {
+              check = check + 1;
+              check = check % 3;
+            });
+          },
+        ),
+        ElevatedButton(
+            onPressed: () async {
+              // ExpenseList.getMonthData('2022-01').then((value) {
+              //   ExpenseList.groupMonthlyValues(2022, 01, daysInMonth(2022, 01));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+              // ExpenseList.getMonthData('2022-02').then((value) {
+              //   ExpenseList.groupMonthlyValues(2022, 02, daysInMonth(2022, 02));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+              // ExpenseList.getMonthData('2022-03').then((value) {
+              //   ExpenseList.groupMonthlyValues(2022, 03, daysInMonth(2022, 03));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+              // ExpenseList.getMonthData('2022-04').then((value) {
+              //   ExpenseList.groupMonthlyValues(2022, 04, daysInMonth(2022, 04));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+              // ExpenseList.getMonthData('2022-05').then((value) {
+              //   ExpenseList.groupMonthlyValues(2022, 05, daysInMonth(2022, 05));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+              // ExpenseList.getMonthData('2022-06').then((value) {
+              //   ExpenseList.groupMonthlyValues(2022, 06, daysInMonth(2022, 06));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+              // ExpenseList.getMonthData('2022-07').then((value) {
+              //   ExpenseList.groupMonthlyValues(2022, 07, daysInMonth(2022, 07));
+              // });
+              // print(ExpenseList.monthlyArrayList());
 
-                // ExpenseList.getMonthData('2022-08').then((value) {
-                //   ExpenseList.groupMonthlyValues(2022, 08, daysInMonth(2022, 08));
-                // });
-                // print(ExpenseList.monthlyArrayList());
-                // ExpenseList.getMonthData('2022-09').then((value) {
-                //   ExpenseList.groupMonthlyValues(2022, 09, daysInMonth(2022, 09));
-                // });
-                // print(ExpenseList.monthlyArrayList());
-                try {
-                  var value = await ExpenseList.getMonthData('2022-10');
-
-                  setState(() {});
-                  // print(ExpenseList.groupMonthlyValues(
-                  //     2022, 10, daysInMonth(2022, 10)));
-                } catch (e) {}
-                // print(ExpenseList.monthlyArrayList());
-                // ExpenseList.getMonthData('2022-11').then((value) {
-                //   print(ExpenseList.groupMonthlyValues(
-                //       2022, 11, daysInMonth(2022, 11)));
-                // });
-                // print(ExpenseList.monthlyArrayList());
-                // ExpenseList.getMonthData('2022-12').then((value) {
-                //   ExpenseList.groupMonthlyValues(2022, 12, daysInMonth(2022, 12));
-                // });
-                // print(ExpenseList.monthlyArrayList());
-              },
-              child: const Text("MonthTrigger")),
-          ElevatedButton(
-              onPressed: () async {
-                var value1 = await ExpenseList.getYearData('2022');
+              // ExpenseList.getMonthData('2022-08').then((value) {
+              //   ExpenseList.groupMonthlyValues(2022, 08, daysInMonth(2022, 08));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+              // ExpenseList.getMonthData('2022-09').then((value) {
+              //   ExpenseList.groupMonthlyValues(2022, 09, daysInMonth(2022, 09));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+              try {
+                var value = await ExpenseList.getMonthData('2022-10');
 
                 setState(() {});
-              },
-              child: Text("YearTrigger")),
-          ElevatedButton(
-              onPressed: () {
-                try {
-                  // print(ExpenseList.groupMonthlyValues(
-                  //     2022, 10, daysInMonth(2022, 10)));
-                } catch (e) {}
-              },
-              child: Text(ExpenseList.monthName(ExpenseList.month))),
-        ],
-      ),
+                // print(ExpenseList.groupMonthlyValues(
+                //     2022, 10, daysInMonth(2022, 10)));
+              } catch (e) {}
+              // print(ExpenseList.monthlyArrayList());
+              // ExpenseList.getMonthData('2022-11').then((value) {
+              //   print(ExpenseList.groupMonthlyValues(
+              //       2022, 11, daysInMonth(2022, 11)));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+              // ExpenseList.getMonthData('2022-12').then((value) {
+              //   ExpenseList.groupMonthlyValues(2022, 12, daysInMonth(2022, 12));
+              // });
+              // print(ExpenseList.monthlyArrayList());
+            },
+            child: const Text("MonthTrigger")),
+        ElevatedButton(
+            onPressed: () async {
+              var value1 = await ExpenseList.getYearData('2022');
+
+              setState(() {});
+            },
+            child: Text("YearTrigger")),
+        ElevatedButton(
+            onPressed: () async {
+              var value2 = ExpenseList.getData();
+              setState(() {});
+              print('hll');
+            },
+            child: Text("WeekTrigger")),
+        ElevatedButton(
+            onPressed: () {
+              try {
+                // print(ExpenseList.groupMonthlyValues(
+                //     2022, 10, daysInMonth(2022, 10)));
+              } catch (e) {}
+            },
+            child: Text(ExpenseList.monthName(ExpenseList.month))),
+      ],
     );
   }
 
@@ -265,9 +271,12 @@ class _LineChartSample2State extends State<LineChartSample2> {
             getTooltipItems: (touchedSpots) {
               return List.generate(touchedSpots.length, (index) {
                 return LineTooltipItem(
-                    (touchedSpots[index].y * ExpenseList.weektemp / 5)
+                    (touchedSpots[index].y * ExpenseList.weektemp / 6)
                         .toString(),
-                    TextStyle());
+                    TextStyle(
+                      fontSize: 12,
+                      color: Colors.white,
+                    ));
               });
             },
           )),
@@ -332,13 +341,13 @@ class _LineChartSample2State extends State<LineChartSample2> {
             //           6 /
             //           ExpenseList.weektemp);
             // })
-            FlSpot(0, flspotarray[6] * 5 / ExpenseList.weektemp),
-            FlSpot(1, flspotarray[5] * 5 / ExpenseList.weektemp),
-            FlSpot(2, flspotarray[4] * 5 / ExpenseList.weektemp),
-            FlSpot(3, flspotarray[3] * 5 / ExpenseList.weektemp),
-            FlSpot(4, flspotarray[2] * 5 / ExpenseList.weektemp),
-            FlSpot(5, flspotarray[1] * 5 / ExpenseList.weektemp),
-            FlSpot(6, flspotarray[0] * 5 / ExpenseList.weektemp),
+            FlSpot(0, flspotarray[6] * 6 / ExpenseList.weektemp),
+            FlSpot(1, flspotarray[5] * 6 / ExpenseList.weektemp),
+            FlSpot(2, flspotarray[4] * 6 / ExpenseList.weektemp),
+            FlSpot(3, flspotarray[3] * 6 / ExpenseList.weektemp),
+            FlSpot(4, flspotarray[2] * 6 / ExpenseList.weektemp),
+            FlSpot(5, flspotarray[1] * 6 / ExpenseList.weektemp),
+            FlSpot(6, flspotarray[0] * 6 / ExpenseList.weektemp),
           ],
           isCurved: false,
           color: Colors.white,
@@ -369,9 +378,11 @@ LineChartData monthData() {
           getTooltipItems: (touchedSpots) {
             return List.generate(touchedSpots.length, (index) {
               return LineTooltipItem(
-                  (touchedSpots[index].y * ExpenseList.monthtemp / 5)
+                  (touchedSpots[index].y * ExpenseList.monthtemp / 6)
                       .toString(),
-                  TextStyle());
+                  TextStyle(
+                    fontSize: 12,
+                  ));
             });
           },
         )),
@@ -547,7 +558,9 @@ LineChartData yearData() {
             return List.generate(touchedSpots.length, (index) {
               return LineTooltipItem(
                   (touchedSpots[index].y * ExpenseList.yeartemp / 6).toString(),
-                  TextStyle());
+                  TextStyle(
+                    fontSize: 12,
+                  ));
             });
           },
         )),
