@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:demo2/models/expenses.dart';
 import 'package:demo2/screens/log/login_screen.dart';
 import 'package:demo2/screens/pages/add_expenses.dart';
@@ -10,7 +12,9 @@ import 'package:flutter/material.dart';
 import "package:demo2/services/authservices.dart";
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:demo2/models/expenseList.dart';
+import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:demo2/theme/constants.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -71,13 +75,19 @@ class _HomePageState extends State<HomePage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text(
-          "  Recent Expenses ",
-          style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w600,
-              fontStyle: FontStyle.italic,
-              color: AppTheme.colors.basecolor),
+        Container(
+          padding: EdgeInsets.only(bottom: 10),
+          
+          child: Text(
+            "  Recent Expenses ",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
+                color: AppTheme.colors.basecolor,
+                
+                ),
+          ),
         ),
         IconButton(
             onPressed: () {
@@ -116,11 +126,13 @@ class _HomePageState extends State<HomePage> {
                     itemCount: nextCount,
                     itemBuilder: ((context, index) {
                       return Container(
+                        
                         height: MediaQuery.of(context).size.height / 5,
                         width: MediaQuery.of(context).size.width,
                         padding: EdgeInsets.only(left: 10, right: 10),
                         margin: EdgeInsets.only(top: 20, left: 10, right: 10),
                         decoration: BoxDecoration(
+                          
                             color: Colors.white,
                             border: Border.all(
                               width: 1,
@@ -138,7 +150,11 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     IconButton(
                                         onPressed: () {},
-                                        icon: Icon(Icons.home)),
+                                        icon:Icon(icons[ExpenseList
+                                          .expenseList[index].category]),
+                                          iconSize: 30,
+                                          ),
+                                          
                                     Row(
                                       children: [
                                         IconButton(
@@ -212,22 +228,25 @@ class _HomePageState extends State<HomePage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    ExpenseList.zeros(
-                                        expenseView[index].amount as double),
+                                    "\$ ${ExpenseList.zeros(
+                                        expenseView[index].amount as double)}",
                                     style: TextStyle(
-                                      color: AppTheme.colors.secondarycolor,
+                                      color: Colors.green,
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 22,
+                                      fontSize: 20,
                                     ),
                                   ),
                                 ]),
                             Row(
                               children: [
-                                Text(" ${expenseView[index].name}",
+                                Text(" ${expenseView[index].name}".toUpperCase(),
                                     style: TextStyle(
                                         color: AppTheme.colors.basecolor,
                                         fontSize: 15,
-                                        fontWeight: FontWeight.w400)),
+                                        fontWeight: FontWeight.w400,
+                                    ),
+                                        
+                                        ),
                               ],
                             ),
                             Row(
@@ -235,7 +254,7 @@ class _HomePageState extends State<HomePage> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                    '${expenseView[index].date.toString().split(' ')[0]}'),
+                                    '${DateFormat("EEE d MMM").format(expenseView[index].date as DateTime).toString()}'),
                               ],
                             )
                           ],
