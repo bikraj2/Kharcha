@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:demo2/models/expenses.dart';
 import 'package:demo2/screens/log/login_screen.dart';
 import 'package:demo2/screens/pages/add_expenses.dart';
@@ -10,7 +12,9 @@ import 'package:flutter/material.dart';
 import "package:demo2/services/authservices.dart";
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:demo2/models/expenseList.dart';
+import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:demo2/theme/constants.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -24,15 +28,30 @@ class _HomePageState extends State<HomePage> {
 
   int nextCount =
       ExpenseList.expenseList.length < 10 ? ExpenseList.expenseList.length : 10;
-
+  String value = "Food";
+  final category = ['Health', 'Rent', 'Food', 'Luxury'];
   int prevCount = 0;
   List<Expense> expenseView = ExpenseList.expenseList.sublist(
       0,
       ExpenseList.expenseList.length < 10
           ? ExpenseList.expenseList.length
           : 10);
-
+  late Expense uniqueExpense;
   final ScrollController _scrollController = ScrollController();
+  final _nameController = TextEditingController();
+  final _amountController = TextEditingController();
+  DateTime? currentDate = DateTime.now();
+  void getDate() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2018),
+            lastDate: DateTime.now())
+        .then((val) => {
+              setState(() => {currentDate = val}),
+            });
+  }
+
   @override
   void initState() {
     print('Wxpense is ${ExpenseList.expenseList.length}');
@@ -71,13 +90,17 @@ class _HomePageState extends State<HomePage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text(
-          "  Recent Expenses ",
-          style: TextStyle(
+        Container(
+          padding: EdgeInsets.only(bottom: 10),
+          child: Text(
+            "  Recent Expenses ",
+            textAlign: TextAlign.center,
+            style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w600,
-              fontStyle: FontStyle.italic,
-              color: AppTheme.colors.basecolor),
+              color: AppTheme.colors.basecolor,
+            ),
+          ),
         ),
         IconButton(
             onPressed: () {
@@ -137,12 +160,230 @@ class _HomePageState extends State<HomePage> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(Icons.home)),
+                                      onPressed: () {},
+                                      icon: Icon(icons[ExpenseList
+                                          .expenseList[index].category]),
+                                      iconSize: 30,
+                                    ),
                                     Row(
                                       children: [
                                         IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            showModalBottomSheet(
+                                                context: context,
+                                                builder: (context) {
+                                                  uniqueExpense =
+                                                      expenseView[index];
+                                                  _nameController.text =
+                                                      uniqueExpense.name
+                                                          as String;
+                                                  _amountController.text =
+                                                      (uniqueExpense.amount)
+                                                          .toString();
+                                                  value = uniqueExpense.category
+                                                      as String;
+                                                  return Container(
+                                                    child: Column(
+                                                      children: [
+                                                        Container(
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  top: 10),
+                                                          width: width,
+                                                          height: height / 8,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  15),
+                                                          child: TextField(
+                                                            controller:
+                                                                _amountController,
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .number,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              labelText:
+                                                                  'Amount ',
+                                                              border:
+                                                                  OutlineInputBorder(),
+                                                              suffixIcon:
+                                                                  IconButton(
+                                                                onPressed:
+                                                                    () {},
+                                                                icon: Icon(Icons
+                                                                    .clear),
+                                                                iconSize: 14,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  top: 10),
+                                                          width: width,
+                                                          height: height / 8,
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  15),
+                                                          child: TextField(
+                                                            controller:
+                                                                _nameController,
+                                                            decoration:
+                                                                InputDecoration(
+                                                              labelText:
+                                                                  'Expense Title ',
+                                                              border:
+                                                                  OutlineInputBorder(),
+                                                              suffixIcon:
+                                                                  IconButton(
+                                                                onPressed:
+                                                                    () {},
+                                                                icon: Icon(Icons
+                                                                    .clear),
+                                                                iconSize: 14,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  15),
+                                                          margin:
+                                                              EdgeInsets.all(
+                                                                  10),
+                                                          width: width / 1.2,
+                                                          decoration: BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10)),
+                                                          child: DropdownButton<
+                                                              String>(
+                                                            value: value,
+                                                            isExpanded: true,
+                                                            iconSize: 30,
+                                                            icon: Icon(
+                                                                Icons
+                                                                    .arrow_drop_down,
+                                                                color: AppTheme
+                                                                    .colors
+                                                                    .secondarycolor),
+                                                            items: category
+                                                                .map(
+                                                                    buildMenuItem)
+                                                                .toList(),
+                                                            onChanged:
+                                                                (value) =>
+                                                                    setState(
+                                                                        () {
+                                                              this.value = value
+                                                                  as String;
+                                                            }),
+                                                          ),
+                                                        ),
+                                                        IconButton(
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .primaryColor,
+                                                          hoverColor: Theme.of(
+                                                                  context)
+                                                              .bottomAppBarColor,
+                                                          icon: Icon(
+                                                            Icons
+                                                                .calendar_month_outlined,
+                                                            color: AppTheme
+                                                                .colors
+                                                                .secondarycolor,
+                                                          ),
+                                                          iconSize: 35,
+                                                          onPressed: () {
+                                                            getDate();
+                                                          },
+                                                        ),
+                                                        Container(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  15),
+                                                          child: ElevatedButton(
+                                                            style:
+                                                                ButtonStyle(),
+                                                            // shape: BeveledRectangleBorder(
+                                                            //     borderRadius: BorderRadius.all(Radius.circular(5))),
+                                                            // hoverColor: AppTheme.colors.basecolor,
+                                                            // backgroundColor: AppTheme.colors.secondarycolor,
+                                                            child: const Text(
+                                                              "Save",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600),
+                                                            ),
+                                                            onPressed: () {
+                                                              setState(() {
+                                                                uniqueExpense
+                                                                        .name =
+                                                                    _nameController
+                                                                        .text;
+                                                                uniqueExpense
+                                                                        .amount =
+                                                                    double.parse(
+                                                                        _amountController
+                                                                            .text
+                                                                            .toString());
+                                                                uniqueExpense
+                                                                        .date =
+                                                                    currentDate;
+                                                              });
+                                                              token.storage
+                                                                  .read(
+                                                                      key:
+                                                                          "jwt")
+                                                                  .then(
+                                                                (value) {
+                                                                  print(value);
+                                                                  AuthService()
+                                                                      .editExpense(
+                                                                          uniqueExpense,
+                                                                          value)
+                                                                      .then(
+                                                                    (val) {
+                                                                      if (val.data[
+                                                                          'success']) {
+                                                                        ExpenseList.getData()
+                                                                            .then((value) {
+                                                                          ExpenseList
+                                                                              .groupedTransactionValues();
+                                                                        });
+                                                                        ExpenseList
+                                                                            .findMaxweek();
+                                                                        Fluttertoast.showToast(
+                                                                            msg:
+                                                                                val.data['msg'],
+                                                                            textColor: Colors.white,
+                                                                            backgroundColor: Colors.green);
+                                                                      } else {
+                                                                        Fluttertoast.showToast(
+                                                                            msg:
+                                                                                val.data['msg'],
+                                                                            textColor: Colors.white,
+                                                                            backgroundColor: Colors.red);
+                                                                      }
+                                                                    },
+                                                                  );
+                                                                },
+                                                              );
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
+                                                });
+                                          },
                                           icon: Icon(
                                             Icons.edit_note_rounded,
                                             color: AppTheme.colors.basecolor,
@@ -212,22 +453,24 @@ class _HomePageState extends State<HomePage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    ExpenseList.zeros(
-                                        expenseView[index].amount as double),
+                                    "\$ ${ExpenseList.zeros(expenseView[index].amount as double)}",
                                     style: TextStyle(
-                                      color: AppTheme.colors.secondarycolor,
+                                      color: Colors.green,
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 22,
+                                      fontSize: 20,
                                     ),
                                   ),
                                 ]),
                             Row(
                               children: [
-                                Text(" ${expenseView[index].name}",
-                                    style: TextStyle(
-                                        color: AppTheme.colors.basecolor,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w400)),
+                                Text(
+                                  " ${expenseView[index].name}".toUpperCase(),
+                                  style: TextStyle(
+                                    color: AppTheme.colors.basecolor,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
                               ],
                             ),
                             Row(
@@ -235,7 +478,7 @@ class _HomePageState extends State<HomePage> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
-                                    '${expenseView[index].date.toString().split(' ')[0]}'),
+                                    '${DateFormat("EEE d MMM").format(expenseView[index].date as DateTime).toString()}'),
                               ],
                             )
                           ],
@@ -249,3 +492,16 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
+    value: item,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          item,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
+        Icon(icons[item])
+      ],
+    ));

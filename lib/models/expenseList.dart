@@ -44,7 +44,7 @@ class ExpenseList {
       final res = await AuthService().getExpense(tk as String);
       print(res);
       for (Map i in res.data['ans']) {
-        print(i['amount']);
+        print(i['_id']);
         expenseList.add(Expense(
             amount: double.parse(i['amount'].toString()),
             name: i['name'],
@@ -66,11 +66,11 @@ class ExpenseList {
         Duration(days: index),
       );
       var totalSum = 0.0;
-      for (var i = 0; i < data.length; i++) {
-        if (data[i].date?.day == weekday.day &&
-            data[i].date?.month == weekday.month &&
-            data[i].date?.year == weekday.year) {
-          totalSum += data[i].amount as double;
+      for (var i = 0; i < expenseList.length; i++) {
+        if (expenseList[i].date?.day == weekday.day &&
+            expenseList[i].date?.month == weekday.month &&
+            expenseList[i].date?.year == weekday.year) {
+          totalSum += expenseList[i].amount as double;
         }
       }
       return {
@@ -90,7 +90,6 @@ class ExpenseList {
 
     return weekarray;
   }
-
   static double findMaxweek() {
     var lineData = ExpenseList.groupedData;
 

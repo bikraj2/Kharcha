@@ -3,22 +3,21 @@ var jwt = require('jwt-simple');
 var expense = require('../models/expense');
 var config = require('../config/dbconfig');
 
-
- function getNextMonth (month){
+function getNextMonth(month) {
   var months = new Date(month);
-      function getLastDayOfMonth(year, month) {
-        return new Date(year, month + 1, 0);
-      }
-      var value = getLastDayOfMonth(months.getFullYear(), months.getMonth());
-      var nextMonth = new Date(value.setDate(value.getDate()+1))
-  return nextMonth
+  function getLastDayOfMonth(year, month) {
+    return new Date(year, month + 1, 0);
+  }
+  var value = getLastDayOfMonth(months.getFullYear(), months.getMonth());
+  var nextMonth = new Date(value.setDate(value.getDate() + 1));
+  return nextMonth;
 }
 
-function getLastMonth (year){
-  var date = new Date(year)
-var lastMonth = new Date(date.getFullYear(),12,0)
-lastMonth.setDate(lastMonth.getDate()+1)
-return lastMonth
+function getLastMonth(year) {
+  var date = new Date(year);
+  var lastMonth = new Date(date.getFullYear(), 12, 0);
+  lastMonth.setDate(lastMonth.getDate() + 1);
+  return lastMonth;
 }
 
 var functions = {
@@ -60,14 +59,18 @@ var functions = {
     console.log(req.headers);
     var decodedtoken = jwt.decode(token, config.secret);
     var userId1 = decodedtoken._id;
-    var { category, date, name, month ,year,number,start,finish} = req.query;
+    var { category, date, name, month, year, number, start, finish } =
+      req.query;
     const queryObject = { userId: userId1 };
-    
-      var nextMonth = getNextMonth(month)
- 
-    var lastMonth = getLastMonth(year)
-    if(start && finish){
-      queryObject.date={$gte:start.split(' ')[0],$lte:finish.split(' ')[0]}
+
+    var nextMonth = getNextMonth(month);
+
+    var lastMonth = getLastMonth(year);
+    if (start && finish) {
+      queryObject.date = {
+        $gte: start.split(' ')[0],
+        $lte: finish.split(' ')[0],
+      };
     }
     if (category) {
       queryObject.category = category;
@@ -79,18 +82,18 @@ var functions = {
     if (name) {
       queryObject.name = { $regex: name, $options: 'i' };
     }
-    if(month) {
-      queryObject.date = {$gte :new Date(month),$lte :nextMonth}
+    if (month) {
+      queryObject.date = { $gte: new Date(month), $lte: nextMonth };
     }
-    if(year){
-      queryObject.date = {$gte :new Date(year), $lte:lastMonth}
+    if (year) {
+      queryObject.date = { $gte: new Date(year), $lte: lastMonth };
     }
-    console.log(queryObject)
+    console.log(queryObject);
     //for Sorting
     var { sortDate, sortAmount } = req.query;
     const sortQuery = {
-      date: sortDate ? sortDate : -1,
-      amount: sortAmount ? sortAmount : -1,
+      date: sortDate ? parseInt(sortDate) : -1,
+      amount: sortAmount ? parseInt(sortAmount) : -1,
     };
     if (sortAmount) {
       sortQuery.amount = sortAmount;
@@ -102,7 +105,8 @@ var functions = {
         name: true,
         date: true,
         _id: true,
-      }).limit(number)
+      })
+      .limit(number)
       .sort(sortQuery)
       .then((result, next) => {
         res.status(200).json({ ans: result });
@@ -176,5 +180,22 @@ var functions = {
       res.status(400).json({ success: false, msg: e.message });
     }
   },
+  editExpense: async (req,res) =>{
+    try {
+      var token = req.query['token'];
+      var decodedtoken = jwt.decode(token, config.secret);
+      var userId = decodedtoken._id;
+      var user = User.find({_id:userId})
+      if(!user){
+        res.status(400).json({success:false,msg:"User not foumd."})
+      }
+      var expenseId = req.params.id;
+      console.log(expenseId)
+      var oneExpense = await expense.findOneAndUpdate({ _id: expenseId },req.body);
+      res.status(200).json({success:true,msg:"Expense Edited Successfully",data: oneExpense})
+    } catch (error) {
+      res.status(400).json({ success: false, msg: error});
+    }
+  } 
 };
 module.exports = functions;

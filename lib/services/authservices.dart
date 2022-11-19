@@ -10,7 +10,7 @@ import '../models/user_info.dart';
 import '../models/expenses.dart';
 import '../token/token.dart';
 
-const url = "http://localhost:3000";
+const url = "http://192.168.1.75:3000";
 
 class AuthService {
   Dio diio = Dio();
@@ -243,6 +243,25 @@ class AuthService {
           },
           options: Options(contentType: Headers.formUrlEncodedContentType));
 
+      return value;
+    } on DioError catch (e) {
+      Fluttertoast.showToast(
+          msg: e.response?.data['msg'],
+          textColor: Colors.white,
+          backgroundColor: Colors.red.shade300);
+    }
+  }
+   editExpense(Expense expense, String? token) async {
+    try {
+      var value = await diio.patch("${url}/addExpense",
+          data: {
+            "name": expense.name,
+            "category": expense.category,
+            "amount": expense.amount,
+            "token": token,
+            "date": expense.date
+          },
+          options: Options(contentType: Headers.formUrlEncodedContentType));
       return value;
     } on DioError catch (e) {
       Fluttertoast.showToast(

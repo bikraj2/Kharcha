@@ -25,4 +25,5 @@ router.post('/income',expenseActions.addIncome)
 router.get('/income', expenseActions.getIncome);
 router.post('/changePassword',actions.changePassword)
 router.post('/forgotPassword', actions.forgotPassword);
+router.patch('/:id', expenseActions.editExpense);
 module.exports =router 
