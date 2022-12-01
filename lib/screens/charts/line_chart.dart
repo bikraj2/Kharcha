@@ -12,6 +12,7 @@ List<Color> gradientColors = [
   AppTheme.colors.basecolor,
   AppTheme.colors.boxcolor,
 ];
+var monthselection;
 LineChartData choice = 0 as LineChartData;
 // import 'package:basic_utils/basic_utils.dart';
 
@@ -36,7 +37,7 @@ class LineChartSample2 extends StatefulWidget {
 class _LineChartSample2State extends State<LineChartSample2> {
   var a = ExpenseList.getData();
   String dropdownvalue = 'Item 1';
-  String monthdropdownvalue = 'Jan';
+  String monthdropdownvalue = 'Nov';
 
   var monthitems = [
     'Jan',
@@ -45,7 +46,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
     'Apr',
     'May',
     'June',
-    'July',
+    'Jul',
     'Aug',
     'Sep',
     'Oct',
@@ -109,13 +110,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
               // ),
 
               //
-              // ElevatedButton(
-              //     onPressed: () async {
-              //       var value1 = await ExpenseList.getYearData('2022');
 
-              //       setState(() {});
-              //     },
-              //     child: Text("YearTrigger")),
               // ElevatedButton(
               //     onPressed: () {
               //       try {
@@ -126,106 +121,96 @@ class _LineChartSample2State extends State<LineChartSample2> {
               //     child: Text(ExpenseList.monthName(ExpenseList.month))),
             ),
             // for week dropdown button
-            DropdownButton(
-              // Initial Value
-              value: monthdropdownvalue,
+            Row(
+              children: [
+                Container(
+                  height: 55,
+                  width: 90,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  margin: EdgeInsets.only(
+                    left: 100,
+                    right: 80,
+                    top: 20,
+                    bottom: 20,
+                  ),
+                  child: DropdownButton(
+                    isExpanded: true,
+                    // Initial Value
+                    value: monthdropdownvalue,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600,
+                      // fontSize: 14,
+                    ),
 
-              // Down Arrow Icon
-              icon: const Icon(Icons.keyboard_arrow_down),
+                    // Down Arrow Icon
+                    icon: const Icon(Icons.keyboard_arrow_down),
+                    iconEnabledColor: Color.fromARGB(255, 8, 79, 138),
 
-              // Array list of items
-              items: monthitems.map((String items) {
-                return DropdownMenuItem(
-                  value: items,
-                  child: Text(items),
-                );
-              }).toList(),
-              // After selecting the desired option,it will
-              // change button value to selected value
-              onChanged: (String? newValue) {
-                setState(() {
-                  monthdropdownvalue = newValue!;
-                });
-              },
+                    // Array list of items
+                    items: monthitems.map((String items) {
+                      return DropdownMenuItem(
+                        value: items,
+                        child: Text(items),
+                      );
+                    }).toList(),
+                    // After selecting the desired option,it will
+                    // change button value to selected value
+                    onChanged: (String? newValue) async {
+                      setState(() {
+                        monthdropdownvalue = newValue!;
+                        monthselection = ExpenseList.monthNumber(newValue);
+                        print(monthselection);
+                      });
+                      var value = await ExpenseList.getMonthData(
+                          '2022-${monthselection}');
+                    },
+                  ),
+                ),
+                SizedBox(
+                  width: 30,
+                ),
+                SizedBox(
+                  width: 40,
+                ),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white, // background
+                      onPrimary: Colors.black, // foreground
+                    ),
+                    onPressed: () async {
+                      var value1 = await ExpenseList.getYearData('2022');
+
+                      setState(() {});
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          bottom: 10, top: 10, left: 15, right: 15),
+                      child: Text("Year"),
+                    )),
+              ],
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white, // background
-                onPrimary: Colors.black, // foreground
-              ),
-              child:
-                  Padding(padding: EdgeInsets.all(10), child: Text("change")),
-              onPressed: () {
-                setState(() {
-                  check = check + 1;
-                  check = check % 3;
-                });
-              },
-            ),
-            ElevatedButton(
+            //for month dropdown button
+            Container(
+              height: 40,
+              child: ElevatedButton.icon(
+                label: Text("Change"),
+                icon: Icon(Icons.navigate_next),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white, // background
-                  onPrimary: Colors.black, // foreground
+                  onPrimary: Colors.black,
+                  // foreground
                 ),
-                onPressed: () async {
-                  // ExpenseList.getMonthData('2022-01').then((value) {
-                  //   ExpenseList.groupMonthlyValues(2022, 01, daysInMonth(2022, 01));
-                  // });
-                  // print(ExpenseList.monthlyArrayList());
-                  // ExpenseList.getMonthData('2022-02').then((value) {
-                  //   ExpenseList.groupMonthlyValues(2022, 02, daysInMonth(2022, 02));
-                  // });
-                  // print(ExpenseList.monthlyArrayList());
-                  // ExpenseList.getMonthData('2022-03').then((value) {
-                  //   ExpenseList.groupMonthlyValues(2022, 03, daysInMonth(2022, 03));
-                  // });
-                  // print(ExpenseList.monthlyArrayList());
-                  // ExpenseList.getMonthData('2022-04').then((value) {
-                  //   ExpenseList.groupMonthlyValues(2022, 04, daysInMonth(2022, 04));
-                  // });
-                  // print(ExpenseList.monthlyArrayList());
-                  // ExpenseList.getMonthData('2022-05').then((value) {
-                  //   ExpenseList.groupMonthlyValues(2022, 05, daysInMonth(2022, 05));
-                  // });
-                  // print(ExpenseList.monthlyArrayList());
-                  // ExpenseList.getMonthData('2022-06').then((value) {
-                  //   ExpenseList.groupMonthlyValues(2022, 06, daysInMonth(2022, 06));
-                  // });
-                  // print(ExpenseList.monthlyArrayList());
-                  // ExpenseList.getMonthData('2022-07').then((value) {
-                  //   ExpenseList.groupMonthlyValues(2022, 07, daysInMonth(2022, 07));
-                  // });
-                  // print(ExpenseList.monthlyArrayList());
-
-                  // ExpenseList.getMonthData('2022-08').then((value) {
-                  //   ExpenseList.groupMonthlyValues(2022, 08, daysInMonth(2022, 08));
-                  // });
-                  // print(ExpenseList.monthlyArrayList());
-                  // ExpenseList.getMonthData('2022-09').then((value) {
-                  //   ExpenseList.groupMonthlyValues(2022, 09, daysInMonth(2022, 09));
-                  // });
-                  // print(ExpenseList.monthlyArrayList());
-                  try {
-                    var value = await ExpenseList.getMonthData('2022-10');
-
-                    setState(() {});
-                    // print(ExpenseList.groupMonthlyValues(
-                    //     2022, 10, daysInMonth(2022, 10)));
-                  } catch (e) {}
-                  // print(ExpenseList.monthlyArrayList());
-                  // ExpenseList.getMonthData('2022-11').then((value) {
-                  //   print(ExpenseList.groupMonthlyValues(
-                  //       2022, 11, daysInMonth(2022, 11)));
-                  // });
-                  // print(ExpenseList.monthlyArrayList());
-                  // ExpenseList.getMonthData('2022-12').then((value) {
-                  //   ExpenseList.groupMonthlyValues(2022, 12, daysInMonth(2022, 12));
-                  // });
-                  // print(ExpenseList.monthlyArrayList());
+                onPressed: () {
+                  setState(() {
+                    check = check + 1;
+                    check = check % 3;
+                  });
                 },
-                child: Padding(
-                    padding: EdgeInsets.all(10), child: Text("months"))),
-            //for month dropdown button
+              ),
+            ),
           ],
         ),
       ),

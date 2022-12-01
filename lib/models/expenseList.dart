@@ -90,6 +90,7 @@ class ExpenseList {
 
     return weekarray;
   }
+
   static double findMaxweek() {
     var lineData = ExpenseList.groupedData;
 
@@ -277,29 +278,29 @@ class ExpenseList {
   }
 
   static int monthNumber(String month) {
-    if (month == "January") {
+    if (month == "Jan") {
       return 1;
-    } else if (month == "February") {
+    } else if (month == "Feb") {
       return 2;
-    } else if (month == "March") {
+    } else if (month == "Mar") {
       return 3;
-    } else if (month == "April") {
+    } else if (month == "Apr") {
       return 4;
     } else if (month == "May") {
       return 5;
-    } else if (month == "June") {
+    } else if (month == "Jun") {
       return 6;
-    } else if (month == "July") {
+    } else if (month == "Jul") {
       return 7;
-    } else if (month == "August") {
+    } else if (month == "Aug") {
       return 8;
-    } else if (month == "September") {
+    } else if (month == "Sep") {
       return 9;
-    } else if (month == "October") {
+    } else if (month == "Oct") {
       return 10;
-    } else if (month == "November") {
+    } else if (month == "Nov") {
       return 11;
-    } else if (month == "December") {
+    } else if (month == "Dec") {
       return 12;
     } else {
       return 1;
