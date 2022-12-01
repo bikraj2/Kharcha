@@ -45,6 +45,7 @@ class BarChartSample1State extends State<BarChartSample1> {
     print(value1);
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text("Bar Chart"),
       ),
       body: AspectRatio(
@@ -80,6 +81,7 @@ class BarChartSample1State extends State<BarChartSample1> {
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                         const SizedBox(
                           height: 30,

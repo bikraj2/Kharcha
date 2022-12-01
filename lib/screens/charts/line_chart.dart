@@ -82,6 +82,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
     }
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text("Line Chart"),
         backgroundColor: Color.fromARGB(255, 6, 26, 61),
       ),
@@ -197,7 +198,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
               height: 40,
               child: ElevatedButton.icon(
                 label: Text("Change"),
-                icon: Icon(Icons.navigate_next),
+                icon: Icon(Icons.arrow_forward),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white, // background
                   onPrimary: Colors.black,
