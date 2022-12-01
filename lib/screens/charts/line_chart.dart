@@ -21,10 +21,6 @@ class LineChartClass1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Your Monthly Expenses"),
-        backgroundColor: AppTheme.colors.secondarycolor,
-      ),
       body: LineChartSample2(),
     );
   }
@@ -39,6 +35,30 @@ class LineChartSample2 extends StatefulWidget {
 
 class _LineChartSample2State extends State<LineChartSample2> {
   var a = ExpenseList.getData();
+  String dropdownvalue = 'Item 1';
+  String monthdropdownvalue = 'Jan';
+
+  var monthitems = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'June',
+    'July',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+  var items = [
+    'Item 1',
+    'Item 2',
+    'Item 3',
+    'Item 4',
+    'Item 5',
+  ];
   var weeklineChartdata = ExpenseList.groupedData;
   List<double> flspotarray = ExpenseList.weeklyarraylist() as List<double>;
 
@@ -60,11 +80,15 @@ class _LineChartSample2State extends State<LineChartSample2> {
         break;
     }
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Line Chart"),
+        backgroundColor: Color.fromARGB(255, 6, 26, 61),
+      ),
       body: SafeArea(
         child: Column(
           children: <Widget>[
             AspectRatio(
-              aspectRatio: 1.2,
+              aspectRatio: 1.6,
               child: DecoratedBox(
                 decoration: const BoxDecoration(
                   color: Color(0xff232d37),
@@ -82,10 +106,55 @@ class _LineChartSample2State extends State<LineChartSample2> {
                       ),
                 ),
               ),
-              
+              // ),
+
+              //
+              // ElevatedButton(
+              //     onPressed: () async {
+              //       var value1 = await ExpenseList.getYearData('2022');
+
+              //       setState(() {});
+              //     },
+              //     child: Text("YearTrigger")),
+              // ElevatedButton(
+              //     onPressed: () {
+              //       try {
+              //         // print(ExpenseList.groupMonthlyValues(
+              //         //     2022, 10, daysInMonth(2022, 10)));
+              //       } catch (e) {}
+              //     },
+              //     child: Text(ExpenseList.monthName(ExpenseList.month))),
+            ),
+            // for week dropdown button
+            DropdownButton(
+              // Initial Value
+              value: monthdropdownvalue,
+
+              // Down Arrow Icon
+              icon: const Icon(Icons.keyboard_arrow_down),
+
+              // Array list of items
+              items: monthitems.map((String items) {
+                return DropdownMenuItem(
+                  value: items,
+                  child: Text(items),
+                );
+              }).toList(),
+              // After selecting the desired option,it will
+              // change button value to selected value
+              onChanged: (String? newValue) {
+                setState(() {
+                  monthdropdownvalue = newValue!;
+                });
+              },
             ),
             ElevatedButton(
-              child: Padding(padding: EdgeInsets.all(10), child: Text("change")),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white, // background
+                onPrimary: Colors.black, // foreground
+              ),
+              child:
+                  Padding(padding: EdgeInsets.all(10), child: Text("change")),
               onPressed: () {
                 setState(() {
                   check = check + 1;
@@ -94,6 +163,10 @@ class _LineChartSample2State extends State<LineChartSample2> {
               },
             ),
             ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white, // background
+                  onPrimary: Colors.black, // foreground
+                ),
                 onPressed: () async {
                   // ExpenseList.getMonthData('2022-01').then((value) {
                   //   ExpenseList.groupMonthlyValues(2022, 01, daysInMonth(2022, 01));
@@ -150,22 +223,9 @@ class _LineChartSample2State extends State<LineChartSample2> {
                   // });
                   // print(ExpenseList.monthlyArrayList());
                 },
-                child: const Text("MonthTrigger")),
-            ElevatedButton(
-                onPressed: () async {
-                  var value1 = await ExpenseList.getYearData('2022');
-
-                  setState(() {});
-                },
-                child: Text("YearTrigger")),
-            ElevatedButton(
-                onPressed: () {
-                  try {
-                    // print(ExpenseList.groupMonthlyValues(
-                    //     2022, 10, daysInMonth(2022, 10)));
-                  } catch (e) {}
-                },
-                child: Text(ExpenseList.monthName(ExpenseList.month))),
+                child: Padding(
+                    padding: EdgeInsets.all(10), child: Text("months"))),
+            //for month dropdown button
           ],
         ),
       ),
