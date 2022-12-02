@@ -44,7 +44,10 @@ class BarChartSample1State extends State<BarChartSample1> {
     value1 = ExpenseList.groupedData;
     print(value1);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("Bar Chart"),
+      ),
       body: AspectRatio(
           aspectRatio: MediaQuery.of(context).size.width /
               MediaQuery.of(context).size.width.toDouble(),
@@ -60,27 +63,28 @@ class BarChartSample1State extends State<BarChartSample1> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        Text(
-                          'BarChart',
-                          style: TextStyle(
-                            color: AppTheme.colors.secondarycolor,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 4,
-                        ),
+                        // Text(
+                        //   'BarChart',
+                        //   style: TextStyle(
+                        //     color: AppTheme.colors.secondarycolor,
+                        //     fontSize: 24,
+                        //     fontWeight: FontWeight.bold,
+                        //   ),
+                        // ),
+                        // const SizedBox(
+                        //   height: 4,
+                        // ),
                         Text(
                           'Your Weekly Expenses ',
                           style: TextStyle(
                             color: AppTheme.colors.basecolor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                         const SizedBox(
-                          height: 38,
+                          height: 30,
                         ),
                         Expanded(
                           child: Container(child: BarChart(mainBarData())),

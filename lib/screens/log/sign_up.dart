@@ -3,10 +3,12 @@ import 'package:demo2/services/authservices.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:validators/validators.dart';
 import '../../models/user_info.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:demo2/theme/theme.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignUp extends StatefulWidget {
   SignUp({Key? key}) : super(key: key);
@@ -54,7 +56,7 @@ class _SignUpState extends State<SignUp> {
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             IconButton(
               onPressed: () {},
@@ -258,11 +260,14 @@ class _SignUpState extends State<SignUp> {
                   });
                 }
               },
-              child: const Text(
+              child: Text(
                 'Sign Up',
-                style: TextStyle(fontSize: 20),
+                style: AppTheme.fonts.boxText,
               ),
             ),
+            SizedBox(
+              height: 30,
+            )
           ],
         ),
       ),

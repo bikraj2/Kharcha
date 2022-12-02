@@ -87,7 +87,6 @@ class _PieChartPageState extends State<PieChartPage> {
     get();
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 40,
         centerTitle: true,
         title: const Text("Your weekly expenses"),
       ),
