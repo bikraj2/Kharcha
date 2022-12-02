@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:demo2/models/expenses.dart';
+import 'package:demo2/models/username.dart';
 import 'package:demo2/screens/log/login_screen.dart';
 import 'package:demo2/screens/pages/add_expenses.dart';
 import 'package:demo2/screens/pages/filterPage.dart';
@@ -54,7 +55,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    print('Wxpense is ${ExpenseList.expenseList.length}');
+    print('Expense is ${ExpenseList.expenseList.length}');
     super.initState();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
@@ -70,12 +71,11 @@ class _HomePageState extends State<HomePage> {
       }
     });
   }
-
   AppBar appBar = AppBar(
     elevation: 0,
-    backgroundColor: const Color.fromARGB(255, 35, 45, 64),
+    backgroundColor: AppTheme.colors.basecolor,
     title: Text(
-      'Hi Username!',
+      'Hi ${UserName.username}',
       style: TextStyle(fontStyle: FontStyle.normal, fontSize: 20),
     ),
     leading: IconButton(
@@ -113,6 +113,7 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.search_outlined))
       ],
     ));
+    
     return Scaffold(
       appBar: appBar,
       floatingActionButton: FloatingActionButton(
@@ -161,8 +162,8 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     IconButton(
                                       onPressed: () {},
-                                      icon: Icon(icons[ExpenseList
-                                          .expenseList[index].category]),
+                                      icon: Icon(
+                                          icons[expenseView[index].category]),
                                       iconSize: 30,
                                     ),
                                     Row(
@@ -172,16 +173,14 @@ class _HomePageState extends State<HomePage> {
                                             showModalBottomSheet(
                                                 context: context,
                                                 builder: (context) {
-                                                  uniqueExpense =
-                                                      expenseView[index];
-                                                  _nameController.text =
-                                                      uniqueExpense.name
-                                                          as String;
-                                                  _amountController.text =
-                                                      (uniqueExpense.amount)
-                                                          .toString();
-                                                  value = uniqueExpense.category
-                                                      as String;
+                                                  final height1 =
+                                                      MediaQuery.of(context)
+                                                          .size
+                                                          .height;
+                                                  final width1 =
+                                                      MediaQuery.of(context)
+                                                          .size
+                                                          .height;
                                                   return Container(
                                                     child: Column(
                                                       children: [
@@ -189,8 +188,8 @@ class _HomePageState extends State<HomePage> {
                                                           margin:
                                                               EdgeInsets.only(
                                                                   top: 10),
-                                                          width: width,
-                                                          height: height / 8,
+                                                          width: width1,
+                                                          height: height1 / 8,
                                                           padding:
                                                               EdgeInsets.all(
                                                                   15),
@@ -221,8 +220,8 @@ class _HomePageState extends State<HomePage> {
                                                           margin:
                                                               EdgeInsets.only(
                                                                   top: 10),
-                                                          width: width,
-                                                          height: height / 8,
+                                                          width: width1,
+                                                          height: height1 / 8,
                                                           padding:
                                                               EdgeInsets.all(
                                                                   15),
@@ -253,7 +252,7 @@ class _HomePageState extends State<HomePage> {
                                                           margin:
                                                               EdgeInsets.all(
                                                                   10),
-                                                          width: width / 1.2,
+                                                          width: width1 / 1.2,
                                                           decoration: BoxDecoration(
                                                               borderRadius:
                                                                   BorderRadius
@@ -323,21 +322,20 @@ class _HomePageState extends State<HomePage> {
                                                                           .w600),
                                                             ),
                                                             onPressed: () {
-                                                              setState(() {
-                                                                uniqueExpense
-                                                                        .name =
-                                                                    _nameController
-                                                                        .text;
-                                                                uniqueExpense
-                                                                        .amount =
-                                                                    double.parse(
-                                                                        _amountController
-                                                                            .text
-                                                                            .toString());
-                                                                uniqueExpense
-                                                                        .date =
-                                                                    currentDate;
-                                                              });
+                                                              Expense uniqueExpense1 = Expense(
+                                                                  name:
+                                                                      _nameController
+                                                                          .text,
+                                                                  amount: double.parse(
+                                                                      _amountController
+                                                                          .text
+                                                                          .toString()),
+                                                                  date1:
+                                                                      currentDate,
+                                                                  id: expenseView[
+                                                                          index]
+                                                                      .id);
+
                                                               token.storage
                                                                   .read(
                                                                       key:
@@ -347,7 +345,7 @@ class _HomePageState extends State<HomePage> {
                                                                   print(value);
                                                                   AuthService()
                                                                       .editExpense(
-                                                                          uniqueExpense,
+                                                                          uniqueExpense1,
                                                                           value)
                                                                       .then(
                                                                     (val) {
@@ -365,6 +363,11 @@ class _HomePageState extends State<HomePage> {
                                                                                 val.data['msg'],
                                                                             textColor: Colors.white,
                                                                             backgroundColor: Colors.green);
+                                                                        setState(
+                                                                            () {
+                                                                          state +=
+                                                                              state;
+                                                                        });
                                                                       } else {
                                                                         Fluttertoast.showToast(
                                                                             msg:
@@ -409,15 +412,6 @@ class _HomePageState extends State<HomePage> {
                                                   .then((val) {
                                                 if (val.data['success']) {
                                                   setState(() {
-                                                    nextCount = ExpenseList
-                                                                .expenseList
-                                                                .length <
-                                                            10
-                                                        ? ExpenseList
-                                                            .expenseList.length
-                                                        : 10;
-
-                                                    prevCount = 0;
                                                     Expense expenseTobeRemoved =
                                                         expenseView[index];
 
@@ -427,7 +421,15 @@ class _HomePageState extends State<HomePage> {
                                                         .remove(
                                                             expenseTobeRemoved);
                                                     state += state;
-                                                    print(expenseView);
+                                                    nextCount = ExpenseList
+                                                                .expenseList
+                                                                .length <
+                                                            10
+                                                        ? ExpenseList
+                                                            .expenseList.length
+                                                        : 10;
+
+                                                    prevCount = 0;
                                                   });
                                                   Fluttertoast.showToast(
                                                       msg:

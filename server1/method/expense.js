@@ -190,11 +190,13 @@ var functions = {
         res.status(400).json({success:false,msg:"User not foumd."})
       }
       var expenseId = req.params.id;
-      console.log(expenseId)
+      console.log(req.body)
       var oneExpense = await expense.findOneAndUpdate({ _id: expenseId },req.body);
+      console.log(oneExpense)
+      
       res.status(200).json({success:true,msg:"Expense Edited Successfully",data: oneExpense})
     } catch (error) {
-      res.status(400).json({ success: false, msg: error});
+      res.status(400).json({ success: false, msg: error.message});
     }
   } 
 };

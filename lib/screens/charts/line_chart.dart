@@ -60,9 +60,15 @@ class _LineChartSample2State extends State<LineChartSample2> {
         break;
     }
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: Column(
           children: <Widget>[
+            Container(
+              margin: EdgeInsets.all(10),
+              child:Text("Line Chart",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: AppTheme.colors.basecolor),)
+            ,
+            ),
             AspectRatio(
               aspectRatio: 1.2,
               child: DecoratedBox(

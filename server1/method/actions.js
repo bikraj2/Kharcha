@@ -116,6 +116,7 @@ var functions = {
     try {
       var otp = crypto.randomBytes(5).toString('hex').toUpperCase();
       var email = req.body.email;
+      otp= otp.substring(0,5)
       var user = await User.findOne({ email: email });
       if (!user) {
         throw Error('Cannot find user Registered with this email.');

@@ -155,17 +155,25 @@ class _expenseAdderState extends State<expenseAdder> {
                     }),
                   ),
                 ),
-                IconButton(
-                  color: Theme.of(context).primaryColor,
-                  hoverColor: Theme.of(context).bottomAppBarColor,
-                  icon: Icon(
-                    Icons.calendar_month_outlined,
-                    color: AppTheme.colors.secondarycolor,
-                  ),
-                  iconSize: 35,
-                  onPressed: () {
-                    getDate();
-                  },
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                        '${DateFormat("EEE d MMM").format(currentDate as DateTime)}',
+                        style: TextStyle(fontSize: 20),),
+                    IconButton(
+                      color: Theme.of(context).primaryColor,
+                      hoverColor: Theme.of(context).bottomAppBarColor,
+                      icon: Icon(
+                        Icons.calendar_month_outlined,
+                        color: AppTheme.colors.secondarycolor,
+                      ),
+                      iconSize: 35,
+                      onPressed: () {
+                        getDate();
+                      },
+                    ),
+                  ],
                 ),
                 Container(
                   padding: EdgeInsets.all(15),

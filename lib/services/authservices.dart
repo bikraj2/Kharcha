@@ -188,7 +188,7 @@ class AuthService {
       var value = await diio.get("${url}/getExpense",
           queryParameters: {"token": token, "year": year},
           options: Options(contentType: Headers.formUrlEncodedContentType));
-      
+
       return value;
     } on DioError catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
@@ -234,7 +234,6 @@ class AuthService {
 
   getExpenseSorted(String token, String sortAmount, String sortDate) async {
     try {
-     
       var value = await diio.get("${url}/getExpense",
           queryParameters: {
             "token": token,
@@ -251,17 +250,22 @@ class AuthService {
           backgroundColor: Colors.red.shade300);
     }
   }
-   editExpense(Expense expense, String? token) async {
+
+  editExpense(Expense expense, String? token) async {
     try {
-      var value = await diio.patch("${url}/addExpense",
+      var value = await diio.patch("${url}/${expense.id}",
           data: {
             "name": expense.name,
             "category": expense.category,
             "amount": expense.amount,
+            
+            "date": expense.date,
+          },
+          queryParameters: {
             "token": token,
-            "date": expense.date
           },
           options: Options(contentType: Headers.formUrlEncodedContentType));
+      print(value);
       return value;
     } on DioError catch (e) {
       Fluttertoast.showToast(

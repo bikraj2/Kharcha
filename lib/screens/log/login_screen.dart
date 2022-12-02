@@ -1,4 +1,5 @@
 import 'package:demo2/models/finance.dart';
+import 'package:demo2/models/username.dart';
 import 'package:demo2/screens/initial_screens/first_screen.dart';
 import 'package:demo2/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // title: Text('Login'),
         elevation: 0,
         title: Text("Login"),
-        backgroundColor: const Color.fromARGB(255, 35, 45, 64),
+        backgroundColor: AppTheme.colors.basecolor,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
@@ -120,9 +121,9 @@ class _LoginScreenState extends State<LoginScreen> {
               } else {
                 AuthService().login(username, password).then((val) {
                   if (val.data["success"]) {
-                    
                     token.storage.write(key: 'jwt', value: val.data['token']);
-                    
+                    UserName.username = val.data['username'];
+                    print(UserName.username);
                     ExpenseList.getData().then((value) {
                       ExpenseList.groupedTransactionValues();
                     });

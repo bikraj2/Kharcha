@@ -119,12 +119,29 @@ class _changePasswordState extends State<changePassword> {
                       String oldPassword = _oldPasswordController.text;
                       String newPassword = _newPasswordController1.text;
                       String confirmPassword = _newPasswordController2.text;
+                      RegExp pass_valid =
+                          RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)");
                       if (newPassword != confirmPassword) {
                         Fluttertoast.showToast(
                             msg: "The password donot match.",
                             textColor: Colors.white,
                             backgroundColor: Colors.red.shade300);
-                      } else {
+                      } else if (newPassword == "") {
+                        Fluttertoast.showToast(
+                            msg: "Please enter a newPassword",
+                            backgroundColor: Colors.red);
+                      } else if (!pass_valid.hasMatch(newPassword)) {
+                        Fluttertoast.showToast(
+                            msg: "Please enter a Valid Password.",
+                            backgroundColor: Colors.red);
+                        Future.delayed(const Duration(milliseconds: 1000), () {
+                          Fluttertoast.showToast(
+                              msg:
+                                  "Password must Contain 8 letter a speical character, a lower case , an upperCase letter.",
+                              backgroundColor: Colors.red);
+                        });
+                      }
+                      {
                         try {
                           var tk = await token.storage.read(key: 'jwt');
 
